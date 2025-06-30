@@ -1,0 +1,31 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+::-webkit-scrollbar {
+  width: 7px;
+}
+
+::-webkit-scrollbar-track {
+  background: #ffffff;
+  border-radius: 7px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #ffffff;
+  border-radius: 7px;
+  box-shadow: 0px 4px 4px 0px #00000040 inset;
+}
+
+@font-face {
+  font-family: "Gilroy";
+  src: url("./assets/font/Gilroy-Regular.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+body {
+  font-family: "Gilroy", sans-serif;
+}
