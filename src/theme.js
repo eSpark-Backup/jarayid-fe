@@ -46,5 +46,69 @@ export const theme = createTheme({
         },
       },
     },
+    MuiChip: {
+      variants: [
+        {
+          props: { variant: "straight" },
+          style: {
+            padding: "0",
+            width: "99.5px",
+            backgroundColor: "#F3EEEE",
+            border: "1px solid #01000142",
+            fontSize: "17.96px",
+            fontWeight: "400",
+            borderRadius: "0px",
+            height: "39px",
+            "& .MuiChip-label": {
+              padding: 0,
+            },
+            ":hover": {
+              backgroundColor: "#F3EEEE",
+              border: "1px solid #01000142",
+            },
+          },
+        },
+        {
+          props: { variant: "rounded" },
+          style: {
+            padding: "0",
+            width: "200px",
+            backgroundColor: "#F3EEEE",
+            border: "1px solid #EBE5E5",
+            borderRadius: "10.08px",
+            fontSize: "17.96px",
+            fontWeight: "400",
+            height: "40px",
+            "& .MuiChip-label": {
+              padding: 0,
+            },
+          },
+        },
+      ],
+    },
+    MuiPaper: {
+      styleOverrides: {
+        root: {
+          borderRadius: "9px",
+          padding: "15px",
+          boxShadow: "none !important",
+          backgroundColor: "#FFFFFF",
+          border: "none !important",
+        },
+      },
+    },
+    MuiMenuItem: {
+      styleOverrides: {
+        root: {
+          height: "40px",
+          borderBottom: "1px solid #007BFF",
+          color: "#383535",
+          fontSize: "17.96px",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        },
+      },
+    },
   },
 });
