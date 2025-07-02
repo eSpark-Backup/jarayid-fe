@@ -1,8 +1,7 @@
-import React from "react";
-import { Box, Card, CardContent, Typography } from "@mui/material";
+import { Box, Typography } from "@mui/material";
+import { Outlet } from "react-router-dom";
 
-export default function AuthLayout({ children, bottomText }) {
-  console.log("✅ AuthLayout is rendering");
+export const AuthLayout = () => {
   return (
     <Box
       sx={{
@@ -15,29 +14,17 @@ export default function AuthLayout({ children, bottomText }) {
         p: 2,
       }}
     >
-      {/* Logo */}
       <Box sx={{ textAlign: "center", mb: 3 }}>
-        <Typography variant="subtitle2" sx={{ fontWeight: 400 }}>
-          RSS <span style={{ fontFamily: "serif" }}>ملخص</span>
+        <Typography
+          variant="subtitle2"
+          sx={{ fontWeight: 400, textAlign: "start" }}
+        >
+          <img src="/images/ملخص RSS.png" alt="rss" />
         </Typography>
-        <Typography variant="h4" sx={{ fontWeight: 600, fontFamily: "serif" }}>
-          JARAYID<span style={{ color: "#1976d2" }}>.com</span>
-        </Typography>
+        <img src="/images/JARAYID.com.png" alt="logo" />
       </Box>
 
-      {/* Card */}
-      <Card
-        sx={{ maxWidth: 400, width: "100%", borderRadius: 2, boxShadow: 3 }}
-      >
-        <CardContent sx={{ p: 4 }}>{children}</CardContent>
-      </Card>
-
-      {/* Bottom link if provided */}
-      {bottomText && (
-        <Typography variant="body2" align="center" sx={{ mt: 2 }}>
-          {bottomText}
-        </Typography>
-      )}
+      <Outlet />
     </Box>
   );
-}
+};
