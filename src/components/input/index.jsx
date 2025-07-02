@@ -1,4 +1,5 @@
 import { TextField, InputAdornment, Typography, Box } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
 const CustomInput = ({
@@ -15,6 +16,7 @@ const CustomInput = ({
   ei,
 }) => {
   const language = useSelector((state) => state.language);
+  const { t } = useTranslation();
 
   return (
     <Box sx={{ mb: 2 }}>
@@ -40,7 +42,6 @@ const CustomInput = ({
         type={type}
         placeholder={placeholder}
         margin="normal"
-        helperText={language === "ar" ? "" : helperText}
         error={error}
         variant="outlined"
         InputLabelProps={{ shrink: false }}
@@ -61,6 +62,18 @@ const CustomInput = ({
           dir: language === "ar" ? "rtl" : "ltr",
         }}
       />
+      {helperText && (
+        <Typography
+          sx={{
+            color: "#d32f2f",
+            fontSize: "0.75rem",
+            fontWeight: "400",
+            textAlign: language === "ar" ? "right" : "left",
+          }}
+        >
+          {t(helperText)}
+        </Typography>
+      )}
     </Box>
   );
 };

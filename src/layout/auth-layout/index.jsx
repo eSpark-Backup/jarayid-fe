@@ -12,17 +12,31 @@ const AuthLayout = () => {
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
 
-  const title =
-    location.pathname === "/signup"
-      ? "Create account"
-      : location.pathname === "/login"
-      ? "login heading"
-      : "Forgot Password";
+  const titleArr = [
+    { pathname: "/signup", title: "Create account" },
+    { pathname: "/login", title: "login heading" },
+    { pathname: "/verify-email", title: "Forgot Password" },
+  ];
 
-  const subtitle =
-    location.pathname === "/login"
-      ? "login description"
-      : "Let’s get you started sharing your links!";
+  const title = titleArr.find(
+    (item) => item?.pathname === location?.pathname
+  ).title;
+
+  const subTitleArr = [
+    {
+      pathname: "/signup",
+      subtitle: "Let’s get you started sharing your links!",
+    },
+    { pathname: "/login", subtitle: "login description" },
+    {
+      pathname: "/verify-email",
+      subtitle: "Let’s get you started sharing your links!",
+    },
+  ];
+
+  const subtitle = subTitleArr.find(
+    (item) => item?.pathname === location?.pathname
+  ).subtitle;
 
   return (
     <Box sx={{ backgroundColor: "#FAFAFA" }}>

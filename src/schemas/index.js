@@ -9,10 +9,10 @@ export const loginSchema = Yup.object({
     .required("Email is required"),
   password: Yup.string()
     .required("Password is required")
-    .min(12, "Password must be at least 12 characters long.")
-    .matches(/[A-Z]/, "Password must contain at least one uppercase letter.")
-    .matches(/[a-z]/, "Password must contain at least one lowercase letter.")
-    .matches(/[0-9]/, "Password must contain at least one number."),
+    .matches(
+      /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{12,}$/,
+      "Password must be at least 12 characters long and include uppercase, lowercase, and a number."
+    ),
 });
 
 export const signupValidationSchema = Yup.object({
