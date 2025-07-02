@@ -1,3 +1,23 @@
 {
-    "home": "Home"
+    "home": "Home",
+    "Create account": "Create account",
+    "Let’s get you started sharing your links!": "Let’s get you started sharing your links!",
+    "Email address": "Email address",
+    "email placeholder": "e.g. alex@email.com",
+    "Create password": "Create password",
+    "Confirm password": "Confirm password",
+    "password placeholder": "At least 8 characters",
+    "Create new account": "Create new account",
+    "Continue with Google": "Continue with Google",
+    "Already have an account": "Already have an account? ",
+    "login": "Login",
+    "login heading": "Login",
+    "login description": "Add your details below to get back into the app",
+    "login password placeholder": "Enter your password",
+    "dont have account": "Don’t have an account? ",
+    "create account": "Create account",
+    "Password": "Password",
+    "Forgot Password": "Forgot Password",
+    "Send code": "Send code",
+    "Try another way?": "Try another way?"
 }

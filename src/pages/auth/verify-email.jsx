@@ -4,6 +4,8 @@ import { useFormik } from "formik";
 import { verifyEmailSchema, forgetPasswordSchema } from "../../schemas";
 import { email, lock } from "../../assets";
 import { useState } from "react";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const VerifyEmail = () => {
   const [step, setStep] = useState(1);
@@ -31,16 +33,31 @@ const VerifyEmail = () => {
     },
   });
 
+  const language = useSelector((state) => state.language);
+  const { t } = useTranslation();
+
   return (
     <>
-      <Typography variant="h5" sx={{ fontWeight: 600, mb: 1 }}>
-        Forgot Password
+      <Typography
+        variant="h5"
+        sx={{
+          fontWeight: 600,
+          mb: 1,
+          textAlign: language === "ar" ? "right" : "left",
+        }}
+      >
+        {t("Forgot Password")}
       </Typography>
       <Typography
         variant="body2"
-        sx={{ color: "#8F8F8F", mb: 2, fontSize: { xs: "10px", md: "16px" } }}
+        sx={{
+          color: "#8F8F8F",
+          mb: 2,
+          fontSize: { xs: "10px", md: "16px" },
+          textAlign: language === "ar" ? "right" : "left",
+        }}
       >
-        Let’s get you started sharing your links!
+        {t("Let’s get you started sharing your links!")}
       </Typography>
 
       <Box
@@ -55,8 +72,8 @@ const VerifyEmail = () => {
           <>
             <CustomInput
               name="email"
-              label="Email address"
-              placeholder="e.g. alex@email.com"
+              label={t("Email address")}
+              placeholder={t("email placeholder")}
               iconSrc={email}
               value={emailFormik.values.email}
               onChange={emailFormik.handleChange}
@@ -71,15 +88,15 @@ const VerifyEmail = () => {
               variant="contained"
               sx={{ height: { xs: "38px", lg: "46px" }, mt: 2 }}
             >
-              Send Code
+              {t("Send code")}
             </Button>
           </>
         ) : (
           <>
             <CustomInput
               name="password"
-              label="Create password"
-              placeholder="At least 8 characters"
+              label={t("Create password")}
+              placeholder={t("password placeholder")}
               iconSrc={lock}
               value={passwordFormik.values.password}
               onChange={passwordFormik.handleChange}
@@ -96,8 +113,8 @@ const VerifyEmail = () => {
             />
             <CustomInput
               name="conPassword"
-              label="Confirm password"
-              placeholder="At least 8 characters"
+              label={t("Confirm password")}
+              placeholder={t("password placeholder")}
               iconSrc={lock}
               value={passwordFormik.values.conPassword}
               onChange={passwordFormik.handleChange}
@@ -125,7 +142,7 @@ const VerifyEmail = () => {
 
       {step === 1 && (
         <Typography variant="body2" align="center" sx={{ mt: 2 }}>
-          Try another way?
+          {t("Try another way?")}
         </Typography>
       )}
     </>

@@ -1,3 +1,23 @@
 {
-    "home": "بيت"
+    "home": "بيت",
+    "Create account": "إنشاء حساب",
+    "Let’s get you started sharing your links!": "لنبدأ بمشاركتك للروابط!",
+    "Email address": "عنوان البريد الإلكتروني",
+    "email placeholder": "مثال: alex@email.com",
+    "Create password": "إنشاء كلمة المرور",
+    "Confirm password": " تأكيد كلمة المرور",
+    "password placeholder": "ثمانية أحرف على الأقل",
+    "Create new account": "إنشاء حساب جديد",
+    "Continue with Google": "أنشئ حسابًا باستخدام جوجل",
+    "Already have an account": "هل لديك حساب بالفعل؟",
+    "login": " تسجيل الدخول ",
+    "login heading": "تسجيل الدخول",
+    "login description": "أدخل بياناتك أدناه للعودة إلى التطبيق",
+    "login password placeholder": "دخل كلمة المرور الخاصة بك",
+    "dont have account": "ليس لديك حساب؟ ",
+    "create account": "أنشئ حسابًا ",
+    "Password": "كلمة المرور",
+    "Forgot Password": "هل نسيت كلمة المرور؟",
+    "Send code": "أرسل الرمز",
+    "Try another way?": "هل ترغب في تجربة طريقة أخرى؟"
 }

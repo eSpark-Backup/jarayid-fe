@@ -1,8 +1,11 @@
-import { Typography, Button, Link, Box } from "@mui/material";
+import { Typography, Button, Box } from "@mui/material";
 import { useFormik } from "formik";
 import { signupValidationSchema } from "../../schemas";
 import { CustomInput } from "../../components";
 import { email, google, lock } from "../../assets";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const formik = useFormik({
@@ -17,10 +20,20 @@ const Signup = () => {
     },
   });
 
+  const language = useSelector((state) => state.language);
+  const { t } = useTranslation();
+
   return (
     <>
-      <Typography variant="h5" sx={{ fontWeight: 600, mb: 1 }}>
-        Create account
+      <Typography
+        variant="h5"
+        sx={{
+          fontWeight: 600,
+          mb: 1,
+          textAlign: language === "ar" ? "right" : "left",
+        }}
+      >
+        {t("Create account")}
       </Typography>
       <Typography
         variant="body2"
@@ -28,16 +41,17 @@ const Signup = () => {
           color: "text.secondary",
           mb: 3,
           fontSize: { xs: "10px", md: "16px" },
+          textAlign: language === "ar" ? "right" : "left",
         }}
       >
-        Let’s get you started sharing your links!
+        {t("Let’s get you started sharing your links!")}
       </Typography>
 
       <Box component={"form"} onSubmit={formik.handleSubmit}>
         <CustomInput
           name="email"
-          label="Email address"
-          placeholder="e.g. alex@email.com"
+          label={t("Email address")}
+          placeholder={t("email placeholder")}
           iconSrc={email}
           value={formik.values.email}
           onChange={formik.handleChange}
@@ -48,8 +62,8 @@ const Signup = () => {
 
         <CustomInput
           name="password"
-          label="Create password"
-          placeholder="At least 8 characters"
+          label={t("Create password")}
+          placeholder={t("password placeholder")}
           type="password"
           iconSrc={lock}
           value={formik.values.password}
@@ -61,8 +75,8 @@ const Signup = () => {
 
         <CustomInput
           name="confirmPassword"
-          label="Confirm password"
-          placeholder="At least 8 characters"
+          label={t("Confirm password")}
+          placeholder={t("password placeholder")}
           type="password"
           iconSrc={lock}
           value={formik.values.confirmPassword}
@@ -82,7 +96,7 @@ const Signup = () => {
           variant="contained"
           sx={{ height: { xs: "38px", lg: "46px" } }}
         >
-          Create new account
+          {t("Create new account")}
         </Button>
       </Box>
 
@@ -112,17 +126,16 @@ const Signup = () => {
         }}
       >
         <img src={google} alt="Google" style={{ width: 24, height: 24 }} />
-        Continue with Google
+        {t("Continue with Google")}
       </Button>
 
       <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-        Already have an account?{" "}
+        {t("Already have an account")}
         <Link
-          href="/login"
-          underline="hover"
-          sx={{ color: "#3281CA", fontSize: "16px" }}
+          to="/login"
+          style={{ color: "#3281CA", fontSize: "16px", textDecoration: "none" }}
         >
-          Login
+          {t("login")}
         </Link>
       </Typography>
     </>

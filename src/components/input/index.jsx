@@ -1,4 +1,5 @@
 import { TextField, InputAdornment, Typography, Box } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const CustomInput = ({
   name,
@@ -12,6 +13,8 @@ const CustomInput = ({
   error = false,
   label = "",
 }) => {
+  const language = useSelector((state) => state.language);
+
   return (
     <Box sx={{ mb: 2 }}>
       {label && (
@@ -21,6 +24,7 @@ const CustomInput = ({
             fontWeight: 500,
             mb: "-12px",
             mt: 2,
+            textAlign: language === "ar" ? "right" : "left",
           }}
         >
           {label}
@@ -35,13 +39,13 @@ const CustomInput = ({
         type={type}
         placeholder={placeholder}
         margin="normal"
-        helperText={helperText}
+        helperText={language === "ar" ? "" : helperText}
         error={error}
         variant="outlined"
         InputLabelProps={{ shrink: false }}
         InputProps={{
           startAdornment: iconSrc ? (
-            <InputAdornment position="start">
+            <InputAdornment position={language === "ar" ? "end" : "start"}>
               <img
                 src={iconSrc}
                 alt=""
@@ -51,7 +55,9 @@ const CustomInput = ({
           ) : null,
           sx: {
             height: { xs: "38px", lg: 48 },
+            textAlign: language === "ar" ? "right" : "left",
           },
+          dir: language === "ar" ? "rtl" : "ltr",
         }}
       />
     </Box>
