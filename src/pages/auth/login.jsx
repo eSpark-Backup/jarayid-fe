@@ -24,28 +24,6 @@ const Login = () => {
 
   return (
     <>
-      <Typography
-        variant="h5"
-        sx={{
-          fontWeight: 600,
-          mb: 1,
-          textAlign: language === "ar" ? "right" : "left",
-        }}
-      >
-        {t("login heading")}
-      </Typography>
-      <Typography
-        variant="body2"
-        sx={{
-          color: "#8F8F8F",
-          mb: 2,
-          fontSize: { xs: "10px", md: "16px" },
-          textAlign: language === "ar" ? "right" : "left",
-        }}
-      >
-        {t("login description")}
-      </Typography>
-
       <Box component={"form"} onSubmit={formik.handleSubmit} noValidate>
         <CustomInput
           name="email"

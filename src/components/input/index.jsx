@@ -12,6 +12,7 @@ const CustomInput = ({
   iconSrc = "",
   error = false,
   label = "",
+  ei,
 }) => {
   const language = useSelector((state) => state.language);
 
