@@ -1,8 +1,11 @@
-import { Typography, Button, Link, Box } from "@mui/material";
+import { Typography, Button, Box } from "@mui/material";
 import { useFormik } from "formik";
 import { signupValidationSchema } from "../../schemas";
 import { CustomInput } from "../../components";
-import { emailIcon, googleIcon, lockIcon } from "../../assets";
+import { email, google, lock } from "../../assets";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
 const Signup = () => {
   const formik = useFormik({
@@ -17,14 +20,17 @@ const Signup = () => {
     },
   });
 
+  const language = useSelector((state) => state.language);
+  const { t } = useTranslation();
+
   return (
     <>
-      <Box component="form" onSubmit={formik.handleSubmit}>
+      <Box component={"form"} onSubmit={formik.handleSubmit}>
         <CustomInput
           name="email"
-          label="Email address"
-          placeholder="e.g. alex@email.com"
-          iconSrc={emailIcon}
+          label={t("Email address")}
+          placeholder={t("email placeholder")}
+          iconSrc={email}
           value={formik.values.email}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -34,10 +40,10 @@ const Signup = () => {
 
         <CustomInput
           name="password"
-          label="Create password"
-          placeholder="At least 8 characters"
+          label={t("Create password")}
+          placeholder={t("password placeholder")}
           type="password"
-          iconSrc={lockIcon}
+          iconSrc={lock}
           value={formik.values.password}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -47,10 +53,10 @@ const Signup = () => {
 
         <CustomInput
           name="confirmPassword"
-          label="Confirm password"
-          placeholder="At least 8 characters"
+          label={t("Confirm password")}
+          placeholder={t("password placeholder")}
           type="password"
-          iconSrc={lockIcon}
+          iconSrc={lock}
           value={formik.values.confirmPassword}
           onChange={formik.handleChange}
           onBlur={formik.handleBlur}
@@ -63,8 +69,12 @@ const Signup = () => {
           }
         />
 
-        <Button type="submit" variant="contained">
-          Create new account
+        <Button
+          type="submit"
+          variant="contained"
+          sx={{ height: { xs: "38px", lg: "46px" } }}
+        >
+          {t("Create new account")}
         </Button>
       </Box>
 
@@ -78,49 +88,32 @@ const Signup = () => {
           py: 1.5,
           boxShadow: "none",
           color: "#000",
-          fontSize: { xs: "14px", sm: "16px" },
+          fontSize: "16px",
           backgroundColor: "#fff",
           border: "1px solid #D9D9D9",
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           gap: 1.5,
-          whiteSpace: "nowrap",
-          px: { xs: 1, sm: 3 },
           "&:hover": {
             backgroundColor: "#fff",
             color: "#000",
             boxShadow: "none",
           },
+          height: { xs: "38px", lg: "48px" },
         }}
       >
-        <img src={googleIcon} alt="Google" style={{ width: 24, height: 24 }} />
-        <Box
-          component="span"
-          sx={{
-            display: { xs: "none", sm: "inline" },
-          }}
-        >
-          Continue with Google
-        </Box>
-        <Box
-          component="span"
-          sx={{
-            display: { xs: "inline", sm: "none" },
-          }}
-        >
-          Google
-        </Box>
+        <img src={google} alt="Google" style={{ width: 24, height: 24 }} />
+        {t("Continue with Google")}
       </Button>
 
       <Typography variant="body2" align="center" sx={{ mt: 3 }}>
-        Already have an account?{" "}
+        {t("Already have an account")}
         <Link
-          href="/login"
-          underline="hover"
-          sx={{ color: "#3281CA", fontSize: "16px" }}
+          to="/login"
+          style={{ color: "#3281CA", fontSize: "16px", textDecoration: "none" }}
         >
-          Login
+          {t("login")}
         </Link>
       </Typography>
     </>

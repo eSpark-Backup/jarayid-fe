@@ -1,8 +1,9 @@
 import { Box, Button } from "@mui/material";
 import { useFormik } from "formik";
 import { CustomInput } from "../../components";
-import { lockIcon } from "../../assets";
 import { changePasswordSchema } from "../../schemas";
+import { lock } from "../../assets";
+import { useTranslation } from "react-i18next";
 
 const ChangePassword = () => {
   const formik = useFormik({
@@ -16,14 +17,16 @@ const ChangePassword = () => {
     },
   });
 
+  const { t } = useTranslation();
+
   return (
     <Box component="form" onSubmit={formik.handleSubmit} noValidate>
       <CustomInput
         name="newPassword"
-        label="Create password"
-        placeholder="Enter new password"
+        label={t("Create password")}
+        placeholder={t("At least 8 characters")}
         type="password"
-        iconSrc={lockIcon}
+        iconSrc={lock}
         value={formik.values.newPassword}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -33,10 +36,10 @@ const ChangePassword = () => {
 
       <CustomInput
         name="confirmPassword"
-        label="Confirm password"
-        placeholder="Re-enter new password"
+        label={t("Confirm password")}
+        placeholder={t("At least 8 characters")}
         type="password"
-        iconSrc={lockIcon}
+        iconSrc={lock}
         value={formik.values.confirmPassword}
         onChange={formik.handleChange}
         onBlur={formik.handleBlur}
@@ -50,7 +53,7 @@ const ChangePassword = () => {
       />
 
       <Button type="submit" variant="contained" sx={{ mt: 2 }}>
-        Save
+        {t("Save")}
       </Button>
     </Box>
   );

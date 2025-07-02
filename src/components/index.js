@@ -1,5 +1,5 @@
 import Button from "./buttons";
 import CustomInput from "./input";
+import LanguageToggler from "./lang-toggler";
 
-export { Button };
-export { CustomInput };
+export { Button, CustomInput, LanguageToggler };
