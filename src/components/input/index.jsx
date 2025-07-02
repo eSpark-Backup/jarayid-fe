@@ -10,7 +10,7 @@ const CustomInput = ({
   helperText = "",
   iconSrc = "",
   error = false,
-  label = "",
+  label = "",ei
 }) => {
   return (
     <Box sx={{ mb: 2 }}>
@@ -45,7 +45,7 @@ const CustomInput = ({
               <img
                 src={iconSrc}
                 alt=""
-                style={{ width: 13, height: 10, marginRight: 8 }}
+                style={{ width: 12, height: 13, marginRight: 8 }}
               />
             </InputAdornment>
           ) : null,
