@@ -1,9 +1,10 @@
 import { Card, CardContent, Typography, Button, Link } from "@mui/material";
-import CustomInput from "../../components/input";
 import { useFormik } from "formik";
 import { signupValidationSchema } from "../../schemas";
+import { CustomInput } from "../../components";
+import { emailIcon, googleIcon, lockIcon } from "../../assets";
 
-export const Signup = () => {
+const Signup = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -27,12 +28,11 @@ export const Signup = () => {
         </Typography>
 
         <form onSubmit={formik.handleSubmit}>
-          <Typography sx={{ mb: "-12px" }}>Email address</Typography>
           <CustomInput
             name="email"
             label="Email address"
             placeholder="e.g. alex@email.com"
-            iconSrc="/images/email.png"
+            iconSrc={emailIcon}
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -40,13 +40,12 @@ export const Signup = () => {
             helperText={formik.touched.email && formik.errors.email}
           />
 
-          <Typography sx={{ mb: "-12px", mt: "20px" }}>Create Password</Typography>
           <CustomInput
             name="password"
             label="Create password"
             placeholder="At least 8 characters"
             type="password"
-            iconSrc="/images/lock.png"
+            iconSrc={lockIcon}
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -54,37 +53,25 @@ export const Signup = () => {
             helperText={formik.touched.password && formik.errors.password}
           />
 
-          <Typography sx={{ mb: "-12px", mt: "20px" }}>Confirm Password</Typography>
           <CustomInput
             name="confirmPassword"
             label="Confirm password"
             placeholder="At least 8 characters"
             type="password"
-            iconSrc="/images/lock.png"
+            iconSrc={lockIcon}
             value={formik.values.confirmPassword}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
-            error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
-            helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
+            error={
+              formik.touched.confirmPassword &&
+              Boolean(formik.errors.confirmPassword)
+            }
+            helperText={
+              formik.touched.confirmPassword && formik.errors.confirmPassword
+            }
           />
 
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            sx={{
-              mt: 3,
-              backgroundColor: "#3281CA",
-              textTransform: "none",
-              boxShadow: "none",
-              fontSize: "16px",
-              py: 1.5,
-              "&:hover": {
-                backgroundColor: "#3281CA",
-                boxShadow: "none",
-              },
-            }}
-          >
+          <Button type="submit" variant="contained">
             Create new account
           </Button>
         </form>
@@ -114,7 +101,7 @@ export const Signup = () => {
           }}
         >
           <img
-            src="/images/google.png"
+            src={googleIcon}
             alt="Google"
             style={{ width: 24, height: 24 }}
           />
@@ -123,11 +110,17 @@ export const Signup = () => {
 
         <Typography variant="body2" align="center" sx={{ mt: 3 }}>
           Already have an account?{" "}
-          <Link href="/login" underline="hover" sx={{ color: "#3281CA", fontSize: "16px" }}>
+          <Link
+            href="/login"
+            underline="hover"
+            sx={{ color: "#3281CA", fontSize: "16px" }}
+          >
             Login
           </Link>
         </Typography>
       </CardContent>
     </Card>
   );
-}
+};
+
+export default Signup;

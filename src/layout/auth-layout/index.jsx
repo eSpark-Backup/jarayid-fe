@@ -1,7 +1,9 @@
 import { Box, Typography } from "@mui/material";
 import { Outlet } from "react-router-dom";
+import rssIcon from "../../assets/images/ملخص RSS.png";
+import logoImage from "../../assets/images/JARAYID.com.png";
 
-export const AuthLayout = () => {
+const AuthLayout = () => {
   return (
     <Box
       sx={{
@@ -19,12 +21,14 @@ export const AuthLayout = () => {
           variant="subtitle2"
           sx={{ fontWeight: 400, textAlign: "start" }}
         >
-          <img src="/images/ملخص RSS.png" alt="rss" />
+          <img src={rssIcon} alt="rss" />
         </Typography>
-        <img src="/images/JARAYID.com.png" alt="logo" />
+        <img src={logoImage} alt="logo" />
       </Box>
 
       <Outlet />
     </Box>
   );
 };
+
+export default AuthLayout;

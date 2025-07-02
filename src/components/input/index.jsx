@@ -1,6 +1,6 @@
-import { TextField, InputAdornment } from "@mui/material";
+import { TextField, InputAdornment, Typography, Box } from "@mui/material";
 
-export const CustomInput = ({
+const CustomInput = ({
   name,
   value,
   onChange,
@@ -10,35 +10,52 @@ export const CustomInput = ({
   helperText = "",
   iconSrc = "",
   error = false,
+  label = "",
 }) => {
   return (
-    <TextField
-      fullWidth
-      name={name}
-      value={value}
-      onChange={onChange}
-      onBlur={onBlur}
-      type={type}
-      placeholder={placeholder}
-      margin="normal"
-      helperText={helperText}
-      error={error}
-      variant="outlined"
-      InputLabelProps={{ shrink: false }}
-      InputProps={{
-        startAdornment: iconSrc ? (
-          <InputAdornment position="start">
-            <img
-              src={iconSrc}
-              alt=""
-              style={{ width: 13, height: 10, marginRight: 8 }}
-            />
-          </InputAdornment>
-        ) : null,
-        sx: {
-          height: 48,
-        },
-      }}
-    />
+    <Box sx={{ mb: 2 }}>
+      {label && (
+        <Typography
+          sx={{
+            fontSize: "14px",
+            fontWeight: 500,
+            mb: "-12px",
+            mt: 2,
+          }}
+        >
+          {label}
+        </Typography>
+      )}
+      <TextField
+        fullWidth
+        name={name}
+        value={value}
+        onChange={onChange}
+        onBlur={onBlur}
+        type={type}
+        placeholder={placeholder}
+        margin="normal"
+        helperText={helperText}
+        error={error}
+        variant="outlined"
+        InputLabelProps={{ shrink: false }}
+        InputProps={{
+          startAdornment: iconSrc ? (
+            <InputAdornment position="start">
+              <img
+                src={iconSrc}
+                alt=""
+                style={{ width: 13, height: 10, marginRight: 8 }}
+              />
+            </InputAdornment>
+          ) : null,
+          sx: {
+            height: 48,
+          },
+        }}
+      />
+    </Box>
   );
 };
+
+export default CustomInput;

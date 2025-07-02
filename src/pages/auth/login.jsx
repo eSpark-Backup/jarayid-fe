@@ -1,9 +1,10 @@
 import { Card, CardContent, Typography, Button, Link } from "@mui/material";
 import { useFormik } from "formik";
 import { loginSchema } from "../../schemas";
-import CustomInput from "../../components/input";
+import { CustomInput } from "../../components";
+import { emailIcon, lockIcon } from "../../assets";
 
-export const Login = () => {
+const Login = () => {
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -33,12 +34,11 @@ export const Login = () => {
         </Typography>
 
         <form onSubmit={formik.handleSubmit} noValidate>
-          <Typography sx={{ mb: "-12px" }}>Email address</Typography>
           <CustomInput
             name="email"
             label="Email address"
             placeholder="e.g. alex@email.com"
-            iconSrc="/images/email.png"
+            iconSrc={emailIcon}
             value={formik.values.email}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -46,9 +46,9 @@ export const Login = () => {
             helperText={formik.touched.email && formik.errors.email}
           />
 
-          <Typography sx={{ mb: "-12px", mt: "20px" }}>Password</Typography>
           <CustomInput
             name="password"
+            label="Password"
             value={formik.values.password}
             onChange={formik.handleChange}
             onBlur={formik.handleBlur}
@@ -56,23 +56,10 @@ export const Login = () => {
             helperText={formik.touched.password && formik.errors.password}
             type="password"
             placeholder="Enter your password"
-            iconSrc="/images/lock.png"
+            iconSrc={lockIcon}
           />
 
-          <Button
-            type="submit"
-            variant="contained"
-            fullWidth
-            sx={{
-              mt: 3,
-              backgroundColor: "#3281CA",
-              textTransform: "none",
-              py: 1.5,
-              "&:hover": {
-                backgroundColor: "#3281CA",
-              },
-            }}
-          >
+          <Button type="submit" variant="contained" sx={{ mt: 2 }}>
             Login
           </Button>
         </form>
@@ -91,3 +78,5 @@ export const Login = () => {
     </Card>
   );
 };
+
+export default Login;
