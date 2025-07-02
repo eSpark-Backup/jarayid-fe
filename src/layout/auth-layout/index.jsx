@@ -4,13 +4,23 @@ import rssIcon from "../../assets/images/ملخص RSS.png";
 import logoImage from "../../assets/images/JARAYID.com.png";
 
 const AuthLayout = () => {
-  const location = useLocation();
-
   const isLogin = location.pathname.includes("login");
-  const title = isLogin ? "Login" : "Create account";
-  const subtitle = isLogin
-    ? "Add your details below to get back into the app"
-    : "Let’s get you started sharing your links!";
+  const isSignup = location.pathname.includes("signup");
+  const isChangePassword = location.pathname.includes("change-password");
+
+  let title = "";
+  let subtitle = "";
+
+  if (isLogin) {
+    title = "Login";
+    subtitle = "Add your details below to get back into the app";
+  } else if (isSignup) {
+    title = "Create account";
+    subtitle = "Let’s get you started sharing your links!";
+  } else if (isChangePassword) {
+    title = "Forgot Password";
+    subtitle = "Let's get you started sharing your links";
+  }
 
   return (
     <Box
