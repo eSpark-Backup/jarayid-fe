@@ -13,7 +13,7 @@ const Router = () => {
           {/* Signup */}
           <Route path="/signup" element={<Signup />} />
           {/* Verify Email */}
-          <Route path="/forget-password" element={<VerifyEmail />} />
+          <Route path="/verify-email" element={<VerifyEmail />} />
         </Route>
         <Route element={<PrivateLayout />}>
           <Route path="/" element={<Home />} />

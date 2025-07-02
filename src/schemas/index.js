@@ -32,12 +32,3 @@ export const verifyEmailSchema = Yup.object({
     .email("Invalid email address")
     .required("Email is required"),
 });
-
-export const forgetPasswordSchema = Yup.object({
-  password: Yup.string()
-    .min(8, "Password must be at least 8 characters")
-    .required("Password is required"),
-  conPassword: Yup.string()
-    .oneOf([Yup.ref("password"), null], "Passwords must match")
-    .required("Confirm Password is required"),
-});
