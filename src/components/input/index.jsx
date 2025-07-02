@@ -45,12 +45,12 @@ const CustomInput = ({
               <img
                 src={iconSrc}
                 alt=""
-                style={{ width: 13, height: 10, marginRight: 8 }}
+                style={{ width: 16, height: 16, marginRight: 8 }}
               />
             </InputAdornment>
           ) : null,
           sx: {
-            height: 48,
+            height: { xs: "38px", lg: 48 },
           },
         }}
       />

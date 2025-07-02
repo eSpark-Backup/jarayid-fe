@@ -1,7 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import AuthLayout from "./layout/auth-layout";
 import PrivateLayout from "./layout/private-layout";
-import { Home, Login, Signup } from "./pages";
+import { Home, Login, Signup, VerifyEmail } from "./pages";
 
 const Router = () => {
   return (
@@ -12,6 +12,8 @@ const Router = () => {
           <Route path="/login" element={<Login />} />
           {/* Signup */}
           <Route path="/signup" element={<Signup />} />
+          {/* Verify Email */}
+          <Route path="/forget-password" element={<VerifyEmail />} />
         </Route>
         <Route element={<PrivateLayout />}>
           <Route path="/" element={<Home />} />

@@ -1,5 +1,6 @@
-import googleIcon from "./icons/google.png";
-import emailIcon from "./icons/email.png";
-import lockIcon from "./icons/lock.png";
+import google from "./icons/google.svg";
+import logo from "./icons/logo.svg";
+import email from "./icons/email.svg";
+import lock from "./icons/lock.svg";
 
-export { googleIcon, emailIcon, lockIcon };
+export { logo, email, lock, google };
