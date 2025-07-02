@@ -47,8 +47,7 @@ const AuthLayout = () => {
             alignItems: "center",
             maxWidth: 476,
             width: "100%",
-            minHeight: { xs: "45vh", lg: "60vh" },
-            rowGap: "25px",
+            rowGap: location.pathname === "/forget-password" ? "100px" : "35px",
           }}
         >
           <Box
