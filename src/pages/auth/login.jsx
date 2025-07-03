@@ -51,16 +51,6 @@ const Login = () => {
           placeholder={t("login password placeholder")}
           iconSrc={lock}
         />
-        <Typography
-          sx={{
-            fontSize: { xs: "11px", md: "14px" },
-            textAlign: language === "ar" ? "right" : "left",
-            cursor: "pointer",
-          }}
-          onClick={() => navigate("/verify-email")}
-        >
-          {t("Forget Password?")}
-        </Typography>
 
         <Button
           type="submit"
@@ -73,6 +63,18 @@ const Login = () => {
         >
           {language === "ar" ? "دخل كلمة المرور الخاصة بك" : "Login"}
         </Button>
+        <Typography
+          sx={{
+            fontSize: { xs: "12px", md: "16px" },
+            textAlign: language === "ar" ? "right" : "left",
+            cursor: "pointer",
+            mt: 2,
+            color: "#007BFF",
+          }}
+          onClick={() => navigate("/verify-email")}
+        >
+          {t("Forget Password?")}
+        </Typography>
       </Box>
 
       <Typography
