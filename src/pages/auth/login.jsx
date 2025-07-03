@@ -5,7 +5,7 @@ import { CustomInput } from "../../components";
 import { email, lock } from "../../assets";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 const Login = () => {
   const formik = useFormik({
@@ -18,6 +18,8 @@ const Login = () => {
       console.log("Login submitted:", values);
     },
   });
+
+  const navigate = useNavigate();
 
   const language = useSelector((state) => state.language);
   const { t } = useTranslation();
@@ -49,22 +51,40 @@ const Login = () => {
           placeholder={t("login password placeholder")}
           iconSrc={lock}
         />
+        <Typography
+          sx={{
+            fontSize: { xs: "11px", md: "14px" },
+            textAlign: language === "ar" ? "right" : "left",
+            cursor: "pointer",
+          }}
+          onClick={() => navigate("/verify-email")}
+        >
+          {t("Forget Password?")}
+        </Typography>
 
         <Button
           type="submit"
           variant="contained"
-          sx={{ height: { xs: "38px", lg: "46px" }, mt: 2 }}
+          sx={{
+            height: { xs: "38px", lg: "46px" },
+            mt: 2,
+            fontSize: { xs: "11px", md: "16px" },
+          }}
         >
           {language === "ar" ? "دخل كلمة المرور الخاصة بك" : "Login"}
         </Button>
       </Box>
 
-      <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+      <Typography
+        // variant="body2"
+        align="center"
+        sx={{ mt: 2, fontSize: { xs: "11px", md: "14px" } }}
+      >
         {t("dont have account")}
         <Link
           to="/signup"
           underline="hover"
-          style={{ color: "#3281CA", fontSize: "16px", textDecoration: "none" }}
+          style={{ color: "#3281CA", textDecoration: "none" }}
         >
           {t("create account")}
         </Link>

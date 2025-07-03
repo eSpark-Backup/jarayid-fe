@@ -72,7 +72,10 @@ const Signup = () => {
         <Button
           type="submit"
           variant="contained"
-          sx={{ height: { xs: "38px", lg: "46px" } }}
+          sx={{
+            height: { xs: "38px", lg: "46px" },
+            fontSize: { xs: "11px", md: "16px" },
+          }}
         >
           {t("Create new account")}
         </Button>
@@ -88,7 +91,7 @@ const Signup = () => {
           py: 1.5,
           boxShadow: "none",
           color: "#000",
-          fontSize: "16px",
+          fontSize: { xs: "11px", md: "16px" },
           backgroundColor: "#fff",
           border: "1px solid #D9D9D9",
           display: "flex",
@@ -107,12 +110,13 @@ const Signup = () => {
         {t("Continue with Google")}
       </Button>
 
-      <Typography variant="body2" align="center" sx={{ mt: 3 }}>
+      <Typography
+        // variant="body2"
+        align="center"
+        sx={{ mt: 3, fontSize: { xs: "11px", md: "14px" } }}
+      >
         {t("Already have an account")}
-        <Link
-          to="/login"
-          style={{ color: "#3281CA", fontSize: "16px", textDecoration: "none" }}
-        >
+        <Link to="/login" style={{ color: "#3281CA", textDecoration: "none" }}>
           {t("login")}
         </Link>
       </Typography>

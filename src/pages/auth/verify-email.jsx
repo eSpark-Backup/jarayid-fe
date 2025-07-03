@@ -4,8 +4,10 @@ import { useFormik } from "formik";
 import { verifyEmailSchema } from "../../schemas";
 import { email } from "../../assets";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const VerifyEmail = () => {
+  const navigate = useNavigate();
   const emailFormik = useFormik({
     initialValues: {
       email: "",
@@ -13,6 +15,7 @@ const VerifyEmail = () => {
     validationSchema: verifyEmailSchema,
     onSubmit: (values) => {
       console.log(values);
+      navigate("/change-password");
     },
   });
 
@@ -40,15 +43,19 @@ const VerifyEmail = () => {
         <Button
           type="submit"
           variant="contained"
-          sx={{ height: { xs: "38px", lg: "46px" }, mt: 2 }}
+          sx={{
+            height: { xs: "38px", lg: "46px" },
+            mt: 2,
+            fontSize: { xs: "11px", md: "16px" },
+          }}
         >
           {t("Send code")}
         </Button>
       </Box>
 
-      <Typography variant="body2" align="center" sx={{ mt: 2 }}>
+      {/* <Typography variant="body2" align="center" sx={{ mt: 2 }}>
         {t("Try another way?")}
-      </Typography>
+      </Typography> */}
     </>
   );
 };

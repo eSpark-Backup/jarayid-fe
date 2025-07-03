@@ -23,7 +23,7 @@ const CustomInput = ({
       {label && (
         <Typography
           sx={{
-            fontSize: "14px",
+            fontSize: { xs: "10px", md: "14px" },
             fontWeight: 500,
             mb: "-12px",
             mt: 2,

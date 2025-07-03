@@ -52,7 +52,11 @@ const ChangePassword = () => {
         }
       />
 
-      <Button type="submit" variant="contained" sx={{ mt: 2 }}>
+      <Button
+        type="submit"
+        variant="contained"
+        sx={{ mt: 2, fontSize: { xs: "11px", md: "16px" } }}
+      >
         {t("Save")}
       </Button>
     </Box>
