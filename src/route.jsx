@@ -1,8 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import AuthLayout from "./layout/auth-layout";
 import PrivateLayout from "./layout/private-layout";
-import { Home, Login, Signup, VerifyEmail } from "./pages";
-import ChangePassword from "./pages/auth/changePassword";
+import { Login, Signup, VerifyEmail, ChangePassword, Home } from "./pages";
 
 const Router = () => {
   return (
