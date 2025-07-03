@@ -27,6 +27,15 @@ export const signupValidationSchema = Yup.object({
     .required("Confirm Password is required"),
 });
 
+export const changePasswordSchema = Yup.object({
+  newPassword: Yup.string()
+    .min(8, "Password must be at least 8 characters")
+    .required("New password is required"),
+  confirmPassword: Yup.string()
+    .oneOf([Yup.ref("newPassword")], "Passwords must match")
+    .required("Confirm password is required"),
+});
+
 export const verifyEmailSchema = Yup.object({
   email: Yup.string()
     .email("Invalid email address")

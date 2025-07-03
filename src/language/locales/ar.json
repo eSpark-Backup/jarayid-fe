@@ -26,5 +26,8 @@
     "Password must be at least 12 characters long and include uppercase, lowercase, and a number.": "يجب أن تتكون كلمة المرور من 12 حرفًا على الأقل وتتضمن أحرفًا كبيرة وأحرفًا صغيرة ورقمًا.",
     "Password must be at least 8 characters": "يجب أن تتكون كلمة المرور من 8 أحرف على الأقل",
     "Passwords must match": "يجب أن تتطابق كلمات المرور",
-    "Confirm Password is required": "تأكيد كلمة المرور مطلوب"
+    "Confirm Password is required": "تأكيد كلمة المرور مطلوب",
+    "Save": "أرسل الرمز",
+    "At least 8 characters": "ثمانية أحرف على الأقل"
+    
 }

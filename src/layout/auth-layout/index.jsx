@@ -16,6 +16,7 @@ const AuthLayout = () => {
     { pathname: "/signup", title: "Create account" },
     { pathname: "/login", title: "login heading" },
     { pathname: "/verify-email", title: "Forgot Password" },
+    { pathname: "/change-password", title: "Forgot Password" },
   ];
 
   const title = titleArr.find(
@@ -30,6 +31,10 @@ const AuthLayout = () => {
     { pathname: "/login", subtitle: "login description" },
     {
       pathname: "/verify-email",
+      subtitle: "Let’s get you started sharing your links!",
+    },
+    {
+      pathname: "/change-password",
       subtitle: "Let’s get you started sharing your links!",
     },
   ];
