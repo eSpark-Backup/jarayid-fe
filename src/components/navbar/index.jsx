@@ -14,131 +14,119 @@ const Navbar = () => {
 
   return (
     <>
-      {pathname === "/login" || pathname === "/signup" ? (
+      <Box
+        sx={{
+          display: { xs: "none", md: "flex" },
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
         <Box
           sx={{
-            p: "20px",
+            width: "90%",
+            py: "20px",
             display: "flex",
-            justifyContent: language === "ar" ? "flex-start" : "flex-end",
+            justifyContent: "space-between",
+            flexDirection: language === "ar" ? "row-reverse" : "row",
           }}
         >
-          <LanguageToggler />
-        </Box>
-      ) : (
-        <Box
-          sx={{
-            display: { xs: "none", md: "flex" },
-            justifyContent: "center",
-            alignItems: "center",
-          }}
-        >
+          <SocialBox />
+          {/* <img src={logo} alt="Logo" /> */}
           <Box
-            sx={{
-              width: "90%",
-              py: "20px",
-              display: "flex",
-              justifyContent: "space-between",
-              flexDirection: language === "ar" ? "row-reverse" : "row",
-            }}
+            component={"img"}
+            src={logo}
+            sx={{ width: { md: "170px", lg: "auto" } }}
+          />
+          <Box
+            sx={{ display: "flex", flexDirection: "column", rowGap: "15px" }}
           >
-            <SocialBox />
-            {/* <img src={logo} alt="Logo" /> */}
             <Box
-              component={"img"}
-              src={logo}
-              sx={{ width: { md: "170px", lg: "auto" } }}
-            />
-            <Box
-              sx={{ display: "flex", flexDirection: "column", rowGap: "15px" }}
+              sx={{
+                display: "flex",
+                columnGap: { md: "20px", lg: "45px" },
+                alignItems: "center",
+              }}
             >
-              <Box
-                sx={{
-                  display: "flex",
-                  columnGap: { md: "20px", lg: "45px" },
-                  alignItems: "center",
-                }}
-              >
-                {user ? (
+              {user ? (
+                <Box
+                  sx={{
+                    backgroundColor: "#053E7C",
+                    borderRadius: "5px",
+                    p: "5px 10px",
+                    display: "flex",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    width: "136px",
+                    // height: "35px",
+                  }}
+                >
                   <Box
                     sx={{
-                      backgroundColor: "#053E7C",
-                      borderRadius: "5px",
-                      p: "5px 10px",
                       display: "flex",
-                      justifyContent: "space-between",
+                      columnGap: "10px",
                       alignItems: "center",
-                      width: "136px",
-                      // height: "35px",
                     }}
                   >
+                    <Avatar sx={{ width: "24px", height: "24px" }} alt="" />
                     <Box
                       sx={{
                         display: "flex",
-                        columnGap: "10px",
-                        alignItems: "center",
+                        flexDirection: "column",
+                        rowGap: "2px",
                       }}
                     >
-                      <Avatar sx={{ width: "24px", height: "24px" }} alt="" />
-                      <Box
+                      <Typography
                         sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          rowGap: "2px",
+                          color: "white",
+                          fontSize: "15.51px",
+                          fontWeight: "500",
                         }}
                       >
-                        <Typography
-                          sx={{
-                            color: "white",
-                            fontSize: "15.51px",
-                            fontWeight: "500",
-                          }}
-                        >
-                          John
-                        </Typography>
-                        <Typography
-                          sx={{
-                            color: "white",
-                            fontSize: "7.89px",
-                            fontWeight: "500",
-                          }}
-                        >
-                          John@gmail.com
-                        </Typography>
-                      </Box>
+                        John
+                      </Typography>
+                      <Typography
+                        sx={{
+                          color: "white",
+                          fontSize: "7.89px",
+                          fontWeight: "500",
+                        }}
+                      >
+                        John@gmail.com
+                      </Typography>
                     </Box>
-                    <img src={downArrow} alt="Icon" />
                   </Box>
-                ) : (
-                  <Link
-                    to={"/signup"}
-                    style={{
-                      textDecoration: "none",
-                      display: "flex",
-                      columnGap: "3px",
-                    }}
-                  >
-                    <Typography sx={{ color: "#007BFF" }}>
-                      {t("signup")}
-                    </Typography>
-                    <img src={login} alt="Icon" />
-                  </Link>
-                )}
+                  <img src={downArrow} alt="Icon" />
+                </Box>
+              ) : (
+                <Link
+                  to={"/signup"}
+                  style={{
+                    textDecoration: "none",
+                    display: "flex",
+                    columnGap: "3px",
+                  }}
+                >
+                  <Typography sx={{ color: "#007BFF" }}>
+                    {t("signup")}
+                  </Typography>
+                  <img src={login} alt="Icon" />
+                </Link>
+              )}
 
-                <LanguageToggler />
-              </Box>
-              <Box
-                sx={{
-                  display: "flex",
-                  justifyContent: language === "ar" ? "flex-start" : "flex-end",
-                  width: "100%",
-                }}
-              >
-                <img src={message} alt="" />
-              </Box>
+              <LanguageToggler />
+            </Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: language === "ar" ? "flex-start" : "flex-end",
+                width: "100%",
+              }}
+            >
+              <img src={message} alt="" />
             </Box>
           </Box>
         </Box>
-      )}
+      </Box>
     </>
   );
 };

@@ -15,28 +15,30 @@ const NewsCard = ({ image, source }) => {
         alignItems: "center",
         justifyContent: "space-between",
         flexDirection: {
-          xs: "column",
+          xs: "row",
           md: language === "ar" ? "row-reverse" : "row",
         },
+        px: { xs: "10px", md: "15px" },
       }}
     >
-      {/* Image */}
       <Box
         component="img"
         src={image}
         alt="News image"
         sx={{
-          width: { xs: "100%", md: "180px" },
+          width: { xs: "111px", md: "180px" },
           objectFit: "cover",
           flexShrink: 0,
+          height: "100px",
+          borderRadius: { xs: "4.7px", md: "7px" },
         }}
       />
 
-      {/* Headline */}
       <Box
         sx={{
           flexGrow: 1,
           overflow: "hidden",
+          display: { xs: "none", md: "block" },
         }}
       >
         <Typography
@@ -56,7 +58,6 @@ const NewsCard = ({ image, source }) => {
         </Typography>
       </Box>
 
-      {/* Right Box */}
       <Box
         sx={{
           display: "flex",
@@ -66,11 +67,12 @@ const NewsCard = ({ image, source }) => {
             xs: "center",
             md: language === "ar" ? "flex-start" : "flex-end",
           },
+          rowGap: "2px",
         }}
       >
         <Typography
           sx={{
-            fontSize: { xs: "14.35px", lg: "17.6px" },
+            fontSize: { xs: "8px", lg: "17.6px" },
             color: "#007BFF",
             textAlign: {
               xs: "center",
@@ -82,10 +84,25 @@ const NewsCard = ({ image, source }) => {
         </Typography>
         <Typography
           sx={{
-            mt: "25px",
+            fontSize: { xs: "9px", md: "18px", lg: "22.49px" },
+            whiteSpace: {
+              xs: "normal",
+              md: "nowrap",
+            },
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            textAlign: "center",
+            display: { xs: "block", md: "none" },
+          }}
+        >
+          {t("newsHeadline")}
+        </Typography>
+        <Typography
+          sx={{
+            mt: { xs: "0px", md: "25px" },
             color: "#8F8F8F",
-            fontSize: "12.07px",
-            mb: "15px",
+            fontSize: { xs: "7px", md: "12.07px" },
+            mb: { xs: "0px", md: "15px" },
             textAlign: {
               xs: "center",
               md: language === "ar" ? "left" : "right",

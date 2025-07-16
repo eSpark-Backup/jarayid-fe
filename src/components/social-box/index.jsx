@@ -8,6 +8,7 @@ import {
   tiktok,
   twitter,
   whatsapp,
+  youtube,
 } from "../../assets";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
@@ -17,39 +18,78 @@ const SocialBox = ({ newsCard }) => {
   const language = useSelector((state) => state.language);
 
   return (
-    <Box sx={{ display: "flex", flexDirection: "column", rowGap: "10px" }}>
-      <Box sx={{ display: "flex", columnGap: "9px" }}>
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: "column",
+        rowGap: { xs: newsCard ? "2px" : "10px", md: "10px" },
+      }}
+    >
+      <Box sx={{ display: "flex", columnGap: { xs: "3px", md: "9px" } }}>
         {newsCard ? (
           <>
-            <img
+            <Box
+              component={"img"}
+              src={youtube}
+              sx={{
+                display: { xs: "block", md: "none" },
+                width: "12px",
+                height: "12px",
+              }}
+            />
+            <Box
+              component="img"
               src={comment}
-              alt="Icon"
-              style={{ width: "21px", height: "21px" }}
+              alt="Comment"
+              sx={{
+                width: { xs: "12px", md: "21px" },
+                height: { xs: "12px", md: "21px" },
+              }}
             />
-            <img
+            <Box
+              component="img"
               src={save}
-              alt="Icon"
-              style={{ width: "21px", height: "21px" }}
+              alt="Save"
+              sx={{
+                width: { xs: "12px", md: "21px" },
+                height: { xs: "12px", md: "21px" },
+              }}
             />
-            <img
+            <Box
+              component="img"
               src={like}
-              alt="Icon"
-              style={{ width: "21px", height: "21px" }}
+              alt="Like"
+              sx={{
+                width: { xs: "12px", md: "21px" },
+                height: { xs: "12px", md: "21px" },
+              }}
             />
-            <img
+            <Box
+              component="img"
               src={twitter}
-              alt="Icon"
-              style={{ width: "21px", height: "21px" }}
+              alt="Twitter"
+              sx={{
+                width: { xs: "12px", md: "21px" },
+                height: { xs: "12px", md: "21px" },
+              }}
             />
-            <img
+            <Box
+              component="img"
               src={facebook}
-              alt="Icon"
-              style={{ width: "21px", height: "21px" }}
+              alt="Facebook"
+              sx={{
+                width: { xs: "12px", md: "21px" },
+                height: { xs: "12px", md: "21px" },
+              }}
             />
-            <img
+            <Box
+              component="img"
               src={whatsapp}
-              alt="Icon"
-              style={{ width: "21px", height: "21px" }}
+              alt="WhatsApp"
+              sx={{
+                width: { xs: "12px", md: "21px" },
+                height: { xs: "12px", md: "21px" },
+              }}
             />
           </>
         ) : (
@@ -69,6 +109,7 @@ const SocialBox = ({ newsCard }) => {
               xs: "center",
               md: language === "ar" ? "left" : "right",
             },
+            fontSize: { xs: "7px", md: "12px" },
           }}
         >
           {t("shareNews")}

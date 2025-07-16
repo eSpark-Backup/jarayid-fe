@@ -102,5 +102,7 @@
     "Confirm Password is required": "Confirm Password is required",
     "Save": "Save",
     "At least 8 characters": "At least 8 characters",
-    "Forget Password?": "Forget Password?"
+    "Forget Password?": "Forget Password?",
+    "Notification": "Notification",
+    "Chatbot": "Chatbot"
 }

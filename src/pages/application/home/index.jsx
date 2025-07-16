@@ -1,13 +1,5 @@
-import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import {
-  Button,
-  Footer,
-  MobileNavbar,
-  Navbar,
-  NewsCard,
-} from "../../../components";
-import useLanguageSwitcher from "../../../hooks/change-language";
+import { Footer, NewsCard } from "../../../components";
 import {
   categories,
   channels,
@@ -21,8 +13,6 @@ import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
   const { t } = useTranslation();
-  const { switchLanguage } = useLanguageSwitcher();
-  const language = useSelector((state) => state.language);
   const [activeItem, setActiveItem] = useState("Lebanon");
   const [activeCategory, setActiveCategory] = useState("Sport");
   const [searchParams, setSearchParams] = useSearchParams();
@@ -79,8 +69,6 @@ const Home = () => {
 
   return (
     <>
-      <Navbar />
-      <MobileNavbar />
       <Box
         sx={{
           display: "flex",

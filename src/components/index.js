@@ -7,6 +7,7 @@ import CustomSwitch from "./custom-switch";
 import MobileNavbar from "./mobile-navbar";
 import LanguageToggler from "./lang-toggler";
 import CustomInput from "./input";
+import MobileFooter from "./mobile-footer";
 
 export {
   Button,
@@ -18,4 +19,5 @@ export {
   MobileNavbar,
   LanguageToggler,
   CustomInput,
+  MobileFooter,
 };

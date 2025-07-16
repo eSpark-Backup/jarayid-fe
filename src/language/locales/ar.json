@@ -102,5 +102,7 @@
     "Confirm Password is required": "تأكيد كلمة المرور مطلوب",
     "Save": "أرسل الرمز",
     "At least 8 characters": "ثمانية أحرف على الأقل",
-    "Forget Password?": "نسيت كلمة المرور؟"
+    "Forget Password?": "نسيت كلمة المرور؟",
+    "Notification": "إشعار",
+    "Chatbot": "روبوت المحادثة"
 }
