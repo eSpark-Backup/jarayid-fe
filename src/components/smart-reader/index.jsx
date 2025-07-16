@@ -1,8 +1,13 @@
 import { Box, Typography, IconButton } from "@mui/material";
 import { memo } from "react";
-import SmartReaderIcon from "../../assets/icons/smart-read.svg"; 
+import SmartReaderIcon from "../../assets/icons/smart-read.svg";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const SmartReaderCard = () => {
+  const { t } = useTranslation();
+  const language = useSelector((state) => state.language);
+
   return (
     <Box
       sx={{
@@ -22,14 +27,15 @@ const SmartReaderCard = () => {
           cursor: "pointer",
           fontSize: "18px",
           fontWeight: "400",
+          textAlign: language === "ar" ? "right" : "center",
         }}
       >
-        Click Here
+        {t("Click Here")}
       </Typography>
 
       <IconButton
         disableRipple
-        aria-label="Open Smart Reader"
+        aria-label={t("Open Smart Reader")}
         sx={{
           p: 0,
           background: "linear-gradient(180deg, #005BBC 0%, #0053AC 100%)",
@@ -42,15 +48,22 @@ const SmartReaderCard = () => {
       >
         <img
           src={SmartReaderIcon}
-          alt="Smart Reader Icon"
+          alt={t("Smart Reader Icon")}
           loading="lazy"
           decoding="async"
           style={{ width: 19, height: 19 }}
         />
       </IconButton>
 
-      <Typography variant="body2" sx={{ fontSize: "18px", fontWeight: "400" }}>
-        Smart Reader
+      <Typography
+        variant="body2"
+        sx={{
+          fontSize: "18px",
+          fontWeight: "400",
+          textAlign: language === "ar" ? "right" : "center",
+        }}
+      >
+        {t("Smart Reader")}
       </Typography>
     </Box>
   );
