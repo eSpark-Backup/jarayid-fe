@@ -1,9 +1,9 @@
-import { Box, Typography } from "@mui/material";
+import { Avatar, Box, Typography } from "@mui/material";
 import SocialBox from "../social-box";
-import { login, logo } from "../../assets";
+import { downArrow, login, logo, message } from "../../assets";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import LanguageToggler from "../lang-toggler";
 
 const Navbar = () => {
@@ -19,8 +19,7 @@ const Navbar = () => {
           sx={{
             p: "20px",
             display: "flex",
-            justifyContent: "flex-end",
-            alignItems: "flex-end",
+            justifyContent: language === "ar" ? "flex-start" : "flex-end",
           }}
         >
           <LanguageToggler />
@@ -53,26 +52,88 @@ const Navbar = () => {
               sx={{ display: "flex", flexDirection: "column", rowGap: "15px" }}
             >
               <Box
-                sx={{ display: "flex", columnGap: { md: "20px", lg: "45px" } }}
+                sx={{
+                  display: "flex",
+                  columnGap: { md: "20px", lg: "45px" },
+                  alignItems: "center",
+                }}
               >
                 {user ? (
-                  <></>
-                ) : (
                   <Box
                     sx={{
+                      backgroundColor: "#053E7C",
+                      borderRadius: "5px",
+                      p: "5px 10px",
                       display: "flex",
-                      columnGap: "10px",
+                      justifyContent: "space-between",
                       alignItems: "center",
+                      width: "136px",
+                      // height: "35px",
+                    }}
+                  >
+                    <Box
+                      sx={{
+                        display: "flex",
+                        columnGap: "10px",
+                        alignItems: "center",
+                      }}
+                    >
+                      <Avatar sx={{ width: "24px", height: "24px" }} alt="" />
+                      <Box
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          rowGap: "2px",
+                        }}
+                      >
+                        <Typography
+                          sx={{
+                            color: "white",
+                            fontSize: "15.51px",
+                            fontWeight: "500",
+                          }}
+                        >
+                          John
+                        </Typography>
+                        <Typography
+                          sx={{
+                            color: "white",
+                            fontSize: "7.89px",
+                            fontWeight: "500",
+                          }}
+                        >
+                          John@gmail.com
+                        </Typography>
+                      </Box>
+                    </Box>
+                    <img src={downArrow} alt="Icon" />
+                  </Box>
+                ) : (
+                  <Link
+                    to={"/signup"}
+                    style={{
+                      textDecoration: "none",
+                      display: "flex",
+                      columnGap: "3px",
                     }}
                   >
                     <Typography sx={{ color: "#007BFF" }}>
                       {t("signup")}
                     </Typography>
                     <img src={login} alt="Icon" />
-                  </Box>
+                  </Link>
                 )}
 
                 <LanguageToggler />
+              </Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  justifyContent: language === "ar" ? "flex-start" : "flex-end",
+                  width: "100%",
+                }}
+              >
+                <img src={message} alt="" />
               </Box>
             </Box>
           </Box>

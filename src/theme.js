@@ -101,12 +101,13 @@ export const theme = createTheme({
       styleOverrides: {
         root: {
           height: "40px",
-          borderBottom: "1px solid #007BFF",
+          borderBottom: "1px solid #8F8F8F",
           color: "#383535",
-          fontSize: "17.96px",
+          fontSize: "15.96px",
           display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          // justifyContent: "center",
+          // alignItems: "center",
+          columnGap: "9px",
         },
       },
     },

@@ -89,25 +89,20 @@ const MobileNavbar = () => {
         anchorEl={anchorEl}
         open={open}
         onClose={handleClose}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
+        anchorReference="none"
         PaperProps={{
           sx: {
             backgroundColor: "#fff",
             color: "#fff",
             borderRadius: "0px",
             boxShadow: "0px 4px 12px rgba(0,0,0,0.3) !important",
-            // padding: "8px 0",
             width: "80vw",
-            mt: -2,
-            maxHeight: "99vh !important",
+            maxHeight: "85vh !important",
             overflowY: "auto",
+            position: "fixed",
+            left: "10% !important",
+            top: "5%",
+            transform: "translate(-50%, -50%)",
           },
         }}
       >
@@ -122,45 +117,53 @@ const MobileNavbar = () => {
           Other Settings
         </Typography>
         {otherSettings?.map((item, index) => (
-          <MenuItem key={index}>{t(item)}</MenuItem>
+          <MenuItem
+            key={index}
+            sx={{
+              display: "flex",
+              flexDirection: language === "ar" ? "row-reverse" : "row",
+              alignItems: "center",
+              justifyContent: language === "ar" ? "end" : "flex-start",
+              gap: "8px",
+            }}
+          >
+            <img src={item?.icon} alt="Icon" />
+            <Typography
+              sx={{
+                color: "#383535",
+                fontSize: "15.7px",
+                textAlign: language === "ar" ? "right" : "left",
+              }}
+            >
+              {t(item?.heading)}
+            </Typography>
+          </MenuItem>
         ))}
       </Menu>
       <Menu
         anchorEl={anchorEl2}
         open={open2}
         onClose={handleClose2}
-        anchorOrigin={{
-          vertical: "bottom",
-          horizontal: "left",
-        }}
-        transformOrigin={{
-          vertical: "top",
-          horizontal: "left",
-        }}
+        anchorReference="none"
         PaperProps={{
           sx: {
             backgroundColor: "#fff",
             color: "#fff",
             borderRadius: "0px",
             boxShadow: "0px 4px 12px rgba(0,0,0,0.3) !important",
-            // padding: "8px 0",
-            width: "80%",
-            mt: -2,
-            maxHeight: "99vh !important",
+            width: "80vw",
+            maxHeight: "85vh !important",
             overflowY: "auto",
-            ml: -3,
-            px: "15px",
+            position: "fixed",
+            left: "10% !important",
+            top: "5%",
+            transform: "translate(-50%, -50%)",
           },
         }}
       >
         {showCountries ? (
-          <>
+          <Box>
             <Box sx={{ pt: "15px", display: "flex", columnGap: "15px" }}>
-              <img
-                src={backArrow}
-                alt=""
-                onClick={() => setShowCountries(false)}
-              />
               <Typography sx={{ fontSize: "23.67px", color: "#004A99" }}>
                 Country Categories
               </Typography>
@@ -172,9 +175,9 @@ const MobileNavbar = () => {
                 <MenuItem key={index}>{t(item)}</MenuItem>
               ))}
             </Box>
-          </>
+          </Box>
         ) : (
-          <>
+          <Box>
             <Box
               sx={{
                 height: "40px",
@@ -237,7 +240,7 @@ const MobileNavbar = () => {
                 ))}
               </Box>
             ))}
-          </>
+          </Box>
         )}
       </Menu>
     </>

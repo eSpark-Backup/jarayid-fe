@@ -12,7 +12,7 @@ const Footer = () => {
     <Box
       sx={{
         backgroundColor: "#1D4167",
-        p: { xs: "25px 20px", lg: "25px 100px" },
+        p: { xs: "25px 20px", lg: "25px 90px" },
         display: "flex",
         justifyContent: "space-between",
         flexDirection: {
@@ -70,7 +70,7 @@ const Footer = () => {
           )}
         </Typography>
       </Box>
-      <Box sx={{ width: { xs: "100%", lg: "25%" } }}>
+      <Box sx={{ width: { xs: "100%", lg: "28%" } }}>
         <Typography
           sx={{
             fontSize: "20px",

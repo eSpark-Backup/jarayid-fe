@@ -13,7 +13,6 @@ const NewsCard = ({ image, source }) => {
       sx={{
         display: "flex",
         alignItems: "center",
-        columnGap: "100px",
         justifyContent: "space-between",
         flexDirection: {
           xs: "column",
@@ -21,34 +20,57 @@ const NewsCard = ({ image, source }) => {
         },
       }}
     >
-      {/* <img src={image} alt="News Image" style={{ width: "100%" }} /> */}
+      {/* Image */}
       <Box
-        component={"img"}
+        component="img"
         src={image}
-        sx={{ width: { xs: "100%", md: "auto" } }}
         alt="News image"
+        sx={{
+          width: { xs: "100%", md: "180px" },
+          objectFit: "cover",
+          flexShrink: 0,
+        }}
       />
+
+      {/* Headline */}
       <Box
         sx={{
-          height: "100%",
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
+          flexGrow: 1,
+          overflow: "hidden",
         }}
       >
         <Typography
           sx={{
             fontSize: { xs: "22.49px", md: "18px", lg: "22.49px" },
             mb: "20px",
+            whiteSpace: {
+              xs: "normal",
+              md: "nowrap",
+            },
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            textAlign: "center",
           }}
         >
           {t("newsHeadline")}
         </Typography>
       </Box>
-      <Box sx={{ display: "flex", flexDirection: "column" }}>
+
+      {/* Right Box */}
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: "column",
+          flexShrink: 0,
+          alignItems: {
+            xs: "center",
+            md: language === "ar" ? "flex-start" : "flex-end",
+          },
+        }}
+      >
         <Typography
           sx={{
-            fontSize: "17.6px",
+            fontSize: { xs: "14.35px", lg: "17.6px" },
             color: "#007BFF",
             textAlign: {
               xs: "center",

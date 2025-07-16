@@ -1,6 +1,13 @@
 import {
   ad1,
   ad2,
+  clockIcon,
+  displayNewsImage,
+  editIcon,
+  folderIcon,
+  letterIcon,
+  logoutIcon,
+  moonIcon,
   news1,
   news2,
   news3,
@@ -10,6 +17,16 @@ import {
   news7,
   news8,
   news9,
+  personIcon,
+  phoneIcon,
+  privacyIcon,
+  profileIcon,
+  questionIcon,
+  settingsIcon,
+  shareIcon,
+  socialIcon,
+  sourceIcon,
+  termsIcon,
 } from "../assets";
 
 export const countries = [
@@ -22,6 +39,11 @@ export const countries = [
   "Syria",
   "Iraq",
   "Libiya",
+  "Economy",
+  "Sports",
+  "Tech",
+  "Health",
+  "Our Choice",
   "Jordan",
   "Yamen",
   "Palestine",
@@ -31,15 +53,11 @@ export const countries = [
   "Bahrain",
   "Oman",
   "World News",
-  "Economy",
-  "Sport",
-  "Tech",
-  "Health",
   "Fashion",
   "TV station",
   "Food Rec",
   "Podcast",
-  "Our Choice",
+  "Tunisia",
 ];
 
 export const categories = ["Economy", "Sport", "Politics"];
@@ -116,20 +134,74 @@ export const categoriesFooter = [
 ];
 
 export const otherSettings = [
-  "Edit Profile",
-  "Setting",
-  "Manage Categories",
-  "Read Later",
-  "Jarayid Social Media",
-  "Be a Sponser",
-  "Rate Jarayid.com",
-  "Ad Free Subscription",
-  "Share the App",
-  "Dark Mode",
-  "Letter Size",
-  "FAQs",
-  "Terms of Services",
-  "Logout",
+  {
+    icon: profileIcon,
+    heading: "Edit Profile",
+  },
+  {
+    icon: settingsIcon,
+    heading: "Setting",
+  },
+  {
+    icon: sourceIcon,
+    heading: "Edit New Source",
+  },
+  {
+    icon: clockIcon,
+    heading: "Read Later",
+  },
+  {
+    icon: editIcon,
+    heading: "Edit Notification",
+  },
+  {
+    icon: socialIcon,
+    heading: "Jarayid Social Media Accounts",
+  },
+  {
+    icon: personIcon,
+    heading: "Advertise here",
+  },
+  {
+    icon: folderIcon,
+    heading: "Rate Jarayid.com",
+  },
+  {
+    icon: profileIcon,
+    heading: "Subscription Jarayid Plus",
+  },
+  {
+    icon: shareIcon,
+    heading: "Share the App",
+  },
+  {
+    icon: moonIcon,
+    heading: "Dark Mode",
+  },
+  {
+    icon: letterIcon,
+    heading: "Font Size",
+  },
+  {
+    icon: questionIcon,
+    heading: "FAQs",
+  },
+  {
+    icon: termsIcon,
+    heading: "Terms of Use",
+  },
+  {
+    icon: privacyIcon,
+    heading: "Privacy Policy",
+  },
+  {
+    icon: phoneIcon,
+    heading: "Contact Us",
+  },
+  {
+    icon: logoutIcon,
+    heading: "Logout",
+  },
 ];
 
 export const settingsMenuItems = [
@@ -144,5 +216,47 @@ export const settingsMenuItems = [
   {
     heading: "Politics",
     items: ["Aldiar", "Aljamouriya", "Alwatan"],
+  },
+];
+
+export const displayNews = [
+  {
+    heading: "World News",
+    videoUrl: "https://www.youtube.com/embed/hs5Nc8vmmZw?si=SqBWEWSPQf54c7WL",
+  },
+  {
+    heading: "Lebanon News",
+    videoUrl: "https://www.youtube.com/embed/hs5Nc8vmmZw?si=SqBWEWSPQf54c7WL",
+  },
+  {
+    heading: "Al Arabiya News",
+    videoUrl: "https://www.youtube.com/embed/hs5Nc8vmmZw?si=SqBWEWSPQf54c7WL",
+  },
+];
+
+export const channels = [
+  {
+    name: "Joe Hatab",
+    image: displayNewsImage,
+  },
+  {
+    name: "Amir Tayib",
+    image: displayNewsImage,
+  },
+  {
+    name: "a7mad Taha",
+    image: displayNewsImage,
+  },
+  {
+    name: "Arab Youtube",
+    image: displayNewsImage,
+  },
+  {
+    name: "Songs",
+    image: displayNewsImage,
+  },
+  {
+    name: "Test & More",
+    image: displayNewsImage,
   },
 ];

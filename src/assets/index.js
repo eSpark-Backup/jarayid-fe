@@ -26,6 +26,25 @@ import settings from "./icons/settings.svg";
 import menu from "./icons/menu.svg";
 import forwardArrow from "./icons/forwardArrow.svg";
 import backArrow from "./icons/backArrow.svg";
+import downArrow from "./icons/downArrow.svg";
+import message from "./icons/message.svg";
+import displayNewsImage from "./icons/displayNews.svg";
+import profileIcon from "./icons/profileIcon.svg";
+import settingsIcon from "./icons/settingIcon.svg";
+import sourceIcon from "./icons/sourceIcon.svg";
+import clockIcon from "./icons/clockIcon.svg";
+import editIcon from "./icons/editIcon.svg";
+import socialIcon from "./icons/signalIcon.svg";
+import personIcon from "./icons/personIcon.svg";
+import folderIcon from "./icons/folderIcon.svg";
+import shareIcon from "./icons/shareIcon.svg";
+import moonIcon from "./icons/moonIcon.svg";
+import letterIcon from "./icons/letterIcon.svg";
+import questionIcon from "./icons/questionIcon.svg";
+import termsIcon from "./icons/termsIcon.svg";
+import privacyIcon from "./icons/privacyIcon.svg";
+import phoneIcon from "./icons/phoneIcon.svg";
+import logoutIcon from "./icons/logoutIcon.svg";
 
 export {
   facebook,
@@ -56,4 +75,23 @@ export {
   menu,
   forwardArrow,
   backArrow,
+  downArrow,
+  message,
+  displayNewsImage,
+  profileIcon,
+  settingsIcon,
+  sourceIcon,
+  clockIcon,
+  editIcon,
+  socialIcon,
+  personIcon,
+  folderIcon,
+  shareIcon,
+  moonIcon,
+  letterIcon,
+  questionIcon,
+  termsIcon,
+  privacyIcon,
+  phoneIcon,
+  logoutIcon,
 };

@@ -8,9 +8,15 @@ import {
   NewsCard,
 } from "../../../components";
 import useLanguageSwitcher from "../../../hooks/change-language";
-import { categories, countries, newsContent } from "../../../constant";
-import { Box, Chip, Divider } from "@mui/material";
-import { useEffect, useState } from "react";
+import {
+  categories,
+  channels,
+  countries,
+  displayNews,
+  newsContent,
+} from "../../../constant";
+import { Box, Chip, Divider, Grid, Typography } from "@mui/material";
+import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 
 const Home = () => {
@@ -85,34 +91,77 @@ const Home = () => {
           pb: "30px",
         }}
       >
-        <Box
+        <Grid
           sx={{
-            width: { xs: "90%", md: "90%", lg: "70%" },
-            display: { xs: "none", md: "flex" },
-            flexWrap: "wrap",
-            gap: "3px",
-            justifyContent: "space-between",
+            width: { xs: "90%", md: "75%", lg: "70%" },
+            display: "flex",
+
+            flexWrap: { xs: "nowrap", md: "wrap" },
+            overflowX: { xs: "auto", md: "hidden" },
+            columnGap: { xs: "3px", md: "0px" },
+            "&::-webkit-scrollbar": {
+              display: "none",
+            },
           }}
+          container
         >
           {countries?.map((item, index) => (
-            <Chip
-              label={t(item)}
-              variant="straight"
-              key={index}
+            <Grid
               sx={{
-                background:
-                  activeItem === item
-                    ? "linear-gradient(180deg, #007BFF 33%, #004A99 100%)"
-                    : "#F3EEEE",
-                color: activeItem === item ? "white" : "#000000",
-                border: activeItem === item ? "none" : "1px solid #01000142",
-                width: { xs: "45%", sm: "33%", md: "77.5px", lg: "99.5px" },
+                display: { xs: "none", md: "flex" },
+                width: {
+                  md: "14.2857%",
+                  lg: "7.1428%",
+                },
+                p: "3px",
               }}
-              onClick={() => handleChipClick(item, "country")}
-              disableRipple
-            />
+              display={{ xs: "none", md: "flex" }}
+              key={index}
+            >
+              <Chip
+                label={t(item)}
+                variant="straight"
+                sx={{
+                  width: "100%",
+                  background:
+                    activeItem === item
+                      ? "linear-gradient(180deg, #007BFF 33%, #004A99 100%)"
+                      : "#F3EEEE",
+                  color: activeItem === item ? "white" : "#000000",
+                  border: activeItem === item ? "none" : "1px solid #01000142",
+                  // width: { sm: "33%", md: "77.5px", lg: "99.5px" },
+                  fontSize: "14px",
+                  // display: { xs: "none", md: "flex" },
+                }}
+                onClick={() => handleChipClick(item, "country")}
+                disableRipple
+              />
+            </Grid>
           ))}
-        </Box>
+          {["Lebanon", "Tech", "Sport", "Economy", "Politics"]?.map(
+            (item, index) => (
+              <Chip
+                label={t(item)}
+                variant="straight"
+                key={index}
+                sx={{
+                  background:
+                    activeItem === item
+                      ? "linear-gradient(180deg, #007BFF 33%, #004A99 100%)"
+                      : "#F3EEEE",
+                  color: activeItem === item ? "white" : "#000000",
+                  border: activeItem === item ? "none" : "1px solid #01000142",
+                  width: { xs: "110px", sm: "20%" },
+                  fontSize: "14px",
+                  display: { xs: "flex", md: "none" },
+                  flexShrink: 0,
+                }}
+                onClick={() => handleChipClick(item, "country")}
+                disableRipple
+              />
+            )
+          )}
+        </Grid>
 
         <Divider
           sx={{
@@ -123,10 +172,14 @@ const Home = () => {
 
         <Box
           sx={{
-            display: { xs: "none", md: "flex" },
-            gap: "20px",
-            flexDirection: { xs: "column", md: "row" },
-            width: { xs: "90%", md: "auto" },
+            display: "flex",
+            gap: { xs: "4px", md: "20px" },
+            flexDirection: "row",
+            width: { xs: "100%", md: "auto" },
+            overflowX: "auto",
+            flexWrap: "nowrap",
+            justifyContent: "center",
+            alignItems: "center",
           }}
         >
           {categories?.map((item, index) => (
@@ -142,12 +195,127 @@ const Home = () => {
                 color: activeCategory === item ? "white" : "#000000",
                 border:
                   activeCategory === item ? "none" : "1px solid #01000142",
-                width: { xs: "100%", md: "157px", lg: "200px" },
+                width: { xs: "100px", md: "157px", lg: "200px" },
+                fontSize: { xs: "11px", md: "14px", lg: "17.96px" },
               }}
               onClick={() => handleChipClick(item, "category")}
               disableRipple
             />
           ))}
+        </Box>
+        <Box
+          sx={{
+            px: "15px",
+            width: { xs: "90%", lg: "50%" },
+            my: "10px",
+          }}
+        >
+          <Grid
+            spacing={1}
+            container
+            sx={{
+              overflowX: "auto",
+              flexWrap: "nowrap",
+              display: "flex",
+              pb: 2,
+              "&::-webkit-scrollbar": {
+                display: "none",
+              },
+            }}
+          >
+            {displayNews?.map((item, index) => (
+              <React.Fragment key={index}>
+                <Grid
+                  item
+                  sx={{
+                    display: { xs: "block", sm: "none" },
+                    width: { xs: "140px", md: "213px" },
+                    flexShrink: 0,
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: { xs: "14px", md: "27.69px" },
+                      fontWeight: 400,
+                      textAlign: "center",
+                      mb: "15px",
+                    }}
+                  >
+                    {item?.heading}
+                  </Typography>
+                  <Box
+                    component="iframe"
+                    src={item?.videoUrl}
+                    sx={{
+                      width: "100%",
+                      height: "455px",
+                      borderRadius: "8px",
+                      boxShadow: "none",
+                    }}
+                  />
+                </Grid>
+
+                <Grid
+                  item
+                  size={4}
+                  sx={{
+                    display: { xs: "none", sm: "block" },
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      fontSize: { sm: "14px", md: "27.69px" },
+                      fontWeight: 400,
+                      textAlign: "center",
+                      mb: "15px",
+                    }}
+                  >
+                    {item?.heading}
+                  </Typography>
+                  <Box
+                    component="iframe"
+                    src={item?.videoUrl}
+                    sx={{
+                      width: "100%",
+                      height: "455px",
+                      borderRadius: "8px",
+                      boxShadow: "none",
+                    }}
+                  />
+                </Grid>
+              </React.Fragment>
+            ))}
+          </Grid>
+
+          <Grid
+            container
+            columnSpacing={1}
+            rowSpacing={3}
+            sx={{ mt: "20px", display: { xs: "none", md: "flex" } }}
+          >
+            {channels?.map((item, index) => (
+              <Grid
+                size={{ xs: 6, md: 4 }}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  rowGap: "15px",
+                }}
+                key={index}
+              >
+                <Box
+                  component={"img"}
+                  src={item?.image}
+                  sx={{ borderRadius: "7.1px", width: "100%" }}
+                  alt="Image"
+                />
+                <Typography sx={{ fontSize: "15.09px", fontWeight: "400" }}>
+                  {item?.name}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
         </Box>
         <Box
           sx={{
@@ -163,14 +331,35 @@ const Home = () => {
             },
           }}
         >
-          <iframe
-            style={{ width: "100%", height: "480px", borderRadius: "9px" }}
-            src="https://www.youtube.com/embed/FMmRfanJsPM?si=7f3hAklLKiXu43iL"
-            title="YouTube video player"
-            frameborder="0"
-            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            allowfullscreen
-          ></iframe>
+          <Grid
+            container
+            columnSpacing={1}
+            rowSpacing={3}
+            sx={{ mt: "20px", display: { xs: "flex", md: "none" }, p: "15px" }}
+          >
+            {channels?.map((item, index) => (
+              <Grid
+                size={{ xs: 6, md: 4 }}
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                  alignItems: "center",
+                  rowGap: "15px",
+                }}
+                key={index}
+              >
+                <Box
+                  component={"img"}
+                  src={item?.image}
+                  sx={{ borderRadius: "7.1px", width: "100%" }}
+                  alt="Image"
+                />
+                <Typography sx={{ fontSize: "15.09px", fontWeight: "400" }}>
+                  {item?.name}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
           <Box
             sx={{
               display: "flex",
@@ -181,7 +370,7 @@ const Home = () => {
           >
             {newsContent?.map((item, index) =>
               item?.ad ? (
-                <img src={item?.ad} alt="Ad" />
+                <img src={item?.ad} alt="Ad" key={index} />
               ) : (
                 <NewsCard
                   key={index}
