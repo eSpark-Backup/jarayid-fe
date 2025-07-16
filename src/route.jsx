@@ -2,6 +2,7 @@ import { Routes, Route, Navigate } from "react-router-dom";
 import AuthLayout from "./layout/auth-layout";
 import PrivateLayout from "./layout/private-layout";
 import { Login, Signup, VerifyEmail, ChangePassword, Home } from "./pages";
+import TermsOfUsePage from "./pages/application/termsOfUse";
 
 const Router = () => {
   return (
@@ -17,6 +18,7 @@ const Router = () => {
 
         <Route element={<PrivateLayout />}>
           <Route path="/" element={<Home />} />
+          <Route path="/terms-of-use" element={<TermsOfUsePage />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
