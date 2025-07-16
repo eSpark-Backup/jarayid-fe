@@ -46,6 +46,10 @@ import privacyIcon from "./icons/privacyIcon.svg";
 import phoneIcon from "./icons/phoneIcon.svg";
 import logoutIcon from "./icons/logoutIcon.svg";
 
+import google from "./icons/google.svg";
+import email from "./icons/email.svg";
+import lock from "./icons/lock.svg";
+
 export {
   facebook,
   instagram,
@@ -94,4 +98,7 @@ export {
   privacyIcon,
   phoneIcon,
   logoutIcon,
+  email,
+  lock,
+  google,
 };
