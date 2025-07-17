@@ -1,5 +1,5 @@
 import { Outlet } from "react-router-dom";
-import { MobileFooter, MobileNavbar, Navbar } from "../../components";
+import { Footer, MobileFooter, MobileNavbar, Navbar } from "../../components";
 
 const PrivateLayout = () => {
   const handleChoice = (event) => {
@@ -11,6 +11,7 @@ const PrivateLayout = () => {
       <MobileNavbar />
       <Outlet />
       <MobileFooter handleClick={handleChoice} />
+      <Footer />
     </>
   );
 };

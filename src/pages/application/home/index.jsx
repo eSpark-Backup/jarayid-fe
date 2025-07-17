@@ -1,5 +1,5 @@
 import { useTranslation } from "react-i18next";
-import { Footer, NewsCard } from "../../../components";
+import { NewsCard } from "../../../components";
 import {
   categories,
   channels,
@@ -380,7 +380,6 @@ const Home = () => {
           </Box>
         </Box>
       </Box>
-      <Footer />
     </>
   );
 };
