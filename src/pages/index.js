@@ -6,5 +6,6 @@ import ChangePassword from "./auth/change-password";
 
 // Dashboard
 import Home from "./application/home";
+import TermsOfUse from "./application/terms-of-use";
 
-export { Login, Signup, VerifyEmail, ChangePassword, Home };
+export { Login, Signup, VerifyEmail, ChangePassword, Home, TermsOfUse };
