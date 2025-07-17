@@ -8,6 +8,7 @@ import MobileNavbar from "./mobile-navbar";
 import LanguageToggler from "./lang-toggler";
 import CustomInput from "./input";
 import MobileFooter from "./mobile-footer";
+import CountryMenu from "./country-menu";
 
 export {
   Button,
@@ -20,4 +21,5 @@ export {
   LanguageToggler,
   CustomInput,
   MobileFooter,
+  CountryMenu,
 };

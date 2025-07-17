@@ -20,8 +20,8 @@ import news9 from "./icons/news9.svg";
 import ad1 from "./icons/ad1.svg";
 import ad2 from "./icons/ad2.svg";
 import logo2 from "./icons/logo2.svg";
-import pick1 from "./icons/pick1.svg";
-import pick2 from "./icons/pick2.svg";
+// import pick1 from "./icons/pick1.svg";
+// import pick2 from "./icons/pick2.svg";
 import settings from "./icons/settings.svg";
 import menu from "./icons/menu.svg";
 import forwardArrow from "./icons/forwardArrow.svg";
@@ -54,6 +54,11 @@ import bellActive from "./icons/bellActive.svg";
 import home from "./icons/home.svg";
 import chatbot from "./icons/chatbot.svg";
 import chatbotActive from "./icons/chatbotActive.svg";
+import settingsWhite from "./icons/settingsWhite.svg";
+import userBlack from "./icons/userBlack.svg";
+
+import pick1 from "./images/pick1.png";
+import pick2 from "./images/pick2.png";
 
 export {
   facebook,
@@ -112,4 +117,6 @@ export {
   home,
   chatbot,
   chatbotActive,
+  settingsWhite,
+  userBlack,
 };
