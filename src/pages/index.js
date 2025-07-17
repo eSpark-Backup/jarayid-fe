@@ -8,6 +8,7 @@ import ChangePassword from "./auth/change-password";
 import Home from "./application/home";
 import TermsOfUse from "./application/terms-of-use";
 import PrivacyPolicy from "./application/privacy-policy";
+import FAQSection from "./application/faq";
 
 export {
   Login,
@@ -17,4 +18,5 @@ export {
   Home,
   TermsOfUse,
   PrivacyPolicy,
+  FAQSection,
 };
