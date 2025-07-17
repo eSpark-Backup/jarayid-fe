@@ -117,9 +117,7 @@ const Home = () => {
                       : "#F3EEEE",
                   color: activeItem === item ? "white" : "#000000",
                   border: activeItem === item ? "none" : "1px solid #01000142",
-                  // width: { sm: "33%", md: "77.5px", lg: "99.5px" },
                   fontSize: "14px",
-                  // display: { xs: "none", md: "flex" },
                 }}
                 onClick={() => handleChipClick(item, "country")}
                 disableRipple
@@ -228,6 +226,7 @@ const Home = () => {
                       textAlign: "center",
                       mb: "15px",
                     }}
+                    component={"h1"}
                   >
                     {item?.heading}
                   </Typography>
@@ -252,11 +251,12 @@ const Home = () => {
                 >
                   <Typography
                     sx={{
-                      fontSize: { sm: "14px", md: "27.69px" },
+                      fontSize: { sm: "14px", md: "24.69px", lg: "27px" },
                       fontWeight: 400,
                       textAlign: "center",
                       mb: "15px",
                     }}
+                    component={"h1"}
                   >
                     {item?.heading}
                   </Typography>
@@ -296,9 +296,13 @@ const Home = () => {
                   component={"img"}
                   src={item?.image}
                   sx={{ borderRadius: "7.1px", width: "100%" }}
-                  alt="Image"
+                  alt="News Image"
+                  loading="lazy"
                 />
-                <Typography sx={{ fontSize: "15.09px", fontWeight: "400" }}>
+                <Typography
+                  sx={{ fontSize: "15.09px", fontWeight: "400" }}
+                  component={"h2"}
+                >
                   {item?.name}
                 </Typography>
               </Grid>
@@ -341,8 +345,12 @@ const Home = () => {
                   src={item?.image}
                   sx={{ borderRadius: "7.1px", width: "100%" }}
                   alt="Image"
+                  loading="lazy"
                 />
-                <Typography sx={{ fontSize: "15.09px", fontWeight: "400" }}>
+                <Typography
+                  sx={{ fontSize: "10.09px", fontWeight: "400" }}
+                  component={"h2"}
+                >
                   {item?.name}
                 </Typography>
               </Grid>
@@ -358,7 +366,7 @@ const Home = () => {
           >
             {newsContent?.map((item, index) =>
               item?.ad ? (
-                <img src={item?.ad} alt="Ad" key={index} />
+                <Box component={"img"} src={item?.ad} alt="Ad" loading="lazy" />
               ) : (
                 <NewsCard
                   key={index}

@@ -36,6 +36,8 @@ const SocialBox = ({ newsCard }) => {
                 width: "12px",
                 height: "12px",
               }}
+              alt="Youtube"
+              loading="lazy"
             />
             <Box
               component="img"
@@ -45,6 +47,7 @@ const SocialBox = ({ newsCard }) => {
                 width: { xs: "12px", md: "21px" },
                 height: { xs: "12px", md: "21px" },
               }}
+              loading="lazy"
             />
             <Box
               component="img"
@@ -54,6 +57,7 @@ const SocialBox = ({ newsCard }) => {
                 width: { xs: "12px", md: "21px" },
                 height: { xs: "12px", md: "21px" },
               }}
+              loading="lazy"
             />
             <Box
               component="img"
@@ -63,6 +67,7 @@ const SocialBox = ({ newsCard }) => {
                 width: { xs: "12px", md: "21px" },
                 height: { xs: "12px", md: "21px" },
               }}
+              loading="lazy"
             />
             <Box
               component="img"
@@ -72,6 +77,7 @@ const SocialBox = ({ newsCard }) => {
                 width: { xs: "12px", md: "21px" },
                 height: { xs: "12px", md: "21px" },
               }}
+              loading="lazy"
             />
             <Box
               component="img"
@@ -81,6 +87,7 @@ const SocialBox = ({ newsCard }) => {
                 width: { xs: "12px", md: "21px" },
                 height: { xs: "12px", md: "21px" },
               }}
+              loading="lazy"
             />
             <Box
               component="img"
@@ -90,15 +97,40 @@ const SocialBox = ({ newsCard }) => {
                 width: { xs: "12px", md: "21px" },
                 height: { xs: "12px", md: "21px" },
               }}
+              loading="lazy"
             />
           </>
         ) : (
           <>
-            <img src={facebook} alt="Icon" />
-            <img src={instagram} alt="Icon" />
-            <img src={tiktok} alt="Icon" />
-            <img src={twitter} alt="Icon" />
-            <img src={whatsapp} alt="Icon" />
+            <Box
+              component={"img"}
+              src={facebook}
+              alt={"Facebook"}
+              loading="lazy"
+              sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+            />
+            <Box
+              component={"img"}
+              src={instagram}
+              alt={"Instagram"}
+              loading="lazy"
+              sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+            />
+            <Box component={"img"} src={tiktok} alt={"TikTok"} loading="lazy" />
+            <Box
+              component={"img"}
+              src={twitter}
+              alt={"Twitter"}
+              loading="lazy"
+              sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+            />
+            <Box
+              component={"img"}
+              src={whatsapp}
+              alt={"Whatsapp"}
+              loading="lazy"
+              sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+            />
           </>
         )}
       </Box>
@@ -111,6 +143,7 @@ const SocialBox = ({ newsCard }) => {
             },
             fontSize: { xs: "7px", md: "12px" },
           }}
+          component={"h4"}
         >
           {t("shareNews")}
         </Typography>
@@ -118,21 +151,23 @@ const SocialBox = ({ newsCard }) => {
         <>
           <Typography
             sx={{
-              fontSize: "16px",
+              fontSize: { md: "12px", lg: "16px" },
               fontWeight: "400",
               textAlign: language === "ar" ? "right" : "left",
               color: language === "ar" ? "#8F8F8F" : "black",
             }}
+            component={"h3"}
           >
             {t("followUs")}
           </Typography>
           <Typography
             sx={{
-              fontSize: "16px",
+              fontSize: { md: "12px", lg: "16px" },
               fontWeight: "400",
               color: "#8F8F8F",
               textAlign: language === "ar" ? "right" : "left",
             }}
+            component={"h4"}
           >
             {t("date")}
           </Typography>

@@ -17,43 +17,49 @@ const Footer = () => {
         justifyContent: "space-between",
         flexDirection: {
           xs: "column",
-          lg: language === "ar" ? "row-reverse" : "row",
+          md: language === "ar" ? "row-reverse" : "row",
         },
+        mb: { xs: "150px", md: "0px" },
+        rowGap: "15px",
       }}
+      component={"footer"}
     >
       <Box
         sx={{
           display: "flex",
           flexDirection: "column",
           rowGap: "20px",
-          width: { xs: "100%", lg: "30%" },
+          width: { xs: "100%", md: "30%" },
         }}
       >
-        <img src={logo2} alt="Logo" />
+        <Box component={"img"} src={logo2} alt="Logo" loading="lazy" />
         <Typography
           sx={{
-            fontSize: "16px",
+            fontSize: { xs: "9px", md: "9px", lg: "16px" },
             color: "#fff",
             textAlign: language === "ar" ? "right" : "unset",
           }}
+          component={"p"}
         >
           {t("footer1")}
         </Typography>
         <Typography
           sx={{
-            fontSize: "16px",
+            fontSize: { xs: "9px", md: "9px", lg: "16px" },
             color: "#fff",
             textAlign: language === "ar" ? "right" : "unset",
           }}
+          component={"p"}
         >
           {t("footer2")}
         </Typography>
         <Typography
           sx={{
-            fontSize: "16px",
+            fontSize: { xs: "9px", md: "9px", lg: "16px" },
             color: "#fff",
             textAlign: language === "ar" ? "right" : "unset",
           }}
+          component={"h3"}
         >
           {language === "ar" ? (
             <>
@@ -70,13 +76,14 @@ const Footer = () => {
           )}
         </Typography>
       </Box>
-      <Box sx={{ width: { xs: "100%", lg: "28%" } }}>
+      <Box sx={{ width: { xs: "100%", md: "28%" } }}>
         <Typography
           sx={{
-            fontSize: "20px",
+            fontSize: { xs: "11px", lg: "20px" },
             color: "#FFFFFF",
             textAlign: language === "ar" ? "right" : "unset",
           }}
+          component={"h2"}
         >
           {t("picks")}
         </Typography>
@@ -92,23 +99,31 @@ const Footer = () => {
               flexDirection: language === "ar" ? "row-reverse" : "row",
             }}
           >
-            <img src={pick1} alt="Image" />
+            <Box
+              component={"img"}
+              src={pick1}
+              sx={{ width: { xs: "90px", lg: "auto" } }}
+              alt={"News"}
+              loading="lazy"
+            />
             <Stack>
               <Typography
                 sx={{
-                  fontSize: "15px",
+                  fontSize: { xs: "8px", lg: "15px" },
                   color: "#FFFFFFB2",
                   textAlign: language === "ar" ? "right" : "unset",
                 }}
+                component={"h3"}
               >
                 {language == "ar" ? "السياسة" : "POLITICS"}
               </Typography>
               <Typography
                 sx={{
                   color: "#FFFFFF",
-                  fontSize: "14px",
+                  fontSize: { xs: "8px", lg: "14px" },
                   textAlign: language === "ar" ? "right" : "unset",
                 }}
+                component={"p"}
               >
                 {t("tipPart1")} <br /> {t("tipPart2")}
               </Typography>
@@ -122,23 +137,31 @@ const Footer = () => {
               flexDirection: language === "ar" ? "row-reverse" : "row",
             }}
           >
-            <img src={pick2} alt="Image" />
+            <Box
+              component={"img"}
+              src={pick2}
+              sx={{ width: { xs: "90px", lg: "auto" } }}
+              alt={"News"}
+              loading="lazy"
+            />
             <Stack>
               <Typography
                 sx={{
-                  fontSize: "15px",
+                  fontSize: { xs: "8px", lg: "15px" },
                   color: "#FFFFFFB2",
                   textAlign: language === "ar" ? "right" : "unset",
                 }}
+                component={"h3"}
               >
                 {language == "ar" ? "السياسة" : "DESIGN"}
               </Typography>
               <Typography
                 sx={{
                   color: "#FFFFFF",
-                  fontSize: "14px",
+                  fontSize: { xs: "8px", lg: "14px" },
                   textAlign: language === "ar" ? "right" : "unset",
                 }}
+                component={"p"}
               >
                 {t("tipPart1")} <br /> {t("tipPart2")}
               </Typography>
@@ -152,23 +175,31 @@ const Footer = () => {
               flexDirection: language === "ar" ? "row-reverse" : "row",
             }}
           >
-            <img src={pick1} alt="Image" />
+            <Box
+              component={"img"}
+              src={pick1}
+              sx={{ width: { xs: "90px", lg: "auto" } }}
+              alt={"News"}
+              loading="lazy"
+            />
             <Stack>
               <Typography
                 sx={{
-                  fontSize: "15px",
+                  fontSize: { xs: "8px", lg: "15px" },
                   color: "#FFFFFFB2",
                   textAlign: language === "ar" ? "right" : "unset",
                 }}
+                component={"h3"}
               >
                 {language == "ar" ? "السياسة" : "Travel"}
               </Typography>
               <Typography
                 sx={{
                   color: "#FFFFFF",
-                  fontSize: "14px",
+                  fontSize: { xs: "8px", lg: "14px" },
                   textAlign: language === "ar" ? "right" : "unset",
                 }}
+                component={"p"}
               >
                 {t("tipPart1")} <br /> {t("tipPart2")}
               </Typography>
@@ -176,13 +207,14 @@ const Footer = () => {
           </Box>
         </Box>
       </Box>
-      <Box sx={{ width: { xs: "100%", lg: "30%" } }}>
+      <Box sx={{ width: { xs: "100%", md: "30%" } }}>
         <Typography
           sx={{
-            fontSize: "20px",
+            fontSize: { xs: "11px", lg: "20px" },
             color: "#FFFFFF",
             textAlign: language === "ar" ? "right" : "unset",
           }}
+          component={"h2"}
         >
           {t("Categories")}
         </Typography>
@@ -210,23 +242,25 @@ const Footer = () => {
             >
               <Typography
                 sx={{
-                  fontSize: "16px",
+                  fontSize: { xs: "9px", lg: "16px" },
                   fontWeight: "400",
                   color: "#FFFFFF",
                   pr: language === "ar" ? "15px" : "0px",
                   pl: language === "ar" ? "0px" : "10px",
                 }}
+                component={"h3"}
               >
                 {t(item)}
               </Typography>
               <Typography
                 sx={{
-                  fontSize: "16px",
+                  fontSize: { xs: "9px", lg: "16px" },
                   fontWeight: "400",
                   color: "#FFFFFF",
                   pr: language !== "ar" ? "10px" : "0px",
                   pl: language === "ar" ? "10px" : "0px",
                 }}
+                component={"h4"}
               >
                 452
               </Typography>
@@ -241,6 +275,7 @@ const Footer = () => {
             textAlign: language === "ar" ? "right" : "unset",
             pr: language === "ar" ? "25px" : "0px",
           }}
+          component={"h6"}
         >
           {t("Show all")}
         </Typography>

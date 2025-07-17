@@ -32,6 +32,7 @@ const NewsCard = ({ image, source }) => {
           height: "100px",
           borderRadius: { xs: "4.7px", md: "7px" },
         }}
+        loading="lazy"
       />
 
       <Box
@@ -53,6 +54,7 @@ const NewsCard = ({ image, source }) => {
             textOverflow: "ellipsis",
             textAlign: "center",
           }}
+          component={"h2"}
         >
           {t("newsHeadline")}
         </Typography>
@@ -72,13 +74,14 @@ const NewsCard = ({ image, source }) => {
       >
         <Typography
           sx={{
-            fontSize: { xs: "8px", lg: "17.6px" },
+            fontSize: { xs: "8 px", md: "14px", lg: "17.6px" },
             color: "#007BFF",
             textAlign: {
               xs: "center",
               md: language === "ar" ? "left" : "right",
             },
           }}
+          component={"h3"}
         >
           Source: {source}
         </Typography>
@@ -94,20 +97,22 @@ const NewsCard = ({ image, source }) => {
             textAlign: "center",
             display: { xs: "block", md: "none" },
           }}
+          component={"h2"}
         >
           {t("newsHeadline")}
         </Typography>
         <Typography
           sx={{
-            mt: { xs: "0px", md: "25px" },
+            mt: { xs: "0px", md: "5px" },
             color: "#8F8F8F",
-            fontSize: { xs: "7px", md: "12.07px" },
-            mb: { xs: "0px", md: "15px" },
+            fontSize: { xs: "7px", md: "9.82px", lg: "12px" },
+            mb: { xs: "0px", md: "5px" },
             textAlign: {
               xs: "center",
               md: language === "ar" ? "left" : "right",
             },
           }}
+          component={"h5"}
         >
           {t("date")}
         </Typography>

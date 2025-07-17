@@ -3,14 +3,13 @@ import SocialBox from "../social-box";
 import { downArrow, login, logo, message } from "../../assets";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Link, useLocation } from "react-router-dom";
+import { Link } from "react-router-dom";
 import LanguageToggler from "../lang-toggler";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
-  const { pathname } = useLocation();
 
   return (
     <>
@@ -31,9 +30,11 @@ const Navbar = () => {
           }}
         >
           <SocialBox />
-          {/* <img src={logo} alt="Logo" /> */}
+
           <Box
             component={"img"}
+            alt="Logo"
+            loading="lazy"
             src={logo}
             sx={{ width: { md: "170px", lg: "auto" } }}
           />
@@ -106,7 +107,12 @@ const Navbar = () => {
                     columnGap: "3px",
                   }}
                 >
-                  <Typography sx={{ color: "#007BFF" }}>
+                  <Typography
+                    sx={{
+                      color: "#007BFF",
+                      fontSize: { md: "13px", lg: "17px" },
+                    }}
+                  >
                     {t("signup")}
                   </Typography>
                   <img src={login} alt="Icon" />
