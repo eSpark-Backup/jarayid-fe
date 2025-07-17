@@ -7,5 +7,14 @@ import ChangePassword from "./auth/change-password";
 // Dashboard
 import Home from "./application/home";
 import TermsOfUse from "./application/terms-of-use";
+import PrivacyPolicy from "./application/privacy-policy";
 
-export { Login, Signup, VerifyEmail, ChangePassword, Home, TermsOfUse };
+export {
+  Login,
+  Signup,
+  VerifyEmail,
+  ChangePassword,
+  Home,
+  TermsOfUse,
+  PrivacyPolicy,
+};

@@ -58,7 +58,10 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
             sx={{
               flexBasis: { xs: "100%", lg: "15%" },
               display: "flex",
-              justifyContent: { xs: "flex-start", md: "flex-end" },
+              justifyContent: { xs: "center", md: "flex-end" },
+              alignItems: "center",
+              width: "100%",
+              mt: { xs: 4, md: 0 },
             }}
           >
             <Suspense fallback={<div>Loading Smart Reader...</div>}>
