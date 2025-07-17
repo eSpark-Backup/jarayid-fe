@@ -80,7 +80,13 @@ const AuthLayout = () => {
           />
 
           <Card
-            sx={{ maxWidth: 476, width: "100%", borderRadius: 2, boxShadow: 3 }}
+            sx={{
+              maxWidth: 476,
+              width: "100%",
+              borderRadius: 2,
+              boxShadow:
+                "0px 0.9px 3.6px 0.9px #0000001F, 0px 2.7px 2.92px -1.35px #00000040 !important",
+            }}
           >
             <CardContent
               sx={{

@@ -1,5 +1,23 @@
 import Button from "./buttons";
-import CustomInput from "./input";
+import Navbar from "./navbar";
+import SocialBox from "./social-box";
+import NewsCard from "./news-card";
+import Footer from "./footer";
+import CustomSwitch from "./custom-switch";
+import MobileNavbar from "./mobile-navbar";
 import LanguageToggler from "./lang-toggler";
+import CustomInput from "./input";
+import MobileFooter from "./mobile-footer";
 
-export { Button, CustomInput, LanguageToggler };
+export {
+  Button,
+  Navbar,
+  SocialBox,
+  NewsCard,
+  Footer,
+  CustomSwitch,
+  MobileNavbar,
+  LanguageToggler,
+  CustomInput,
+  MobileFooter,
+};
