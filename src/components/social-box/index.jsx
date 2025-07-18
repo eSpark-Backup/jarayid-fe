@@ -13,7 +13,7 @@ import {
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 
-const SocialBox = ({ newsCard }) => {
+const SocialBox = ({ newsCard, detailPage }) => {
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
 
@@ -140,7 +140,7 @@ const SocialBox = ({ newsCard }) => {
           </>
         )}
       </Box>
-      {newsCard ? (
+      {detailPage ? null : newsCard ? (
         <Typography
           sx={{
             textAlign: {

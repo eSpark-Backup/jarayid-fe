@@ -8,6 +8,8 @@ import MobileNavbar from "./mobile-navbar";
 import LanguageToggler from "./lang-toggler";
 import CustomInput from "./input";
 import MobileFooter from "./mobile-footer";
+import CustomSwiper from "./slider";
+import SmartReaderCard from "./smart-reader";
 import CountryMenu from "./country-menu";
 
 export {
@@ -21,5 +23,7 @@ export {
   LanguageToggler,
   CustomInput,
   MobileFooter,
+  CustomSwiper,
+  SmartReaderCard,
   CountryMenu,
 };
