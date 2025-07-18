@@ -11,7 +11,6 @@ const SmartReaderCard = () => {
   return (
     <Box
       sx={{
-        bgcolor: "#fff",
         px: 2,
         py: 3,
         display: "flex",
