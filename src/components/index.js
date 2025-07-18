@@ -8,6 +8,8 @@ import MobileNavbar from "./mobile-navbar";
 import LanguageToggler from "./lang-toggler";
 import CustomInput from "./input";
 import MobileFooter from "./mobile-footer";
+import CustomSwiper from "./slider";
+import SmartReaderCard from "./smart-reader";
 import CountryMenu from "./country-menu";
 import DynamicModal from "./modal";
 import EditProfileModal from "./edit-profile-modal";
@@ -28,6 +30,8 @@ export {
   LanguageToggler,
   CustomInput,
   MobileFooter,
+  CustomSwiper,
+  SmartReaderCard,
   CountryMenu,
   DynamicModal,
   EditProfileModal,

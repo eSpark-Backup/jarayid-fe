@@ -75,6 +75,45 @@ export const theme = createTheme({
               boxShadow: "none",
             },
           },
+          props: { variant: "outlined" },
+          style: {
+            backgroundColor: "transparent",
+            border: "1px solid #3281CA",
+            color: "#3281CA",
+            "&:hover": {
+              backgroundColor: "#3281CA",
+              color: "#FFF",
+            },
+          },
+        },
+        {
+          props: { variant: "text" },
+          style: {
+            backgroundColor: "transparent",
+            color: "#3281CA",
+            boxShadow: "none",
+            "&:hover": {
+              backgroundColor: "#F0F7FF",
+            },
+          },
+        },
+        {
+          props: { variant: "gradient" },
+          style: {
+            height: "40px",
+            borderRadius: "10px",
+            background:
+              "linear-gradient(180deg, #007BFF 32.36%, #004A99 97.76%)",
+            color: "#FFF",
+            border: "1.12px solid #EBE5E5",
+            fontSize: "17px",
+            "&:hover": {
+              background:
+                "linear-gradient(180deg, #007BFF 32.36%, #004A99 97.76%)",
+              color: "#FFF",
+              border: "1.12px solid #EBE5E5",
+            },
+          },
         },
       ],
     },

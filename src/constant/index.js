@@ -269,6 +269,69 @@ export const channels = [
   },
 ];
 
+export const relativeNews = [
+  {
+    image: news1,
+    headline: "SCCI finalizes preparations",
+    source: "CNN",
+    date: "02-08-20",
+  },
+  {
+    image: news2,
+    headline: "SCCI finalizes preparations",
+    source: "CNN",
+    date: "02-08-20",
+  },
+  {
+    image: news3,
+    headline: "SCCI finalizes preparations",
+    source: "CNN",
+    date: "02-08-20",
+  },
+  {
+    image: news1,
+    headline: "SCCI finalizes preparations",
+    source: "CNN",
+    date: "02-08-20",
+  },
+  {
+    image: news2,
+    headline: "SCCI finalizes preparations",
+    source: "CNN",
+    date: "02-08-20",
+  },
+  {
+    image: news3,
+    headline: "SCCI finalizes preparations",
+    source: "CNN",
+    date: "02-08-20",
+  },
+  {
+    image: news1,
+    headline: "SCCI finalizes preparations",
+    source: "CNN",
+    date: "02-08-20",
+  },
+  {
+    image: news2,
+    headline: "SCCI finalizes preparations",
+    source: "CNN",
+    date: "02-08-20",
+  },
+  {
+    image: news3,
+    headline: "SCCI finalizes preparations",
+    source: "CNN",
+    date: "02-08-20",
+  },
+  {
+    image: news3,
+    headline: "SCCI finalizes preparations",
+    source: "CNN",
+    date: "02-08-20",
+  },
+];
+
 export const footerLinks = [
   "Term & Condition",
   "Privacy Policy",

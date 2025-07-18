@@ -1,7 +1,17 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import AuthLayout from "./layout/auth-layout";
 import PrivateLayout from "./layout/private-layout";
-import { Login, Signup, VerifyEmail, ChangePassword, Home, TermsOfUse, PrivacyPolicy } from "./pages";
+import {
+  Login,
+  Signup,
+  VerifyEmail,
+  ChangePassword,
+  Home,
+  TermsOfUse,
+  PrivacyPolicy,
+  FAQSection,
+  ArticleDetails,
+} from "./pages";
 
 const Router = () => {
   return (
@@ -11,7 +21,6 @@ const Router = () => {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/change-password" element={<ChangePassword />} />
-          {/* Verify Email */}
           <Route path="/verify-email" element={<VerifyEmail />} />
         </Route>
 
@@ -19,6 +28,8 @@ const Router = () => {
           <Route path="/" element={<Home />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+          <Route path="/:id" element={<ArticleDetails />} />
+          <Route path="/faq" element={<FAQSection />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

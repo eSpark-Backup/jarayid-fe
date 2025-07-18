@@ -8,6 +8,8 @@ import ChangePassword from "./auth/change-password";
 import Home from "./application/home";
 import TermsOfUse from "./application/terms-of-use";
 import PrivacyPolicy from "./application/privacy-policy";
+import ArticleDetails from "./application/article-details";
+import FAQSection from "./application/faq";
 
 export {
   Login,
@@ -16,5 +18,7 @@ export {
   ChangePassword,
   Home,
   TermsOfUse,
+  ArticleDetails,
   PrivacyPolicy,
+  FAQSection,
 };
