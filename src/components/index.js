@@ -9,6 +9,13 @@ import LanguageToggler from "./lang-toggler";
 import CustomInput from "./input";
 import MobileFooter from "./mobile-footer";
 import CountryMenu from "./country-menu";
+import DynamicModal from "./modal";
+import EditProfileModal from "./edit-profile-modal";
+import AdvertiseModal from "./advertise-modal";
+import SubscriptionModal from "./subscription-modal";
+import ContactModal from "./contact-modal";
+import ShareModal from "./share-modal";
+import QRModal from "./qr-modal";
 
 export {
   Button,
@@ -22,4 +29,11 @@ export {
   CustomInput,
   MobileFooter,
   CountryMenu,
+  DynamicModal,
+  EditProfileModal,
+  AdvertiseModal,
+  SubscriptionModal,
+  ContactModal,
+  ShareModal,
+  QRModal,
 };

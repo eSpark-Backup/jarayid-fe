@@ -25,7 +25,9 @@ const SocialBox = ({ newsCard }) => {
         rowGap: { xs: newsCard ? "2px" : "10px", md: "10px" },
       }}
     >
-      <Box sx={{ display: "flex", columnGap: { xs: "3px", md: "9px" } }}>
+      <Box
+        sx={{ display: "flex", columnGap: { xs: "3px", md: "4px", lg: "9px" } }}
+      >
         {newsCard ? (
           <>
             <Box
@@ -33,8 +35,8 @@ const SocialBox = ({ newsCard }) => {
               src={youtube}
               sx={{
                 display: { xs: "block", md: "none" },
-                width: "12px",
-                height: "12px",
+                width: { xs: "12px", sm: "15px", md: "21px" },
+                height: { xs: "12px", sm: "15px", md: "21px" },
               }}
               alt="Youtube"
               loading="lazy"
@@ -44,8 +46,8 @@ const SocialBox = ({ newsCard }) => {
               src={comment}
               alt="Comment"
               sx={{
-                width: { xs: "12px", md: "21px" },
-                height: { xs: "12px", md: "21px" },
+                width: { xs: "12px", sm: "15px", md: "21px" },
+                height: { xs: "12px", sm: "15px", md: "21px" },
               }}
               loading="lazy"
             />
@@ -54,8 +56,8 @@ const SocialBox = ({ newsCard }) => {
               src={save}
               alt="Save"
               sx={{
-                width: { xs: "12px", md: "21px" },
-                height: { xs: "12px", md: "21px" },
+                width: { xs: "12px", sm: "15px", md: "21px" },
+                height: { xs: "12px", sm: "15px", md: "21px" },
               }}
               loading="lazy"
             />
@@ -64,8 +66,8 @@ const SocialBox = ({ newsCard }) => {
               src={like}
               alt="Like"
               sx={{
-                width: { xs: "12px", md: "21px" },
-                height: { xs: "12px", md: "21px" },
+                width: { xs: "12px", sm: "15px", md: "21px" },
+                height: { xs: "12px", sm: "15px", md: "21px" },
               }}
               loading="lazy"
             />
@@ -74,8 +76,8 @@ const SocialBox = ({ newsCard }) => {
               src={twitter}
               alt="Twitter"
               sx={{
-                width: { xs: "12px", md: "21px" },
-                height: { xs: "12px", md: "21px" },
+                width: { xs: "12px", sm: "15px", md: "21px" },
+                height: { xs: "12px", sm: "15px", md: "21px" },
               }}
               loading="lazy"
             />
@@ -84,8 +86,8 @@ const SocialBox = ({ newsCard }) => {
               src={facebook}
               alt="Facebook"
               sx={{
-                width: { xs: "12px", md: "21px" },
-                height: { xs: "12px", md: "21px" },
+                width: { xs: "12px", sm: "15px", md: "21px" },
+                height: { xs: "12px", sm: "15px", md: "21px" },
               }}
               loading="lazy"
             />
@@ -94,8 +96,8 @@ const SocialBox = ({ newsCard }) => {
               src={whatsapp}
               alt="WhatsApp"
               sx={{
-                width: { xs: "12px", md: "21px" },
-                height: { xs: "12px", md: "21px" },
+                width: { xs: "12px", sm: "15px", md: "21px" },
+                height: { xs: "12px", sm: "15px", md: "21px" },
               }}
               loading="lazy"
             />
@@ -147,7 +149,7 @@ const SocialBox = ({ newsCard }) => {
               xs: "center",
               md: language === "ar" ? "left" : "right",
             },
-            fontSize: { xs: "7px", md: "12px" },
+            fontSize: { xs: "7px", sm: "14px", md: "12px" },
           }}
           component={"h4"}
         >

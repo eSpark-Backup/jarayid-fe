@@ -56,6 +56,14 @@ import chatbot from "./icons/chatbot.svg";
 import chatbotActive from "./icons/chatbotActive.svg";
 import settingsWhite from "./icons/settingsWhite.svg";
 import userBlack from "./icons/userBlack.svg";
+import userAvatar from "./icons/avatar.svg";
+import picEdit from "./icons/picEdit.svg";
+import close from "./icons/close.svg";
+import users from "./icons/users.svg";
+import go from "./icons/go.svg";
+import modalClose from "./icons/modalClose.svg";
+import deleteInfo from "./icons/information-fill.svg";
+import qr from "./icons/qr.svg";
 
 import pick1 from "./images/pick1.png";
 import pick2 from "./images/pick2.png";
@@ -119,4 +127,12 @@ export {
   chatbotActive,
   settingsWhite,
   userBlack,
+  userAvatar,
+  picEdit,
+  close,
+  users,
+  go,
+  deleteInfo,
+  modalClose,
+  qr,
 };

@@ -14,20 +14,23 @@ const CustomInput = ({
   error = false,
   label = "",
   ei,
+  sx,
+  modal,
 }) => {
   const language = useSelector((state) => state.language);
   const { t } = useTranslation();
 
   return (
-    <Box sx={{ mb: 2 }}>
+    <Box sx={{ mb: modal ? 0 : 2 }}>
       {label && (
         <Typography
           sx={{
-            fontSize: { xs: "10px", md: "14px" },
+            fontSize: modal ? "22px" : { xs: "10px", md: "14px" },
             fontWeight: 500,
             mb: "-12px",
-            mt: 2,
+            mt: modal ? 0 : 2,
             textAlign: language === "ar" ? "right" : "left",
+            color: modal ? "#101828" : "#000",
           }}
         >
           {label}
@@ -43,6 +46,7 @@ const CustomInput = ({
         placeholder={placeholder}
         margin="normal"
         error={error}
+        sx={sx}
         variant="outlined"
         InputLabelProps={{ shrink: false }}
         InputProps={{
