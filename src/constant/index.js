@@ -260,3 +260,42 @@ export const channels = [
     image: displayNewsImage,
   },
 ];
+
+export const footerLinks = [
+  "Term & Condition",
+  "Privacy Policy",
+  "Contact Us",
+  "About Us",
+  "FAQs",
+];
+
+export const generalCategories = [
+  "World News",
+  "Fashion",
+  "TV station",
+  "Food Rec",
+  "Podcast",
+  "Economy",
+  "Sports",
+  "Tech",
+  "Health",
+  "Our Choice",
+];
+
+export const otherSettingsNavbarItems = [
+  "Edit Profile",
+  "Setting",
+  "Edit New Source",
+  "Read Late",
+  "Jarayid Social Media",
+  "Advertise Here",
+  "Subscription",
+  "Share Jarayid",
+  "Font Size",
+  "FAQs",
+  "Terms of Use",
+  "Privacy Policy",
+  "Contact Us",
+  "Logout",
+  "Smart QR Code To Download The App",
+];

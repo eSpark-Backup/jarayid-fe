@@ -117,7 +117,14 @@
   },
   "Click Here": "Click Here",
   "Smart Reader": "Smart Reader",
-   "PrivacyPolicy": {
+  "Term & Condition": "Term & Condition",
+  "About Us": "About Us",
+  "Read Late": "Read Late",
+  "Advertise Here": "Advertise Here",
+  "Subscription": "Subscription",
+  "Share Jarayid": "Share Jarayid",
+  "Smart QR Code To Download The App": "Smart QR Code To Download The App",
+  "PrivacyPolicy": {
     "title": "Privacy Policy",
     "paragraphs": [
       "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
