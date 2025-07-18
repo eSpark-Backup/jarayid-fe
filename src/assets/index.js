@@ -20,8 +20,6 @@ import news9 from "./icons/news9.svg";
 import ad1 from "./icons/ad1.svg";
 import ad2 from "./icons/ad2.svg";
 import logo2 from "./icons/logo2.svg";
-import pick1 from "./icons/pick1.svg";
-import pick2 from "./icons/pick2.svg";
 import settings from "./icons/settings.svg";
 import menu from "./icons/menu.svg";
 import forwardArrow from "./icons/forwardArrow.svg";
@@ -56,12 +54,16 @@ import chatbot from "./icons/chatbot.svg";
 import chatbotActive from "./icons/chatbotActive.svg";
 import arrowLeft from "./icons/arrow-left.svg";
 import arrowRight from "./icons/arrow-right.svg";
+import settingsWhite from "./icons/settingsWhite.svg";
+import userBlack from "./icons/userBlack.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
 import image2 from "./images/image-2.png";
 import sideImage from "./images/side-image.png";
 import newsIcon from "./images/news-icon.png";
+import pick1 from "./images/pick1.png";
+import pick2 from "./images/pick2.png";
 
 export {
   facebook,
@@ -127,4 +129,6 @@ export {
   image2,
   sideImage,
   newsIcon,
+  settingsWhite,
+  userBlack,
 };

@@ -10,6 +10,7 @@ import CustomInput from "./input";
 import MobileFooter from "./mobile-footer";
 import CustomSwiper from "./slider";
 import SmartReaderCard from "./smart-reader";
+import CountryMenu from "./country-menu";
 
 export {
   Button,
@@ -24,4 +25,5 @@ export {
   MobileFooter,
   CustomSwiper,
   SmartReaderCard,
+  CountryMenu,
 };

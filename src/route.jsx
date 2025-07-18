@@ -9,6 +9,7 @@ import {
   Home,
   TermsOfUse,
   PrivacyPolicy,
+  FAQSection,
   ArticleDetails,
 } from "./pages";
 
@@ -28,6 +29,7 @@ const Router = () => {
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/:id" element={<ArticleDetails />} />
+          <Route path="/faq" element={<FAQSection />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

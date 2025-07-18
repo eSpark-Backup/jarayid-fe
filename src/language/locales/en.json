@@ -117,6 +117,13 @@
   },
   "Click Here": "Click Here",
   "Smart Reader": "Smart Reader",
+  "Term & Condition": "Term & Condition",
+  "About Us": "About Us",
+  "Read Late": "Read Late",
+  "Advertise Here": "Advertise Here",
+  "Subscription": "Subscription",
+  "Share Jarayid": "Share Jarayid",
+  "Smart QR Code To Download The App": "Smart QR Code To Download The App",
   "PrivacyPolicy": {
     "title": "Privacy Policy",
     "paragraphs": [
@@ -133,5 +140,26 @@
   "notice": "Notice: This is an AI- Generated Summary and may be sometimes Inaccurate",
   "article_details_button": "View Original Article",
   "share_news": "Share the News",
-  "most_read": "Most Read"
+  "most_read": "Most Read",
+  "FAQ": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "Lorem Ipsum is simply dummy text of the printing?",
+        "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+      },
+      {
+        "question": "Lorem Ipsum is simply dummy text of the printing?",
+        "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+      },
+      {
+        "question": "Lorem Ipsum is simply dummy text of the printing?",
+        "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+      },
+      {
+        "question": "Lorem Ipsum is simply dummy text of the printing?",
+        "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+      }
+    ]
+  }
 }

@@ -1,15 +1,29 @@
-import { Avatar, Box, Typography } from "@mui/material";
+import { Avatar, Box, Menu, MenuItem, Typography } from "@mui/material";
 import SocialBox from "../social-box";
 import { downArrow, login, logo, message } from "../../assets";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 import LanguageToggler from "../lang-toggler";
+import { useState } from "react";
+import { otherSettings, otherSettingsNavbarItems } from "../../constant";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
+
+  const [anchorEl, setAnchorEl] = useState(null);
+  const open = Boolean(anchorEl);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = (event) => {
+    event.stopPropagation();
+    setAnchorEl(null);
+  };
 
   return (
     <>
@@ -58,8 +72,10 @@ const Navbar = () => {
                     justifyContent: "space-between",
                     alignItems: "center",
                     width: "136px",
+                    cursor: "pointer",
                     // height: "35px",
                   }}
+                  onClick={handleClick}
                 >
                   <Box
                     sx={{
@@ -133,6 +149,63 @@ const Navbar = () => {
           </Box>
         </Box>
       </Box>
+      <Menu
+        anchorEl={anchorEl}
+        open={open}
+        onClose={handleClose}
+        anchorOrigin={{
+          vertical: "bottom",
+          horizontal: "center",
+        }}
+        transformOrigin={{
+          vertical: "top",
+          horizontal: "right",
+        }}
+        PaperProps={{
+          sx: {
+            backgroundColor: "#fff",
+            color: "#fff",
+            borderRadius: "0px",
+            boxShadow: "0px 4px 12px rgba(0,0,0,0.3) !important",
+            width: "400px",
+            maxHeight: "85vh !important",
+            overflowY: "auto",
+            position: "fixed",
+          },
+        }}
+      >
+        <Typography
+          sx={{
+            color: "#004A99",
+            fontSize: "23.67px",
+            textAlign: "center",
+            pb: "20px",
+          }}
+        >
+          Other Settings
+        </Typography>
+        {otherSettingsNavbarItems?.map((item, index) => (
+          <MenuItem
+            key={index}
+            sx={{
+              display: "flex",
+              alignItems: "center",
+              justifyContent: "center",
+              gap: "8px",
+            }}
+          >
+            <Typography
+              sx={{
+                color: "#383535",
+                fontSize: "15.7px",
+                textAlign: language === "ar" ? "right" : "left",
+              }}
+            >
+              {t(item)}
+            </Typography>
+          </MenuItem>
+        ))}
+      </Menu>
     </>
   );
 };

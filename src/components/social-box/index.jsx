@@ -116,7 +116,13 @@ const SocialBox = ({ newsCard, detailPage }) => {
               loading="lazy"
               sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
             />
-            <Box component={"img"} src={tiktok} alt={"TikTok"} loading="lazy" />
+            <Box
+              component={"img"}
+              src={tiktok}
+              alt={"TikTok"}
+              loading="lazy"
+              sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+            />
             <Box
               component={"img"}
               src={twitter}
