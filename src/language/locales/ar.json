@@ -126,5 +126,12 @@
       "Why do we use it?",
       "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
     ]
-  }
+  },
+  "article_detail_title": "قال كارلوس ألكاراز إنه لم يكن لديه أي توقعات قبل دخول موسم الملاعب العشبية",
+  "para1": "قال كارلوس ألكاراز إنه لم يكن لديه أي توقعات قبل دخول موسم الملاعب العشبية، لكنه أثبت نفسه كمرشح قوي للاحتفاظ بلقب ويمبلدون بعد فوزه على ييري ليهتسكا في بطولة",
+  "para2": " استعاد النجم الإسباني المصنّف الأول لقبه كملك نادي كوينز، وكرر فوزه الأول الذي حققه قبل عامين بنتيجة 7-5، 6-7(5)، 6-2",
+  "notice": "تنويه: هذا ملخص تم إنشاؤه بواسطة الذكاء الاصطناعي وقد يكون غير دقيق في بعض الأحيان",
+  "article_details_button": " عرض المقال الأصلي",
+  "share_news": "شارك الأخبار",
+  "most_read": "الأكثر قراءة"
 }

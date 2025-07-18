@@ -8,6 +8,8 @@ import MobileNavbar from "./mobile-navbar";
 import LanguageToggler from "./lang-toggler";
 import CustomInput from "./input";
 import MobileFooter from "./mobile-footer";
+import CustomSwiper from "./slider";
+import SmartReaderCard from "./smart-reader";
 
 export {
   Button,
@@ -20,4 +22,6 @@ export {
   LanguageToggler,
   CustomInput,
   MobileFooter,
+  CustomSwiper,
+  SmartReaderCard,
 };

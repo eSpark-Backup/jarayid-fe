@@ -54,6 +54,14 @@ import bellActive from "./icons/bellActive.svg";
 import home from "./icons/home.svg";
 import chatbot from "./icons/chatbot.svg";
 import chatbotActive from "./icons/chatbotActive.svg";
+import arrowLeft from "./icons/arrow-left.svg";
+import arrowRight from "./icons/arrow-right.svg";
+
+import slider from "./images/slider.png";
+import image1 from "./images/image-1.png";
+import image2 from "./images/image-2.png";
+import sideImage from "./images/side-image.png";
+import newsIcon from "./images/news-icon.png";
 
 export {
   facebook,
@@ -112,4 +120,11 @@ export {
   home,
   chatbot,
   chatbotActive,
+  arrowLeft,
+  arrowRight,
+  slider,
+  image1,
+  image2,
+  sideImage,
+  newsIcon,
 };
