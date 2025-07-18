@@ -2,8 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 import { authApi } from "../../services/auth";
 
 const initialState = {
-  // user: JSON.parse(localStorage.getItem("user")) || null,
-  user: "Abdul",
+  user: JSON.parse(localStorage.getItem("user")) || null,
 };
 
 const slice = createSlice({
