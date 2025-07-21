@@ -4,10 +4,12 @@ import {
   categories,
   channels,
   countries,
+  countriesArabic,
   displayNews,
   generalCategories,
   newsContent,
   settingsMenuItems,
+  tabletCountries,
 } from "../../../constant";
 import {
   Box,
@@ -186,13 +188,48 @@ const Home = () => {
               overflowX: { xs: "auto", md: "hidden" },
               columnGap: { xs: "3px", md: 0 },
               "&::-webkit-scrollbar": { display: "none" },
+              flexDirection: {
+                xs: "row",
+                md: language === "ar" ? "row" : "row-reverse",
+                lg: "row",
+              },
             }}
           >
-            {countries?.map((item, index) => (
+            {(language === "ar" ? countriesArabic : countries)?.map(
+              (item, index) => (
+                <Grid
+                  key={index}
+                  sx={{
+                    display: { xs: "none", lg: "flex" },
+                    width: { md: "14.2857%", lg: "7.1428%" },
+                    p: "3px",
+                  }}
+                >
+                  <Chip
+                    label={t(item)}
+                    variant="straight"
+                    sx={{
+                      width: "100%",
+                      background:
+                        activeItem === item
+                          ? "linear-gradient(180deg, #007BFF 33%, #004A99 100%)"
+                          : "#F3EEEE",
+                      color: activeItem === item ? "#fff" : "#000",
+                      border:
+                        activeItem === item ? "none" : "1px solid #01000142",
+                      fontSize: 14,
+                    }}
+                    onClick={() => handleChipClick(item, "country")}
+                    disableRipple
+                  />
+                </Grid>
+              )
+            )}
+            {tabletCountries?.map((item, index) => (
               <Grid
                 key={index}
                 sx={{
-                  display: { xs: "none", md: "flex" },
+                  display: { xs: "none", md: "flex", lg: "none" },
                   width: { md: "14.2857%", lg: "7.1428%" },
                   p: "3px",
                 }}
@@ -313,7 +350,7 @@ const Home = () => {
         <Box
           sx={{
             px: { xs: "20px", sm: "0px", md: "15px" },
-            width: { xs: "100%", sm: "90%", lg: "60%" },
+            width: { xs: "100%", sm: "95%", lg: "60%" },
             my: "10px",
             "@media (min-width:1281px) and (max-width:1550px)": {
               width: "75%",
@@ -321,19 +358,21 @@ const Home = () => {
           }}
         >
           <Grid
-            spacing={1}
+            // spacing={1}
             container
             sx={{
               overflowX: "auto",
               flexWrap: "nowrap",
               display: "flex",
-              pb: 2,
               "&::-webkit-scrollbar": {
-                display: "none",
+                height: "6px",
               },
-              justifyContent: { md: "center" },
+              userSelect: "none",
             }}
           >
+            <Box
+              sx={{ display: { xs: "none", md: "block" }, flex: "0 0 auto" }}
+            />
             {displayNews?.map((item, index) => (
               <React.Fragment key={index}>
                 <Grid
@@ -369,10 +408,14 @@ const Home = () => {
 
                 <Grid
                   item
-                  size={3.5}
+                  key={index}
                   sx={{
+                    flex: "0 0 auto",
+                    // width: { md: "300px", lg: "340px" },
                     display: { xs: "none", md: "block" },
+                    mx: 0.5,
                   }}
+                  size={{ xs: 6, md: 4 }}
                 >
                   <Typography
                     sx={{
@@ -398,6 +441,9 @@ const Home = () => {
                 </Grid>
               </React.Fragment>
             ))}
+            <Box
+              sx={{ display: { xs: "none", md: "block" }, flex: "0 0 auto" }}
+            />
           </Grid>
 
           {showChannels && (
@@ -409,11 +455,12 @@ const Home = () => {
                 mt: "20px",
                 display: { xs: "none", md: "flex" },
                 justifyContent: "center",
+                userSelect: "none",
               }}
             >
               {channels?.map((item, index) => (
                 <Grid
-                  size={{ xs: 6, md: 3.5 }}
+                  size={{ xs: 6, md: 4 }}
                   sx={{
                     display: "flex",
                     flexDirection: "column",
@@ -445,7 +492,7 @@ const Home = () => {
             backgroundColor: "#EDEDED",
             borderTopRightRadius: "9px",
             borderTopLeftRadius: "9px",
-            width: { xs: "90%", md: "70%", lg: "45%" },
+            width: { xs: "90%", md: "75%", lg: "45%" },
             display: "flex",
             flexDirection: "column",
             rowGap: "25px",
