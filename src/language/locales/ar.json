@@ -106,17 +106,17 @@
   "Notification": "إشعار",
   "Chatbot": "روبوت المحادثة",
   "termsOfUse": {
-    "title": "Terms Of Use",
-    "paragraphs": [
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      "Why do we use it?",
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      "Why do we use it?",
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    ]
-  },
-  "Click Here": "Click Here",
-  "Smart Reader": "Smart Reader",
+  "title": "شروط الاستخدام",
+  "paragraphs": [
+    "لوريم إيبسوم هو ببساطة نص وهمي يستخدم في صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير. وقد شاع استخدامه في الستينيات مع إصدار أوراق Letraset التي تحتوي على مقاطع من لوريم إيبسوم، ومؤخرًا مع برامج النشر المكتبي مثل Aldus PageMaker التي تتضمن نسخًا من لوريم إيبسوم.",
+    "لماذا نستخدمه؟",
+    "إنها حقيقة معروفة منذ زمن طويل أن القارئ سيتشتت انتباهه بمحتوى الصفحة المقروء أثناء النظر إلى تخطيطها. تكمن فائدة استخدام لوريم إيبسوم في أنه يحتوي على توزيع طبيعي أكثر أو أقل للأحرف، على عكس استخدام 'محتوى هنا، محتوى هنا'، مما يجعله يبدو كنص إنجليزي قابل للقراءة. تستخدم العديد من برامج النشر المكتبي ومحرري صفحات الويب الآن لوريم إيبسوم كنص نموذجي افتراضي، والبحث عن 'lorem ipsum' سيكشف عن العديد من مواقع الويب التي لا تزال في مراحلها الأولى. تطورت نسخ مختلفة منه على مر السنين، أحيانًا عن طريق الصدفة، وأحيانًا عن قصد (بإضافة الفكاهة وما إلى ذلك). لوريم إيبسوم هو ببساطة نص وهمي يستخدم في صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير. وقد شاع استخدامه في الستينيات مع إصدار أوراق Letraset التي تحتوي على مقاطع من لوريم إيبسوم، ومؤخرًا مع برامج النشر المكتبي مثل Aldus PageMaker التي تتضمن نسخًا من لوريم إيبسوم.",
+    "لماذا نستخدمه؟",
+    "إنها حقيقة معروفة منذ زمن طويل أن القارئ سيتشتت انتباهه بمحتوى الصفحة المقروء أثناء النظر إلى تخطيطها. تكمن فائدة استخدام لوريم إيبسوم في أنه يحتوي على توزيع طبيعي أكثر أو أقل للأحرف، على عكس استخدام 'محتوى هنا، محتوى هنا'، مما يجعله يبدو كنص إنجليزي قابل للقراءة. تستخدم العديد من برامج النشر المكتبي ومحرري صفحات الويب الآن لوريم إيبسوم كنص نموذجي افتراضي، والبحث عن 'lorem ipsum' سيكشف عن العديد من مواقع الويب التي لا تزال في مراحلها الأولى. تطورت نسخ مختلفة منه على مر السنين، أحيانًا عن طريق الصدفة، وأحيانًا عن قصد (بإضافة الفكاهة وما إلى ذلك). لوريم إيبسوم هو ببساطة نص وهمي يستخدم في صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير. وقد شاع استخدامه في الستينيات مع إصدار أوراق Letraset التي تحتوي على مقاطع من لوريم إيبسوم، ومؤخرًا مع برامج النشر المكتبي مثل Aldus PageMaker التي تتضمن نسخًا من لوريم إيبسوم."
+  ]
+},
+  "Click Here": "انقر هنا",
+  "Smart Reader": "القارئ الذكي",
   "Term & Condition": "الشروط والأحكام",
   "About Us": "من نحن",
   "Read Late": "اقرأ لاحقًا",
@@ -125,15 +125,15 @@
   "Share Jarayid": "jarayid  شارك",
   "Smart QR Code To Download The App": "رمز QR لتحميل التطبيق",
   "PrivacyPolicy": {
-    "title": "Privacy Policy",
-    "paragraphs": [
-      "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      "Why do we use it?",
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.",
-      "Why do we use it?",
-      "It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using 'Content here, content here', making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy. Various versions have evolved over the years, sometimes by accident, sometimes on purpose (injected humour and the like). Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum."
-    ]
-  },
+  "title": "سياسة الخصوصية",
+  "paragraphs": [
+    "لوريم إيبسوم هو ببساطة نص وهمي يستخدم في صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير. وقد شاع استخدامه في الستينيات مع إصدار أوراق Letraset التي تحتوي على مقاطع من لوريم إيبسوم، ومؤخرًا مع برامج النشر المكتبي مثل Aldus PageMaker التي تتضمن نسخًا من لوريم إيبسوم.",
+    "لماذا نستخدمه؟",
+    "إنها حقيقة معروفة منذ زمن طويل أن القارئ سيتشتت انتباهه بمحتوى الصفحة المقروء أثناء النظر إلى تخطيطها. تكمن فائدة استخدام لوريم إيبسوم في أنه يحتوي على توزيع طبيعي أكثر أو أقل للأحرف، على عكس استخدام 'محتوى هنا، محتوى هنا'، مما يجعله يبدو كنص إنجليزي قابل للقراءة. تستخدم العديد من برامج النشر المكتبي ومحرري صفحات الويب الآن لوريم إيبسوم كنص نموذجي افتراضي، والبحث عن 'lorem ipsum' سيكشف عن العديد من مواقع الويب التي لا تزال في مراحلها الأولى. تطورت نسخ مختلفة منه على مر السنين، أحيانًا عن طريق الصدفة، وأحيانًا عن قصد (بإضافة الفكاهة وما إلى ذلك). لوريم إيبسوم هو ببساطة نص وهمي يستخدم في صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير. وقد شاع استخدامه في الستينيات مع إصدار أوراق Letraset التي تحتوي على مقاطع من لوريم إيبسوم، ومؤخرًا مع برامج النشر المكتبي مثل Aldus PageMaker التي تتضمن نسخًا من لوريم إيبسوم.",
+    "لماذا نستخدمه؟",
+    "إنها حقيقة معروفة منذ زمن طويل أن القارئ سيتشتت انتباهه بمحتوى الصفحة المقروء أثناء النظر إلى تخطيطها. تكمن فائدة استخدام لوريم إيبسوم في أنه يحتوي على توزيع طبيعي أكثر أو أقل للأحرف، على عكس استخدام 'محتوى هنا، محتوى هنا'، مما يجعله يبدو كنص إنجليزي قابل للقراءة. تستخدم العديد من برامج النشر المكتبي ومحرري صفحات الويب الآن لوريم إيبسوم كنص نموذجي افتراضي، والبحث عن 'lorem ipsum' سيكشف عن العديد من مواقع الويب التي لا تزال في مراحلها الأولى. تطورت نسخ مختلفة منه على مر السنين، أحيانًا عن طريق الصدفة، وأحيانًا عن قصد (بإضافة الفكاهة وما إلى ذلك). لوريم إيبسوم هو ببساطة نص وهمي يستخدم في صناعة الطباعة والتنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير. وقد شاع استخدامه في الستينيات مع إصدار أوراق Letraset التي تحتوي على مقاطع من لوريم إيبسوم، ومؤخرًا مع برامج النشر المكتبي مثل Aldus PageMaker التي تتضمن نسخًا من لوريم إيبسوم."
+  ]
+},
   "article_detail_title": "قال كارلوس ألكاراز إنه لم يكن لديه أي توقعات قبل دخول موسم الملاعب العشبية",
   "para1": "قال كارلوس ألكاراز إنه لم يكن لديه أي توقعات قبل دخول موسم الملاعب العشبية، لكنه أثبت نفسه كمرشح قوي للاحتفاظ بلقب ويمبلدون بعد فوزه على ييري ليهتسكا في بطولة",
   "para2": " استعاد النجم الإسباني المصنّف الأول لقبه كملك نادي كوينز، وكرر فوزه الأول الذي حققه قبل عامين بنتيجة 7-5، 6-7(5)، 6-2",
@@ -141,25 +141,25 @@
   "article_details_button": " عرض المقال الأصلي",
   "share_news": "شارك الأخبار",
   "most_read": "الأكثر قراءة",
-  "FAQ": {
-    "title": "Frequently Asked Questions",
-    "items": [
-      {
-        "question": "Lorem Ipsum is simply dummy text of the printing?",
-        "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-      },
-      {
-        "question": "Lorem Ipsum is simply dummy text of the printing?",
-        "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-      },
-      {
-        "question": "Lorem Ipsum is simply dummy text of the printing?",
-        "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-      },
-      {
-        "question": "Lorem Ipsum is simply dummy text of the printing?",
-        "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
-      }
-    ]
-  }
+ "FAQ": {
+  "title": "الأسئلة الشائعة",
+  "items": [
+    {
+      "question": "هل لوريم إيبسوم مجرد نص وهمي في الطباعة؟",
+      "answer": "صناعة التنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير."
+    },
+    {
+      "question": "هل لوريم إيبسوم مجرد نص وهمي في الطباعة؟",
+      "answer": "صناعة التنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير."
+    },
+    {
+      "question": "هل لوريم إيبسوم مجرد نص وهمي في الطباعة؟",
+      "answer": "صناعة التنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير."
+    },
+    {
+      "question": "هل لوريم إيبسوم مجرد نص وهمي في الطباعة؟",
+      "answer": "صناعة التنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير."
+    }
+  ]
+}
 }
