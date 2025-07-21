@@ -12,10 +12,12 @@ import {
   FAQSection,
   ArticleDetails,
 } from "./pages";
+import { ScrollTop } from "./components";
 
 const Router = () => {
   return (
     <>
+      <ScrollTop />
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />

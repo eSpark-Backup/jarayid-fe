@@ -64,18 +64,21 @@ export const categories = ["Economy", "Sport", "Politics"];
 
 export const newsContent = [
   {
+    id: 1,
     image: news1,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 2,
     image: news2,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 3,
     image: news3,
     headline: "SCCI finalizes preparations",
     source: "CNN",
@@ -83,18 +86,21 @@ export const newsContent = [
   },
   { ad: ad1 },
   {
+    id: 4,
     image: news4,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 5,
     image: news5,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 6,
     image: news6,
     headline: "SCCI finalizes preparations",
     source: "CNN",
@@ -102,18 +108,21 @@ export const newsContent = [
   },
   { ad: ad2 },
   {
+    id: 7,
     image: news7,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 8,
     image: news8,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 9,
     image: news9,
     headline: "SCCI finalizes preparations",
     source: "CNN",
@@ -271,60 +280,70 @@ export const channels = [
 
 export const relativeNews = [
   {
+    id: 1,
     image: news1,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news2,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news3,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news1,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news2,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news3,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news1,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news2,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news3,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news3,
     headline: "SCCI finalizes preparations",
     source: "CNN",

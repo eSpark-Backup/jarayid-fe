@@ -175,6 +175,7 @@ const ArticleDetails = () => {
               headline={item?.headline}
               date={item?.date}
               source={item?.source}
+              id={item?.id}
             />
           ))}
         </Box>

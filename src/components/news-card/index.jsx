@@ -3,10 +3,12 @@ import { news1 } from "../../assets";
 import SocialBox from "../social-box";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-const NewsCard = ({ image, source }) => {
+const NewsCard = ({ image, source, id }) => {
   const language = useSelector((state) => state.language);
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <Paper
@@ -19,7 +21,9 @@ const NewsCard = ({ image, source }) => {
           md: language === "ar" ? "row-reverse" : "row",
         },
         px: { xs: "10px", md: "15px" },
+        cursor: "pointer",
       }}
+      onClick={() => navigate(`/${id}`)}
     >
       <Box
         component="img"

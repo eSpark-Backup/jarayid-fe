@@ -13,7 +13,7 @@ import CustomSwitch from "../custom-switch";
 import useLanguageSwitcher from "../../hooks/change-language";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CountryMenu from "../country-menu";
 import DynamicModal from "../modal";
 import EditProfileModal from "../edit-profile-modal";
@@ -33,6 +33,8 @@ const MobileNavbar = () => {
   const [contactModal, setContactModal] = useState(false);
   const [shareModal, setShareModal] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
+
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -79,6 +81,12 @@ const MobileNavbar = () => {
       setShareModal(true);
     } else if (event === "Logout") {
       setLogoutModal(true);
+    } else if (event === "FAQs") {
+      navigate("/faq");
+    } else if (event === "Terms of Use") {
+      navigate("/terms-of-use");
+    } else if (event === "Privacy Policy") {
+      navigate("/privacy-policy");
     }
   };
 

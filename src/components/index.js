@@ -18,6 +18,7 @@ import SubscriptionModal from "./subscription-modal";
 import ContactModal from "./contact-modal";
 import ShareModal from "./share-modal";
 import QRModal from "./qr-modal";
+import ScrollTop from "./scroll-top";
 
 export {
   Button,
@@ -40,4 +41,5 @@ export {
   ContactModal,
   ShareModal,
   QRModal,
+  ScrollTop,
 };

@@ -367,11 +367,15 @@ const Home = () => {
               "&::-webkit-scrollbar": {
                 height: "6px",
               },
+
               userSelect: "none",
             }}
           >
             <Box
-              sx={{ display: { xs: "none", md: "block" }, flex: "0 0 auto" }}
+              sx={{
+                display: { xs: "none", md: "block" },
+                flex: "0 0 auto",
+              }}
             />
             {displayNews?.map((item, index) => (
               <React.Fragment key={index}>
@@ -564,6 +568,7 @@ const Home = () => {
                   headline={item?.headline}
                   date={item?.date}
                   source={item?.source}
+                  id={item?.id}
                 />
               )
             )}

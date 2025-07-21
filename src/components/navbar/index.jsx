@@ -3,7 +3,7 @@ import SocialBox from "../social-box";
 import { downArrow, login, logo, message } from "../../assets";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import LanguageToggler from "../lang-toggler";
 import { useState } from "react";
 import { otherSettingsNavbarItems } from "../../constant";
@@ -27,6 +27,8 @@ const Navbar = () => {
   const [shareModal, setShareModal] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
   const [qrModal, setQrModal] = useState(false);
+
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -55,6 +57,12 @@ const Navbar = () => {
       setLogoutModal(true);
     } else if (event === "Smart QR Code To Download The App") {
       setQrModal(true);
+    } else if (event === "FAQs") {
+      navigate("/faq");
+    } else if (event === "Terms of Use") {
+      navigate("/terms-of-use");
+    } else if (event === "Privacy Policy") {
+      navigate("/privacy-policy");
     }
   };
 
@@ -83,7 +91,8 @@ const Navbar = () => {
             alt="Logo"
             loading="lazy"
             src={logo}
-            sx={{ width: { md: "170px", lg: "auto" } }}
+            sx={{ width: { md: "170px", lg: "auto" }, cursor: "pointer" }}
+            onClick={() => navigate("/?category=Sport&country=Lebanon")}
           />
           <Box
             sx={{ display: "flex", flexDirection: "column", rowGap: "15px" }}
