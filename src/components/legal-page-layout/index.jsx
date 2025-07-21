@@ -46,7 +46,7 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
             }}
           >
             <Typography
-              variant="h4"
+              variant="h1"
               fontWeight="600"
               gutterBottom
               fontSize="35px"

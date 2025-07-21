@@ -34,7 +34,7 @@ const FAQSection = () => {
       }}
     >
       <Typography
-        variant="h5"
+        variant="h1"
         align="center"
         fontWeight="600"
         fontSize="35px"
