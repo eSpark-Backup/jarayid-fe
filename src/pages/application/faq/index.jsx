@@ -34,7 +34,7 @@ const FAQSection = () => {
       }}
     >
       <Typography
-        variant="h5"
+        variant="h1"
         align="center"
         fontWeight="600"
         fontSize="35px"
@@ -54,6 +54,7 @@ const FAQSection = () => {
           sx={{
             width: "100%",
             maxWidth: "750px",
+            margin: "0 auto", // keeps it centered
             order: { xs: 2, md: isArabic ? 2 : 1 },
             textAlign: isArabic ? "right" : "left",
           }}
@@ -112,10 +113,18 @@ const FAQSection = () => {
 
         <Box
           sx={{
-            alignSelf: { xs: "center", md: "flex-start" },
+            position: {
+              xs: "relative",
+              md: "relative",
+              lg: "absolute", // only float on large screens
+            },
+            top: { lg: 0 },
+            [isArabic ? "left" : "right"]: { lg: 0 },
+            zIndex: { lg: 1 },
+            width: "fit-content",
+            mt: { xs: 2, md: 2, lg: 0 },
             order: { xs: 1, md: isArabic ? 1 : 2 },
-            ml: isArabic ? 0 : 4,
-            mr: isArabic ? 4 : 0,
+            alignSelf: { xs: "center", md: "flex-start", lg: "flex-start" },
           }}
         >
           <SmartReaderCard />
