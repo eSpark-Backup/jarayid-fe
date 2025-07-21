@@ -1,4 +1,4 @@
-import { Typography, Button, Box } from "@mui/material";
+import { Typography, Button, Box, CircularProgress } from "@mui/material";
 import { useFormik } from "formik";
 import { signupValidationSchema } from "../../schemas";
 import { CustomInput } from "../../components";
@@ -6,6 +6,8 @@ import { email, google, lock } from "../../assets";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
 
 const Signup = () => {
   const formik = useFormik({
@@ -22,6 +24,36 @@ const Signup = () => {
 
   const language = useSelector((state) => state.language);
   const { t } = useTranslation();
+
+  const {
+    loginWithRedirect,
+    logout,
+    isAuthenticated,
+    user,
+    error,
+    isLoading: authloading,
+  } = useAuth0();
+
+  useEffect(() => {
+    if (isAuthenticated && user) {
+      console.log("User successfully logged in via:", user.sub.split("|")[0]);
+      console.log(user);
+    }
+    console.log(user);
+    console.log(isAuthenticated);
+  }, [isAuthenticated, user]);
+
+  const handleGoogleLogin = () => {
+    console.log("1. Initiating Google login...");
+    loginWithRedirect({
+      connection: "google",
+      authorizationParams: {
+        prompt: "login",
+      },
+    }).then(() => {
+      console.log("2. Redirect initiated");
+    });
+  };
 
   return (
     <>
@@ -105,9 +137,16 @@ const Signup = () => {
           },
           height: { xs: "38px", lg: "48px" },
         }}
+        onClick={handleGoogleLogin}
       >
-        <img src={google} alt="Google" style={{ width: 24, height: 24 }} />
-        {t("Continue with Google")}
+        {authloading ? (
+          <CircularProgress />
+        ) : (
+          <>
+            <img src={google} alt="Google" style={{ width: 24, height: 24 }} />
+            {t("Continue with Google")}
+          </>
+        )}
       </Button>
 
       <Typography
