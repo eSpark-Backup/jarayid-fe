@@ -318,7 +318,7 @@ const Home = () => {
           sx={{
             display: "flex",
             gap: { xs: "4px", md: "20px" },
-            flexDirection: "row",
+            flexDirection: language === "ar" ? "row-reverse" : "row",
             width: { xs: "100%", md: "auto" },
             overflowX: "auto",
             flexWrap: "nowrap",
