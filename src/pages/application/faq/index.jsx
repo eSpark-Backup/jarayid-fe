@@ -13,19 +13,28 @@ import ButtonDown from "../../../assets/icons/button-close.svg";
 import SmartReaderCard from "../../../components/smart-reader";
 
 const FAQSection = () => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const faqs = t("FAQ.items", { returnObjects: true });
   const title = t("FAQ.title");
   const [expanded, setExpanded] = useState(0);
+
+  const isArabic = i18n.language === "ar";
 
   const handleChange = (panelIndex) => (event, isExpanded) => {
     setExpanded(isExpanded ? panelIndex : false);
   };
 
   return (
-    <Container maxWidth="lg" sx={{ py: 5, position: "relative" }}>
+    <Container
+      maxWidth="lg"
+      sx={{
+        py: 5,
+        position: "relative",
+        direction: isArabic ? "rtl" : "ltr",
+      }}
+    >
       <Typography
-        variant="h5"
+        variant="h1"
         align="center"
         fontWeight="600"
         fontSize="35px"
@@ -38,10 +47,18 @@ const FAQSection = () => {
         display="flex"
         justifyContent="center"
         position="relative"
-        flexDirection={{ xs: "column", md: "row" }}
+        flexDirection={{ xs: "column", md: isArabic ? "row-reverse" : "row" }}
       >
         {/* FAQ Section */}
-        <Box sx={{ width: "100%", maxWidth: "750px" }}>
+        <Box
+          sx={{
+            width: "100%",
+            maxWidth: "750px",
+            margin: "0 auto", // keeps it centered
+            order: { xs: 2, md: isArabic ? 2 : 1 },
+            textAlign: isArabic ? "right" : "left",
+          }}
+        >
           {faqs.map((faq, index) => (
             <Accordion
               key={index}
@@ -72,21 +89,42 @@ const FAQSection = () => {
                   },
                 }}
               >
-                <Typography fontWeight="600" fontSize="22px">
+                <Typography
+                  fontWeight="600"
+                  fontSize="22px"
+                  sx={{ textAlign: isArabic ? "right" : "left", width: "100%" }}
+                >
                   {faq.question}
                 </Typography>
               </AccordionSummary>
               <AccordionDetails>
-                <Typography color="#737373" fontWeight="400" fontSize="16px">
+                <Typography
+                  color="#737373"
+                  fontWeight="400"
+                  fontSize="16px"
+                  sx={{ textAlign: isArabic ? "right" : "left" }}
+                >
                   {faq.answer}
                 </Typography>
               </AccordionDetails>
             </Accordion>
           ))}
         </Box>
+
         <Box
           sx={{
-            alignSelf: { xs: "center", md: "flex-start" },
+            position: {
+              xs: "relative",
+              md: "relative",
+              lg: "absolute", // only float on large screens
+            },
+            top: { lg: 0 },
+            [isArabic ? "left" : "right"]: { lg: 0 },
+            zIndex: { lg: 1 },
+            width: "fit-content",
+            mt: { xs: 2, md: 2, lg: 0 },
+            order: { xs: 1, md: isArabic ? 1 : 2 },
+            alignSelf: { xs: "center", md: "flex-start", lg: "flex-start" },
           }}
         >
           <SmartReaderCard />

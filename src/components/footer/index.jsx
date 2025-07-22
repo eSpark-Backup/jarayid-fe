@@ -5,11 +5,15 @@ import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import React from "react";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import DynamicModal from "../modal";
+import ContactModal from "../contact-modal";
 
 const Footer = () => {
   const language = useSelector((state) => state.language);
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const [contactModal, setContactModal] = useState(false);
 
   const handleChoice = (item) => {
     if (item === "Term & Condition") {
@@ -18,6 +22,8 @@ const Footer = () => {
       navigate("/privacy-policy");
     } else if (item === "FAQs") {
       navigate("/faq");
+    } else if (item === "Contact Us") {
+      setContactModal(true);
     }
   };
 
@@ -51,7 +57,14 @@ const Footer = () => {
             width: { xs: "100%", md: "30%" },
           }}
         >
-          <Box component={"img"} src={logo2} alt="Logo" loading="lazy" />
+          <Box
+            component={"img"}
+            src={logo2}
+            alt="Logo"
+            loading="lazy"
+            style={{ cursor: "pointer" }}
+            onClick={() => navigate("/?category=Sport&country=Lebanon")}
+          />
           <Typography
             sx={{
               fontSize: { xs: "9px", md: "9px", lg: "16px" },
@@ -352,6 +365,13 @@ const Footer = () => {
           ))}
         </Box>
       </Box>
+      <DynamicModal
+        open={contactModal}
+        handleClose={() => setContactModal(false)}
+        sx={{ padding: { xs: "15px", md: "25px", lg: "35px" } }}
+      >
+        <ContactModal handleSubmit={() => setContactModal(false)} />
+      </DynamicModal>
     </Box>
   );
 };

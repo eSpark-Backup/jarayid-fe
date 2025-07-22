@@ -49,15 +49,32 @@ export const theme = createTheme({
         {
           props: { variant: "contained" },
           style: {
-            backgroundColor: "#3281CA",
+            borderRadius: "9.77px",
             color: "#FFFFFF",
+            background: "#007BFF",
+            boxShadow: "none",
             "&:hover": {
-              backgroundColor: "#3281CA",
-              color: "#FFF",
+              background: "#007BFF",
+              color: "#FFFFFF",
+              border: "none",
+              boxShadow: "none",
             },
           },
         },
         {
+          props: { variant: "delete" },
+          style: {
+            background: "#DF1C41",
+            border: "none",
+            borderRadius: "12px",
+            color: "#FFFFFF",
+            "&:hover": {
+              border: "none",
+              color: "#FFFFFF",
+              background: "#DF1C41",
+              boxShadow: "none",
+            },
+          },
           props: { variant: "outlined" },
           style: {
             backgroundColor: "transparent",

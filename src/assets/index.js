@@ -56,6 +56,14 @@ import arrowLeft from "./icons/arrow-left.svg";
 import arrowRight from "./icons/arrow-right.svg";
 import settingsWhite from "./icons/settingsWhite.svg";
 import userBlack from "./icons/userBlack.svg";
+import userAvatar from "./icons/avatar.svg";
+import picEdit from "./icons/picEdit.svg";
+import close from "./icons/close.svg";
+import users from "./icons/users.svg";
+import go from "./icons/go.svg";
+import modalClose from "./icons/modalClose.svg";
+import deleteInfo from "./icons/information-fill.svg";
+import qr from "./icons/qr.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
@@ -131,4 +139,12 @@ export {
   newsIcon,
   settingsWhite,
   userBlack,
+  userAvatar,
+  picEdit,
+  close,
+  users,
+  go,
+  deleteInfo,
+  modalClose,
+  qr,
 };

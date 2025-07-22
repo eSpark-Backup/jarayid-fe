@@ -10,6 +10,7 @@ import TermsOfUse from "./application/terms-of-use";
 import PrivacyPolicy from "./application/privacy-policy";
 import ArticleDetails from "./application/article-details";
 import FAQSection from "./application/faq";
+import ReadLater from "./application/read-later";
 
 export {
   Login,
@@ -21,4 +22,5 @@ export {
   ArticleDetails,
   PrivacyPolicy,
   FAQSection,
+  ReadLater,
 };

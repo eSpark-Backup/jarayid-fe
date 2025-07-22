@@ -11,11 +11,14 @@ import {
   PrivacyPolicy,
   FAQSection,
   ArticleDetails,
+  ReadLater,
 } from "./pages";
+import { ScrollTop } from "./components";
 
 const Router = () => {
   return (
     <>
+      <ScrollTop />
       <Routes>
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />
@@ -30,6 +33,7 @@ const Router = () => {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/:id" element={<ArticleDetails />} />
           <Route path="/faq" element={<FAQSection />} />
+          <Route path="/read-later" element={<ReadLater />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

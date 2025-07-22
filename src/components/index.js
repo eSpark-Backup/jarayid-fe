@@ -11,6 +11,14 @@ import MobileFooter from "./mobile-footer";
 import CustomSwiper from "./slider";
 import SmartReaderCard from "./smart-reader";
 import CountryMenu from "./country-menu";
+import DynamicModal from "./modal";
+import EditProfileModal from "./edit-profile-modal";
+import AdvertiseModal from "./advertise-modal";
+import SubscriptionModal from "./subscription-modal";
+import ContactModal from "./contact-modal";
+import ShareModal from "./share-modal";
+import QRModal from "./qr-modal";
+import ScrollTop from "./scroll-top";
 
 export {
   Button,
@@ -26,4 +34,12 @@ export {
   CustomSwiper,
   SmartReaderCard,
   CountryMenu,
+  DynamicModal,
+  EditProfileModal,
+  AdvertiseModal,
+  SubscriptionModal,
+  ContactModal,
+  ShareModal,
+  QRModal,
+  ScrollTop,
 };

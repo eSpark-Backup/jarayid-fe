@@ -1,9 +1,13 @@
 import { Box, Typography, Container } from "@mui/material";
 import { memo, Suspense, lazy } from "react";
+import { useTranslation } from "react-i18next";
 
 const SmartReaderCard = lazy(() => import("../smart-reader"));
 
 const LegalPageLayout = memo(({ title, paragraphs }) => {
+  const { i18n } = useTranslation();
+  const isArabic = i18n.language === "ar";
+
   return (
     <Box
       component="main"
@@ -12,6 +16,7 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
         pb: "100px",
         backgroundColor: "#fff",
         minHeight: "100vh",
+        direction: isArabic ? "rtl" : "ltr",
       }}
     >
       <Container
@@ -23,17 +28,29 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
         <Box
           sx={{
             display: "flex",
+            justifyContent: "center",
+            flexDirection: {
+              xs: "column",
+              md: isArabic ? "row-reverse" : "row",
+            },
             alignItems: "flex-start",
-            justifyContent: "space-between",
-            flexWrap: "wrap",
+            gap: 4,
           }}
         >
-          <Box sx={{ flexBasis: { xs: "100%", md: "68%" }, flexGrow: 1 }}>
+          <Box
+            sx={{
+              flex: 1,
+              maxWidth: "850px",
+              order: { xs: 2, md: isArabic ? 2 : 1 },
+              textAlign: isArabic ? "right" : "left",
+            }}
+          >
             <Typography
-              variant="h4"
+              variant="h1"
               fontWeight="600"
               gutterBottom
               fontSize="35px"
+              sx={{ textAlign: isArabic ? "right" : "left" }}
             >
               {title}
             </Typography>
@@ -44,9 +61,8 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
                 variant="body1"
                 sx={{
                   fontSize: "16px",
-                  textAlign: "justify",
+                  textAlign: isArabic ? "right" : "justify",
                   mb: 2,
-                  marginBottom: "0",
                 }}
               >
                 {text}
@@ -56,12 +72,10 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
 
           <Box
             sx={{
-              flexBasis: { xs: "100%", lg: "15%" },
-              display: "flex",
-              justifyContent: { xs: "center", md: "flex-end" },
-              alignItems: "center",
-              width: "100%",
-              mt: { xs: 4, md: 0 },
+              alignSelf: { xs: "center", md: "flex-start" },
+              order: { xs: 1, md: isArabic ? 1 : 2 },
+              ml: isArabic ? 0 : 4,
+              mr: isArabic ? 4 : 0,
             }}
           >
             <Suspense fallback={<div>Loading Smart Reader...</div>}>

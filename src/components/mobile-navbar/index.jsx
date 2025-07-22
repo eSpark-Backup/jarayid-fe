@@ -13,13 +13,28 @@ import CustomSwitch from "../custom-switch";
 import useLanguageSwitcher from "../../hooks/change-language";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import CountryMenu from "../country-menu";
+import DynamicModal from "../modal";
+import EditProfileModal from "../edit-profile-modal";
+import AdvertiseModal from "../advertise-modal";
+import SubscriptionModal from "../subscription-modal";
+import ContactModal from "../contact-modal";
+import ShareModal from "../share-modal";
+import ConfirmModal from "../confirm-modal";
 
 const MobileNavbar = () => {
   const { t } = useTranslation();
   const { switchLanguage } = useLanguageSwitcher();
   const language = useSelector((state) => state.language);
+  const [editProfileModal, setEditProfileModal] = useState(false);
+  const [advertiseModal, setAdvertiseModal] = useState(false);
+  const [subscriptionModal, setSubscriptionModal] = useState(false);
+  const [contactModal, setContactModal] = useState(false);
+  const [shareModal, setShareModal] = useState(false);
+  const [logoutModal, setLogoutModal] = useState(false);
+
+  const navigate = useNavigate();
 
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -52,6 +67,40 @@ const MobileNavbar = () => {
     iktisad: false,
     mal: false,
   });
+
+  const handleChoice = (event) => {
+    if (event === "Edit Profile") {
+      setEditProfileModal(true);
+      setAnchorEl(null);
+    } else if (event === "Advertise here") {
+      setAdvertiseModal(true);
+      setAnchorEl(null);
+    } else if (event === "Subscription Jarayid Plus") {
+      setSubscriptionModal(true);
+      setAnchorEl(null);
+    } else if (event === "Contact Us") {
+      setContactModal(true);
+      setAnchorEl(null);
+    } else if (event === "Share the App") {
+      setShareModal(true);
+      setAnchorEl(null);
+    } else if (event === "Logout") {
+      setLogoutModal(true);
+      setAnchorEl(null);
+    } else if (event === "FAQs") {
+      navigate("/faq");
+      setAnchorEl(null);
+    } else if (event === "Terms of Use") {
+      navigate("/terms-of-use");
+      setAnchorEl(null);
+    } else if (event === "Privacy Policy") {
+      navigate("/privacy-policy");
+      setAnchorEl(null);
+    } else if (event === "Read Later") {
+      navigate("/read-later");
+      setAnchorEl(null);
+    }
+  };
 
   const handleToggle = (name) => {
     setState((prev) => ({ ...prev, [name]: !prev[name] }));
@@ -129,6 +178,7 @@ const MobileNavbar = () => {
               justifyContent: language === "ar" ? "end" : "flex-start",
               gap: "8px",
             }}
+            onClick={() => handleChoice(item?.heading)}
           >
             <img src={item?.icon} alt="Icon" />
             <Typography
@@ -149,6 +199,61 @@ const MobileNavbar = () => {
         onClose={handleClose2}
         navbar={true}
       />
+      <DynamicModal
+        open={editProfileModal}
+        handleClose={() => setEditProfileModal(false)}
+      >
+        <EditProfileModal handleClose={() => setEditProfileModal(false)} />
+      </DynamicModal>
+      <DynamicModal
+        open={advertiseModal}
+        handleClose={() => setAdvertiseModal(false)}
+        sx={{ padding: { xs: "15px", md: "25px", lg: "35px" } }}
+      >
+        <AdvertiseModal handleSubmit={() => setAdvertiseModal(false)} />
+      </DynamicModal>
+      <DynamicModal
+        open={subscriptionModal}
+        handleClose={() => setSubscriptionModal(false)}
+        sx={{
+          padding: {
+            xs: "15px",
+            md: "20px 40px 20px 20px",
+            lg: "30px 45px 30px 30px",
+          },
+        }}
+      >
+        <SubscriptionModal />
+      </DynamicModal>
+      <DynamicModal
+        open={contactModal}
+        handleClose={() => setContactModal(false)}
+        sx={{ padding: { xs: "15px", md: "25px", lg: "35px" } }}
+      >
+        <ContactModal handleSubmit={() => setContactModal(false)} />
+      </DynamicModal>
+      <DynamicModal
+        open={shareModal}
+        handleClose={() => setShareModal(false)}
+        sx={{ padding: { xs: "15px", md: "25px", lg: "35px" } }}
+      >
+        <ShareModal />
+      </DynamicModal>
+      <ConfirmModal
+        open={logoutModal}
+        handleClose={() => setLogoutModal(false)}
+        heading={"Are you sure you want to Logout?"}
+        handleAccept={() => setLogoutModal(false)}
+        handleCancel={() => setLogoutModal(false)}
+        button2Text={"Logout"}
+      >
+        <Typography
+          sx={{ fontSize: "16px", fontWeight: "400", opacity: "56%" }}
+        >
+          Lorem Ipsum is simply dummy text of the printing and typesetting
+          industry. Lorem Ipsum has been the industry's standard
+        </Typography>
+      </ConfirmModal>
     </>
   );
 };

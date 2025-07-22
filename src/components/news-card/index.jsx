@@ -3,10 +3,12 @@ import { news1 } from "../../assets";
 import SocialBox from "../social-box";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-const NewsCard = ({ image, source }) => {
+const NewsCard = ({ image, source, id }) => {
   const language = useSelector((state) => state.language);
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   return (
     <Paper
@@ -19,14 +21,16 @@ const NewsCard = ({ image, source }) => {
           md: language === "ar" ? "row-reverse" : "row",
         },
         px: { xs: "10px", md: "15px" },
+        cursor: "pointer",
       }}
+      onClick={() => navigate(`/${id}`)}
     >
       <Box
         component="img"
         src={image}
         alt="News image"
         sx={{
-          width: { xs: "111px", md: "180px" },
+          width: { xs: "111px", md: "153px", lg: "180px" },
           objectFit: "cover",
           flexShrink: 0,
           height: "100px",
@@ -39,12 +43,12 @@ const NewsCard = ({ image, source }) => {
         sx={{
           flexGrow: 1,
           overflow: "hidden",
-          display: { xs: "none", md: "block" },
+          display: { xs: "none", sm: "block" },
         }}
       >
         <Typography
           sx={{
-            fontSize: { xs: "22.49px", md: "18px", lg: "22.49px" },
+            fontSize: { xs: "15.49px", md: "18px", lg: "22.49px" },
             mb: "20px",
             whiteSpace: {
               xs: "normal",
@@ -95,7 +99,7 @@ const NewsCard = ({ image, source }) => {
             overflow: "hidden",
             textOverflow: "ellipsis",
             textAlign: "center",
-            display: { xs: "block", md: "none" },
+            display: { xs: "block", sm: "none" },
           }}
           component={"h2"}
         >
@@ -105,7 +109,7 @@ const NewsCard = ({ image, source }) => {
           sx={{
             mt: { xs: "0px", md: "5px" },
             color: "#8F8F8F",
-            fontSize: { xs: "7px", md: "9.82px", lg: "12px" },
+            fontSize: { xs: "7px", sm: "14px", md: "9.82px", lg: "12px" },
             mb: { xs: "0px", md: "5px" },
             textAlign: {
               xs: "center",

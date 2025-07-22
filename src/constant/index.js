@@ -64,18 +64,21 @@ export const categories = ["Economy", "Sport", "Politics"];
 
 export const newsContent = [
   {
+    id: 1,
     image: news1,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 2,
     image: news2,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 3,
     image: news3,
     headline: "SCCI finalizes preparations",
     source: "CNN",
@@ -83,18 +86,21 @@ export const newsContent = [
   },
   { ad: ad1 },
   {
+    id: 4,
     image: news4,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 5,
     image: news5,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 6,
     image: news6,
     headline: "SCCI finalizes preparations",
     source: "CNN",
@@ -102,18 +108,21 @@ export const newsContent = [
   },
   { ad: ad2 },
   {
+    id: 7,
     image: news7,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 8,
     image: news8,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 9,
     image: news9,
     headline: "SCCI finalizes preparations",
     source: "CNN",
@@ -138,10 +147,10 @@ export const otherSettings = [
     icon: profileIcon,
     heading: "Edit Profile",
   },
-  {
-    icon: settingsIcon,
-    heading: "Setting",
-  },
+  // {
+  //   icon: settingsIcon,
+  //   heading: "Setting",
+  // },
   {
     icon: sourceIcon,
     heading: "Edit New Source",
@@ -232,6 +241,14 @@ export const displayNews = [
     heading: "Al Arabiya News",
     videoUrl: "https://www.youtube.com/embed/hs5Nc8vmmZw?si=SqBWEWSPQf54c7WL",
   },
+  {
+    heading: "Al Arabiya News",
+    videoUrl: "https://www.youtube.com/embed/hs5Nc8vmmZw?si=SqBWEWSPQf54c7WL",
+  },
+  {
+    heading: "Al Arabiya News",
+    videoUrl: "https://www.youtube.com/embed/hs5Nc8vmmZw?si=SqBWEWSPQf54c7WL",
+  },
 ];
 
 export const channels = [
@@ -263,60 +280,70 @@ export const channels = [
 
 export const relativeNews = [
   {
+    id: 1,
     image: news1,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news2,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news3,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news1,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news2,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news3,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news1,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news2,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news3,
     headline: "SCCI finalizes preparations",
     source: "CNN",
     date: "02-08-20",
   },
   {
+    id: 1,
     image: news3,
     headline: "SCCI finalizes preparations",
     source: "CNN",
@@ -328,7 +355,7 @@ export const footerLinks = [
   "Term & Condition",
   "Privacy Policy",
   "Contact Us",
-  "About Us",
+  // "About Us",
   "FAQs",
 ];
 
@@ -347,9 +374,9 @@ export const generalCategories = [
 
 export const otherSettingsNavbarItems = [
   "Edit Profile",
-  "Setting",
+  // "Setting",
   "Edit New Source",
-  "Read Late",
+  "Read Later",
   "Jarayid Social Media",
   "Advertise Here",
   "Subscription",
@@ -361,4 +388,66 @@ export const otherSettingsNavbarItems = [
   "Contact Us",
   "Logout",
   "Smart QR Code To Download The App",
+];
+
+export const countriesArabic = [
+  "UAE",
+  "Egypt",
+  "Saudia",
+  "Morocco",
+  "Algeria",
+  "Syria",
+  "Iraq",
+  "Libiya",
+  "Economy",
+  "Our Choice",
+  "Podcast",
+  "Food Rec",
+  "TV station",
+  "Lebanon",
+  "World News",
+  "Yamen",
+  "Palestine",
+  "Soudan",
+  "Kuwait",
+  "Qatar",
+  "Bahrain",
+  "Oman",
+  "Tunisia",
+  "Fashion",
+  "Health",
+  "Tech",
+  "Sports",
+  "Jordan",
+];
+
+export const tabletCountries = [
+  "Tech",
+  "UAE",
+  "Egypt",
+  "Saudia",
+  "Morocco",
+  "Algeria",
+  "Lebanon",
+  "Syria",
+  "Iraq",
+  "Libiya",
+  "World News",
+  "Yamen",
+  "Palestine",
+  "Sports",
+  "Soudan",
+  "Kuwait",
+  "Qatar",
+  "Bahrain",
+  "Oman",
+  "Tunisia",
+  "Economy",
+  "Our Choice",
+  "Podcast",
+  "Food Rec",
+  "TV station",
+  "Fashion",
+  "Health",
+  "Jordan",
 ];

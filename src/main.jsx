@@ -8,27 +8,36 @@ import { theme } from "./theme.js";
 import store from "./store/index.js";
 import App from "./App.jsx";
 import "./language/i18n.js";
+import { Auth0Provider } from "@auth0/auth0-react";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <ThemeProvider theme={theme}>
-      <Provider store={store}>
-        <BrowserRouter>
-          <App />
-          <ToastContainer
-            position="top-right"
-            autoClose={5000}
-            hideProgressBar={true}
-            newestOnTop={false}
-            closeOnClick
-            rtl={false}
-            pauseOnFocusLoss
-            draggable
-            pauseOnHover
-            transition:Bounce
-          />
-        </BrowserRouter>
-      </Provider>
-    </ThemeProvider>
+    <Auth0Provider
+      domain={import.meta.env.VITE_AUTH0_DOMAIN}
+      clientId={import.meta.env.VITE_CLIENT_ID}
+      authorizationParams={{
+        redirect_uri: `${window.location.origin}/signup`,
+      }}
+    >
+      <ThemeProvider theme={theme}>
+        <Provider store={store}>
+          <BrowserRouter>
+            <App />
+            <ToastContainer
+              position="top-right"
+              autoClose={5000}
+              hideProgressBar={true}
+              newestOnTop={false}
+              closeOnClick
+              rtl={false}
+              pauseOnFocusLoss
+              draggable
+              pauseOnHover
+              transition:Bounce
+            />
+          </BrowserRouter>
+        </Provider>
+      </ThemeProvider>
+    </Auth0Provider>
   </StrictMode>
 );
