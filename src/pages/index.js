@@ -4,13 +4,16 @@ import Signup from "./auth/sign-up";
 import VerifyEmail from "./auth/verify-email";
 import ChangePassword from "./auth/change-password";
 
-// Dashboard
+// Web App
 import Home from "./application/home";
 import TermsOfUse from "./application/terms-of-use";
 import PrivacyPolicy from "./application/privacy-policy";
 import ArticleDetails from "./application/article-details";
 import FAQSection from "./application/faq";
 import ReadLater from "./application/read-later";
+
+// Dashboard
+import Dashboard from "./admin/dashboard";
 
 export {
   Login,
@@ -23,4 +26,5 @@ export {
   PrivacyPolicy,
   FAQSection,
   ReadLater,
+  Dashboard,
 };

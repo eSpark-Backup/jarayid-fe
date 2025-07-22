@@ -64,6 +64,17 @@ import go from "./icons/go.svg";
 import modalClose from "./icons/modalClose.svg";
 import deleteInfo from "./icons/information-fill.svg";
 import qr from "./icons/qr.svg";
+import adminLogo from "./icons/admin-logo.svg";
+import adminHome from "./icons/admin-home.svg";
+import adminContent from "./icons/admin-content.svg";
+import adminUser from "./icons/admin-user.svg";
+import adminRss from "./icons/admin-rss.svg";
+import adminContact from "./icons/admin-contact.svg";
+import adminAnalystics from "./icons/admin-analytics.svg";
+import adminAd from "./icons/admin-ad.svg";
+import adminSettings from "./icons/admin-settings.svg";
+import adminLogout from "./icons/admin-logout.svg";
+import blueSearch from "./icons/blue-search.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
@@ -147,4 +158,15 @@ export {
   deleteInfo,
   modalClose,
   qr,
+  adminLogo,
+  adminHome,
+  adminContent,
+  adminUser,
+  adminRss,
+  adminContact,
+  adminAnalystics,
+  adminAd,
+  adminSettings,
+  adminLogout,
+  blueSearch,
 };

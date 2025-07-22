@@ -27,6 +27,14 @@ import {
   socialIcon,
   sourceIcon,
   termsIcon,
+  adminAd,
+  adminAnalystics,
+  adminContact,
+  adminContent,
+  adminHome,
+  adminRss,
+  adminSettings,
+  adminUser,
 } from "../assets";
 
 export const countries = [
@@ -450,4 +458,15 @@ export const tabletCountries = [
   "Fashion",
   "Health",
   "Jordan",
+];
+
+export const adminSidebarNavs = [
+  { title: "Dashboard", icon: adminHome, link: "/admin/dashboard" },
+  { title: "Content", icon: adminContent, link: "/admin/content" },
+  { title: "User", icon: adminUser, link: "/admin/user" },
+  { title: "RSS sources", icon: adminRss, link: "/admin/rss" },
+  { title: "Contact Form", icon: adminContact, link: "/admin/contact" },
+  { title: "Analytic", icon: adminAnalystics, link: "/admin/analystics" },
+  { title: "Ad Management", icon: adminAd, link: "/admin/ad-management" },
+  { title: "Settings", icon: adminSettings, link: "/admin/settings" },
 ];

@@ -1,6 +1,7 @@
 import { Routes, Route, Navigate } from "react-router-dom";
 import AuthLayout from "./layout/auth-layout";
 import PrivateLayout from "./layout/private-layout";
+import AdminLayout from "./layout/dashboard-layout";
 import {
   Login,
   Signup,
@@ -12,6 +13,7 @@ import {
   FAQSection,
   ArticleDetails,
   ReadLater,
+  Dashboard,
 } from "./pages";
 import { ScrollTop } from "./components";
 
@@ -23,7 +25,7 @@ const Router = () => {
         <Route element={<AuthLayout />}>
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
-          <Route path="/change-password" element={<ChangePassword />} />
+          <Route path="/reset-password" element={<ChangePassword />} />
           <Route path="/verify-email" element={<VerifyEmail />} />
         </Route>
 
@@ -34,6 +36,10 @@ const Router = () => {
           <Route path="/:id" element={<ArticleDetails />} />
           <Route path="/faq" element={<FAQSection />} />
           <Route path="/read-later" element={<ReadLater />} />
+        </Route>
+
+        <Route element={<AdminLayout />}>
+          <Route path="/admin/dashboard" element={<Dashboard />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
