@@ -147,10 +147,10 @@ export const otherSettings = [
     icon: profileIcon,
     heading: "Edit Profile",
   },
-  {
-    icon: settingsIcon,
-    heading: "Setting",
-  },
+  // {
+  //   icon: settingsIcon,
+  //   heading: "Setting",
+  // },
   {
     icon: sourceIcon,
     heading: "Edit New Source",
@@ -355,7 +355,7 @@ export const footerLinks = [
   "Term & Condition",
   "Privacy Policy",
   "Contact Us",
-  "About Us",
+  // "About Us",
   "FAQs",
 ];
 
@@ -374,9 +374,9 @@ export const generalCategories = [
 
 export const otherSettingsNavbarItems = [
   "Edit Profile",
-  "Setting",
+  // "Setting",
   "Edit New Source",
-  "Read Late",
+  "Read Later",
   "Jarayid Social Media",
   "Advertise Here",
   "Subscription",

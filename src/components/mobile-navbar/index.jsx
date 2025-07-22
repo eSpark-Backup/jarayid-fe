@@ -96,6 +96,9 @@ const MobileNavbar = () => {
     } else if (event === "Privacy Policy") {
       navigate("/privacy-policy");
       setAnchorEl(null);
+    } else if (event === "Read Later") {
+      navigate("/read-later");
+      setAnchorEl(null);
     }
   };
 
