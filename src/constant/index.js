@@ -376,7 +376,7 @@ export const otherSettingsNavbarItems = [
   "Edit Profile",
   "Setting",
   "Edit New Source",
-  "Read Late",
+  "Read Later",
   "Jarayid Social Media",
   "Advertise Here",
   "Subscription",
