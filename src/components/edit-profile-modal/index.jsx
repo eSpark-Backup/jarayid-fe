@@ -1,10 +1,59 @@
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import { close, picEdit, userAvatar } from "../../assets";
 import { useRef, useState } from "react";
+import { useFormik } from "formik";
+import CustomInput from "../input";
+
+const sharedInputStyles = {
+  mt: 0,
+  mb: 0,
+  my: 0,
+  "&.MuiFormControl-root": {
+    marginTop: 0,
+    marginBottom: 0,
+    marginY: 0,
+  },
+  "& .MuiOutlinedInput-root": {
+    backgroundColor: "transparent",
+    borderRadius: 0,
+    height: "40px",
+    fontSize: { xs: "15px", md: "26px" },
+    color: "#4B5563",
+    border: "none",
+    padding: 0,
+    "& fieldset": {
+      border: "none",
+    },
+    "&:hover fieldset": {
+      border: "none",
+    },
+    "&.Mui-focused fieldset": {
+      border: "none",
+    },
+  },
+  "& input": {
+    padding: 0,
+  },
+};
 
 const EditProfileModal = ({ handleClose }) => {
   const [avatar, setAvatar] = useState(userAvatar);
   const fileInputRef = useRef(null);
+  const [editName, setEditName] = useState(false);
+  const [editMobile, setEditMobile] = useState(false);
+  const [editLocation, setEditLocation] = useState(false);
+
+  const formik = useFormik({
+    initialValues: {
+      name: "",
+      mobile: "",
+      location: "",
+    },
+    onSubmit: (values) => {
+      console.log(values);
+      handleClose();
+    },
+  });
 
   const handleEditClick = () => {
     fileInputRef.current.click();
@@ -17,8 +66,17 @@ const EditProfileModal = ({ handleClose }) => {
       setAvatar(imageURL);
     }
   };
+
+  const handleNameClick = () => {
+    setEditName(true);
+  };
+
   return (
-    <Box sx={{ display: "flex", flexDirection: "column" }}>
+    <Box
+      sx={{ display: "flex", flexDirection: "column" }}
+      component={"form"}
+      onSubmit={formik.handleSubmit}
+    >
       <Box
         sx={{
           display: "flex",
@@ -110,9 +168,11 @@ const EditProfileModal = ({ handleClose }) => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
-            pb: "10px",
+            alignItems: { xs: "flex-start", sm: "center" },
+            pb: "20px",
             borderBottom: "1.63px solid #F3F4F6",
+            flexDirection: { xs: "column", sm: "row" },
+            rowGap: editName ? "0px" : "10px",
           }}
         >
           <Typography
@@ -120,19 +180,47 @@ const EditProfileModal = ({ handleClose }) => {
           >
             Name
           </Typography>
-          <Typography
-            sx={{ fontSize: { xs: "15px", md: "26px" }, color: "#4B5563" }}
-          >
-            your name
-          </Typography>
+          {editName ? (
+            <Box sx={{ width: { xs: "100%", sm: "220px" } }}>
+              <CustomInput
+                placeholder={"your name"}
+                type={"text"}
+                sx={sharedInputStyles}
+                name={"name"}
+                value={formik.values.name}
+                onChange={formik.handleChange}
+                onBlur={() => {
+                  setEditName(false);
+                  formik.handleBlur({ target: { name: "name" } });
+                }}
+                error={formik.touched.name && Boolean(formik.errors.name)}
+                helperText={formik.touched.name && formik.errors.name}
+                modal={true}
+                autoFocus={true}
+              />
+            </Box>
+          ) : (
+            <Typography
+              sx={{
+                fontSize: { xs: "15px", md: "26px" },
+                color: "#4B5563",
+                cursor: "pointer",
+              }}
+              onClick={handleNameClick}
+            >
+              {formik.values.name || "your name"}
+            </Typography>
+          )}
         </Box>
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
-            pb: "10px",
+            alignItems: { xs: "flex-start", sm: "center" },
+            pb: "20px",
             borderBottom: "1.63px solid #F3F4F6",
+            flexDirection: { xs: "column", sm: "row" },
+            rowGap: "10px",
           }}
         >
           <Typography
@@ -150,9 +238,11 @@ const EditProfileModal = ({ handleClose }) => {
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
-            pb: "10px",
+            alignItems: { xs: "flex-start", sm: "center" },
+            pb: "20px",
             borderBottom: "1.63px solid #F3F4F6",
+            flexDirection: { xs: "column", sm: "row" },
+            rowGap: editMobile ? "0px" : "10px",
           }}
         >
           <Typography
@@ -160,17 +250,47 @@ const EditProfileModal = ({ handleClose }) => {
           >
             Mobile number
           </Typography>
-          <Typography
-            sx={{ fontSize: { xs: "15px", md: "26px" }, color: "#4B5563" }}
-          >
-            Add number
-          </Typography>
+          {editMobile ? (
+            <Box sx={{ width: { xs: "100%", sm: "220px" } }}>
+              <CustomInput
+                autoFocus
+                placeholder={"Add number"}
+                type={"text"}
+                sx={sharedInputStyles}
+                name={"mobile"}
+                value={formik.values.mobile}
+                onChange={formik.handleChange}
+                onBlur={(e) => {
+                  setEditMobile(false);
+                  formik.handleBlur(e);
+                }}
+                error={formik.touched.mobile && Boolean(formik.errors.mobile)}
+                helperText={formik.touched.mobile && formik.errors.mobile}
+                modal={true}
+              />
+            </Box>
+          ) : (
+            <Typography
+              sx={{
+                fontSize: { xs: "15px", md: "26px" },
+                color: "#4B5563",
+                cursor: "pointer",
+              }}
+              onClick={() => setEditMobile(true)}
+            >
+              {formik.values.mobile || "Add number"}
+            </Typography>
+          )}
         </Box>
+
         <Box
           sx={{
             display: "flex",
             justifyContent: "space-between",
-            alignItems: "center",
+            alignItems: { xs: "flex-start", sm: "center" },
+            pb: "20px",
+            flexDirection: { xs: "column", sm: "row" },
+            rowGap: editLocation ? "0px" : "10px",
           }}
         >
           <Typography
@@ -178,16 +298,44 @@ const EditProfileModal = ({ handleClose }) => {
           >
             Location
           </Typography>
-          <Typography
-            sx={{ fontSize: { xs: "15px", md: "26px" }, color: "#4B5563" }}
-          >
-            USA
-          </Typography>
+          {editLocation ? (
+            <Box sx={{ width: { xs: "100%", sm: "220px" } }}>
+              <CustomInput
+                autoFocus
+                placeholder={"Location"}
+                type={"text"}
+                sx={sharedInputStyles}
+                name={"location"}
+                value={formik.values.location}
+                onChange={formik.handleChange}
+                onBlur={(e) => {
+                  setEditLocation(false);
+                  formik.handleBlur(e);
+                }}
+                error={
+                  formik.touched.location && Boolean(formik.errors.location)
+                }
+                helperText={formik.touched.location && formik.errors.location}
+                modal={true}
+              />
+            </Box>
+          ) : (
+            <Typography
+              sx={{
+                fontSize: { xs: "15px", md: "26px" },
+                color: "#4B5563",
+                cursor: "pointer",
+              }}
+              onClick={() => setEditLocation(true)}
+            >
+              {formik.values.location || "USA"}
+            </Typography>
+          )}
         </Box>
       </Box>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Box sx={{ width: { xs: "100%", md: "234.19px" }, height: "58.64px" }}>
-          <Button variant="contained" disableRipple>
+          <Button variant="contained" disableRipple type="submit">
             Save Change
           </Button>
         </Box>

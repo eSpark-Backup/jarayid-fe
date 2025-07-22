@@ -71,22 +71,31 @@ const MobileNavbar = () => {
   const handleChoice = (event) => {
     if (event === "Edit Profile") {
       setEditProfileModal(true);
+      setAnchorEl(null);
     } else if (event === "Advertise here") {
       setAdvertiseModal(true);
+      setAnchorEl(null);
     } else if (event === "Subscription Jarayid Plus") {
       setSubscriptionModal(true);
+      setAnchorEl(null);
     } else if (event === "Contact Us") {
       setContactModal(true);
+      setAnchorEl(null);
     } else if (event === "Share the App") {
       setShareModal(true);
+      setAnchorEl(null);
     } else if (event === "Logout") {
       setLogoutModal(true);
+      setAnchorEl(null);
     } else if (event === "FAQs") {
       navigate("/faq");
+      setAnchorEl(null);
     } else if (event === "Terms of Use") {
       navigate("/terms-of-use");
+      setAnchorEl(null);
     } else if (event === "Privacy Policy") {
       navigate("/privacy-policy");
+      setAnchorEl(null);
     }
   };
 

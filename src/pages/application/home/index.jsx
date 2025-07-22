@@ -367,7 +367,7 @@ const Home = () => {
               "&::-webkit-scrollbar": {
                 height: "6px",
               },
-
+              flexDirection: language === "ar" ? "row-reverse" : "row",
               userSelect: "none",
             }}
           >

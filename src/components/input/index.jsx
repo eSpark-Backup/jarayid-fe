@@ -16,6 +16,7 @@ const CustomInput = ({
   ei,
   sx,
   modal,
+  autoFocus,
 }) => {
   const language = useSelector((state) => state.language);
   const { t } = useTranslation();
@@ -39,6 +40,7 @@ const CustomInput = ({
       <TextField
         fullWidth
         name={name}
+        autoFocus={autoFocus}
         value={value}
         onChange={onChange}
         onBlur={onBlur}

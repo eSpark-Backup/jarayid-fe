@@ -45,24 +45,34 @@ const Navbar = () => {
   const handleMenuClick = (event) => {
     if (event === "Edit Profile") {
       setEditProfileModal(true);
+      setAnchorEl(null);
     } else if (event === "Advertise Here") {
       setAdvertiseModal(true);
+      setAnchorEl(null);
     } else if (event === "Subscription") {
       setSubscriptionModal(true);
+      setAnchorEl(null);
     } else if (event === "Contact Us") {
       setContactModal(true);
+      setAnchorEl(null);
     } else if (event === "Share Jarayid") {
       setShareModal(true);
+      setAnchorEl(null);
     } else if (event === "Logout") {
       setLogoutModal(true);
+      setAnchorEl(null);
     } else if (event === "Smart QR Code To Download The App") {
       setQrModal(true);
+      setAnchorEl(null);
     } else if (event === "FAQs") {
       navigate("/faq");
+      setAnchorEl(null);
     } else if (event === "Terms of Use") {
       navigate("/terms-of-use");
+      setAnchorEl(null);
     } else if (event === "Privacy Policy") {
       navigate("/privacy-policy");
+      setAnchorEl(null);
     }
   };
 
