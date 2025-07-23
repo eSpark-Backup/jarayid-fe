@@ -36,3 +36,27 @@
 body {
   font-family: "Gilroy", sans-serif;
 }
+
+.highcharts-drilldown-axis-label,
+.highcharts-yaxis-labels text,
+.highcharts-xaxis-labels text {
+  fill: #7B91B0 !important;
+  text-decoration: none !important;
+  font-size: 8.52px !important;
+}
+
+
+
+.highcharts-data-label text,
+.highcharts-credits,
+.highcharts-axis-title {
+  display: none !important;
+}
+
+.highcharts-axis-line {
+  stroke: #EFF1F3;
+}
+
+.highcharts-yaxis-grid path {
+  stroke: #EFF1F3 !important;
+}

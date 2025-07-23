@@ -35,6 +35,12 @@ import {
   adminRss,
   adminSettings,
   adminUser,
+  orderIcon,
+  usersFilled,
+  fileTray,
+  eyeRight,
+  check,
+  warning,
 } from "../assets";
 
 export const countries = [
@@ -470,3 +476,77 @@ export const adminSidebarNavs = [
   { title: "Ad Management", icon: adminAd, link: "/admin/ad-management" },
   { title: "Settings", icon: adminSettings, link: "/admin/settings" },
 ];
+
+export const SummaryCardContent = [
+  {
+    cardBg: "#BFE2FB",
+    iconBg: "#004A99",
+    icon: orderIcon,
+    value: "14,589",
+    name: "Total Articles",
+    comparison: "+8% from yesterday",
+  },
+  {
+    cardBg: "#FFF4DE",
+    iconBg: "#FF947A",
+    icon: usersFilled,
+    value: "300",
+    name: "Active Users",
+    comparison: "+5% from yesterday",
+  },
+  {
+    cardBg: "#DCFCE7",
+    iconBg: "#3CD856",
+    icon: fileTray,
+    value: "60",
+    name: "Categories",
+    comparison: "+1.2% from yesterday",
+  },
+  {
+    cardBg: "#F3E8FF",
+    iconBg: "#BF83FF",
+    icon: eyeRight,
+    value: "12.4k ",
+    name: "Page view",
+    comparison: "+25% from yesterday",
+  },
+];
+
+export const systemStatuses = [
+  {
+    icon: check,
+    heading: "RSS Aggregation",
+    variant: "blue",
+    chipText: "Healthy",
+  },
+  {
+    icon: warning,
+    heading: "User Authentication",
+    variant: "transparent",
+    chipText: "Warning",
+  },
+  {
+    icon: check,
+    heading: "Content Processing",
+    variant: "blue",
+    chipText: "Healthy",
+  },
+  {
+    icon: check,
+    heading: "Data Base",
+    variant: "blue",
+    chipText: "Healthy",
+  },
+];
+
+export const recentArticlesContent = [
+  {
+    name: "Climate Change Global Impact",
+    description: "856 views • 4 hours ago",
+  },
+];
+
+export const stackedChartData = {
+  thisMonth: [11, 12, 10, 10, 10.5, 10.5, 12],
+  lastMonth: [12, 10, 11, 9, 12, 8, 13],
+};

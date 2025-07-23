@@ -155,6 +155,57 @@ export const theme = createTheme({
             },
           },
         },
+        {
+          props: { variant: "blue" },
+          style: {
+            padding: "0",
+            width: "51.51px",
+            backgroundColor: "#004A99",
+            border: "none",
+            borderRadius: "8.73px",
+            fontSize: "7.96px",
+            fontWeight: "400",
+            height: "15.71px",
+            "& .MuiChip-label": {
+              padding: 0,
+              color: "white",
+            },
+          },
+        },
+        {
+          props: { variant: "transparent" },
+          style: {
+            padding: "0",
+            width: "51.51px",
+            backgroundColor: "#ffffffff",
+            border: "none",
+            borderRadius: "8.73px",
+            fontSize: "7.96px",
+            fontWeight: "400",
+            height: "15.71px",
+            "& .MuiChip-label": {
+              padding: 0,
+              color: "#6E6F70",
+            },
+          },
+        },
+        {
+          props: { variant: "outlined" },
+          style: {
+            padding: "0",
+            width: "56.51px",
+            backgroundColor: "#ffffffff",
+            border: "1.23px solid #007BFF45",
+            borderRadius: "9.6px",
+            fontSize: "7.96px",
+            fontWeight: "400",
+            height: "17.71px",
+            "& .MuiChip-label": {
+              padding: 0,
+              color: "#004A99",
+            },
+          },
+        },
       ],
     },
     MuiPaper: {
@@ -167,6 +218,17 @@ export const theme = createTheme({
           border: "none !important",
         },
       },
+      variants: [
+        {
+          props: "adminPaper",
+          style: {
+            borderRadius: "16.97px",
+            padding: "15px",
+            border: "0.85px solid #F8F9FA",
+            boxShadow: "0px 1px 4px 0px #00000040",
+          },
+        },
+      ],
     },
     MuiMenuItem: {
       styleOverrides: {
