@@ -75,6 +75,12 @@ import adminAd from "./icons/admin-ad.svg";
 import adminSettings from "./icons/admin-settings.svg";
 import adminLogout from "./icons/admin-logout.svg";
 import blueSearch from "./icons/blue-search.svg";
+import orderIcon from "./icons/Order-Icon.svg";
+import eyeRight from "./icons/eyeRight.svg";
+import fileTray from "./icons/file-tray.svg";
+import usersFilled from "./icons/usersFilled.svg";
+import check from "./icons/check.svg";
+import warning from "./icons/warning.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
@@ -169,4 +175,10 @@ export {
   adminSettings,
   adminLogout,
   blueSearch,
+  orderIcon,
+  eyeRight,
+  fileTray,
+  usersFilled,
+  check,
+  warning,
 };
