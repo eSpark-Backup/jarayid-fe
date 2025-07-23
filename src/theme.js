@@ -159,6 +159,60 @@ export const theme = createTheme({
           props: { variant: "blue" },
           style: {
             padding: "0",
+            width: "66px",
+            height: "20px",
+            border: "1.43px solid #007BFF45",
+            borderRadius: "11.11px",
+            background: "transparent",
+            color: "#004A99",
+            "& .MuiChip-label": {
+              padding: 0,
+              fontSize: "10.14px",
+              fontWeight: "400",
+              fontFamily: "Gilroy",
+            },
+          },
+        },
+        {
+          props: { variant: "green" },
+          style: {
+            padding: "0",
+            width: "66px",
+            height: "20px",
+            border: "1.43px solid #54D70D45",
+            borderRadius: "11.11px",
+            background: "transparent",
+            color: "#0DB112",
+            "& .MuiChip-label": {
+              padding: 0,
+              fontSize: "10.14px",
+              fontWeight: "400",
+              fontFamily: "Gilroy",
+            },
+          },
+        },
+        {
+          props: { variant: "red" },
+          style: {
+            padding: "0",
+            width: "66px",
+            height: "20px",
+            border: "1.43px solid #DF1C4182",
+            borderRadius: "11.11px",
+            background: "transparent",
+            color: "#DF1C41",
+            "& .MuiChip-label": {
+              padding: 0,
+              fontSize: "10.14px",
+              fontWeight: "400",
+              fontFamily: "Gilroy",
+            },
+          },
+        },
+        {
+          props: { variant: "darkblue" },
+          style: {
+            padding: "0",
             width: "51.51px",
             backgroundColor: "#004A99",
             border: "none",
@@ -189,24 +243,141 @@ export const theme = createTheme({
             },
           },
         },
-        {
-          props: { variant: "outlined" },
-          style: {
-            padding: "0",
-            width: "56.51px",
-            backgroundColor: "#ffffffff",
-            border: "1.23px solid #007BFF45",
-            borderRadius: "9.6px",
-            fontSize: "7.96px",
-            fontWeight: "400",
-            height: "17.71px",
-            "& .MuiChip-label": {
-              padding: 0,
-              color: "#004A99",
-            },
+      ],
+    },
+    MuiTable: {
+      styleOverrides: {
+        root: {
+          borderCollapse: "separate !important",
+          borderSpacing: "0 10px",
+        },
+      },
+    },
+    MuiTableHead: {
+      styleOverrides: {
+        root: {
+          ".MuiTableCell-root": {
+            whiteSpace: "nowrap",
+            color: "#908B93",
+            borderBottom: "none",
+            fontSize: "12px",
+            fontWeight: 600,
+            padding: "7px 0px",
           },
         },
-      ],
+      },
+    },
+    MuiTableBody: {
+      styleOverrides: {
+        root: {
+          ".MuiTableRow-root": {
+            backgroundColor: "#fff",
+            borderRadius: "8px",
+            overflow: "hidden",
+          },
+          "& .MuiTableCell-root": {
+            borderTop: "1px solid #EAE7EC",
+            borderBottom: "1px solid #EAE7EC",
+            whiteSpace: "nowrap",
+            color: "#908B93",
+            fontSize: "14px",
+            fontWeight: 400,
+            padding: "18px 0px",
+          },
+          ".MuiTableRow-root .MuiTableCell-root:first-of-type": {
+            borderLeft: "1px solid #EAE7EC",
+            borderTopLeftRadius: "8px",
+            borderBottomLeftRadius: "8px",
+          },
+          ".MuiTableRow-root .MuiTableCell-root:last-of-type": {
+            borderRight: "1px solid #EAE7EC",
+            borderTopRightRadius: "8px",
+            borderBottomRightRadius: "8px",
+          },
+        },
+      },
+    },
+    MuiPagination: {
+      styleOverrides: {
+        root: {
+          marginTop: "20px",
+          display: "flex",
+          justifyContent: "center",
+        },
+      },
+    },
+    MuiPaginationItem: {
+      styleOverrides: {
+        root: {
+          fontSize: "14px",
+          fontWeight: 500,
+          color: "#505050",
+          borderRadius: "8px",
+          border: "1px solid #ccc",
+          "&:hover": {
+            backgroundColor: "#f0f0f0",
+          },
+
+          "&.Mui-selected": {
+            backgroundColor: "#0077FF",
+            color: "#fff",
+            borderColor: "#0077FF",
+            "&:hover": {
+              backgroundColor: "#1565c0",
+            },
+          },
+          "&.MuiPaginationItem-previousNext": {
+            color: "#505050",
+            border: "1.5px solid #505050",
+            borderRadius: "50%",
+            width: "20px",
+            minWidth: "20px",
+            maxWidth: "20px",
+            height: "20px",
+          },
+        },
+      },
+    },
+    MuiLinearProgress: {
+      styleOverrides: {
+        root: {
+          height: 5,
+          borderRadius: 5,
+          backgroundColor: "#0000001A",
+        },
+        bar: {
+          borderRadius: 5,
+          backgroundColor: "#007BFF",
+        },
+      },
+    },
+    MuiCheckbox: {
+      styleOverrides: {
+        root: {
+          color: "#007BFF",
+          "& .MuiSvgIcon-root": {
+            width: 16,
+            height: 16,
+            borderRadius: 4,
+          },
+          "&.Mui-checked .MuiSvgIcon-root": {
+            width: 16,
+            height: 16,
+            borderRadius: 4,
+          },
+          "&.MuiCheckbox-indeterminate .MuiSvgIcon-root": {
+            width: 16,
+            height: 16,
+            borderRadius: 4,
+          },
+          "&.Mui-checked": {
+            color: "#007BFF",
+          },
+          "&.MuiCheckbox-indeterminate": {
+            color: "#007BFF",
+          },
+        },
+      },
     },
     MuiPaper: {
       styleOverrides: {

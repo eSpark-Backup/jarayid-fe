@@ -1,6 +1,6 @@
-import { Box, Typography } from "@mui/material";
+import { Box } from "@mui/material";
 
-const CustomSwitch = ({ checked, onToggle }) => {
+const CustomSwitch = ({ sx, insideSx, checked, onToggle }) => {
   return (
     <Box
       onClick={onToggle}
@@ -13,6 +13,7 @@ const CustomSwitch = ({ checked, onToggle }) => {
         alignItems: "center",
         cursor: "pointer",
         position: "relative",
+        ...sx,
       }}
     >
       <Box
@@ -25,6 +26,7 @@ const CustomSwitch = ({ checked, onToggle }) => {
           left: checked ? "7%" : "73%",
           transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
           transform: checked ? "translateX(0)" : "translateX(0)",
+          ...insideSx,
         }}
       />
     </Box>

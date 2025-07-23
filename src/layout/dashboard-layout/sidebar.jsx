@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { useAuth0 } from "@auth0/auth0-react";
@@ -9,7 +9,7 @@ import { adminSidebarNavs } from "../../constant";
 import { logout } from "../../store/slices/auth";
 import { adminLogo, adminLogout } from "../../assets";
 
-const Sidebar = () => {
+const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { isAuthenticated, logout: logoutAsGoogle } = useAuth0();
@@ -22,10 +22,33 @@ const Sidebar = () => {
     navigate("/login");
   };
 
+  const sidebarRef = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (sidebarRef.current && !sidebarRef.current.contains(event.target)) {
+        setSidebarOpen(false);
+      }
+    };
+    if (sidebarOpen) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [sidebarOpen]);
+
   return (
     <>
       <Box
+        ref={sidebarRef}
         sx={{
+          position: { xs: "absolute", lg: "relative" },
+          background: "#FFF",
+          zIndex: 999,
+          left: { xs: sidebarOpen ? 0 : "-268px", lg: 0 },
+          transition: "left 0.5s ease-in-out",
+          minWidth: "268px",
           width: "268px",
           height: "100vh",
           padding: "8px 0px 16px 0px",
