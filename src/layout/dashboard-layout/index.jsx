@@ -1,9 +1,11 @@
+import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { Box } from "@mui/material";
 import Sidebar from "./sidebar";
 import Header from "./header";
 
 const AdminLayout = () => {
+  const [open, setOpen] = useState(false);
   return (
     <Box
       sx={{
@@ -16,7 +18,7 @@ const AdminLayout = () => {
         justifyContent: "flex-start",
       }}
     >
-      <Sidebar />
+      <Sidebar sidebarOpen={open} setSidebarOpen={setOpen} />
       <Box
         sx={{
           flex: 1,
@@ -27,14 +29,14 @@ const AdminLayout = () => {
           height: "100%",
         }}
       >
-        <Header />
+        <Header open={open} setOpen={setOpen} />
         <Box
           sx={{
             height: "calc(100vh - 69px)",
-            width: "100%",
+            width: { xs: "100vw", lg: "100%" },
             overflowY: "auto",
             background: "#E5E5E5",
-            padding: "38px 38px 38px 50px",
+            padding: { xs: "20px", sm: "38px 38px 38px 50px" },
           }}
         >
           <Outlet />

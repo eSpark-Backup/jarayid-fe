@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { Box, Tabs, Tab, Typography, Paper } from "@mui/material";
-import { dummyText } from "../../../../constant";
+import { dummyText } from "../../../constant";
+import { SubHeader } from "../../../components";
 
 const TermsPrivacyScreen = () => {
   const [value, setValue] = useState(0);
@@ -12,20 +13,10 @@ const TermsPrivacyScreen = () => {
   return (
     <Box
       sx={{
-        minHeight: "100vh",
         fontFamily: "Inter, sans-serif",
       }}
     >
-      <Typography
-        variant="h1"
-        fontSize="30px"
-        color="#3F3F40"
-        fontWeight={600}
-        gutterBottom
-      >
-        Term of Service/ Privacy Policy
-      </Typography>
-
+      <SubHeader title="Term of Service/ Privacy Policy" />
       <Paper
         elevation={1}
         sx={{
