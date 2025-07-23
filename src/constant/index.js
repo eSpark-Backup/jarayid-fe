@@ -669,3 +669,102 @@ export const userStats = [
     timeStamp: "yesterday",
   },
 ];
+
+export const articlesData = [
+  {
+    id: "1",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Published",
+      variant: "blue",
+    },
+  },
+  {
+    id: "2",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Unpublished",
+      variant: "blue",
+    },
+  },
+  {
+    id: "3",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Published",
+      variant: "blue",
+    },
+  },
+  {
+    id: "4",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Unpublished",
+      variant: "blue",
+    },
+  },
+  {
+    id: "5",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Published",
+      variant: "blue",
+    },
+  },
+  {
+    id: "6",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Unpublished",
+      variant: "blue",
+    },
+  },
+  {
+    id: "7",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Published",
+      variant: "blue",
+    },
+  },
+  {
+    id: "8",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Unpublished",
+      variant: "blue",
+    },
+  },
+];
