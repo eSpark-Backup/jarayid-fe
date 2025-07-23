@@ -14,6 +14,7 @@ import ReadLater from "./application/read-later";
 
 // Dashboard
 import Dashboard from "./admin/dashboard";
+import TermsPrivacyScreen from "./admin/dashboard/privacy-policy"
 
 export {
   Login,
@@ -27,4 +28,5 @@ export {
   FAQSection,
   ReadLater,
   Dashboard,
+  TermsPrivacyScreen,
 };

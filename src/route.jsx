@@ -14,6 +14,7 @@ import {
   ArticleDetails,
   ReadLater,
   Dashboard,
+  TermsPrivacyScreen,
 } from "./pages";
 import { ScrollTop } from "./components";
 
@@ -40,6 +41,10 @@ const Router = () => {
 
         <Route element={<AdminLayout />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
+          <Route
+            path="/admin/dashboard/term-privacy"
+            element={<TermsPrivacyScreen />}
+          />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
