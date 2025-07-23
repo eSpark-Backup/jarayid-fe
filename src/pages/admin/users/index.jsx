@@ -174,7 +174,7 @@ const Users = () => {
             <TimeFilterTab
               tabs={tabs}
               activeTab={activeTab}
-              setActiveTab={activeTab}
+              setActiveTab={setActiveTab}
             />
             <DateRangePicker
               placeholder="Select range"
