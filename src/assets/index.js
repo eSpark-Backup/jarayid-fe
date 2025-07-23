@@ -64,6 +64,7 @@ import go from "./icons/go.svg";
 import modalClose from "./icons/modalClose.svg";
 import deleteInfo from "./icons/information-fill.svg";
 import qr from "./icons/qr.svg";
+import blueSearch from "./icons/blue-search.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
@@ -147,4 +148,5 @@ export {
   deleteInfo,
   modalClose,
   qr,
+  blueSearch
 };

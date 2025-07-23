@@ -17,6 +17,7 @@ const CustomInput = ({
   sx,
   modal,
   autoFocus,
+  InputProps,
 }) => {
   const language = useSelector((state) => state.language);
   const { t } = useTranslation();
@@ -51,22 +52,28 @@ const CustomInput = ({
         sx={sx}
         variant="outlined"
         InputLabelProps={{ shrink: false }}
-        InputProps={{
-          startAdornment: iconSrc ? (
-            <InputAdornment position={language === "ar" ? "end" : "start"}>
-              <img
-                src={iconSrc}
-                alt=""
-                style={{ width: 16, height: 16, marginRight: 8 }}
-              />
-            </InputAdornment>
-          ) : null,
-          sx: {
-            height: { xs: "38px", lg: 48 },
-            textAlign: language === "ar" ? "right" : "left",
-          },
-          dir: language === "ar" ? "rtl" : "ltr",
-        }}
+        InputProps={
+          InputProps
+            ? InputProps
+            : {
+                startAdornment: iconSrc ? (
+                  <InputAdornment
+                    position={language === "ar" ? "end" : "start"}
+                  >
+                    <img
+                      src={iconSrc}
+                      alt=""
+                      style={{ width: 16, height: 16, marginRight: 8 }}
+                    />
+                  </InputAdornment>
+                ) : null,
+                sx: {
+                  height: { xs: "38px", lg: 48 },
+                  textAlign: language === "ar" ? "right" : "left",
+                },
+                dir: language === "ar" ? "rtl" : "ltr",
+              }
+        }
       />
       {helperText && (
         <Typography

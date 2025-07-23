@@ -1,11 +1,18 @@
-import { Avatar, Box, Menu, MenuItem, Typography } from "@mui/material";
+import {
+  Avatar,
+  Box,
+  InputAdornment,
+  Menu,
+  MenuItem,
+  Typography,
+} from "@mui/material";
 import SocialBox from "../social-box";
-import { downArrow, login, logo, message } from "../../assets";
+import { blueSearch, downArrow, login, logo, message } from "../../assets";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import LanguageToggler from "../lang-toggler";
-import { useState } from "react";
+import { useEffect, useState, useRef } from "react";
 import { otherSettingsNavbarItems } from "../../constant";
 import DynamicModal from "../modal";
 import EditProfileModal from "../edit-profile-modal";
@@ -15,6 +22,7 @@ import ContactModal from "../contact-modal";
 import ShareModal from "../share-modal";
 import ConfirmModal from "../confirm-modal";
 import QRModal from "../qr-modal";
+import CustomInput from "../input";
 
 const Navbar = () => {
   const { user } = useSelector((state) => state.auth);
@@ -78,6 +86,23 @@ const Navbar = () => {
       setAnchorEl(null);
     }
   };
+
+  const [chatAi, setChatAi] = useState(false);
+  const boxRef = useRef();
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      if (boxRef.current && !boxRef.current.contains(event.target)) {
+        setChatAi(false);
+      }
+    };
+    if (chatAi) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [chatAi]);
 
   return (
     <>
@@ -193,7 +218,9 @@ const Navbar = () => {
               <LanguageToggler />
             </Box>
             <Box
+              onClick={() => setChatAi(true)}
               sx={{
+                cursor: "pointer",
                 display: "flex",
                 justifyContent: language === "ar" ? "flex-start" : "flex-end",
                 width: "100%",
@@ -327,6 +354,67 @@ const Navbar = () => {
       >
         <QRModal />
       </DynamicModal>
+      <Box
+        ref={boxRef}
+        sx={{
+          transition: "top 1s ease-in-out",
+          position: "absolute",
+          top: chatAi ? 0 : "-60vh",
+          left: 0,
+          width: "100%",
+          height: "60vh",
+          background: "#C8C7C799",
+          backdropFilter: "blur(12.699999809265137px)",
+          borderRadius: "0 0 50px 50px",
+          zIndex: 999,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          "> div": { width: "70%" },
+        }}
+      >
+        <CustomInput
+          modal
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position={"start"}>
+                <img
+                  src={blueSearch}
+                  alt=""
+                  style={{ width: 26, height: 26 }}
+                />
+              </InputAdornment>
+            ),
+          }}
+          placeholder="Search here..."
+          sx={{
+            width: "100%",
+            height: "71px",
+            color: "#A098AE",
+            padding: "12px",
+            input: {
+              height: "100%",
+              padding: 0,
+              color: "#A098AE",
+              fontSize: "14.7px",
+              fontWeight: 700,
+            },
+            ".MuiInputBase-root": {
+              height: "100%",
+            },
+            borderRadius: "11px",
+            background: "#DBEDFF",
+            boxShadow: "0px 0px 19px 0px #00000040",
+            fieldset: {
+              borderRadius: "11px",
+              border: "none",
+              outline: "none",
+            },
+            border: "none",
+            outline: "none",
+          }}
+        />
+      </Box>
     </>
   );
 };
