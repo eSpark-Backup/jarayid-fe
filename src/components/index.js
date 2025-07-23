@@ -19,6 +19,7 @@ import ContactModal from "./contact-modal";
 import ShareModal from "./share-modal";
 import QRModal from "./qr-modal";
 import ScrollTop from "./scroll-top";
+import SummaryCard from "./summary-card";
 
 export {
   Button,
@@ -42,4 +43,5 @@ export {
   ShareModal,
   QRModal,
   ScrollTop,
+  SummaryCard,
 };
