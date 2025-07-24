@@ -1070,3 +1070,69 @@ export const cookiesData = [
     duration: "180 Days",
   },
 ];
+
+export const contactUsData = [
+  {
+    id: "1",
+    name: "Ahmed Ali",
+    email: "ahmed@email.com",
+    message: "I have an issue with..",
+    date: "2025-03-13",
+  },
+  {
+    id: "2",
+    name: "Sara Hassan",
+    email: "sara@email.com",
+    message: "Can you add a feature..",
+    date: "2025-03-13",
+  },
+  {
+    id: "3",
+    name: "Omar Khaled",
+    email: "omar@email.com",
+    message: "I need support with...",
+    date: "2025-03-13",
+  },
+  {
+    id: "4",
+    name: "Ahmed Ali",
+    email: "omar@email.com",
+    message: "March 12, 2025",
+    date: "2025-03-13",
+  },
+  {
+    id: "5",
+    name: "Sara Hassan",
+    email: "omar@email.com",
+    message: "March 12, 2025",
+    date: "2025-03-13",
+  },
+  {
+    id: "6",
+    name: "Omar Khaled",
+    email: "omar@email.com",
+    message: "March 12, 2025",
+    date: "2025-03-13",
+  },
+  {
+    id: "7",
+    name: "Sara Hassan",
+    email: "omar@email.com",
+    message: "March 12, 2025",
+    date: "2025-03-13",
+  },
+  {
+    id: "8",
+    name: "Omar Khaled",
+    email: "omar@email.com",
+    message: "March 12, 2025",
+    date: "2025-03-13",
+  },
+  {
+    id: "9",
+    name: "Sara Hassan",
+    email: "omar@email.com",
+    message: "March 12, 2025",
+    date: "2025-03-13",
+  },
+]

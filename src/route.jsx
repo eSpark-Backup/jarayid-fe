@@ -22,6 +22,7 @@ import {
   SentryBugMonitor,
   Cookies,
   Adfree,
+  ContactUs,
 } from "./pages";
 import { ScrollTop } from "./components";
 
@@ -59,6 +60,7 @@ const Router = () => {
           <Route path="/admin/sentry-bug-monitor" element={<SentryBugMonitor />} />
           <Route path="/admin/cookies" element={<Cookies />} />
           <Route path="/admin/ad-free" element={<Adfree />} />
+          <Route path="/admin/contact-us" element={<ContactUs />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
