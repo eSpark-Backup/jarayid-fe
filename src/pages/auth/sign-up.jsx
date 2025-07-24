@@ -5,11 +5,16 @@ import { CustomInput } from "../../components";
 import { email, google, lock } from "../../assets";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { useAuth0 } from "@auth0/auth0-react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useSignupMutation } from "../../services/auth";
+import { toast } from "react-toastify";
 
 const Signup = () => {
+  const navigate = useNavigate();
+  const [signup, { isLoading }] = useSignupMutation();
+  const [signupType, setSignupType] = useState("");
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -18,7 +23,27 @@ const Signup = () => {
     },
     validationSchema: signupValidationSchema,
     onSubmit: (values) => {
-      console.log("Form submitted:", values);
+      setSignupType("local");
+      const objToSend = {
+        email: values?.email,
+        loginType: "local",
+        password: values?.password,
+      };
+      signup(objToSend).then((res) => {
+        if (res?.data) {
+          if (res?.data?.data?.user?.role === "ADMIN") {
+            navigate("/dashboard");
+          } else {
+            navigate("/");
+          }
+          return;
+        }
+        if (res?.error) {
+          toast.error(res?.error?.data?.message);
+          return;
+        }
+        setSignupType("");
+      });
     },
   });
 
@@ -36,23 +61,34 @@ const Signup = () => {
 
   useEffect(() => {
     if (isAuthenticated && user) {
-      console.log("User successfully logged in via:", user.sub.split("|")[0]);
-      console.log(user);
+      setSignupType("google");
+      const objToSend = {
+        name: user?.name,
+        email: user?.email,
+        loginType: "google",
+        socialId: user?.sub,
+        image: user?.picture,
+      };
+      signup(objToSend).then((res) => {
+        if (res?.data) {
+          navigate("/");
+        }
+        if (res?.error) {
+          toast.error(res?.error?.data?.message);
+          return;
+        }
+        setSignupType("");
+      });
     }
-    console.log(user);
-    console.log(isAuthenticated);
   }, [isAuthenticated, user]);
 
   const handleGoogleLogin = () => {
-    console.log("1. Initiating Google login...");
     loginWithRedirect({
-      connection: "google",
       authorizationParams: {
-        prompt: "login",
+        connection: "google-oauth2",
+        prompt: "select_account",
       },
-    }).then(() => {
-      console.log("2. Redirect initiated");
-    });
+    }).then(() => {});
   };
 
   return (
@@ -102,6 +138,8 @@ const Signup = () => {
         />
 
         <Button
+          loading={signupType === "local" && isLoading}
+          disabled={signupType === "local" && isLoading}
           type="submit"
           variant="contained"
           sx={{
@@ -137,9 +175,13 @@ const Signup = () => {
           },
           height: { xs: "38px", lg: "48px" },
         }}
-        onClick={handleGoogleLogin}
+        onClick={
+          (signupType === "google" && isLoading) || authloading
+            ? () => {}
+            : handleGoogleLogin
+        }
       >
-        {authloading ? (
+        {(signupType === "google" && isLoading) || authloading ? (
           <CircularProgress />
         ) : (
           <>

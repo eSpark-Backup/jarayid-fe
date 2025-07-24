@@ -6,8 +6,11 @@ import { email, lock } from "../../assets";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
+import { useLoginMutation } from "../../services/auth";
+import { toast } from "react-toastify";
 
 const Login = () => {
+  const [login, { isLoading }] = useLoginMutation();
   const formik = useFormik({
     initialValues: {
       email: "",
@@ -15,7 +18,26 @@ const Login = () => {
     },
     validationSchema: loginSchema,
     onSubmit: (values) => {
-      console.log("Login submitted:", values);
+      const objToSend = {
+        email: values?.email,
+        password: values?.password,
+        loginType: "local",
+      };
+      login(objToSend).then((res) => {
+        console.log(res?.data, "response");
+        if (res?.data) {
+          if (res?.data?.data?.user?.role === "ADMIN") {
+            navigate("/dashboard");
+          } else {
+            navigate("/");
+          }
+          return;
+        }
+        if (res?.error) {
+          toast.error(res?.error?.data?.message);
+          return;
+        }
+      });
     },
   });
 
@@ -60,6 +82,8 @@ const Login = () => {
             mt: 2,
             fontSize: { xs: "11px", md: "16px" },
           }}
+          loading={isLoading}
+          disabled={isLoading}
         >
           {language === "ar" ? "دخل كلمة المرور الخاصة بك" : "Login"}
         </Button>

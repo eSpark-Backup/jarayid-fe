@@ -2,22 +2,53 @@ import { api } from "./rtk";
 
 export const authApi = api.injectEndpoints({
   endpoints: (builder) => ({
-    login: builder.mutation({
+    signup: builder.mutation({
       query: (credentials) => ({
-        url: "/auth/login",
+        url: "/users/signup",
         method: "POST",
         body: credentials,
         credentials: "include",
       }),
     }),
-    getUserInfo: builder.mutation({
-      query: () => ({
-        url: "/user/profile",
-        method: "GET",
+    login: builder.mutation({
+      query: (credentials) => ({
+        url: "/users/login",
+        method: "POST",
+        body: credentials,
+        credentials: "include",
+      }),
+    }),
+    forgotPassword: builder.mutation({
+      query: (credentials) => ({
+        url: "/users/forgot-password",
+        method: "POST",
+        body: credentials,
+        credentials: "include",
+      }),
+    }),
+    resetPassword: builder.mutation({
+      query: (credentials) => ({
+        url: "/users/reset-password",
+        method: "POST",
+        body: credentials,
+        credentials: "include",
+      }),
+    }),
+    updateUser: builder.mutation({
+      query: (credentials) => ({
+        url: "/users",
+        method: "PUT",
+        body: credentials,
         credentials: "include",
       }),
     }),
   }),
 });
 
-export const { useLoginMutation, useGetUserInfoMutation } = authApi;
+export const {
+  useSignupMutation,
+  useLoginMutation,
+  useForgotPasswordMutation,
+  useResetPasswordMutation,
+  useUpdateUserMutation,
+} = authApi;

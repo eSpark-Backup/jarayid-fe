@@ -14,25 +14,32 @@ const slice = createSlice({
       localStorage.removeItem("token");
       localStorage.removeItem("user");
     },
-    updateUser: (state, action) => {
-      state.user = action.payload;
-    },
   },
   extraReducers: (builder) => {
+    builder.addMatcher(
+      authApi.endpoints.signup.matchFulfilled,
+      (state, { payload }) => {
+        const { data } = payload;
+        state.user = data?.user;
+        localStorage.setItem("user", JSON.stringify(data?.user));
+        localStorage.setItem("token", data?.token);
+      }
+    );
     builder.addMatcher(
       authApi.endpoints.login.matchFulfilled,
       (state, { payload }) => {
         const { data } = payload;
         state.user = data?.user;
         localStorage.setItem("user", JSON.stringify(data?.user));
+        localStorage.setItem("token", data?.token);
       }
     );
     builder.addMatcher(
-      authApi.endpoints.getUserInfo.matchFulfilled,
+      authApi.endpoints.updateUser.matchFulfilled,
       (state, { payload }) => {
         const { data } = payload;
-        state.user = data;
-        localStorage.setItem("user", JSON.stringify(data));
+        state.user = data?.user;
+        localStorage.setItem("user", JSON.stringify(data?.user));
       }
     );
   },
