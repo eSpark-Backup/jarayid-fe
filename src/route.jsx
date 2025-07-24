@@ -29,6 +29,7 @@ import {
   ManualPosting,
   SeoManagement,
   RssSourceManagement,
+  RssSource,
 } from "./pages";
 import { ScrollTop } from "./components";
 
@@ -76,6 +77,7 @@ const Router = () => {
           <Route path="/admin/manual-posting" element={<ManualPosting />} />
           <Route path="/admin/seo-management" element={<SeoManagement />} />
           <Route path="/admin/rss-source-management" element={<RssSourceManagement />} />
+          <Route path="/admin/rss-source" element={<RssSource />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

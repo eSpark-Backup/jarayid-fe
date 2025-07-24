@@ -29,6 +29,7 @@ import SearchBar from "./searchbar";
 import DateRangePicker from "./range-picker";
 import WordsInput from "./words-input";
 import CustomCheckbox from "./custome-checkbox";
+import RssInfoCard from "./rss-info-card";
 
 export {
   Button,
@@ -62,4 +63,5 @@ export {
   DateRangePicker,
   WordsInput,
   CustomCheckbox,
+  RssInfoCard,
 };

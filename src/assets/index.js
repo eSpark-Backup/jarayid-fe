@@ -96,6 +96,11 @@ import hamburger from "./icons/hamburger.svg";
 import upArrow from "./icons/upArrow.svg";
 import checkedIcon from "./icons/checkedBox.svg";
 import uncheckedIcon from "./icons/uchecked.svg";
+import allResources from "./icons/all-resources.svg";
+import healthyResources from "./icons/healthy-resources.svg";
+import warningIcon from "./icons/warning-icon.svg";
+import error from "./icons/error.svg";
+import refresh from "./icons/refresh.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
@@ -211,4 +216,9 @@ export {
   upArrow,
   checkedIcon,
   uncheckedIcon,
+  allResources,
+  healthyResources,
+  warningIcon,
+  error,
+  refresh,
 };
