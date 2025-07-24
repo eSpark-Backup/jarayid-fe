@@ -41,6 +41,10 @@ import {
   eyeRight,
   check,
   warning,
+  activeUsers,
+  allUsers,
+  guestVisit,
+  premiumUsers,
 } from "../assets";
 
 export const countries = [
@@ -469,7 +473,7 @@ export const tabletCountries = [
 export const adminSidebarNavs = [
   { title: "Dashboard", icon: adminHome, link: "/admin/dashboard" },
   { title: "Content", icon: adminContent, link: "/admin/content" },
-  { title: "User", icon: adminUser, link: "/admin/user" },
+  { title: "User", icon: adminUser, link: "/admin/users" },
   { title: "RSS sources", icon: adminRss, link: "/admin/rss" },
   { title: "Contact Form", icon: adminContact, link: "/admin/contact" },
   { title: "Analytic", icon: adminAnalystics, link: "/admin/analystics" },
@@ -516,7 +520,7 @@ export const systemStatuses = [
   {
     icon: check,
     heading: "RSS Aggregation",
-    variant: "blue",
+    variant: "darkblue",
     chipText: "Healthy",
   },
   {
@@ -528,13 +532,13 @@ export const systemStatuses = [
   {
     icon: check,
     heading: "Content Processing",
-    variant: "blue",
+    variant: "darkblue",
     chipText: "Healthy",
   },
   {
     icon: check,
     heading: "Data Base",
-    variant: "blue",
+    variant: "darkblue",
     chipText: "Healthy",
   },
 ];
@@ -576,5 +580,214 @@ export const faqs = [
     question: "Lorem Ipsum is simply dummy text of the printing?",
     answer:
       "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
+  },
+];
+
+export const usersData = [
+  {
+    id: "1",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "2",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "3",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "4",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "5",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "6",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+];
+
+export const userStats = [
+  {
+    icon: allUsers,
+    title: "Total User",
+    value: "40,689",
+    trending: "up",
+    perc: "8.5%",
+    timeStamp: "yesterday",
+  },
+  {
+    icon: activeUsers,
+    title: "Active Users",
+    value: "10293",
+    trending: "up",
+    perc: "1.3%",
+    timeStamp: "past week",
+  },
+  {
+    icon: premiumUsers,
+    title: "Premium Users",
+    value: "4563",
+    trending: "down",
+    perc: "4.3%",
+    timeStamp: "yesterday",
+  },
+  {
+    icon: guestVisit,
+    title: "Guest Visits",
+    value: "458",
+    trending: "up",
+    perc: "1.8%",
+    timeStamp: "yesterday",
+  },
+];
+
+export const articlesData = [
+  {
+    id: "1",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Published",
+      variant: "blue",
+    },
+  },
+  {
+    id: "2",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Unpublished",
+      variant: "blue",
+    },
+  },
+  {
+    id: "3",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Published",
+      variant: "blue",
+    },
+  },
+  {
+    id: "4",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Unpublished",
+      variant: "blue",
+    },
+  },
+  {
+    id: "5",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Published",
+      variant: "blue",
+    },
+  },
+  {
+    id: "6",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Unpublished",
+      variant: "blue",
+    },
+  },
+  {
+    id: "7",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Published",
+      variant: "blue",
+    },
+  },
+  {
+    id: "8",
+    articleName: "Understanding Modern Web Development",
+    cat: "Technology",
+    createAt: "09/06/2023",
+    views: "12546",
+    comments: "25",
+    status: {
+      label: "Unpublished",
+      variant: "blue",
+    },
   },
 ];

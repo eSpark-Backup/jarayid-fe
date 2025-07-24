@@ -1,5 +1,5 @@
 import { Box, Chip, Grid, Paper, Typography } from "@mui/material";
-import { Button, SummaryCard } from "../../../components";
+import { Button, SubHeader, SummaryCard } from "../../../components";
 import {
   stackedChartData,
   SummaryCardContent,
@@ -12,23 +12,14 @@ import StackedAreaChart from "../../../components/stacked-area-chart";
 const Dashboard = () => {
   return (
     <>
-      <Box
-        sx={{
-          display: "flex",
-          justifyContent: "space-between",
-          alignItems: "center",
-          flexWrap: "wrap",
-        }}
-      >
-        <Typography
-          sx={{ fontSize: "30.22px", fontWeight: "bold", color: "#3F3F40" }}
-        >
-          Dashboard
-        </Typography>
-        <Box sx={{ width: "142px", height: "39px" }}>
-          <Button variant="gradient">Sync RSS</Button>
-        </Box>
-      </Box>
+      <SubHeader
+        title="Dashboard"
+        rightNode={
+          <Box sx={{ width: "142px", height: "39px" }}>
+            <Button variant="gradient">Sync RSS</Button>
+          </Box>
+        }
+      />
       <Grid
         sx={{
           alignItems: "flex-start",
@@ -196,7 +187,7 @@ const Dashboard = () => {
                     >
                       856 views • 4 hours ago
                     </Typography>
-                    <Chip variant="outlined" label="Published" />
+                    <Chip variant="blue" label="Published" />
                   </Box>
                 </Box>
               ))}

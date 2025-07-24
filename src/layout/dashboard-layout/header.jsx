@@ -1,9 +1,9 @@
 import { Avatar, Box, InputAdornment, Typography } from "@mui/material";
 import CustomInput from "../../components/input";
 import LanguageToggler from "../../components/lang-toggler";
-import { blueSearch, downArrow } from "../../assets";
+import { blueSearch, downArrow, hamburger } from "../../assets";
 
-const Header = () => {
+const Header = ({ open, setOpen }) => {
   return (
     <Box
       sx={{
@@ -16,39 +16,59 @@ const Header = () => {
         gap: "13px",
       }}
     >
-      <CustomInput
-        InputProps={{
-          startAdornment: (
-            <InputAdornment position={"start"}>
-              <img src={blueSearch} alt="" style={{ width: 26, height: 26 }} />
-            </InputAdornment>
-          ),
-        }}
-        placeholder="Search here..."
+      <Box
         sx={{
-          width: "326px",
-          height: "49px",
-          color: "#A098AE",
-          padding: "12px",
-          input: {
-            height: "100%",
-            padding: 0,
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+          gap: "13px",
+        }}
+      >
+        <Box
+          sx={{ cursor: "pointer", display: { xs: "block", lg: "none" } }}
+          onClick={() => setOpen(true)}
+        >
+          <img src={hamburger} alt="menu" />
+        </Box>
+        <CustomInput
+          InputProps={{
+            startAdornment: (
+              <InputAdornment position={"start"}>
+                <img
+                  src={blueSearch}
+                  alt=""
+                  style={{ width: 26, height: 26 }}
+                />
+              </InputAdornment>
+            ),
+          }}
+          placeholder="Search here..."
+          sx={{
+            display: { xs: "none", sm: "block" },
+            width: "326px",
+            height: "49px",
             color: "#A098AE",
-            fontSize: "14.7px",
-            fontWeight: 700,
-          },
-          borderRadius: "16.33px",
-          background: "#F5EFFC",
-          fieldset: {
+            padding: "12px",
+            input: {
+              height: "100%",
+              padding: 0,
+              color: "#A098AE",
+              fontSize: "14.7px",
+              fontWeight: 700,
+            },
             borderRadius: "16.33px",
+            background: "#F5EFFC",
+            fieldset: {
+              borderRadius: "16.33px",
+              border: "none",
+              outline: "none",
+            },
             border: "none",
             outline: "none",
-          },
-          border: "none",
-          outline: "none",
-        }}
-      />
-      <Box
+          }}
+        />
+      </Box>
+      {/* <Box
         sx={{
           backgroundColor: "#053E7C",
           borderRadius: "5px",
@@ -111,7 +131,7 @@ const Header = () => {
           </Box>
         </Box>
         <img src={downArrow} alt="Icon" />
-      </Box>
+      </Box> */}
     </Box>
   );
 };

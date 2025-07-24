@@ -16,6 +16,8 @@ import {
   Dashboard,
   TermsPrivacyScreen,
   FAQ,
+  Users,
+  ArticlesManagement,
 } from "./pages";
 import { ScrollTop } from "./components";
 

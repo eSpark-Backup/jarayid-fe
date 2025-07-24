@@ -20,6 +20,13 @@ import ShareModal from "./share-modal";
 import QRModal from "./qr-modal";
 import ScrollTop from "./scroll-top";
 import SummaryCard from "./summary-card";
+import DynamicTable from "./table";
+import SubHeader from "./sub-header";
+import InfoCard from "./info-card";
+import TimeFilterTab from "./time-filter";
+import Dropdown from "./dropdown";
+import SearchBar from "./searchbar";
+import DateRangePicker from "./range-picker";
 
 export {
   Button,
@@ -44,4 +51,11 @@ export {
   QRModal,
   ScrollTop,
   SummaryCard,
+  DynamicTable,
+  SubHeader,
+  InfoCard,
+  TimeFilterTab,
+  Dropdown,
+  SearchBar,
+  DateRangePicker,
 };

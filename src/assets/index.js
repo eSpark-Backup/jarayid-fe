@@ -81,6 +81,18 @@ import fileTray from "./icons/file-tray.svg";
 import usersFilled from "./icons/usersFilled.svg";
 import check from "./icons/check.svg";
 import warning from "./icons/warning.svg";
+import adminTrash from "./icons/admin-trash.svg";
+import adminEdit from "./icons/admin-edit.svg";
+import sortArrow from "./icons/sort-arrow.svg";
+import allUsers from "./icons/total-users.svg";
+import activeUsers from "./icons/active-users.svg";
+import premiumUsers from "./icons/premium-users.svg";
+import guestVisit from "./icons/guest-visit.svg";
+import trendingUp from "./icons/trending-up.svg";
+import trendingDown from "./icons/trending-down.svg";
+import dropdownArrow from "./icons/dropdown-arrow.svg";
+import searchIcon from "./icons/search-icon.svg";
+import hamburger from "./icons/hamburger.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
@@ -181,4 +193,16 @@ export {
   usersFilled,
   check,
   warning,
+  adminTrash,
+  adminEdit,
+  sortArrow,
+  allUsers,
+  activeUsers,
+  premiumUsers,
+  guestVisit,
+  trendingUp,
+  trendingDown,
+  dropdownArrow,
+  searchIcon,
+  hamburger,
 };

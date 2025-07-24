@@ -12,6 +12,8 @@ import {
 } from "@mui/material";
 import FAQList from "../../../components/faq-list";
 import { faqs as initialFaqs } from "../../../constant";
+import { SubHeader } from "../../../components";
+import FAQFormDialog from "../../../components/faq-dialog";
 
 const FAQ = () => {
   const [expanded, setExpanded] = useState(0);
@@ -53,42 +55,29 @@ const FAQ = () => {
 
   return (
     <>
-      <Box
-        display="flex"
-        flexDirection={{ xs: "column", sm: "row" }}
-        justifyContent="space-between"
-        alignItems={{ xs: "flex-start", sm: "center" }}
-        width="100%"
-        mb={2}
-        gap={2}
-      >
-        <Typography
-          variant="h1"
-          fontSize={{ xs: "24px", sm: "28px", md: "35px" }}
-          color="#3F3F40"
-          fontWeight="600"
-        >
-          FAQ
-        </Typography>
-        <Button
-          variant="contained"
-          color="primary"
-          sx={{
-            width: { xs: "100%", sm: "auto" },
-            minWidth: "125px",
-            height: "35px",
-            backgroundColor: "#007BFF",
-            fontSize: "12px",
-            textTransform: "none",
-          }}
-          onClick={() => {
-            setFormDataAdd({ question: "", answer: "" });
-            setOpenAdd(true);
-          }}
-        >
-          Add New FAQ
-        </Button>
-      </Box>
+      <SubHeader
+        title="FAQ"
+        rightNode={
+          <Button
+            variant="contained"
+            color="primary"
+            sx={{
+              width: { xs: "100%", sm: "auto" },
+              minWidth: "125px",
+              height: "35px",
+              backgroundColor: "#007BFF",
+              fontSize: "12px",
+              textTransform: "none",
+            }}
+            onClick={() => {
+              setFormDataAdd({ question: "", answer: "" });
+              setOpenAdd(true);
+            }}
+          >
+            Add New FAQ
+          </Button>
+        }
+      />
 
       <Container
         maxWidth="lg"
@@ -98,6 +87,7 @@ const FAQ = () => {
           position: "relative",
           borderRadius: "8px",
           backgroundColor: "#fff",
+          mt: "10px",
         }}
       >
         <Typography
@@ -122,102 +112,6 @@ const FAQ = () => {
         </Box>
       </Container>
 
-      <Dialog
-        open={openEdit}
-        onClose={() => setOpenEdit(false)}
-        PaperProps={{
-          sx: {
-            width: "475px !important",
-            height: "485px",
-            borderRadius: "10px",
-          },
-        }}
-      >
-        <DialogTitle color="#3F3F40" fontSize="30px" fontWeight="bold">
-          Edit FAQ
-        </DialogTitle>
-
-        <DialogContent
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-            pt: "10px !important",
-          }}
-        >
-          <TextField
-            label="Question"
-            placeholder="Write Down Your Question Here"
-            value={formData.question}
-            onChange={(e) =>
-              setFormData({ ...formData, question: e.target.value })
-            }
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-              sx: {
-                fontSize: "14px",
-                fontWeight: "bold",
-                color: "#121826",
-              },
-            }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "8px",
-              },
-              "& .MuiInputBase-input::placeholder": {
-                color: "#6C727F",
-                fontSize: "12px",
-              },
-            }}
-          />
-
-          <TextField
-            label="Answer"
-            placeholder="Write Down Your Answer Here"
-            value={formData.answer}
-            onChange={(e) =>
-              setFormData({ ...formData, answer: e.target.value })
-            }
-            multiline
-            minRows={7}
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-              sx: {
-                fontSize: "16px",
-                fontWeight: "bold",
-                color: "#3F3F40",
-              },
-            }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "8px",
-              },
-              "& .MuiInputBase-input::placeholder": {
-                color: "#888",
-                fontSize: "14px",
-              },
-            }}
-          />
-        </DialogContent>
-
-        <DialogActions>
-          <Button
-            onClick={() => {
-              if (formData.question && formData.answer) {
-                handleEditSubmit();
-              }
-            }}
-            variant="contained"
-            color="primary"
-            sx={{ width: "137px", height: "40px", fontSize: "12px" }}
-          >
-            Save
-          </Button>
-        </DialogActions>
-      </Dialog>
-
       <Dialog open={openDelete} onClose={() => setOpenDelete(false)}>
         <DialogTitle>Confirm Delete</DialogTitle>
         <DialogContent>Are you sure you want to delete this FAQ?</DialogContent>
@@ -228,100 +122,33 @@ const FAQ = () => {
           </Button>
         </DialogActions>
       </Dialog>
-      <Dialog
+      <FAQFormDialog
         open={openAdd}
         onClose={() => setOpenAdd(false)}
-        PaperProps={{
-          sx: {
-            width: "475px !important",
-            height: "485px",
-            borderRadius: "10px",
-          },
+        onSubmit={() => {
+          setFaqsData([...faqsData, formDataAdd]);
+          setOpenAdd(false);
         }}
-      >
-        <DialogTitle color="#3F3F40" fontSize="30px" fontWeight="bold">
-          Add New FAQ
-        </DialogTitle>
-        <DialogContent
-          sx={{
-            display: "flex",
-            flexDirection: "column",
-            gap: 2,
-            pt: "10px !important",
-          }}
-        >
-          <TextField
-            label="Question"
-            placeholder="Write Down Your Question Here"
-            value={formDataAdd.question}
-            onChange={(e) =>
-              setFormDataAdd({ ...formDataAdd, question: e.target.value })
-            }
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-              sx: {
-                fontSize: "14px",
-                fontWeight: "bold",
-                color: "#121826",
-              },
-            }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "8px",
-              },
-              "& .MuiInputBase-input::placeholder": {
-                color: "#6C727F", // light gray
-                fontSize: "12px",
-              },
-            }}
-          />
+        formData={formDataAdd}
+        setFormData={setFormDataAdd}
+        dialogTitle="Add New FAQ"
+        buttonText="Add FAQ"
+      />
 
-          <TextField
-            label="Answer"
-            placeholder="Write Down Your Answer Here"
-            value={formDataAdd.answer}
-            onChange={(e) =>
-              setFormDataAdd({ ...formDataAdd, answer: e.target.value })
-            }
-            multiline
-            minRows={7} // ⬅️ Increase this value to make it taller
-            fullWidth
-            InputLabelProps={{
-              shrink: true,
-              sx: {
-                fontSize: "16px",
-                fontWeight: "bold",
-                color: "#3F3F40",
-              },
-            }}
-            sx={{
-              "& .MuiOutlinedInput-root": {
-                borderRadius: "8px",
-              },
-              "& .MuiInputBase-input::placeholder": {
-                color: "#888",
-                fontSize: "14px",
-              },
-            }}
-          />
-        </DialogContent>
-        <DialogActions>
-          <Button
-            onClick={() => {
-              if (formDataAdd.question && formDataAdd.answer) {
-                setFaqsData([...faqsData, formDataAdd]);
-                setOpenAdd(false);
-              }
-            }}
-            variant="contained"
-            color="primary"
-            sx={{ width: "137px", height: "40px", fontSize: "12px" }}
-          >
-            Add FAQ
-          </Button>
-        </DialogActions>
-      </Dialog>
+      <FAQFormDialog
+        open={openEdit}
+        onClose={() => setOpenEdit(false)}
+        onSubmit={() => {
+          const updatedFaqs = [...faqsData];
+          updatedFaqs[currentIndex] = formData;
+          setFaqsData(updatedFaqs);
+          setOpenEdit(false);
+        }}
+        formData={formData}
+        setFormData={setFormData}
+        dialogTitle="Edit FAQ"
+        buttonText="Save"
+      />
     </>
   );
 };
