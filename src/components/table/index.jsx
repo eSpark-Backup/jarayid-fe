@@ -166,7 +166,7 @@ const DynamicTable = ({
                         color: "#101828",
                         fontSize: "16px",
                         fontWeight: 600,
-                        padding: "8px 0px",
+                        padding: "8px 10px",
                       },
                       ".MuiTableRow-root .MuiTableCell-root:first-of-type": {
                         borderLeft: "1px solid #EAE7EC",
@@ -213,7 +213,17 @@ const DynamicTable = ({
               </TableRow>
             </TableHead>
             {!isLoading && (
-              <TableBody>
+              <TableBody
+                sx={
+                  headerBorder
+                    ? {
+                        "& .MuiTableCell-root": {
+                          color: "#8C8E90",
+                        },
+                      }
+                    : {}
+                }
+              >
                 {data?.map((item, index) => (
                   <TableRow key={index}>
                     {selectable && (

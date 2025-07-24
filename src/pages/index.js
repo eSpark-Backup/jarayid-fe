@@ -18,6 +18,13 @@ import TermsPrivacyScreen from "./admin/privacy-policy";
 import Users from "./admin/users";
 import ArticlesManagement from "./admin/articles-management";
 import RssSummarization from "./admin/rss-summarization";
+import FAQ from "./admin/faq";
+import SponsorAccount from "./admin/sponsor-account";
+import SentryBugMonitor from "./admin/sentry-bug-monitor";
+import Cookies from "./admin/cookies";
+import Adfree from "./admin/ad-free";
+import ContactUs from "./admin/contact-us";
+import ExternalLink from "./admin/external-links";
 
 export {
   Login,
@@ -32,7 +39,14 @@ export {
   ReadLater,
   Dashboard,
   TermsPrivacyScreen,
+  FAQ,
   Users,
   ArticlesManagement,
   RssSummarization,
+  SponsorAccount,
+  SentryBugMonitor,
+  Cookies,
+  Adfree,
+  ContactUs,
+  ExternalLink,
 };

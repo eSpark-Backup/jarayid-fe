@@ -15,8 +15,15 @@ import {
   ReadLater,
   Dashboard,
   TermsPrivacyScreen,
+  FAQ,
   Users,
   ArticlesManagement,
+  SponsorAccount,
+  SentryBugMonitor,
+  Cookies,
+  Adfree,
+  ContactUs,
+  ExternalLink,
   RssSummarization,
 } from "./pages";
 import { ScrollTop } from "./components";
@@ -45,11 +52,21 @@ const Router = () => {
         <Route element={<AdminLayout />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route path="/admin/term-privacy" element={<TermsPrivacyScreen />} />
+          <Route path="/admin/faq" element={<FAQ />} />
           <Route path="/admin/users" element={<Users />} />
           <Route
             path="/admin/articles-management"
             element={<ArticlesManagement />}
           />
+          <Route path="/admin/sponsor-account" element={<SponsorAccount />} />
+          <Route
+            path="/admin/sentry-bug-monitor"
+            element={<SentryBugMonitor />}
+          />
+          <Route path="/admin/cookies" element={<Cookies />} />
+          <Route path="/admin/ad-free" element={<Adfree />} />
+          <Route path="/admin/contact-us" element={<ContactUs />} />
+          <Route path="/admin/external-links" element={<ExternalLink />} />
           <Route path="/admin/rss" element={<RssSummarization />} />
         </Route>
 

@@ -521,6 +521,7 @@ export const systemStatuses = [
     icon: check,
     heading: "RSS Aggregation",
     variant: "darkblue",
+    variant: "darkblue",
     chipText: "Healthy",
   },
   {
@@ -533,11 +534,13 @@ export const systemStatuses = [
     icon: check,
     heading: "Content Processing",
     variant: "darkblue",
+    variant: "darkblue",
     chipText: "Healthy",
   },
   {
     icon: check,
     heading: "Data Base",
+    variant: "darkblue",
     variant: "darkblue",
     chipText: "Healthy",
   },
@@ -560,78 +563,26 @@ Letraset sheets containing Lorem Ipsum passages, and more recently with desktop 
 but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s,
 when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.`;
 
-export const usersData = [
+export const faqs = [
   {
-    id: "1",
-    user: "John Deo",
-    email: "John@gamil.com",
-    role: "Premium User",
-    joinDate: "25/09/25",
-    lastLogin: "25/09/25",
-    status: {
-      label: "Active",
-      variant: "blue",
-    },
+    question: "Lorem Ipsum is simply dummy text of the printing?",
+    answer:
+      "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
   },
   {
-    id: "2",
-    user: "John Deo",
-    email: "John@gamil.com",
-    role: "Premium User",
-    joinDate: "25/09/25",
-    lastLogin: "25/09/25",
-    status: {
-      label: "Active",
-      variant: "blue",
-    },
+    question: "Lorem Ipsum is simply dummy text of the printing?",
+    answer:
+      "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
   },
   {
-    id: "3",
-    user: "John Deo",
-    email: "John@gamil.com",
-    role: "Premium User",
-    joinDate: "25/09/25",
-    lastLogin: "25/09/25",
-    status: {
-      label: "Active",
-      variant: "blue",
-    },
+    question: "Lorem Ipsum is simply dummy text of the printing?",
+    answer:
+      "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
   },
   {
-    id: "4",
-    user: "John Deo",
-    email: "John@gamil.com",
-    role: "Premium User",
-    joinDate: "25/09/25",
-    lastLogin: "25/09/25",
-    status: {
-      label: "Active",
-      variant: "blue",
-    },
-  },
-  {
-    id: "5",
-    user: "John Deo",
-    email: "John@gamil.com",
-    role: "Premium User",
-    joinDate: "25/09/25",
-    lastLogin: "25/09/25",
-    status: {
-      label: "Active",
-      variant: "blue",
-    },
-  },
-  {
-    id: "6",
-    user: "John Deo",
-    email: "John@gamil.com",
-    role: "Premium User",
-    joinDate: "25/09/25",
-    lastLogin: "25/09/25",
-    status: {
-      label: "Active",
-      variant: "blue",
-    },
+    question: "Lorem Ipsum is simply dummy text of the printing?",
+    answer:
+      "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
   },
 ];
 
@@ -819,4 +770,438 @@ export const timeOptions = [
   { id: 1, value: "Days" },
   { id: 2, value: "Week" },
   { id: 3, value: "Month" },
+];
+export const usersData = [
+  {
+    id: "1",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "2",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "3",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "4",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "5",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "6",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+];
+
+export const sponsorAccountData = [
+  {
+    id: "1",
+    name: "Ali Hammoud",
+    businessName: "Tony Pizza",
+    website: "https://www.Tonypizza.com",
+    email: "sponsor@gmail.com",
+    category: "Lebanon",
+    contact: "Contact",
+    status: {
+      label: "Active",
+      variant: "green",
+    },
+    phone: "908-99-889",
+  },
+  {
+    id: "2",
+    name: "Ali Hammoud",
+    businessName: "Tony Pizza",
+    website: "https://www.Tonypizza.com",
+    email: "sponsor@gmail.com",
+    category: "Lebanon",
+    contact: "Contact",
+    status: {
+      label: "Banned",
+      variant: "red",
+    },
+    phone: "908-99-889",
+  },
+  {
+    id: "3",
+    name: "Ali Hammoud",
+    businessName: "Tony Pizza",
+    website: "https://www.Tonypizza.com",
+    email: "sponsor@gmail.com",
+    category: "Lebanon",
+    contact: "Contact",
+    status: {
+      label: "Banned",
+      variant: "red",
+    },
+    phone: "908-99-889",
+  },
+  {
+    id: "4",
+    name: "Ali Hammoud",
+    businessName: "Tony Pizza",
+    website: "https://www.Tonypizza.com",
+    email: "sponsor@gmail.com",
+    category: "Lebanon",
+    contact: "Contact",
+    status: {
+      label: "Active",
+      variant: "green",
+    },
+    phone: "908-99-889",
+  },
+  {
+    id: "5",
+    name: "Ali Hammoud",
+    businessName: "Tony Pizza",
+    website: "https://www.Tonypizza.com",
+    email: "sponsor@gmail.com",
+    category: "Lebanon",
+    contact: "Contact",
+    status: {
+      label: "Active",
+      variant: "green",
+    },
+    phone: "908-99-889",
+  },
+  {
+    id: "6",
+    name: "Ali Hammoud",
+    businessName: "Tony Pizza",
+    website: "https://www.Tonypizza.com",
+    email: "sponsor@gmail.com",
+    category: "Lebanon",
+    contact: "Contact",
+    status: {
+      label: "Active",
+      variant: "green",
+    },
+    phone: "908-99-889",
+  },
+  {
+    id: "7",
+    name: "Ali Hammoud",
+    businessName: "Tony Pizza",
+    website: "https://www.Tonypizza.com",
+    email: "sponsor@gmail.com",
+    category: "Lebanon",
+    contact: "Contact",
+    status: {
+      label: "Active",
+      variant: "green",
+    },
+    phone: "908-99-889",
+  },
+  {
+    id: "8",
+    name: "Ali Hammoud",
+    businessName: "Tony Pizza",
+    website: "https://www.Tonypizza.com",
+    email: "sponsor@gmail.com",
+    category: "Lebanon",
+    contact: "Contact",
+    status: {
+      label: "Banned",
+      variant: "red",
+    },
+    phone: "908-99-889",
+  },
+  {
+    id: "9",
+    name: "Ali Hammoud",
+    businessName: "Tony Pizza",
+    website: "https://www.Tonypizza.com",
+    email: "sponsor@gmail.com",
+    category: "Lebanon",
+    contact: "Contact",
+    status: {
+      label: "banned",
+      variant: "red",
+    },
+    phone: "908-99-889",
+  },
+  {
+    id: "10",
+    name: "Ali Hammoud",
+    businessName: "Tony Pizza",
+    website: "https://www.Tonypizza.com",
+    email: "sponsor@gmail.com",
+    category: "Lebanon",
+    contact: "Contact",
+    status: {
+      label: "Active",
+      variant: "green",
+    },
+    phone: "908-99-889",
+  },
+  {
+    id: "11",
+    name: "Ali Hammoud",
+    businessName: "Tony Pizza",
+    website: "https://www.Tonypizza.com",
+    email: "sponsor@gmail.com",
+    category: "Lebanon",
+    contact: "Contact",
+    status: {
+      label: "Active",
+      variant: "green",
+    },
+    phone: "908-99-889",
+  },
+  {
+    id: "12",
+    name: "Ali Hammoud",
+    businessName: "Tony Pizza",
+    website: "https://www.Tonypizza.com",
+    email: "sponsor@gmail.com",
+    category: "Lebanon",
+    contact: "Contact",
+    status: {
+      label: "Banned",
+      variant: "red",
+    },
+    phone: "908-99-889",
+  },
+  {
+    id: "13",
+    name: "Ali Hammoud",
+    businessName: "Tony Pizza",
+    website: "https://www.Tonypizza.com",
+    email: "sponsor@gmail.com",
+    category: "Lebanon",
+    contact: "Contact",
+    status: {
+      label: "Active",
+      variant: "green",
+    },
+    phone: "908-99-889",
+  },
+];
+
+export const sentryBugMonitorData = [
+  {
+    id: "1",
+    type: "Harmful",
+    category: "exception",
+    description: "ZeroDevisonError: division by zero",
+    level: {
+      label: "Error",
+      variant: "red",
+    },
+    time: "17:09:27",
+  },
+  {
+    id: "2",
+    type: "Harmful",
+    category: "uvicorn.access",
+    description: "ZeroDevisonError: division by zero",
+    level: {
+      label: "Info",
+      variant: "green",
+    },
+    time: "17:09:27",
+  },
+  {
+    id: "3",
+    type: "Harmful",
+    category: "exception",
+    description: "ZeroDevisonError: division by zero",
+    level: {
+      label: "Error",
+      variant: "red",
+    },
+    time: "17:09:27",
+  },
+  {
+    id: "4",
+    type: "Harmful",
+    category: "uvicorn.access",
+    description: "ZeroDevisonError: division by zero",
+    level: {
+      label: "Info",
+      variant: "green",
+    },
+    time: "17:09:27",
+  },
+  {
+    id: "5",
+    type: "Harmful",
+    category: "uvicorn.access",
+    description: "ZeroDevisonError: division by zero",
+    level: {
+      label: "Error",
+      variant: "red",
+    },
+    time: "17:09:27",
+  },
+];
+
+export const cookiesData = [
+  {
+    id: "1",
+    cookie: "Jayarid_session in",
+    purpose: "Keeps user Logged",
+    duration: "7 Days",
+  },
+  {
+    id: "2",
+    cookie: "Cerf_token attacks",
+    purpose: "Protects agaisnt CSRF",
+    duration: "3 Days",
+  },
+  {
+    id: "3",
+    cookie: "Cookie_consent Banner",
+    purpose: "Stores cookie choices for compliance",
+    duration: "2 Days",
+  },
+  {
+    id: "4",
+    cookie: "Cookie_consent Banner",
+    purpose: "uvicorn.access",
+    duration: "1 Days",
+  },
+  {
+    id: "5",
+    cookie: "Cerf_token attacks",
+    purpose: "uvicorn.access",
+    duration: "180 Days",
+  },
+];
+
+export const contactUsData = [
+  {
+    id: "1",
+    name: "Ahmed Ali",
+    email: "ahmed@email.com",
+    message: "I have an issue with..",
+    date: "2025-03-13",
+  },
+  {
+    id: "2",
+    name: "Sara Hassan",
+    email: "sara@email.com",
+    message: "Can you add a feature..",
+    date: "2025-03-13",
+  },
+  {
+    id: "3",
+    name: "Omar Khaled",
+    email: "omar@email.com",
+    message: "I need support with...",
+    date: "2025-03-13",
+  },
+  {
+    id: "4",
+    name: "Ahmed Ali",
+    email: "omar@email.com",
+    message: "March 12, 2025",
+    date: "2025-03-13",
+  },
+  {
+    id: "5",
+    name: "Sara Hassan",
+    email: "omar@email.com",
+    message: "March 12, 2025",
+    date: "2025-03-13",
+  },
+  {
+    id: "6",
+    name: "Omar Khaled",
+    email: "omar@email.com",
+    message: "March 12, 2025",
+    date: "2025-03-13",
+  },
+  {
+    id: "7",
+    name: "Sara Hassan",
+    email: "omar@email.com",
+    message: "March 12, 2025",
+    date: "2025-03-13",
+  },
+  {
+    id: "8",
+    name: "Omar Khaled",
+    email: "omar@email.com",
+    message: "March 12, 2025",
+    date: "2025-03-13",
+  },
+  {
+    id: "9",
+    name: "Sara Hassan",
+    email: "omar@email.com",
+    message: "March 12, 2025",
+    date: "2025-03-13",
+  },
+];
+
+export const externalLinksData = [
+  {
+    id: "1",
+    toolName: "adWords",
+    toolLink: "en.wikipedia.org/wiki/Google_.AdSense",
+  },
+  {
+    id: "1",
+    toolName: "Dashbord  Admanger",
+    toolLink: "en.wikipedia.org/wiki/Google_.AdSense",
+  },
+  {
+    id: "1",
+    toolName: "colossyan",
+    toolLink: "en.wikipedia.org/wiki/Google_.AdSense",
+  },
 ];
