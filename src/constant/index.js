@@ -1205,3 +1205,195 @@ export const externalLinksData = [
     toolLink: "en.wikipedia.org/wiki/Google_.AdSense",
   },
 ];
+
+export const categoriesData = [
+  {
+    id: "1",
+    categoryName: "Lebanon News",
+  },
+  {
+    id: "2",
+    categoryName: "Egypt News",
+  },
+  {
+    id: "3",
+    categoryName: "World News",
+  },
+  {
+    id: "4",
+    categoryName: "Sports",
+  },
+  {
+    id: "5",
+    categoryName: "Football",
+  },
+  {
+    id: "6",
+    categoryName: "Breaking News",
+  },
+  {
+    id: "7",
+    categoryName: "Lebanon News",
+  },
+  {
+    id: "8",
+    categoryName: "Lebanon News",
+  },
+  {
+    id: "9",
+    categoryName: "Lebanon News",
+  },
+];
+
+export const manualPostingData = [
+  {
+    id: "1",
+    headline: "Lebanon Elections Results Announced",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025",
+  },
+  {
+    id: "2",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025",
+  },
+  {
+    id: "3",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025",
+  },
+  {
+    id: "4",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025",
+  },
+  {
+    id: "5",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025",
+  },
+  {
+    id: "6",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025",
+  },
+  {
+    id: "7",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025",
+  },
+  {
+    id: "8",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025",
+  },
+  {
+    id: "9",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025",
+  },
+  {
+    id: "10",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025",
+  },
+  {
+    id: "11",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025",
+  },
+  {
+    id: "12",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025",
+  },
+];
+
+export const seoData = [
+  {
+    id: "1",
+    category: "Lebanon News",
+    metaTitle: "Latest News from Lebanon",
+    metaDescription: "Get the latest Lebanon...",
+    schemaLink: "Jarayid.com/Lebanon-news",
+  },
+  {
+    id: "2",
+    category: "Egypt News",
+    metaTitle: "Breaking News in Egypt",
+    metaDescription: "Get the latest Lebanon...",
+    schemaLink: "Jarayid.com/Lebanon-news",
+  },
+  {
+    id: "3",
+    category: "World News",
+    metaTitle: "Global News & Headlines",
+    metaDescription: "Get the latest Lebanon...",
+    schemaLink: "Jarayid.com/Lebanon-news",
+  },
+  {
+    id: "4",
+    category: "Sports",
+    metaTitle: "Sports News & Updates",
+    metaDescription: "Get the latest Lebanon...",
+    schemaLink: "Jarayid.com/Lebanon-news",
+  },
+  {
+    id: "5",
+    category: "Lebanon News",
+    metaTitle: "Latest News from Lebanon",
+    metaDescription: "Get the latest Lebanon...",
+    schemaLink: "Jarayid.com/Lebanon-news",
+  },
+  {
+    id: "6",
+    category: "Egypt News",
+    metaTitle: "Breaking News in Egypt",
+    metaDescription: "Get the latest Lebanon...",
+    schemaLink: "Jarayid.com/Lebanon-news",
+  },
+  {
+    id: "7",
+    category: "World News",
+    metaTitle: "Global News & Headlines",
+    metaDescription: "Get the latest Lebanon...",
+    schemaLink: "Jarayid.com/Lebanon-news",
+  },
+  {
+    id: "8",
+    category: "Sports",
+    metaTitle: "Sports News & Updates",
+    metaDescription: "Get the latest Lebanon...",
+    schemaLink: "Jarayid.com/Lebanon-news",
+  },
+  {
+    id: "9",
+    category: "Lebanon News",
+    metaTitle: "Latest News from Lebanon",
+    metaDescription: "Get the latest Lebanon...",
+    schemaLink: "Jarayid.com/Lebanon-news",
+  },
+];
