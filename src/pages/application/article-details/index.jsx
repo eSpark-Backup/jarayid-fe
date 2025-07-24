@@ -129,7 +129,7 @@ const ArticleDetails = () => {
             mt={1}
             textAlign="center"
             fontSize="12px"
-            fontWeight={400}
+            fontWeight={600}
           >
             {t("share_news")}
           </Typography>

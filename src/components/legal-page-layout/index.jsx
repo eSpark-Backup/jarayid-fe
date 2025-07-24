@@ -50,7 +50,10 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
               fontWeight="600"
               gutterBottom
               fontSize="35px"
-              sx={{ textAlign: isArabic ? "right" : "left" }}
+              sx={{
+                textAlign: isArabic ? "right" : "left",
+                fontFamily: "'Poppins', 'sans-serif'",
+              }}
             >
               {title}
             </Typography>
@@ -63,6 +66,7 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
                   fontSize: "16px",
                   textAlign: isArabic ? "right" : "justify",
                   mb: 2,
+                  fontWeight: "600",
                 }}
               >
                 {text}

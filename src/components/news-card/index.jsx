@@ -57,6 +57,7 @@ const NewsCard = ({ image, source, id }) => {
             overflow: "hidden",
             textOverflow: "ellipsis",
             textAlign: "center",
+            fontWeight: "600",
           }}
           component={"h2"}
         >
@@ -100,6 +101,7 @@ const NewsCard = ({ image, source, id }) => {
             textOverflow: "ellipsis",
             textAlign: "center",
             display: { xs: "block", sm: "none" },
+            fontWeight: "600",
           }}
           component={"h2"}
         >

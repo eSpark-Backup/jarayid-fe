@@ -207,6 +207,7 @@ const Navbar = () => {
                     sx={{
                       color: "#007BFF",
                       fontSize: { md: "13px", lg: "17px" },
+                      fontWeight: "500",
                     }}
                   >
                     {t("signup")}

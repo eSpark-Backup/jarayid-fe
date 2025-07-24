@@ -160,7 +160,7 @@ const SocialBox = ({ newsCard, detailPage }) => {
           <Typography
             sx={{
               fontSize: { md: "12px", lg: "16px" },
-              fontWeight: "400",
+              fontWeight: "600",
               textAlign: language === "ar" ? "right" : "left",
               color: language === "ar" ? "#8F8F8F" : "black",
             }}
@@ -171,7 +171,7 @@ const SocialBox = ({ newsCard, detailPage }) => {
           <Typography
             sx={{
               fontSize: { md: "12px", lg: "16px" },
-              fontWeight: "400",
+              fontWeight: "500",
               color: "#8F8F8F",
               textAlign: language === "ar" ? "right" : "left",
             }}

@@ -218,6 +218,7 @@ const Home = () => {
                       border:
                         activeItem === item ? "none" : "1px solid #01000142",
                       fontSize: 14,
+                      fontWeight: "600",
                     }}
                     onClick={() => handleChipClick(item, "country")}
                     disableRipple
@@ -247,6 +248,7 @@ const Home = () => {
                     border:
                       activeItem === item ? "none" : "1px solid #01000142",
                     fontSize: 14,
+                    fontWeight: "600",
                   }}
                   onClick={() => handleChipClick(item, "country")}
                   disableRipple
@@ -272,6 +274,7 @@ const Home = () => {
                     fontSize: 14,
                     display: { xs: "flex", md: "none" },
                     flexShrink: 0,
+                    fontWeight: "600",
                   }}
                   onClick={() => handleChipClick(item, "country")}
                   disableRipple
@@ -341,6 +344,7 @@ const Home = () => {
                   activeCategory === item ? "none" : "1px solid #01000142",
                 width: { xs: "100px", md: "157px", lg: "200px" },
                 fontSize: { xs: "11px", md: "14px", lg: "17.96px" },
+                fontWeight: "600",
               }}
               onClick={() => handleChipClick(item, "category")}
               disableRipple
@@ -390,9 +394,9 @@ const Home = () => {
                   <Typography
                     sx={{
                       fontSize: { xs: "14px", md: "27.69px" },
-                      fontWeight: 400,
                       textAlign: "center",
                       mb: "15px",
+                      fontWeight: "600",
                     }}
                     component={"h1"}
                   >
@@ -424,7 +428,7 @@ const Home = () => {
                   <Typography
                     sx={{
                       fontSize: { sm: "14px", md: "24.69px", lg: "27px" },
-                      fontWeight: 400,
+                      fontWeight: "600",
                       textAlign: "center",
                       mb: "15px",
                     }}
@@ -481,7 +485,7 @@ const Home = () => {
                     loading="lazy"
                   />
                   <Typography
-                    sx={{ fontSize: "15.09px", fontWeight: "400" }}
+                    sx={{ fontSize: "15.09px", fontWeight: "600" }}
                     component={"h2"}
                   >
                     {item?.name}
@@ -535,7 +539,7 @@ const Home = () => {
                     loading="lazy"
                   />
                   <Typography
-                    sx={{ fontSize: "10.09px", fontWeight: "400" }}
+                    sx={{ fontSize: "10.09px", fontWeight: "600" }}
                     component={"h2"}
                   >
                     {item?.name}
