@@ -45,10 +45,6 @@ import {
   allUsers,
   guestVisit,
   premiumUsers,
-  activeUsers,
-  allUsers,
-  guestVisit,
-  premiumUsers,
 } from "../assets";
 
 export const countries = [
