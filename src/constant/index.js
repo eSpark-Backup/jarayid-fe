@@ -45,6 +45,10 @@ import {
   allUsers,
   guestVisit,
   premiumUsers,
+  activeUsers,
+  allUsers,
+  guestVisit,
+  premiumUsers,
 } from "../assets";
 
 export const countries = [
@@ -474,6 +478,7 @@ export const adminSidebarNavs = [
   { title: "Dashboard", icon: adminHome, link: "/admin/dashboard" },
   { title: "Content", icon: adminContent, link: "/admin/content" },
   { title: "User", icon: adminUser, link: "/admin/users" },
+  { title: "User", icon: adminUser, link: "/admin/users" },
   { title: "RSS sources", icon: adminRss, link: "/admin/rss" },
   { title: "Contact Form", icon: adminContact, link: "/admin/contact" },
   { title: "Analytic", icon: adminAnalystics, link: "/admin/analystics" },
@@ -521,6 +526,7 @@ export const systemStatuses = [
     icon: check,
     heading: "RSS Aggregation",
     variant: "darkblue",
+    variant: "darkblue",
     chipText: "Healthy",
   },
   {
@@ -533,11 +539,13 @@ export const systemStatuses = [
     icon: check,
     heading: "Content Processing",
     variant: "darkblue",
+    variant: "darkblue",
     chipText: "Healthy",
   },
   {
     icon: check,
     heading: "Data Base",
+    variant: "darkblue",
     variant: "darkblue",
     chipText: "Healthy",
   },
@@ -580,81 +588,6 @@ export const faqs = [
     question: "Lorem Ipsum is simply dummy text of the printing?",
     answer:
       "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged.",
-  },
-];
-
-export const usersData = [
-  {
-    id: "1",
-    user: "John Deo",
-    email: "John@gamil.com",
-    role: "Premium User",
-    joinDate: "25/09/25",
-    lastLogin: "25/09/25",
-    status: {
-      label: "Active",
-      variant: "blue",
-    },
-  },
-  {
-    id: "2",
-    user: "John Deo",
-    email: "John@gamil.com",
-    role: "Premium User",
-    joinDate: "25/09/25",
-    lastLogin: "25/09/25",
-    status: {
-      label: "Active",
-      variant: "blue",
-    },
-  },
-  {
-    id: "3",
-    user: "John Deo",
-    email: "John@gamil.com",
-    role: "Premium User",
-    joinDate: "25/09/25",
-    lastLogin: "25/09/25",
-    status: {
-      label: "Active",
-      variant: "blue",
-    },
-  },
-  {
-    id: "4",
-    user: "John Deo",
-    email: "John@gamil.com",
-    role: "Premium User",
-    joinDate: "25/09/25",
-    lastLogin: "25/09/25",
-    status: {
-      label: "Active",
-      variant: "blue",
-    },
-  },
-  {
-    id: "5",
-    user: "John Deo",
-    email: "John@gamil.com",
-    role: "Premium User",
-    joinDate: "25/09/25",
-    lastLogin: "25/09/25",
-    status: {
-      label: "Active",
-      variant: "blue",
-    },
-  },
-  {
-    id: "6",
-    user: "John Deo",
-    email: "John@gamil.com",
-    role: "Premium User",
-    joinDate: "25/09/25",
-    lastLogin: "25/09/25",
-    status: {
-      label: "Active",
-      variant: "blue",
-    },
   },
 ];
 
@@ -787,6 +720,81 @@ export const articlesData = [
     comments: "25",
     status: {
       label: "Unpublished",
+      variant: "blue",
+    },
+  },
+];
+
+export const usersData = [
+  {
+    id: "1",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "2",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "3",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "4",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "5",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
+      variant: "blue",
+    },
+  },
+  {
+    id: "6",
+    user: "John Deo",
+    email: "John@gamil.com",
+    role: "Premium User",
+    joinDate: "25/09/25",
+    lastLogin: "25/09/25",
+    status: {
+      label: "Active",
       variant: "blue",
     },
   },

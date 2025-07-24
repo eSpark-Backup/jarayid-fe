@@ -16,6 +16,7 @@ import {
   Dashboard,
   TermsPrivacyScreen,
   FAQ,
+ 
   Users,
   ArticlesManagement,
 } from "./pages";
@@ -44,11 +45,10 @@ const Router = () => {
 
         <Route element={<AdminLayout />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
-          <Route
-            path="/admin/term-privacy"
-            element={<TermsPrivacyScreen />}
-          />
+          <Route path="/admin/term-privacy" element={<TermsPrivacyScreen />} />
           <Route path="/admin/faq" element={<FAQ />} />
+          <Route path="/admin/users" element={<Users />} />
+          <Route path="/admin/articles-management" element={<ArticlesManagement />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
