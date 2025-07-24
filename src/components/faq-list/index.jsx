@@ -10,8 +10,8 @@ import {
 } from "@mui/material";
 import ButtonUp from "../../assets/icons/button-close.svg";
 import ButtonDown from "../../assets/icons/button-open.svg";
-import EditIcon from "../../assets/icons/delete.svg";
-import DeleteIcon from "../../assets/icons/edit.svg";
+import EditIcon from "../../assets/icons/edit.svg";
+import DeleteIcon from "../../assets/icons/delete.svg";
 
 const FAQList = ({
   faqs,

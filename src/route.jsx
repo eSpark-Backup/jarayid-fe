@@ -43,10 +43,10 @@ const Router = () => {
         <Route element={<AdminLayout />}>
           <Route path="/admin/dashboard" element={<Dashboard />} />
           <Route
-            path="/admin/dashboard/term-privacy"
+            path="/admin/term-privacy"
             element={<TermsPrivacyScreen />}
           />
-          <Route path="/admin/dashboard/faq" element={<FAQ />} />
+          <Route path="/admin/faq" element={<FAQ />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

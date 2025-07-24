@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Tabs, Tab, Typography, Paper } from "@mui/material";
-import { dummyText } from "../../../../constant";
+import { dummyText } from "../../../constant";
 
 const TermsPrivacyScreen = () => {
   const [value, setValue] = useState(0);
