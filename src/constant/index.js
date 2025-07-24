@@ -1135,4 +1135,22 @@ export const contactUsData = [
     message: "March 12, 2025",
     date: "2025-03-13",
   },
-]
+];
+
+export const externalLinksData = [
+  {
+    id: "1",
+    toolName: "adWords",
+    toolLink: "en.wikipedia.org/wiki/Google_.AdSense",
+  },
+  {
+    id: "1",
+    toolName: "Dashbord  Admanger",
+    toolLink: "en.wikipedia.org/wiki/Google_.AdSense",
+  },
+  {
+    id: "1",
+    toolName: "colossyan",
+    toolLink: "en.wikipedia.org/wiki/Google_.AdSense",
+  },
+];
