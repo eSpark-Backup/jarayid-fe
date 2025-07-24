@@ -24,6 +24,7 @@ import {
   Adfree,
   ContactUs,
   ExternalLink,
+  Categories,
 } from "./pages";
 import { ScrollTop } from "./components";
 
@@ -63,6 +64,7 @@ const Router = () => {
           <Route path="/admin/ad-free" element={<Adfree />} />
           <Route path="/admin/contact-us" element={<ContactUs />} />
           <Route path="/admin/external-links" element={<ExternalLink />} />
+          <Route path="/admin/categories" element={<Categories />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

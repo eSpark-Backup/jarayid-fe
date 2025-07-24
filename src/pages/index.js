@@ -24,6 +24,7 @@ import Cookies from "./admin/cookies";
 import Adfree from "./admin/ad-free";
 import ContactUs from "./admin/contact-us";
 import ExternalLink from "./admin/external-links";
+import Categories from "./admin/categories";
 
 export {
   Login,
@@ -47,4 +48,5 @@ export {
   Adfree,
   ContactUs,
   ExternalLink,
+  Categories,
 };
