@@ -28,6 +28,7 @@ import ExternalLink from "./admin/external-links";
 import Categories from "./admin/categories";
 import ManualPosting from "./admin/manual-posting";
 import SeoManagement from "./admin/seo";
+import RssSourceManagement from "./admin/rss-source-management";
 
 export {
   Login,
@@ -55,4 +56,5 @@ export {
   Categories,
   ManualPosting,
   SeoManagement,
+  RssSourceManagement,
 };

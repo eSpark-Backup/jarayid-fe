@@ -1397,3 +1397,66 @@ export const seoData = [
     schemaLink: "Jarayid.com/Lebanon-news",
   },
 ];
+
+export const rssSourceManagementData = [
+  {
+    id: "1",
+    sourceName: "Al Jazeera",
+    rssUrl: "https://www.aljazeera.com/rss.xml",
+    worldNews: "World News",
+    logo: "",
+    status: {
+      label: "Active",
+      variant: "green",
+    },
+    active: true,
+  },
+  {
+    id: "2",
+    sourceName: "Al Jazeera",
+    rssUrl: "https://www.aljazeera.com/rss.xml",
+    worldNews: "World News",
+    logo: "",
+    status: {
+      label: "Refresh Inactive",
+      variant: "red",
+    },
+    active: false,
+  },
+  {
+    id: "3",
+    sourceName: "Al Jazeera",
+    rssUrl: "https://www.aljazeera.com/rss.xml",
+    worldNews: "World News",
+    logo: "",
+    status: {
+      label: "Active",
+      variant: "green",
+    },
+    active: true,
+  },
+  {
+    id: "4",
+    sourceName: "Al Jazeera",
+    rssUrl: "https://www.aljazeera.com/rss.xml",
+    worldNews: "World News",
+    logo: "",
+    status: {
+      label: "Refresh Inactive",
+      variant: "red",
+    },
+    active: true,
+  },
+  {
+    id: "5",
+    sourceName: "Al Jazeera",
+    rssUrl: "https://www.aljazeera.com/rss.xml",
+    worldNews: "World News",
+    logo: "",
+    status: {
+      label: "Active",
+      variant: "green",
+    },
+    active: true,
+  },
+];

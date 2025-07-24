@@ -177,7 +177,8 @@ export const theme = createTheme({
           props: { variant: "green" },
           style: {
             padding: "0",
-            width: "66px",
+            width: "88px",
+            padding: "0 5px",
             height: "20px",
             border: "1.43px solid #54D70D45",
             borderRadius: "11.11px",
@@ -195,7 +196,8 @@ export const theme = createTheme({
           props: { variant: "red" },
           style: {
             padding: "0",
-            width: "66px",
+            width: "88px",
+            padding: "0 5px",
             height: "20px",
             border: "1.43px solid #DF1C4182",
             borderRadius: "11.11px",
