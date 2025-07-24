@@ -21,6 +21,7 @@ import ArticlesManagement from "./admin/articles-management";
 import SponsorAccount from "./admin/sponsor-account";
 import SentryBugMonitor from "./admin/sentry-bug-monitor";
 import Cookies from "./admin/cookies";
+import Adfree from "./admin/ad-free";
 
 export {
   Login,
@@ -41,4 +42,5 @@ export {
   SponsorAccount,
   SentryBugMonitor,
   Cookies,
+  Adfree,
 };
