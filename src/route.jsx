@@ -16,9 +16,9 @@ import {
   Dashboard,
   TermsPrivacyScreen,
   FAQ,
- 
   Users,
   ArticlesManagement,
+  SponsorAccount,
 } from "./pages";
 import { ScrollTop } from "./components";
 
@@ -48,7 +48,11 @@ const Router = () => {
           <Route path="/admin/term-privacy" element={<TermsPrivacyScreen />} />
           <Route path="/admin/faq" element={<FAQ />} />
           <Route path="/admin/users" element={<Users />} />
-          <Route path="/admin/articles-management" element={<ArticlesManagement />} />
+          <Route
+            path="/admin/articles-management"
+            element={<ArticlesManagement />}
+          />
+          <Route path="/admin/sponsor-account" element={<SponsorAccount />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

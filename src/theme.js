@@ -262,7 +262,7 @@ export const theme = createTheme({
             borderBottom: "none",
             fontSize: "12px",
             fontWeight: 600,
-            padding: "7px 0px",
+            padding: "7px 10px",
           },
         },
       },
@@ -282,7 +282,7 @@ export const theme = createTheme({
             color: "#908B93",
             fontSize: "14px",
             fontWeight: 400,
-            padding: "18px 0px",
+            padding: "18px 10px",
           },
           ".MuiTableRow-root .MuiTableCell-root:first-of-type": {
             borderLeft: "1px solid #EAE7EC",
