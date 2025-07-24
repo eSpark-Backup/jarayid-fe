@@ -29,6 +29,7 @@ import Categories from "./admin/categories";
 import ManualPosting from "./admin/manual-posting";
 import SeoManagement from "./admin/seo";
 import RssSourceManagement from "./admin/rss-source-management";
+import YoutubeManagement from "./admin/youtube-management";
 
 export {
   Login,
@@ -57,4 +58,5 @@ export {
   ManualPosting,
   SeoManagement,
   RssSourceManagement,
+  YoutubeManagement,
 };

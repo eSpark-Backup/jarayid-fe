@@ -1,36 +1,37 @@
-import { Routes, Route, Navigate } from "react-router-dom";
-import AuthLayout from "./layout/auth-layout";
-import PrivateLayout from "./layout/private-layout";
-import AdminLayout from "./layout/dashboard-layout";
-import {
-  Login,
-  Signup,
-  VerifyEmail,
-  ChangePassword,
-  Home,
-  TermsOfUse,
-  PrivacyPolicy,
-  FAQSection,
-  ArticleDetails,
-  ReadLater,
-  Dashboard,
-  TermsPrivacyScreen,
-  FAQ,
-  Users,
-  ArticlesManagement,
-  SponsorAccount,
-  SentryBugMonitor,
-  Cookies,
-  Adfree,
-  ContactUs,
-  ExternalLink,
-  RssSummarization,
-  Categories,
-  ManualPosting,
-  SeoManagement,
-  RssSourceManagement,
-} from "./pages";
+import { Navigate, Route, Routes } from "react-router-dom";
 import { ScrollTop } from "./components";
+import AuthLayout from "./layout/auth-layout";
+import AdminLayout from "./layout/dashboard-layout";
+import PrivateLayout from "./layout/private-layout";
+import {
+  Adfree,
+  ArticleDetails,
+  ArticlesManagement,
+  Categories,
+  ChangePassword,
+  ContactUs,
+  Cookies,
+  Dashboard,
+  ExternalLink,
+  FAQ,
+  FAQSection,
+  Home,
+  Login,
+  ManualPosting,
+  PrivacyPolicy,
+  ReadLater,
+  RssSourceManagement,
+  RssSummarization,
+  SentryBugMonitor,
+  SeoManagement,
+  Signup,
+  SponsorAccount,
+  TermsOfUse,
+  TermsPrivacyScreen,
+  Users,
+  VerifyEmail,
+  YoutubeManagement
+} from "./pages";
 
 const Router = () => {
   return (
@@ -75,7 +76,15 @@ const Router = () => {
           <Route path="/admin/categories" element={<Categories />} />
           <Route path="/admin/manual-posting" element={<ManualPosting />} />
           <Route path="/admin/seo-management" element={<SeoManagement />} />
-          <Route path="/admin/rss-source-management" element={<RssSourceManagement />} />
+          <Route
+            path="/admin/rss-source-management"
+            element={<RssSourceManagement />}
+          />
+
+          <Route
+            path="/admin/youtube-management"
+            element={<YoutubeManagement />}
+          />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
