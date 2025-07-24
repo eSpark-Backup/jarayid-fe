@@ -45,6 +45,10 @@ import {
   allUsers,
   guestVisit,
   premiumUsers,
+  allResources,
+  healthyResources,
+  warningIcon,
+  error,
 } from "../assets";
 
 export const countries = [
@@ -1458,5 +1462,77 @@ export const rssSourceManagementData = [
       variant: "green",
     },
     active: true,
+  },
+];
+
+export const rssStats = [
+  {
+    icon: allResources,
+    title: "Total Resources",
+    value: "40,689",
+    trending: "up",
+    perc: "8.5%",
+    timeStamp: "yesterday",
+  },
+  {
+    icon: healthyResources,
+    title: "Healthy Resources",
+    value: "10293",
+    trending: "up",
+    perc: "1.3%",
+    timeStamp: "past week",
+  },
+  {
+    icon: warningIcon,
+    title: "Warning",
+    value: "4563",
+    trending: "down",
+    perc: "4.3%",
+    timeStamp: "yesterday",
+  },
+  {
+    icon: error,
+    title: "Error",
+    value: "458",
+    trending: "up",
+    perc: "1.8%",
+    timeStamp: "yesterday",
+  },
+];
+
+export const rssResourcesData = [
+  {
+    id: 1,
+    title: "TechCrunch",
+    lastSync: "2mints",
+    noOfArticles: "45",
+    link: "https://feeds.feedburner.com/TechCrunch",
+    active: true,
+  },
+  {
+    id: 2,
+    title: "BBC News",
+    lastSync: "2mints",
+    noOfArticles: "45",
+    link: "https://feeds.feedburner.com/TechCrunch",
+    active: true,
+    status: { type: "error", value: "Error: Feed not accessible (404)" },
+  },
+  {
+    id: 3,
+    title: "CNN",
+    lastSync: "2mints",
+    noOfArticles: "45",
+    link: "https://feeds.feedburner.com/TechCrunch",
+    active: false,
+  },
+  {
+    id: 4,
+    title: "BBC News",
+    lastSync: "2mints",
+    noOfArticles: "45",
+    link: "https://feeds.feedburner.com/TechCrunch",
+    active: true,
+    status: { type: "warning", value: "Warning: Slow response time" },
   },
 ];
