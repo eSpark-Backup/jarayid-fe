@@ -19,6 +19,7 @@ import FAQ from "./admin/faq";
 import Users from "./admin/users";
 import ArticlesManagement from "./admin/articles-management";
 import SponsorAccount from "./admin/sponsor-account";
+import SentryBugMonitor from "./admin/sentry-bug-monitor";
 
 export {
   Login,
@@ -37,4 +38,5 @@ export {
   Users,
   ArticlesManagement,
   SponsorAccount,
+  SentryBugMonitor,
 };

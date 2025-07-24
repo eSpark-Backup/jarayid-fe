@@ -19,6 +19,7 @@ import {
   Users,
   ArticlesManagement,
   SponsorAccount,
+  SentryBugMonitor,
 } from "./pages";
 import { ScrollTop } from "./components";
 
@@ -53,6 +54,7 @@ const Router = () => {
             element={<ArticlesManagement />}
           />
           <Route path="/admin/sponsor-account" element={<SponsorAccount />} />
+          <Route path="/admin/sentry-bug-monitor" element={<SentryBugMonitor />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
