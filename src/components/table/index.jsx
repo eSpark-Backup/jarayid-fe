@@ -81,7 +81,7 @@ const DynamicTable = ({
           {!hideSwitch && (
             <CustomSwitch
               sx={{
-                background: !checked
+                background: item.active
                   ? "linear-gradient(180deg, #004A99 0%, #007BFF 100%)"
                   : "linear-gradient(180deg, #282B30 0%, #1E2124 100%)",
                 boxShadow: "0px 0.88px 5.88px 0px #00000026 inset",
@@ -91,7 +91,7 @@ const DynamicTable = ({
                 position: "relative",
                 "::before": {
                   content: "''",
-                  background: !checked
+                  background: item.active
                     ? "linear-gradient(180deg, #0095FF 0%, #004A99 100%)"
                     : "",
                   width: "41.25px !important",
@@ -106,7 +106,7 @@ const DynamicTable = ({
                 boxShadow: "0px 0px 1.18px 0px #00000059",
                 width: "14.18px!important",
                 height: "13.18px !important",
-                left: checked ? "4%" : "68%",
+                left: !item.active ? "4%" : "68%",
                 "::before": {
                   content: "''",
                   background:
@@ -119,8 +119,8 @@ const DynamicTable = ({
                   top: "0.2px",
                 },
               }}
-              checked={checked}
-              onToggle={onToggle}
+              checked={item.active}
+              onToggle={() => onToggle(item, !item.active)}
             />
           )}
           {!hideDelete && (
