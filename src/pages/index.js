@@ -20,6 +20,7 @@ import Users from "./admin/users";
 import ArticlesManagement from "./admin/articles-management";
 import SponsorAccount from "./admin/sponsor-account";
 import SentryBugMonitor from "./admin/sentry-bug-monitor";
+import Cookies from "./admin/cookies";
 
 export {
   Login,
@@ -39,4 +40,5 @@ export {
   ArticlesManagement,
   SponsorAccount,
   SentryBugMonitor,
+  Cookies,
 };

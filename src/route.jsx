@@ -20,6 +20,7 @@ import {
   ArticlesManagement,
   SponsorAccount,
   SentryBugMonitor,
+  Cookies,
 } from "./pages";
 import { ScrollTop } from "./components";
 
@@ -55,6 +56,7 @@ const Router = () => {
           />
           <Route path="/admin/sponsor-account" element={<SponsorAccount />} />
           <Route path="/admin/sentry-bug-monitor" element={<SentryBugMonitor />} />
+          <Route path="/admin/cookies" element={<Cookies />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

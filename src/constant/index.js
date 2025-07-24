@@ -1037,3 +1037,36 @@ export const sentryBugMonitorData = [
     time: "17:09:27",
   },
 ];
+
+export const cookiesData = [
+  {
+    id: "1",
+    cookie: "Jayarid_session in",
+    purpose: "Keeps user Logged",
+    duration: "7 Days",
+  },
+  {
+    id: "2",
+    cookie: "Cerf_token attacks",
+    purpose: "Protects agaisnt CSRF",
+    duration: "3 Days",
+  },
+  {
+    id: "3",
+    cookie: "Cookie_consent Banner",
+    purpose: "Stores cookie choices for compliance",
+    duration: "2 Days",
+  },
+  {
+    id: "4",
+    cookie: "Cookie_consent Banner",
+    purpose: "uvicorn.access",
+    duration: "1 Days",
+  },
+  {
+    id: "5",
+    cookie: "Cerf_token attacks",
+    purpose: "uvicorn.access",
+    duration: "180 Days",
+  },
+];

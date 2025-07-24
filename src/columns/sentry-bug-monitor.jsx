@@ -1,5 +1,3 @@
-import { Typography } from "@mui/material";
-
 export const columns = () => {
   return [
     { name: "Type", key: "type" },
