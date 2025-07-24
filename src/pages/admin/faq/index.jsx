@@ -1,19 +1,19 @@
-import React, { useState } from "react";
 import {
-  Typography,
-  Container,
   Box,
   Button,
+  Container,
   Dialog,
-  DialogTitle,
-  DialogContent,
   DialogActions,
-  TextField,
+  DialogContent,
+  DialogTitle,
+  Typography,
 } from "@mui/material";
-import FAQList from "../../../components/faq-list";
-import { faqs as initialFaqs } from "../../../constant";
+import { useState } from "react";
 import { SubHeader } from "../../../components";
-import FAQFormDialog from "../../../components/faq-dialog";
+import FAQList from "../../../components/faq-list";
+import FAQModal from "../../../components/faq-modal";
+import { faqs as initialFaqs } from "../../../constant";
+import DeleteModal from "../../../components/delete-modal";
 
 const FAQ = () => {
   const [expanded, setExpanded] = useState(0);
@@ -112,17 +112,15 @@ const FAQ = () => {
         </Box>
       </Container>
 
-      <Dialog open={openDelete} onClose={() => setOpenDelete(false)}>
-        <DialogTitle>Confirm Delete</DialogTitle>
-        <DialogContent>Are you sure you want to delete this FAQ?</DialogContent>
-        <DialogActions>
-          <Button onClick={() => setOpenDelete(false)}>Cancel</Button>
-          <Button onClick={confirmDelete} color="error" variant="contained">
-            Delete
-          </Button>
-        </DialogActions>
-      </Dialog>
-      <FAQFormDialog
+      <DeleteModal
+        open={openDelete}
+        handleClose={() => setOpenDelete(false)}
+        handleCancel={() => setOpenDelete(false)}
+        handleConfirm={confirmDelete}
+        heading="Are you sure you want to delete this FAQ?"
+        confirmText="Delete"
+      />
+      <FAQModal
         open={openAdd}
         onClose={() => setOpenAdd(false)}
         onSubmit={() => {
@@ -131,11 +129,11 @@ const FAQ = () => {
         }}
         formData={formDataAdd}
         setFormData={setFormDataAdd}
-        dialogTitle="Add New FAQ"
+        title="Add New FAQ"
         buttonText="Add FAQ"
       />
 
-      <FAQFormDialog
+      <FAQModal
         open={openEdit}
         onClose={() => setOpenEdit(false)}
         onSubmit={() => {
@@ -146,7 +144,7 @@ const FAQ = () => {
         }}
         formData={formData}
         setFormData={setFormData}
-        dialogTitle="Edit FAQ"
+        title="Edit FAQ"
         buttonText="Save"
       />
     </>
