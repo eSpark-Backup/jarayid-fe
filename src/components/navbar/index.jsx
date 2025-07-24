@@ -8,7 +8,7 @@ import {
 } from "@mui/material";
 import SocialBox from "../social-box";
 import { blueSearch, downArrow, login, logo, message } from "../../assets";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import LanguageToggler from "../lang-toggler";
@@ -23,9 +23,14 @@ import ShareModal from "../share-modal";
 import ConfirmModal from "../confirm-modal";
 import QRModal from "../qr-modal";
 import CustomInput from "../input";
+import { logout } from "../../store/slices/auth";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Navbar = () => {
+  const dispatch = useDispatch();
+  const { isAuthenticated, logout: logoutAsGoogle } = useAuth0();
   const { user } = useSelector((state) => state.auth);
+  const token = localStorage.getItem("token");
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
   const [editProfileModal, setEditProfileModal] = useState(false);
@@ -142,7 +147,7 @@ const Navbar = () => {
                 alignItems: "center",
               }}
             >
-              {user ? (
+              {token && user ? (
                 <Box
                   sx={{
                     backgroundColor: "#053E7C",
@@ -153,7 +158,7 @@ const Navbar = () => {
                     alignItems: "center",
                     width: "136px",
                     cursor: "pointer",
-                    // height: "35px",
+                    height: "35px",
                   }}
                   onClick={handleClick}
                 >
@@ -164,7 +169,11 @@ const Navbar = () => {
                       alignItems: "center",
                     }}
                   >
-                    <Avatar sx={{ width: "24px", height: "24px" }} alt="" />
+                    <Avatar
+                      src={user?.image}
+                      sx={{ width: "24px", height: "24px" }}
+                      alt="profile"
+                    />
                     <Box
                       sx={{
                         display: "flex",
@@ -177,18 +186,27 @@ const Navbar = () => {
                           color: "white",
                           fontSize: "15.51px",
                           fontWeight: "500",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          width: "70px",
+                          whiteSpace: "nowrap",
+                          lineHeight: "10px"
                         }}
                       >
-                        John
+                        {user?.name || "Your name"}
                       </Typography>
                       <Typography
                         sx={{
                           color: "white",
                           fontSize: "7.89px",
                           fontWeight: "500",
+                          overflow: "hidden",
+                          textOverflow: "ellipsis",
+                          width: "70px",
+                          whiteSpace: "nowrap",
                         }}
                       >
-                        John@gmail.com
+                        {user?.email}
                       </Typography>
                     </Box>
                   </Box>
@@ -334,7 +352,12 @@ const Navbar = () => {
         open={logoutModal}
         handleClose={() => setLogoutModal(false)}
         heading={"Are you sure you want to Logout?"}
-        handleAccept={() => setLogoutModal(false)}
+        handleAccept={() => {
+          dispatch(logout());
+          isAuthenticated &&
+            logoutAsGoogle({ returnTo: window.location.origin });
+          setLogoutModal(false);
+        }}
         handleCancel={() => setLogoutModal(false)}
         button2Text={"Logout"}
       >
