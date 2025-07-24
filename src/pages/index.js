@@ -18,6 +18,7 @@ import TermsPrivacyScreen from "./admin/privacy-policy";
 import FAQ from "./admin/faq";
 import Users from "./admin/users";
 import ArticlesManagement from "./admin/articles-management";
+import SponsorAccount from "./admin/sponsor-account";
 
 export {
   Login,
@@ -35,4 +36,5 @@ export {
   FAQ,
   Users,
   ArticlesManagement,
+  SponsorAccount,
 };
