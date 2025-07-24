@@ -1154,3 +1154,42 @@ export const externalLinksData = [
     toolLink: "en.wikipedia.org/wiki/Google_.AdSense",
   },
 ];
+
+export const categoriesData = [
+  {
+    id: "1",
+    categoryName: "Lebanon News",
+  },
+  {
+    id: "2",
+    categoryName: "Egypt News",
+  },
+  {
+    id: "3",
+    categoryName: "World News",
+  },
+  {
+    id: "4",
+    categoryName: "Sports",
+  },
+  {
+    id: "5",
+    categoryName: "Football",
+  },
+  {
+    id: "6",
+    categoryName: "Breaking News",
+  },
+  {
+    id: "7",
+    categoryName: "Lebanon News",
+  },
+  {
+    id: "8",
+    categoryName: "Lebanon News",
+  },
+  {
+    id: "9",
+    categoryName: "Lebanon News",
+  },
+];
