@@ -14,9 +14,10 @@ import ReadLater from "./application/read-later";
 
 // Dashboard
 import Dashboard from "./admin/dashboard";
-import TermsPrivacyScreen from "./admin/privacy-policy"
+import TermsPrivacyScreen from "./admin/privacy-policy";
 import Users from "./admin/users";
 import ArticlesManagement from "./admin/articles-management";
+import RssSummarization from "./admin/rss-summarization";
 
 export {
   Login,
@@ -33,4 +34,5 @@ export {
   TermsPrivacyScreen,
   Users,
   ArticlesManagement,
+  RssSummarization,
 };

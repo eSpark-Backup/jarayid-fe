@@ -768,3 +768,55 @@ export const articlesData = [
     },
   },
 ];
+
+export const wordInputStyles = {
+  mt: 0,
+  mb: 0,
+  my: 0,
+  "&.MuiFormControl-root": {
+    marginTop: 0,
+    marginBottom: 0,
+    marginY: 0,
+  },
+  "& .MuiOutlinedInput-root": {
+    backgroundColor: "#EAF4FF",
+    borderRadius: "5px",
+    height: "42.37px",
+    fontSize: { xs: "15px", md: "17px" },
+    color: "#101828",
+    border: "1px solid #D1E5FA",
+    fontWeight: "600",
+    padding: 0,
+    "& fieldset": {
+      border: "none",
+    },
+    "&:hover fieldset": {
+      border: "none",
+    },
+    "&.Mui-focused fieldset": {
+      border: "none",
+    },
+  },
+  "& input": {
+    padding: 0,
+    height: "42.37px",
+    lineHeight: "42.37px",
+    textAlign: "center",
+  },
+};
+
+export const modelsContent = [
+  { id: 1, value: "gpt-4.1-nano (Input: $0.1/1M, Output: $15/1M)" },
+  { id: 2, value: " gpt-40 (Input: $5/1M, Output: $15/1M)" },
+  { id: 3, value: "gpt-4-turbo (Input: $10/1M, Output: $30/1M)" },
+  { id: 4, value: "gpt-4.1-nano (Input: $0.1/1M, Output: $0.4/1M)" },
+  { id: 5, value: "gpt-4 (Input: $30/1M, Output: $60/1M)" },
+  { id: 6, value: "gpt-3.5-turbo (Input: $0.5/1M, Output: $1.5/1M)" },
+  { id: 7, value: "gpt-3.5-turbo-instruct (Input: $1.5/1M, Output: $2/1M)" },
+];
+
+export const timeOptions = [
+  { id: 1, value: "Days" },
+  { id: 2, value: "Week" },
+  { id: 3, value: "Month" },
+];
