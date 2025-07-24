@@ -1193,3 +1193,90 @@ export const categoriesData = [
     categoryName: "Lebanon News",
   },
 ];
+
+export const manualPostingData = [
+  {
+    id: "1",
+    headline: "Lebanon Elections Results Announced",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025"
+  },
+  {
+    id: "2",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025"
+  },
+  {
+    id: "3",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025"
+  },
+  {
+    id: "4",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025"
+  },
+  {
+    id: "5",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025"
+  },
+  {
+    id: "6",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025"
+  },
+  {
+    id: "7",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025"
+  },
+  {
+    id: "8",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025"
+  },
+  {
+    id: "9",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025"
+  },
+  {
+    id: "10",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025"
+  },
+  {
+    id: "11",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025"
+  },
+  {
+    id: "12",
+    headline: "Egypt’s Economy Growth in 2025",
+    category: "Lebanon",
+    image: "",
+    publishedDate: "March 12, 2025"
+  },
+];
