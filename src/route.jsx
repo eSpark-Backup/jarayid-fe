@@ -23,6 +23,7 @@ import {
   Cookies,
   Adfree,
   ContactUs,
+  ExternalLink,
 } from "./pages";
 import { ScrollTop } from "./components";
 
@@ -61,6 +62,7 @@ const Router = () => {
           <Route path="/admin/cookies" element={<Cookies />} />
           <Route path="/admin/ad-free" element={<Adfree />} />
           <Route path="/admin/contact-us" element={<ContactUs />} />
+          <Route path="/admin/external-links" element={<ExternalLink />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

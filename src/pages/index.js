@@ -23,6 +23,7 @@ import SentryBugMonitor from "./admin/sentry-bug-monitor";
 import Cookies from "./admin/cookies";
 import Adfree from "./admin/ad-free";
 import ContactUs from "./admin/contact-us";
+import ExternalLink from "./admin/external-links";
 
 export {
   Login,
@@ -45,4 +46,5 @@ export {
   Cookies,
   Adfree,
   ContactUs,
+  ExternalLink,
 };
