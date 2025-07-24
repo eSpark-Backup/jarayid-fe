@@ -28,6 +28,7 @@ import Dropdown from "./dropdown";
 import SearchBar from "./searchbar";
 import DateRangePicker from "./range-picker";
 import WordsInput from "./words-input";
+import CustomCheckbox from "./custome-checkbox";
 
 export {
   Button,
@@ -60,4 +61,5 @@ export {
   SearchBar,
   DateRangePicker,
   WordsInput,
+  CustomCheckbox,
 };

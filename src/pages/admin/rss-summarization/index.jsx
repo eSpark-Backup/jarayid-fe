@@ -1,7 +1,17 @@
-import { Box, Grid, Paper, Typography } from "@mui/material";
-import { CustomInput, WordsInput } from "../../../components";
+import {
+  Box,
+  FormControlLabel,
+  Grid,
+  InputAdornment,
+  MenuItem,
+  Paper,
+  Popover,
+  TextField,
+  Typography,
+} from "@mui/material";
+import { CustomCheckbox, CustomInput, WordsInput } from "../../../components";
 import { useEffect, useState } from "react";
-import { upArrow } from "../../../assets";
+import { dropdownArrow, upArrow } from "../../../assets";
 import { modelsContent, timeOptions, wordInputStyles } from "../../../constant";
 
 const sectionStyle = {
@@ -35,7 +45,53 @@ const RssSummarization = () => {
     timeOptions?.filter((item) => item?.id === selectedTime)
   );
 
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
+  const open = Boolean(anchorEl);
+
   const [treshold, setTreshold] = useState(50);
+
+  const [countries, setCOuntries] = useState({
+    Morocco: false,
+    Algeria: false,
+    Yemen: false,
+    Bahrain: false,
+    Lebanon: false,
+    Syria: false,
+    Sudan: false,
+    Tunisia: false,
+    Iraq: false,
+    Kuwait: false,
+    Oman: false,
+    Libya: false,
+    Qatar: false,
+    "Word News": false,
+    Tech: false,
+    Fashion: false,
+    Economy: false,
+    Sports: false,
+    Health: false,
+  });
+
+  const options = Object.keys(countries);
+  console.log(options);
+
+  const handleCheckboxChange = (event) => {
+    console.log(event);
+    const { name, checked: isChecked } = event.target;
+    setCOuntries((prev) => ({
+      ...prev,
+      [name]: isChecked,
+    }));
+  };
 
   const handleChange = (value, index) => {
     const newValues = [...wordsValue];
@@ -63,6 +119,84 @@ const RssSummarization = () => {
         RSS Summarization
       </Typography>
       <Paper variant="adminPaper" sx={{ mt: "20px" }}>
+        <Box sx={{ display: "flex", justifyContent: "flex-end", pb: "20px" }}>
+          <TextField
+            label="Category Type"
+            defaultValue="Select"
+            InputProps={{
+              endAdornment: (
+                <InputAdornment position="end">
+                  <img
+                    src={dropdownArrow}
+                    alt="dropdown"
+                    style={{ width: 20, height: 20 }}
+                  />
+                </InputAdornment>
+              ),
+              readOnly: true,
+            }}
+            sx={{
+              boxShadow: "0px 2px 2px 0px #0000000D",
+              width: "380.58px",
+              "& .MuiOutlinedInput-root": {
+                "& fieldset": {
+                  borderColor: "#D2D5DA",
+                },
+                "&:hover fieldset": {
+                  borderColor: "#D2D5DA",
+                },
+                "&.Mui-focused fieldset": {
+                  borderColor: "#D2D5DA",
+                },
+              },
+            }}
+            InputLabelProps={{ shrink: true }}
+            onClick={handleClick}
+          />
+          <Popover
+            open={open}
+            anchorEl={anchorEl}
+            onClose={handleClose}
+            anchorOrigin={{
+              vertical: "bottom",
+              horizontal: "left",
+            }}
+            PaperProps={{
+              elevation: 0,
+              sx: {
+                width: { xs: "100%", sm: "380.58px" },
+                maxHeight: "300px",
+                // overflowY: "auto",
+                px: "10px",
+                py: "10px",
+                mt: "10px",
+                border: "1px solid #D2D5DA !important",
+              },
+            }}
+          >
+            <Grid container rowSpacing={2} columnSpacing={1.5}>
+              {options.map((option) => (
+                <Grid size={3} key={option}>
+                  <FormControlLabel
+                    control={
+                      <CustomCheckbox
+                        name={option}
+                        checked={countries[option]}
+                        onChange={handleCheckboxChange}
+                      />
+                    }
+                    label={option}
+                    sx={{
+                      "& .MuiFormControlLabel-label": {
+                        fontSize: "12px", // or your desired size
+                      },
+                    }}
+                  />
+                </Grid>
+              ))}
+            </Grid>
+          </Popover>
+        </Box>
         <Grid container spacing={2}>
           <Grid size={{ xs: 12, lg: 3.5 }} sx={sectionStyle}>
             <Typography
