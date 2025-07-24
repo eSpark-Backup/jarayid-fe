@@ -93,6 +93,9 @@ import trendingDown from "./icons/trending-down.svg";
 import dropdownArrow from "./icons/dropdown-arrow.svg";
 import searchIcon from "./icons/search-icon.svg";
 import hamburger from "./icons/hamburger.svg";
+import upArrow from "./icons/upArrow.svg";
+import checkedIcon from "./icons/checkedBox.svg";
+import uncheckedIcon from "./icons/uchecked.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
@@ -205,4 +208,7 @@ export {
   dropdownArrow,
   searchIcon,
   hamburger,
+  upArrow,
+  checkedIcon,
+  uncheckedIcon,
 };

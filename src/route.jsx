@@ -24,6 +24,7 @@ import {
   Adfree,
   ContactUs,
   ExternalLink,
+  RssSummarization,
   Categories,
   ManualPosting,
   SeoManagement,
@@ -61,11 +62,15 @@ const Router = () => {
             element={<ArticlesManagement />}
           />
           <Route path="/admin/sponsor-account" element={<SponsorAccount />} />
-          <Route path="/admin/sentry-bug-monitor" element={<SentryBugMonitor />} />
+          <Route
+            path="/admin/sentry-bug-monitor"
+            element={<SentryBugMonitor />}
+          />
           <Route path="/admin/cookies" element={<Cookies />} />
           <Route path="/admin/ad-free" element={<Adfree />} />
           <Route path="/admin/contact-us" element={<ContactUs />} />
           <Route path="/admin/external-links" element={<ExternalLink />} />
+          <Route path="/admin/rss" element={<RssSummarization />} />
           <Route path="/admin/categories" element={<Categories />} />
           <Route path="/admin/manual-posting" element={<ManualPosting />} />
           <Route path="/admin/seo-management" element={<SeoManagement />} />
