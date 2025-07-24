@@ -9,7 +9,12 @@ import {
   TextField,
   Typography,
 } from "@mui/material";
-import { CustomCheckbox, CustomInput, WordsInput } from "../../../components";
+import {
+  CustomCheckbox,
+  CustomInput,
+  SubHeader,
+  WordsInput,
+} from "../../../components";
 import { useEffect, useState } from "react";
 import { dropdownArrow, upArrow } from "../../../assets";
 import { modelsContent, timeOptions, wordInputStyles } from "../../../constant";
@@ -113,11 +118,7 @@ const RssSummarization = () => {
 
   return (
     <>
-      <Typography
-        sx={{ fontSize: "30px", color: "#3F3F40", fontWeight: "600" }}
-      >
-        RSS Summarization
-      </Typography>
+      <SubHeader title={"RSS Summarization"} />
       <Paper variant="adminPaper" sx={{ mt: "20px" }}>
         <Box sx={{ display: "flex", justifyContent: "flex-end", pb: "20px" }}>
           <TextField
