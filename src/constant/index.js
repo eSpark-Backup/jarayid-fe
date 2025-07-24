@@ -979,3 +979,61 @@ export const sponsorAccountData = [
     phone: "908-99-889",
   },
 ];
+
+export const sentryBugMonitorData = [
+  {
+    id: "1",
+    type: "Harmful",
+    category: "exception",
+    description: "ZeroDevisonError: division by zero",
+    level: {
+      label: "Error",
+      variant: "red",
+    },
+    time: "17:09:27",
+  },
+  {
+    id: "2",
+    type: "Harmful",
+    category: "uvicorn.access",
+    description: "ZeroDevisonError: division by zero",
+    level: {
+      label: "Info",
+      variant: "green",
+    },
+    time: "17:09:27",
+  },
+  {
+    id: "3",
+    type: "Harmful",
+    category: "exception",
+    description: "ZeroDevisonError: division by zero",
+    level: {
+      label: "Error",
+      variant: "red",
+    },
+    time: "17:09:27",
+  },
+  {
+    id: "4",
+    type: "Harmful",
+    category: "uvicorn.access",
+    description: "ZeroDevisonError: division by zero",
+    level: {
+      label: "Info",
+      variant: "green",
+    },
+    time: "17:09:27",
+  },
+  {
+    id: "5",
+    type: "Harmful",
+    category: "uvicorn.access",
+    description: "ZeroDevisonError: division by zero",
+    level: {
+      label: "Error",
+      variant: "red",
+    },
+    time: "17:09:27",
+  },
+];
