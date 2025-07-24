@@ -25,6 +25,7 @@ import {
   ContactUs,
   ExternalLink,
   Categories,
+  ManualPosting,
 } from "./pages";
 import { ScrollTop } from "./components";
 
@@ -65,6 +66,7 @@ const Router = () => {
           <Route path="/admin/contact-us" element={<ContactUs />} />
           <Route path="/admin/external-links" element={<ExternalLink />} />
           <Route path="/admin/categories" element={<Categories />} />
+          <Route path="/admin/manual-posting" element={<ManualPosting />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
