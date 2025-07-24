@@ -30,7 +30,8 @@ import {
   TermsPrivacyScreen,
   Users,
   VerifyEmail,
-  YoutubeManagement
+  VisiualAd,
+  YoutubeManagement,
 } from "./pages";
 
 const Router = () => {
@@ -85,6 +86,7 @@ const Router = () => {
             path="/admin/youtube-management"
             element={<YoutubeManagement />}
           />
+          <Route path="/admin/visiual-ad-placement" element={<VisiualAd />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />
