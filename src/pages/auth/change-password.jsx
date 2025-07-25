@@ -4,16 +4,34 @@ import { CustomInput } from "../../components";
 import { changePasswordSchema } from "../../schemas";
 import { lock } from "../../assets";
 import { useTranslation } from "react-i18next";
+import { useQuery } from "../../utils";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
+import { useResetPasswordMutation } from "../../services/auth";
 
 const ChangePassword = () => {
+  const [resetPassword, { isLoading }] = useResetPasswordMutation();
+  const query = useQuery();
+  const navigate = useNavigate();
+  const token = query.get("token");
   const formik = useFormik({
     initialValues: {
       newPassword: "",
       confirmPassword: "",
     },
     validationSchema: changePasswordSchema,
-    onSubmit: (values) => {
-      console.log("Password change submitted:", values);
+    onSubmit: ({ newPassword }) => {
+      resetPassword({ token, newPassword }).then((res) => {
+        if (res?.data) {
+          toast.success(res?.data?.message);
+          navigate("/login");
+          return;
+        }
+        if (res?.error) {
+          toast.error(res?.error?.data?.message);
+          return;
+        }
+      });
     },
   });
 
@@ -53,6 +71,8 @@ const ChangePassword = () => {
       />
 
       <Button
+        loading={isLoading}
+        disabled={isLoading}
         type="submit"
         variant="contained"
         sx={{ mt: 2, fontSize: { xs: "11px", md: "16px" } }}

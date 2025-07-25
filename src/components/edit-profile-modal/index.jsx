@@ -1,8 +1,11 @@
+import { useSelector } from "react-redux";
 import { Avatar, Box, Button, Typography } from "@mui/material";
 import { close, picEdit, userAvatar } from "../../assets";
 import { useRef, useState } from "react";
 import { useFormik } from "formik";
 import CustomInput from "../input";
+import { useUpdateUserMutation } from "../../services/auth";
+import { toast } from "react-toastify";
 
 const sharedInputStyles = {
   mt: 0,
@@ -37,7 +40,10 @@ const sharedInputStyles = {
 };
 
 const EditProfileModal = ({ handleClose }) => {
-  const [avatar, setAvatar] = useState(userAvatar);
+  const [updateUser, { isLoading }] = useUpdateUserMutation();
+  const { user } = useSelector((state) => state.auth);
+  const [avatar, setAvatar] = useState(user.image);
+  const [file, setFile] = useState(null);
   const fileInputRef = useRef(null);
   const [editName, setEditName] = useState(false);
   const [editMobile, setEditMobile] = useState(false);
@@ -45,13 +51,38 @@ const EditProfileModal = ({ handleClose }) => {
 
   const formik = useFormik({
     initialValues: {
-      name: "",
-      mobile: "",
-      location: "",
+      name: user?.name || "",
+      mobile: user?.phoneNumber || "",
+      location: user?.country,
     },
+    enableReinitialize: true,
     onSubmit: (values) => {
-      console.log(values);
-      handleClose();
+      const objToSend = {
+        name: values?.name,
+        phoneNumber: values?.mobile,
+        country: values?.location,
+        image: file,
+      };
+      const cleanedObj = Object.fromEntries(
+        Object.entries(objToSend).filter(
+          ([_, v]) => v !== null && v !== undefined && v !== ""
+        )
+      );
+      const formData = new FormData();
+      for (const key in cleanedObj) {
+        formData.append(key, cleanedObj[key]);
+      }
+      updateUser(formData).then((res) => {
+        if (res?.data) {
+          toast.success(res?.data?.message);
+          handleClose();
+          return;
+        }
+        if (res?.error) {
+          toast.error(res?.error?.data?.message);
+          return;
+        }
+      });
     },
   });
 
@@ -63,6 +94,7 @@ const EditProfileModal = ({ handleClose }) => {
     const file = event.target.files[0];
     if (file) {
       const imageURL = URL.createObjectURL(file);
+      setFile(file);
       setAvatar(imageURL);
     }
   };
@@ -138,12 +170,12 @@ const EditProfileModal = ({ handleClose }) => {
             <Typography
               sx={{ color: "#1F2937", fontSize: "26.06px", fontWeight: "400" }}
             >
-              Your name
+              {user?.name || "Your name"}
             </Typography>
             <Typography
               sx={{ color: "#6B7280", fontSize: "22.06px", fontWeight: "400" }}
             >
-              yourname@gmail.com
+              {user?.email}
             </Typography>
           </Box>
         </Box>
@@ -231,7 +263,7 @@ const EditProfileModal = ({ handleClose }) => {
           <Typography
             sx={{ fontSize: { xs: "15px", md: "26px" }, color: "#4B5563" }}
           >
-            yourname@gmail.com
+            {user?.email}
           </Typography>
         </Box>
         <Box
@@ -328,14 +360,20 @@ const EditProfileModal = ({ handleClose }) => {
               }}
               onClick={() => setEditLocation(true)}
             >
-              {formik.values.location || "USA"}
+              {formik.values.location || "Add location"}
             </Typography>
           )}
         </Box>
       </Box>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Box sx={{ width: { xs: "100%", md: "234.19px" }, height: "58.64px" }}>
-          <Button variant="contained" disableRipple type="submit">
+          <Button
+            loading={isLoading}
+            disabled={isLoading}
+            variant="contained"
+            disableRipple
+            type="submit"
+          >
             Save Change
           </Button>
         </Box>
