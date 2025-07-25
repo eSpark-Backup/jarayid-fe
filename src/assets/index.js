@@ -64,7 +64,55 @@ import go from "./icons/go.svg";
 import modalClose from "./icons/modalClose.svg";
 import deleteInfo from "./icons/information-fill.svg";
 import qr from "./icons/qr.svg";
+import adminLogo from "./icons/admin-logo.svg";
+import adminDashboard from "./icons/admin-dashboard.svg";
+import adminArticle from "./icons/admin-article.svg";
+import adminCategory from "./icons/admin-category.svg";
+import adminSeo from "./icons/admin-category.svg";
+import adminRss from "./icons/admin-rss.svg";
+import adminSponsor from "./icons/admin-sponsor.svg";
+import adminYoutube from "./icons/admin-youtube.svg";
+import adminManual from "./icons/admin-manual.svg";
+import adminCookies from "./icons/admin-cookie.svg";
+import adminFaq from "./icons/admin-faq.svg";
+import adminUser from "./icons/admin-user.svg";
+import adminTos from "./icons/admin-tos.svg";
+import adminNotification from "./icons/admin-notification.svg";
+import adminBug from "./icons/admin-bug.svg";
+import adminOpenai from "./icons/admin-openai.svg";
+import adminAdfree from "./icons/admin-adfree.svg";
+import adminExternal from "./icons/admin-external.svg";
+import adminSocial from "./icons/admin-social.svg";
+import adminContact from "./icons/admin-contact.svg";
+import adminAdplacement from "./icons/admin-adplacement.svg";
+import adminLogout from "./icons/admin-logout.svg";
 import blueSearch from "./icons/blue-search.svg";
+import orderIcon from "./icons/Order-Icon.svg";
+import eyeRight from "./icons/eyeRight.svg";
+import fileTray from "./icons/file-tray.svg";
+import usersFilled from "./icons/usersFilled.svg";
+import check from "./icons/check.svg";
+import warning from "./icons/warning.svg";
+import adminTrash from "./icons/admin-trash.svg";
+import adminEdit from "./icons/admin-edit.svg";
+import sortArrow from "./icons/sort-arrow.svg";
+import allUsers from "./icons/total-users.svg";
+import activeUsers from "./icons/active-users.svg";
+import premiumUsers from "./icons/premium-users.svg";
+import guestVisit from "./icons/guest-visit.svg";
+import trendingUp from "./icons/trending-up.svg";
+import trendingDown from "./icons/trending-down.svg";
+import dropdownArrow from "./icons/dropdown-arrow.svg";
+import searchIcon from "./icons/search-icon.svg";
+import hamburger from "./icons/hamburger.svg";
+import upArrow from "./icons/upArrow.svg";
+import checkedIcon from "./icons/checkedBox.svg";
+import uncheckedIcon from "./icons/uchecked.svg";
+import allResources from "./icons/all-resources.svg";
+import healthyResources from "./icons/healthy-resources.svg";
+import warningIcon from "./icons/warning-icon.svg";
+import error from "./icons/error.svg";
+import refresh from "./icons/refresh.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
@@ -148,5 +196,53 @@ export {
   deleteInfo,
   modalClose,
   qr,
-  blueSearch
+  adminLogo,
+  adminLogout,
+  blueSearch,
+  orderIcon,
+  eyeRight,
+  fileTray,
+  usersFilled,
+  check,
+  warning,
+  adminTrash,
+  adminEdit,
+  sortArrow,
+  allUsers,
+  activeUsers,
+  premiumUsers,
+  guestVisit,
+  trendingUp,
+  trendingDown,
+  dropdownArrow,
+  searchIcon,
+  hamburger,
+  upArrow,
+  checkedIcon,
+  uncheckedIcon,
+  allResources,
+  healthyResources,
+  warningIcon,
+  error,
+  refresh,
+  adminDashboard,
+  adminArticle,
+  adminCategory,
+  adminSeo,
+  adminRss,
+  adminSponsor,
+  adminYoutube,
+  adminManual,
+  adminCookies,
+  adminFaq,
+  adminUser,
+  adminTos,
+  adminNotification,
+  adminBug,
+  adminOpenai,
+  adminAdfree,
+  adminExternal,
+  adminSocial,
+  adminContact,
+  adminAdplacement,
 };
