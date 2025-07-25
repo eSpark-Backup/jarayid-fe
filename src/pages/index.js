@@ -30,6 +30,8 @@ import ManualPosting from "./admin/manual-posting";
 import SeoManagement from "./admin/seo";
 import RssSourceManagement from "./admin/rss-source-management";
 import RssSource from "./admin/rss-source";
+import YoutubeManagement from "./admin/youtube-management";
+import VisiualAd from "./admin/visual-ad-placement";
 
 export {
   Login,
@@ -59,4 +61,6 @@ export {
   SeoManagement,
   RssSourceManagement,
   RssSource,
+  YoutubeManagement,
+  VisiualAd,
 };

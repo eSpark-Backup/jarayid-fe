@@ -22,6 +22,7 @@ const InfoCard = ({
       <Typography sx={{ fontSize: "15.21px", color: "#202224" }}>
         {title}
       </Typography>
+
       <Stack
         direction="row"
         alignItems="center"
@@ -36,31 +37,39 @@ const InfoCard = ({
         </Typography>
         {icon && <img src={icon} alt="icon" />}
       </Stack>
-      <Stack
-        direction="row"
-        alignItems="center"
-        justifyContent="flex-start"
-        gap={"7px"}
-        mt={"18px"}
-      >
-        <img src={trending === "up" ? trendingUp : trendingDown} alt="icon" />
-        <Typography
-          sx={{
-            fontSize: "15.21px",
-            color: trending === "up" ? "#00B69B" : "#F93C65",
-            fontWeight: 400,
-          }}
+
+      {trending && (
+        <Stack
+          direction="row"
+          alignItems="center"
+          justifyContent="flex-start"
+          gap={"7px"}
+          mt={"18px"}
         >
-          {perc}
-        </Typography>
-        {!hideTime && (
+          <img src={trending === "up" ? trendingUp : trendingDown} alt="icon" />
           <Typography
-            sx={{ fontSize: "15.21px", color: "#606060", fontWeight: 400 }}
+            sx={{
+              fontSize: "15.21px",
+              color: trending === "up" ? "#00B69B" : "#F93C65",
+              fontWeight: 400,
+            }}
           >
-            {`${trending === "up" ? "Up" : "Down"} from ${timeStamp}`}
+            {perc}
           </Typography>
-        )}
-      </Stack>
+
+          {!hideTime && timeStamp && (
+            <Typography
+              sx={{
+                fontSize: "15.21px",
+                color: "#606060",
+                fontWeight: 400,
+              }}
+            >
+              {`${trending === "up" ? "Up" : "Down"} from ${timeStamp}`}
+            </Typography>
+          )}
+        </Stack>
+      )}
     </Box>
   );
 };

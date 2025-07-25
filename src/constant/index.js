@@ -1536,3 +1536,34 @@ export const rssResourcesData = [
     status: { type: "warning", value: "Warning: Slow response time" },
   },
 ];
+
+export const infoCardData = [
+  {
+    title: "Total Revenue",
+    value: "$40,689",
+    trending: "up",
+    perc: "8.5%",
+    timeStamp: "yesterday",
+  },
+  {
+    title: "Total Impressions",
+    value: "40,689",
+    trending: "up",
+    perc: "8.5%",
+    timeStamp: "last month",
+  },
+  {
+    title: "Average CTR",
+    value: "1.8%",
+    trending: "up",
+    perc: "click through Rate",
+    timeStamp: "",
+  },
+  {
+    title: "Active Placements",
+    value: "05",
+    trending: "up",
+    perc: "06 total",
+    timeStamp: "",
+  },
+];
