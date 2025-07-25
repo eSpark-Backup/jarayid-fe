@@ -1,11 +1,19 @@
-import { useState } from "react";
-import { Outlet } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
 import { Box } from "@mui/material";
 import Sidebar from "./sidebar";
 import Header from "./header";
 
 const AdminLayout = () => {
   const [open, setOpen] = useState(false);
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user?.role !== "ADMIN") {
+      navigate(-1);
+    }
+  }, [user]);
   return (
     <Box
       sx={{

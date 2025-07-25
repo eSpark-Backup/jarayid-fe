@@ -1,16 +1,21 @@
-import { Outlet } from "react-router-dom";
-import { Footer, MobileFooter, MobileNavbar, Navbar } from "../../components";
+import { useEffect } from "react";
+import { Outlet, useNavigate } from "react-router-dom";
+import { useSelector } from "react-redux";
+import { Footer, MobileNavbar, Navbar } from "../../components";
 
 const PrivateLayout = () => {
-  // const handleChoice = (event) => {
-  //   console.log(event);
-  // };
+  const { user } = useSelector((state) => state.auth);
+  const navigate = useNavigate();
+  useEffect(() => {
+    if (user && user?.role === "ADMIN") {
+      navigate("/admin/dashboard");
+    }
+  }, [user]);
   return (
     <>
       <Navbar />
       <MobileNavbar />
       <Outlet />
-      {/* <MobileFooter handleClick={handleChoice} /> */}
       <Footer />
     </>
   );

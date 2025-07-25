@@ -32,7 +32,7 @@ const Signup = () => {
       signup(objToSend).then((res) => {
         if (res?.data) {
           if (res?.data?.data?.user?.role === "ADMIN") {
-            navigate("/dashboard");
+            navigate("/admin/dashboard");
           } else {
             navigate("/");
           }
