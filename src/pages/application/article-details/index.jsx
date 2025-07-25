@@ -6,6 +6,7 @@ import { SocialBox, CustomSwiper, NewsCard } from "../../../components";
 const SmartReaderCard = lazy(() => import("../../../components/smart-reader"));
 import { relativeNews } from "../../../constant";
 import { image1, image2, sideImage, newsIcon } from "../../../assets";
+import CommentBox from "../../../components/comments";
 
 const ArticleDetails = () => {
   const isTablet = useMediaQuery("(max-width:800px)");
@@ -128,10 +129,11 @@ const ArticleDetails = () => {
             mt={1}
             textAlign="center"
             fontSize="12px"
-            fontWeight={400}
+            fontWeight={600}
           >
             {t("share_news")}
           </Typography>
+          <CommentBox />
           <Box
             sx={{
               width: { xs: "100%", lg: "738px" },

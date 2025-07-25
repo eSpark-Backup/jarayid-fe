@@ -70,6 +70,7 @@ const Login = () => {
             cursor: "pointer",
             mt: 2,
             color: "#007BFF",
+            fontWeight: "500",
           }}
           onClick={() => navigate("/verify-email")}
         >

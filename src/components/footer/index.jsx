@@ -114,6 +114,7 @@ const Footer = () => {
               fontSize: { xs: "11px", lg: "20px" },
               color: "#FFFFFF",
               textAlign: language === "ar" ? "right" : "unset",
+              fontWeight: "700",
             }}
             component={"h2"}
           >
@@ -147,6 +148,7 @@ const Footer = () => {
                     fontSize: { xs: "8px", lg: "15px" },
                     color: "#FFFFFFB2",
                     textAlign: language === "ar" ? "right" : "unset",
+                    fontWeight: "600",
                   }}
                   component={"h3"}
                 >
@@ -157,6 +159,7 @@ const Footer = () => {
                     color: "#FFFFFF",
                     fontSize: { xs: "8px", lg: "14px" },
                     textAlign: language === "ar" ? "right" : "unset",
+                    fontWeight: "600",
                   }}
                   component={"p"}
                 >
@@ -185,6 +188,7 @@ const Footer = () => {
                     fontSize: { xs: "8px", lg: "15px" },
                     color: "#FFFFFFB2",
                     textAlign: language === "ar" ? "right" : "unset",
+                    fontWeight: "600",
                   }}
                   component={"h3"}
                 >
@@ -195,6 +199,7 @@ const Footer = () => {
                     color: "#FFFFFF",
                     fontSize: { xs: "8px", lg: "14px" },
                     textAlign: language === "ar" ? "right" : "unset",
+                    fontWeight: "600",
                   }}
                   component={"p"}
                 >
@@ -223,6 +228,7 @@ const Footer = () => {
                     fontSize: { xs: "8px", lg: "15px" },
                     color: "#FFFFFFB2",
                     textAlign: language === "ar" ? "right" : "unset",
+                    fontWeight: "600",
                   }}
                   component={"h3"}
                 >
@@ -233,6 +239,7 @@ const Footer = () => {
                     color: "#FFFFFF",
                     fontSize: { xs: "8px", lg: "14px" },
                     textAlign: language === "ar" ? "right" : "unset",
+                    fontWeight: "600",
                   }}
                   component={"p"}
                 >
@@ -248,6 +255,7 @@ const Footer = () => {
               fontSize: { xs: "11px", lg: "20px" },
               color: "#FFFFFF",
               textAlign: language === "ar" ? "right" : "unset",
+              fontWeight: "700",
             }}
             component={"h2"}
           >
@@ -278,7 +286,7 @@ const Footer = () => {
                 <Typography
                   sx={{
                     fontSize: { xs: "9px", lg: "16px" },
-                    fontWeight: "400",
+                    fontWeight: "600",
                     color: "#FFFFFF",
                     pr: language === "ar" ? "15px" : "0px",
                     pl: language === "ar" ? "0px" : "10px",

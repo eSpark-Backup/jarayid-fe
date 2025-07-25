@@ -96,7 +96,7 @@ const AuthLayout = () => {
             >
               <Typography
                 sx={{
-                  fontWeight: 600,
+                  fontWeight: 700,
                   mb: 1,
                   textAlign: language === "ar" ? "right" : "left",
                   fontSize: { xs: "22.5px", md: "32px" },

@@ -30,6 +30,9 @@ const FAQSection = () => {
         fontWeight="600"
         fontSize="35px"
         mb="22px"
+        sx={{
+          fontFamily: "'Poppins', 'sans-serif'",
+        }}
       >
         {title}
       </Typography>

@@ -141,25 +141,39 @@
   "article_details_button": " عرض المقال الأصلي",
   "share_news": "شارك الأخبار",
   "most_read": "الأكثر قراءة",
- "FAQ": {
-  "title": "الأسئلة الشائعة",
-  "items": [
-    {
-      "question": "هل لوريم إيبسوم مجرد نص وهمي في الطباعة؟",
-      "answer": "صناعة التنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير."
-    },
-    {
-      "question": "هل لوريم إيبسوم مجرد نص وهمي في الطباعة؟",
-      "answer": "صناعة التنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير."
-    },
-    {
-      "question": "هل لوريم إيبسوم مجرد نص وهمي في الطباعة؟",
-      "answer": "صناعة التنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير."
-    },
-    {
-      "question": "هل لوريم إيبسوم مجرد نص وهمي في الطباعة؟",
-      "answer": "صناعة التنضيد. لقد كان لوريم إيبسوم النص الوهمي القياسي في هذه الصناعة منذ القرن السادس عشر، عندما أخذت مطبعة غير معروفة مجموعة من الأحرف وعبثت بها لصنع كتاب نماذج. لقد صمد هذا النص ليس فقط لخمسة قرون، ولكن أيضًا خلال القفزة إلى التنضيد الإلكتروني، وظل دون تغيير إلى حد كبير."
-    }
+  "FAQ": {
+    "title": "Frequently Asked Questions",
+    "items": [
+      {
+        "question": "Lorem Ipsum is simply dummy text of the printing?",
+        "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+      },
+      {
+        "question": "Lorem Ipsum is simply dummy text of the printing?",
+        "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+      },
+      {
+        "question": "Lorem Ipsum is simply dummy text of the printing?",
+        "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+      },
+      {
+        "question": "Lorem Ipsum is simply dummy text of the printing?",
+        "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
+      }
+    ]
+  },
+  "Comments": {
+  "title": "التعليقات ({{count}})",
+  "placeholder": "اكتب تعليقًا...",
+  "post": "نشر",
+  "loginToComment": "🔒 الرجاء تسجيل الدخول لكتابة تعليق.",
+  "seeMore": "عرض المزيد",
+  "seeLess": "عرض أقل",
+  "justNow": "الآن",
+  "initial": [
+    "هذه مقالة مفيدة!",
+    "شكرًا للمشاركة!",
+    "أتطلع إلى المزيد من هذا المحتوى."
   ]
 }
 }

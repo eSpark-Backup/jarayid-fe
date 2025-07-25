@@ -161,5 +161,19 @@
         "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
       }
     ]
+  }, 
+  "Comments": {
+    "title": "Comments ({{count}})",
+    "placeholder": "Write a comment...",
+    "post": "Post",
+    "loginToComment": "Please log in to post a comment.",
+    "seeMore": "See more",
+    "seeLess": "See less",
+    "justNow": "Just now",
+    "initial": [
+      "This is an insightful article!",
+      "Thanks for sharing!",
+      "Looking forward to more content like this."
+    ]
   }
 }
