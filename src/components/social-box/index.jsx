@@ -12,11 +12,26 @@ import {
 } from "../../assets";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { useToggleReadLaterMutation } from "../../services/feed";
+import { toast } from "react-toastify";
+import { useNavigate } from "react-router-dom";
 
-const SocialBox = ({ newsCard, detailPage }) => {
+const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
+  const [toggleReadLater, { isLoading }] = useToggleReadLaterMutation();
+  const navigate = useNavigate();
 
+  const handleToggle = async () => {
+    try {
+      const response = await toggleReadLater({ id }).unwrap();
+      console.log("Toggled successfully:", response);
+      toast.success(response?.message);
+    } catch (error) {
+      console.error("Error toggling read later:", error);
+      toast.error("Something went wrong");
+    }
+  };
   return (
     <Box
       sx={{
@@ -49,6 +64,10 @@ const SocialBox = ({ newsCard, detailPage }) => {
                 width: { xs: "12px", sm: "15px", md: "21px" },
                 height: { xs: "12px", sm: "15px", md: "21px" },
               }}
+              onClick={(e) => {
+                navigate(`/${id}`);
+                e.stopPropagation();
+              }}
               loading="lazy"
             />
             <Box
@@ -60,6 +79,11 @@ const SocialBox = ({ newsCard, detailPage }) => {
                 height: { xs: "12px", sm: "15px", md: "21px" },
               }}
               loading="lazy"
+              onClick={(e) => {
+                if (isLoading) return;
+                e.stopPropagation();
+                handleToggle();
+              }}
             />
             <Box
               component="img"
@@ -71,36 +95,54 @@ const SocialBox = ({ newsCard, detailPage }) => {
               }}
               loading="lazy"
             />
-            <Box
-              component="img"
-              src={twitter}
-              alt="Twitter"
-              sx={{
-                width: { xs: "12px", sm: "15px", md: "21px" },
-                height: { xs: "12px", sm: "15px", md: "21px" },
-              }}
-              loading="lazy"
-            />
-            <Box
-              component="img"
-              src={facebook}
-              alt="Facebook"
-              sx={{
-                width: { xs: "12px", sm: "15px", md: "21px" },
-                height: { xs: "12px", sm: "15px", md: "21px" },
-              }}
-              loading="lazy"
-            />
-            <Box
-              component="img"
-              src={whatsapp}
-              alt="WhatsApp"
-              sx={{
-                width: { xs: "12px", sm: "15px", md: "21px" },
-                height: { xs: "12px", sm: "15px", md: "21px" },
-              }}
-              loading="lazy"
-            />
+            <a
+              href={shareLinks?.twitter}
+              target="_blank"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Box
+                component="img"
+                src={twitter}
+                alt="Twitter"
+                sx={{
+                  width: { xs: "12px", sm: "15px", md: "21px" },
+                  height: { xs: "12px", sm: "15px", md: "21px" },
+                }}
+                loading="lazy"
+              />
+            </a>
+            <a
+              target="_blank"
+              href={shareLinks?.facebook}
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Box
+                component="img"
+                src={facebook}
+                alt="Facebook"
+                sx={{
+                  width: { xs: "12px", sm: "15px", md: "21px" },
+                  height: { xs: "12px", sm: "15px", md: "21px" },
+                }}
+                loading="lazy"
+              />
+            </a>
+            <a
+              href={shareLinks?.whatsapp}
+              target="_blank"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <Box
+                component="img"
+                src={whatsapp}
+                alt="WhatsApp"
+                sx={{
+                  width: { xs: "12px", sm: "15px", md: "21px" },
+                  height: { xs: "12px", sm: "15px", md: "21px" },
+                }}
+                loading="lazy"
+              />
+            </a>
           </>
         ) : (
           <>

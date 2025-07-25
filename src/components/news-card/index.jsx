@@ -4,8 +4,13 @@ import SocialBox from "../social-box";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ar";
 
-const NewsCard = ({ image, source, id }) => {
+dayjs.extend(relativeTime);
+
+const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
   const language = useSelector((state) => state.language);
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -58,10 +63,15 @@ const NewsCard = ({ image, source, id }) => {
             textOverflow: "ellipsis",
             textAlign: "center",
             fontWeight: "600",
+            maxWidth: "100%",
+            display: "-webkit-box",
+            WebkitLineClamp: 1,
+            WebkitBoxOrient: "vertical",
           }}
           component={"h2"}
+          title={headline}
         >
-          {t("newsHeadline")}
+          {headline?.length > 25 ? `${headline.substring(0, 25)}...` : headline}
         </Typography>
       </Box>
 
@@ -93,6 +103,7 @@ const NewsCard = ({ image, source, id }) => {
         <Typography
           sx={{
             fontSize: { xs: "9px", md: "18px", lg: "22.49px" },
+            display: { xs: "block", sm: "none" },
             whiteSpace: {
               xs: "normal",
               md: "nowrap",
@@ -100,12 +111,14 @@ const NewsCard = ({ image, source, id }) => {
             overflow: "hidden",
             textOverflow: "ellipsis",
             textAlign: "center",
-            display: { xs: "block", sm: "none" },
             fontWeight: "600",
+            maxWidth: "100%",
+            WebkitLineClamp: 1, // Show only 1 line
+            WebkitBoxOrient: "vertical",
           }}
           component={"h2"}
         >
-          {t("newsHeadline")}
+          {headline?.length > 25 ? `${headline.substring(0, 25)}...` : headline}
         </Typography>
         <Typography
           sx={{
@@ -120,9 +133,11 @@ const NewsCard = ({ image, source, id }) => {
           }}
           component={"h5"}
         >
-          {t("date")}
+          {dayjs(date)
+            .locale(language === "ar" ? "ar" : "en")
+            .fromNow()}
         </Typography>
-        <SocialBox newsCard={true} />
+        <SocialBox newsCard={true} shareLinks={shareLinks} id={id} />
       </Box>
     </Paper>
   );

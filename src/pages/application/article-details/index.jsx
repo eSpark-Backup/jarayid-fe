@@ -1,4 +1,4 @@
-import { lazy } from "react";
+import { lazy, useEffect } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { Box, Button, Stack, Typography, useMediaQuery } from "@mui/material";
@@ -7,11 +7,19 @@ const SmartReaderCard = lazy(() => import("../../../components/smart-reader"));
 import { relativeNews } from "../../../constant";
 import { image1, image2, sideImage, newsIcon } from "../../../assets";
 import CommentBox from "../../../components/comments";
+import { useGetArticleByIdQuery } from "../../../services/feed";
+import { useLocation } from "react-router-dom";
 
 const ArticleDetails = () => {
   const isTablet = useMediaQuery("(max-width:800px)");
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
+  const { pathname } = useLocation();
+  const { data, isLoading } = useGetArticleByIdQuery(pathname);
+
+  useEffect(() => {
+    console.log(data);
+  }, [data]);
 
   return (
     <Stack direction="row" justifyContent="center" alignItems="flex-start">
