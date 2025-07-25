@@ -1567,3 +1567,35 @@ export const infoCardData = [
     timeStamp: "",
   },
 ];
+
+export const dropdowns = ["Main Page", "Article Page", "Category"];
+
+export const dropdownOptions = {
+  "Main Page": ["Left", "Right", "Feed"],
+  "Article Page": ["Left Side", "Right Side", "Bottom"],
+};
+
+export const categoryOptions = [
+  "Lebanon",
+  "UAE",
+  "Jordan",
+  "Palestine",
+  "Morocco",
+  "Algeria",
+  "Yemen",
+  "Bahrain",
+  "Iraq",
+  "Syria",
+  "Sudan",
+  "Tunisia",
+  "Tech",
+  "Libya",
+  "Kuwait",
+  "Oman",
+  "Fashion",
+  "Sports",
+  "Qatar",
+  "Word News",
+  "Health",
+  "All",
+];
