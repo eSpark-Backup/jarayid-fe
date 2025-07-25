@@ -2,6 +2,7 @@ import { Box, Stack, Typography } from "@mui/material";
 import { trendingDown, trendingUp } from "../../assets";
 
 const InfoCard = ({
+  adPlacement,
   icon,
   title,
   value,
@@ -14,7 +15,7 @@ const InfoCard = ({
     <Box
       sx={{
         background: "#FFF",
-        height: "159.86px",
+        height: adPlacement ? "126px" : "159.86px",
         borderRadius: "14px",
         padding: "15px",
       }}
@@ -44,7 +45,7 @@ const InfoCard = ({
           alignItems="center"
           justifyContent="flex-start"
           gap={"7px"}
-          mt={"18px"}
+          mt={adPlacement ? "12px" : "18px"}
         >
           <img src={trending === "up" ? trendingUp : trendingDown} alt="icon" />
           <Typography

@@ -65,14 +65,26 @@ import modalClose from "./icons/modalClose.svg";
 import deleteInfo from "./icons/information-fill.svg";
 import qr from "./icons/qr.svg";
 import adminLogo from "./icons/admin-logo.svg";
-import adminHome from "./icons/admin-home.svg";
-import adminContent from "./icons/admin-content.svg";
-import adminUser from "./icons/admin-user.svg";
+import adminDashboard from "./icons/admin-dashboard.svg";
+import adminArticle from "./icons/admin-article.svg";
+import adminCategory from "./icons/admin-category.svg";
+import adminSeo from "./icons/admin-category.svg";
 import adminRss from "./icons/admin-rss.svg";
+import adminSponsor from "./icons/admin-sponsor.svg";
+import adminYoutube from "./icons/admin-youtube.svg";
+import adminManual from "./icons/admin-manual.svg";
+import adminCookies from "./icons/admin-cookie.svg";
+import adminFaq from "./icons/admin-faq.svg";
+import adminUser from "./icons/admin-user.svg";
+import adminTos from "./icons/admin-tos.svg";
+import adminNotification from "./icons/admin-notification.svg";
+import adminBug from "./icons/admin-bug.svg";
+import adminOpenai from "./icons/admin-openai.svg";
+import adminAdfree from "./icons/admin-adfree.svg";
+import adminExternal from "./icons/admin-external.svg";
+import adminSocial from "./icons/admin-social.svg";
 import adminContact from "./icons/admin-contact.svg";
-import adminAnalystics from "./icons/admin-analytics.svg";
-import adminAd from "./icons/admin-ad.svg";
-import adminSettings from "./icons/admin-settings.svg";
+import adminAdplacement from "./icons/admin-adplacement.svg";
 import adminLogout from "./icons/admin-logout.svg";
 import blueSearch from "./icons/blue-search.svg";
 import orderIcon from "./icons/Order-Icon.svg";
@@ -185,14 +197,6 @@ export {
   modalClose,
   qr,
   adminLogo,
-  adminHome,
-  adminContent,
-  adminUser,
-  adminRss,
-  adminContact,
-  adminAnalystics,
-  adminAd,
-  adminSettings,
   adminLogout,
   blueSearch,
   orderIcon,
@@ -221,4 +225,24 @@ export {
   warningIcon,
   error,
   refresh,
+  adminDashboard,
+  adminArticle,
+  adminCategory,
+  adminSeo,
+  adminRss,
+  adminSponsor,
+  adminYoutube,
+  adminManual,
+  adminCookies,
+  adminFaq,
+  adminUser,
+  adminTos,
+  adminNotification,
+  adminBug,
+  adminOpenai,
+  adminAdfree,
+  adminExternal,
+  adminSocial,
+  adminContact,
+  adminAdplacement,
 };

@@ -32,6 +32,9 @@ import RssSourceManagement from "./admin/rss-source-management";
 import RssSource from "./admin/rss-source";
 import YoutubeManagement from "./admin/youtube-management";
 import VisiualAd from "./admin/visual-ad-placement";
+import Notification from "./admin/notification";
+import Openai from "./admin/openai";
+import Social from "./admin/social";
 
 export {
   Login,
@@ -63,4 +66,7 @@ export {
   RssSource,
   YoutubeManagement,
   VisiualAd,
+  Notification,
+  Openai,
+  Social,
 };

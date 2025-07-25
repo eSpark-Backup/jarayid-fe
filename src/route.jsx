@@ -32,6 +32,10 @@ import {
   VerifyEmail,
   VisiualAd,
   YoutubeManagement,
+  RssSource,
+  Notification,
+  Openai,
+  Social,
 } from "./pages";
 
 const Router = () => {
@@ -78,15 +82,18 @@ const Router = () => {
           <Route path="/admin/manual-posting" element={<ManualPosting />} />
           <Route path="/admin/seo-management" element={<SeoManagement />} />
           <Route
-            path="/admin/rss-source-management"
+            path="/admin/rss-source-management/detail"
             element={<RssSourceManagement />}
           />
-
+          <Route path="/admin/rss-source-management" element={<RssSource />} />
           <Route
             path="/admin/youtube-management"
             element={<YoutubeManagement />}
           />
           <Route path="/admin/visiual-ad-placement" element={<VisiualAd />} />
+          <Route path="/admin/notifications" element={<Notification />} />
+          <Route path="/admin/openai" element={<Openai />} />
+          <Route path="/admin/social" element={<Social />} />
         </Route>
 
         <Route path="*" element={<Navigate to="/" replace />} />

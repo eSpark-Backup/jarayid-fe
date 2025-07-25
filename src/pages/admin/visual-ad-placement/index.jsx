@@ -13,7 +13,7 @@ const VisiualAd = () => {
         Configure ad placements, manage Google Ads and AdMob integration, and
         monitor ad performance.
       </Typography>
-      <Grid container spacing={2} mt="25px">
+      <Grid sx={{ justifyContent: "space-between" }} container spacing={2} mt="25px">
         {infoCardData.map((card, index) => (
           <Grid
             item
@@ -21,9 +21,10 @@ const VisiualAd = () => {
             xs={12}
             sm={6}
             md={3}
-            sx={{ width: 300, height: 180 }}
+            sx={{ width: 233, height: 126 }}
           >
             <InfoCard
+              adPlacement={true}
               title={card.title}
               value={card.value}
               trending={card.trending}

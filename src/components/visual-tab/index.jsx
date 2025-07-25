@@ -80,6 +80,7 @@ const VisualTab = () => {
         borderRadius: "14px",
         height: { xs: "auto", md: "491px" },
         minWidth: 0,
+        marginTop: "23px",
       }}
     >
       <Tabs

@@ -22,6 +22,8 @@ const NavLink = ({ img, name, type, link, handleClick }) => {
     >
       <img
         style={{
+          width: "19px",
+          height: "19px",
           filter:
             path === link
               ? "brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(7492%) hue-rotate(184deg) brightness(95%) contrast(105%)"
@@ -33,7 +35,7 @@ const NavLink = ({ img, name, type, link, handleClick }) => {
       <Typography
         sx={{
           fontWeight: 700,
-          fontSize: type === "logout" ? "20px" : "18px",
+          fontSize: type === "logout" ? "20px" : "16px",
           color:
             path === link ? "#FFF" : type === "logout" ? "#DF1C41" : "#6E6F70",
         }}

@@ -24,7 +24,7 @@ const RssSource = () => {
         rightNode={
           <Box sx={{ width: "159px", height: "39px" }}>
             <Button
-              onClick={() => navigate(`/admin/rss-source-management`)}
+              onClick={() => navigate(`/admin/rss-source-management/detail`)}
               variant="gradient"
             >
               View More
