@@ -45,3 +45,21 @@ export const isObjectSame = (obj1, obj2) => {
 
   return true;
 };
+
+export const buildQueryParams = (params) => {
+  const query = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    const isEmpty =
+      value === undefined ||
+      value === null ||
+      (typeof value === "string" && value.trim() === "");
+
+    if (!isEmpty) {
+      query.append(key, value);
+    }
+  });
+
+  return query.toString();
+};
+

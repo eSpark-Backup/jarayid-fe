@@ -1,5 +1,8 @@
 import { useEffect, useState } from "react";
-import { Box, Chip, Stack, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
+import { toast } from "react-toastify";
+import dayjs from "dayjs";
+import { Box, Button, Chip, Stack, Typography } from "@mui/material";
 import {
   DynamicTable,
   SubHeader,
@@ -7,38 +10,89 @@ import {
   SearchBar,
 } from "../../../components";
 import { columns } from "../../../columns/articles";
-import { articlesData } from "../../../constant";
+import {
+  useDeleteArticleMutation,
+  useGetAllArticlesForAdminQuery,
+} from "../../../services/articles";
+import { translateText } from "../../../utils";
+import DeleteModal from "../../../components/delete-modal";
 
 const ArticlesManagement = () => {
-  const catOptions = [
-    { label: "Lebanon", value: "lebanon" },
-    { label: "Egypt", value: "egypt" },
-  ];
+  const { category } = useSelector((state) => state?.category);
+  const [catOptions, setCatOptions] = useState(
+    category?.map((cat) => {
+      return { label: cat?.name, value: cat?.id };
+    }) || []
+  );
+  useEffect(() => {
+    setCatOptions(
+      category?.map((cat) => {
+        return { label: cat?.name, value: cat?.id };
+      }) || []
+    );
+  }, [category]);
   const statusOptions = [
-    { label: "Published", value: "published" },
-    { label: "Unpublished", value: "unpublished" },
+    { label: "Published", value: true },
+    { label: "Unpublished", value: false },
   ];
   const [status, setStatus] = useState("");
   const [cat, setCat] = useState("");
   const [search, setSearch] = useState("");
-  const [data, setData] = useState(articlesData || []);
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [pageSize] = useState(11);
-  const [total] = useState(11);
+  const [pageSize] = useState(10);
+  const [total, setTotal] = useState(0);
+  const [openDelete, setOpenDelete] = useState(null);
   const [selectedRows, setSelectedRows] = useState([]);
   const isAllSelected = data.length > 0 && selectedRows.length === data.length;
 
-  const [sortBy, setSortBy] = useState("createAt");
-  const [sortDirection, setSortDirection] = useState("asc");
+  const [sortBy] = useState("date");
+  const [sortDirection, setSortDirection] = useState("desc");
 
-  const handleSort = (columnKey) => {
-    if (sortBy === columnKey) {
-      setSortDirection((prev) => (prev === "asc" ? "desc" : "asc"));
-    } else {
-      setSortBy(columnKey);
-      setSortDirection("asc");
+  const {
+    data: data2,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+    refetch,
+    isFetching,
+  } = useGetAllArticlesForAdminQuery(
+    {
+      page,
+      pageSize,
+      search: search ?? "",
+      sortBy: "createdAt",
+      sortOrder: sortDirection,
+      ...(status !== "" && { status }),
+      ...(cat !== "" && { cat }),
+    },
+    { refetchOnMountOrArgChange: true }
+  );
+
+  useEffect(() => {
+    if (isSuccess) {
+      setData(
+        data2?.data?.items?.map((item) => {
+          return {
+            ...item,
+            date: dayjs(item?.createdAt).format("DD/MM/YYYY"),
+            cat: item?.category?.name,
+            articleTitle: item?.title,
+            commentCount: item?._count?.comments,
+            status: {
+              label: item?.status ? "Published" : "Unpublished",
+              variant: "blue",
+            },
+          };
+        })
+      );
+      setTotal(data2?.data?.pagination?.total);
     }
-  };
+    if (isError) {
+      toast.error(error?.data?.message);
+    }
+  }, [isSuccess, isError, data2]);
 
   const handleSelectAll = () => {
     setSelectedRows(isAllSelected ? [] : data.map((item) => item.id));
@@ -54,43 +108,30 @@ const ArticlesManagement = () => {
     setPage(page);
   };
 
-  const handleDelete = (item) => {
-    console.log(item);
+  const [deleteArticle, { isLoading: deleteLoading }] =
+    useDeleteArticleMutation();
+
+  const handleDeleteFinal = () => {
+    deleteArticle({ articleIds: openDelete }).then((res) => {
+      if (res?.error) {
+        toast.error(res?.error?.data?.message);
+        return;
+      }
+      if (res?.data) {
+        setOpenDelete(false);
+        refetch();
+        return;
+      }
+    });
   };
 
-  useEffect(() => {
-    const filtered = articlesData.filter((item) =>
-      Object.values(item).some((val) =>
-        String(val).toLowerCase().includes(search.toLowerCase())
-      )
-    );
-    setData(filtered);
-    setPage(1);
-  }, [search]);
+  const handleDelete = (item) => {
+    setOpenDelete([item?.id]);
+  };
 
-  useEffect(() => {
-    let sorted = [...articlesData];
-
-    if (sortBy) {
-      sorted.sort((a, b) => {
-        const aValue = a[sortBy];
-        const bValue = b[sortBy];
-
-        if (aValue < bValue) return sortDirection === "desc" ? -1 : 1;
-        if (aValue > bValue) return sortDirection === "asc" ? 1 : -1;
-        return 0;
-      });
-    }
-
-    const filtered = sorted.filter((item) =>
-      Object.values(item).some((val) =>
-        String(val).toLowerCase().includes(search.toLowerCase())
-      )
-    );
-
-    setData(filtered);
-    setPage(1);
-  }, [search, sortBy, sortDirection]);
+  const deleteSelected = () => {
+    setOpenDelete(selectedRows);
+  };
 
   return (
     <>
@@ -140,30 +181,44 @@ const ArticlesManagement = () => {
         <Stack
           direction="row"
           alignItems="center"
-          justifyContent="flex-start"
+          justifyContent="space-between"
           gap="8px"
         >
-          <Typography
-            sx={{ fontSize: "18px", fontWeight: 600, color: "#101828" }}
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="flex-start"
+            gap="8px"
           >
-            Articles
-          </Typography>
-          <Chip
-            sx={{
-              padding: "6px",
-              background: "#D7E4F2",
-              border: 0,
-              width: "max-content",
-              ".MuiChip-label": { fontWeight: 700 },
-            }}
-            label="25002"
-            variant="blue"
-          />
+            <Typography
+              sx={{ fontSize: "18px", fontWeight: 600, color: "#101828" }}
+            >
+              Articles
+            </Typography>
+            <Chip
+              sx={{
+                padding: "6px",
+                background: "#D7E4F2",
+                border: 0,
+                width: "max-content",
+                ".MuiChip-label": { fontWeight: 700 },
+              }}
+              label="25002"
+              variant="blue"
+            />
+          </Stack>
+          {selectedRows?.length > 0 && (
+            <Box sx={{ width: "max-content", height: "39px" }}>
+              <Button onClick={deleteSelected} variant="gradient">
+                Delete Selected
+              </Button>
+            </Box>
+          )}
         </Stack>
         <DynamicTable
           data={data}
           columns={columns()}
-          isLoading={false}
+          isLoading={isLoading || isFetching}
           handleDelete={handleDelete}
           page={page}
           pageSize={pageSize}
@@ -175,12 +230,24 @@ const ArticlesManagement = () => {
           onSelectRow={handleSelectRow}
           onSelectAll={handleSelectAll}
           isAllSelected={isAllSelected}
-          onSort={handleSort}
+          onSort={() =>
+            setSortDirection(sortDirection === "asc" ? "desc" : "asc")
+          }
           sortBy={sortBy}
           sortDirection={sortDirection}
           hideSwitch={true}
         />
       </Box>
+      <DeleteModal
+        open={openDelete}
+        handleClose={() => setOpenDelete(false)}
+        handleCancel={() => setOpenDelete(false)}
+        handleConfirm={handleDeleteFinal}
+        heading="Are you sure you want to Delete ?"
+        desc="Deleting is permanent and your Article will automatically be deleted after 30 days if you do not log in again."
+        confirmText="Delete"
+        loading={deleteLoading}
+      />
     </>
   );
 };
