@@ -1,12 +1,12 @@
-import React, { useState } from "react";
-import { Box, Stack, TextField, ClickAwayListener } from "@mui/material";
+import { Box, ClickAwayListener, Stack, TextField } from "@mui/material";
+import { useState } from "react";
 import AddIcon from "../../../assets/icons/add-icon.svg";
-import CheckOn from "../../../assets/icons/check-on.svg";
-import CheckOff from "../../../assets/icons/check-off.svg";
-import { categoryOptions } from "../../../constant";
-import { socialOptions } from "../../../constant";
 import DownArrow from "../../../assets/icons/arrow-down.svg";
 import UpArrow from "../../../assets/icons/arrow-up.svg";
+import CheckOff from "../../../assets/icons/check-off.svg";
+import CheckOn from "../../../assets/icons/check-on.svg";
+import CategoryDropdown from "../../../components/category-tab";
+import { socialOptions } from "../../../constant";
 
 const textFieldBaseStyle = {
   height: "42px",
@@ -85,10 +85,13 @@ export default function SocialMediaForm() {
             variant="standard"
             InputProps={{
               disableUnderline: true,
-              sx: { ...textFieldBaseStyle, width: "430px" },
+              sx: {
+                ...textFieldBaseStyle,
+                width: "430px",
+                backgroundColor: "#EAF4FF",
+              },
             }}
           />
-
           <Box sx={{ position: "relative", width: "145px" }}>
             <Box
               sx={{
@@ -113,7 +116,7 @@ export default function SocialMediaForm() {
                 src={showSocialDropdown ? UpArrow : DownArrow}
                 alt="toggle"
                 style={{
-                  width: "14px", 
+                  width: "14px",
                   height: "14px",
                   objectFit: "contain",
                 }}
@@ -172,90 +175,12 @@ export default function SocialMediaForm() {
           </Box>
 
           <Box sx={{ position: "relative", width: "414px" }}>
-            <Box
-              sx={{
-                width: "100%",
-                height: "42px",
-                border: "1px solid #D1E5FA",
-                borderRadius: "5px",
-                backgroundColor: "#EAF4FF",
-                fontWeight: "600",
-                display: "flex",
-                alignItems: "center",
-                justifyContent: "center",
-                gap: "6px",
-                px: 1,
-                cursor: "pointer",
-                color: category ? "#000" : "#6C727F",
-              }}
-              onClick={() => setShowCategoryDropdown((prev) => !prev)}
-            >
-              <span>{category || "Category"}</span>
-              <img
-                src={showCategoryDropdown ? UpArrow : DownArrow}
-                alt="toggle"
-                style={{
-                  width: "14px",
-                  height: "14px",
-                  objectFit: "contain",
-                }}
-              />
-            </Box>
-
-            {showCategoryDropdown && (
-              <ClickAwayListener
-                onClickAway={() => setShowCategoryDropdown(false)}
-              >
-                <Box
-                  sx={{
-                    position: "absolute",
-                    zIndex: 20,
-                    top: "100%",
-                    left: 0,
-                    backgroundColor: "#EAF4FF",
-                    border: "1px solid #D1E5FA",
-                    borderRadius: "5px",
-                    p: 2,
-                    mt: "5px",
-                    width: "100%",
-                    display: "grid",
-                    gap: "15px",
-                    gridTemplateColumns: {
-                      xs: "repeat(1, 1fr)",
-                      sm: "repeat(2, 1fr)",
-                      md: "repeat(3, 1fr)",
-                      lg: "repeat(4, 1fr)",
-                    },
-                  }}
-                >
-                  {categoryOptions.map((option) => (
-                    <Box
-                      key={option}
-                      sx={{
-                        display: "flex",
-                        alignItems: "center",
-                        fontSize: "15px",
-                        fontWeight: 600,
-                        color: "#6C727F",
-                      }}
-                    >
-                      <img
-                        src={selectedCategories[option] ? CheckOn : CheckOff}
-                        alt="checkbox"
-                        style={{
-                          cursor: "pointer",
-                          width: 16,
-                          height: 16,
-                          marginRight: 8,
-                        }}
-                        onClick={() => toggleCategory(option)}
-                      />
-                      {option}
-                    </Box>
-                  ))}
-                </Box>
-              </ClickAwayListener>
-            )}
+            <CategoryDropdown
+              selectedCategories={selectedCategories}
+              setSelectedCategories={setSelectedCategories}
+              selectedText={category}
+              setSelectedText={setCategory}
+            />
           </Box>
 
           <img
@@ -270,33 +195,42 @@ export default function SocialMediaForm() {
       <Box mr="-24px" width="100%">
         {items.map((item, index) => (
           <Stack key={index} direction="row" gap="5px" mt={1}>
-            <TextField
-              variant="standard"
-              value={item.link}
-              disabled
-              InputProps={{
-                disableUnderline: true,
-                sx: { ...textFieldBaseStyle, width: "430px" },
-              }}
-            />
-            <TextField
-              variant="standard"
-              value={item.social}
-              disabled
-              InputProps={{
-                disableUnderline: true,
-                sx: { ...textFieldBaseStyle, width: "145px" },
-              }}
-            />
-            <TextField
-              variant="standard"
-              value={item.category}
-              disabled
-              InputProps={{
-                disableUnderline: true,
-                sx: { ...textFieldBaseStyle, width: "414px" },
-              }}
-            />
+            <Box mr="-24px" width="100%">
+              {items.map((item, index) => (
+                <Stack key={index} direction="row" gap="5px" mt={1}>
+                  <Box
+                    sx={{
+                      ...textFieldBaseStyle,
+                      width: "430px",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {item.link}
+                  </Box>
+                  <Box
+                    sx={{
+                      ...textFieldBaseStyle,
+                      width: "145px",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {item.social}
+                  </Box>
+                  <Box
+                    sx={{
+                      ...textFieldBaseStyle,
+                      width: "414px",
+                      display: "flex",
+                      alignItems: "center",
+                    }}
+                  >
+                    {item.category}
+                  </Box>
+                </Stack>
+              ))}
+            </Box>
           </Stack>
         ))}
       </Box>
