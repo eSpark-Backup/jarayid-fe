@@ -95,10 +95,31 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
               xs: "center",
               md: language === "ar" ? "left" : "right",
             },
+            whiteSpace: {
+              xs: "normal",
+              md: "nowrap",
+            },
+            overflow: "hidden",
+            textOverflow: "ellipsis",
+            maxWidth: "100%",
+            display: "-webkit-box",
+            WebkitLineClamp: 1,
+            WebkitBoxOrient: "vertical",
           }}
+          title={source}
           component={"h3"}
         >
-          Source: {source}
+          {language === "ar" ? (
+            <>
+              {source?.length > 30 ? `${source.substring(0, 30)}...` : source}
+              {":" + t("Source")}
+            </>
+          ) : (
+            <>
+              {t("Source") + ": "}
+              {source?.length > 30 ? `${source.substring(0, 30)}...` : source}
+            </>
+          )}
         </Typography>
         <Typography
           sx={{

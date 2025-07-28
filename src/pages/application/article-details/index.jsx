@@ -1,25 +1,145 @@
-import { lazy, useEffect } from "react";
+import { lazy, useEffect, useState } from "react";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Box, Button, Stack, Typography, useMediaQuery } from "@mui/material";
+import {
+  Box,
+  Button,
+  Skeleton,
+  Stack,
+  Typography,
+  useMediaQuery,
+} from "@mui/material";
 import { SocialBox, CustomSwiper, NewsCard } from "../../../components";
 const SmartReaderCard = lazy(() => import("../../../components/smart-reader"));
 import { relativeNews } from "../../../constant";
 import { image1, image2, sideImage, newsIcon } from "../../../assets";
 import CommentBox from "../../../components/comments";
-import { useGetArticleByIdQuery } from "../../../services/feed";
+import {
+  useGetArticleByIdQuery,
+  useGetCommentsQuery,
+  useTrendingArticlesQuery,
+} from "../../../services/feed";
 import { useLocation } from "react-router-dom";
+import { translateText } from "../../../utils";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import "dayjs/locale/ar";
+import localizedFormat from "dayjs/plugin/localizedFormat";
+
+dayjs.extend(relativeTime);
+dayjs.extend(localizedFormat);
 
 const ArticleDetails = () => {
   const isTablet = useMediaQuery("(max-width:800px)");
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
-  const { pathname } = useLocation();
-  const { data, isLoading } = useGetArticleByIdQuery(pathname);
+  const location = useLocation();
+  const { pathname, state } = location;
+  const [articleData, setArticleData] = useState({});
+  const [tredningData, setTrendingData] = useState([]);
+  const [comments, setComments] = useState([]);
+  const [totalComments, setTotalComments] = useState(0);
+  const [commentsPage, setCommentsPage] = useState(1);
+  const { data, isLoading } = useGetArticleByIdQuery(pathname, {
+    skip: !pathname,
+  });
 
   useEffect(() => {
-    console.log(data);
-  }, [data]);
+    if (state?.scrollToOffset) {
+      window.scrollTo({
+        top: 100,
+        behavior: "smooth",
+      });
+    }
+  }, []);
+
+  const hasMorePages = commentsPage < Math.ceil(totalComments / 3);
+
+  const { data: trendingArticles, isLoading: tredningLoading } =
+    useTrendingArticlesQuery({ page: 1, limit: 10 });
+
+  const { data: commentsData, isLoading: commentsLoading } =
+    useGetCommentsQuery(
+      { page: commentsPage, limit: 3, articleId: pathname },
+      { skip: !pathname }
+    );
+
+  useEffect(() => {
+    const data = commentsData?.data?.items?.map((item) => ({
+      id: item?.id,
+      name: item?.user?.name || "User",
+      avatar: item?.user?.image,
+      text: item?.content,
+      date: dayjs(item?.createdAt).fromNow(),
+    }));
+    setComments(data);
+    setTotalComments(commentsData?.data?.meta?.totalItems);
+  }, [commentsData]);
+
+  useEffect(() => {
+    const updateArticleData = async () => {
+      if (data) {
+        const article = data?.data?.article;
+        let translatedTitle = article?.title;
+
+        const isTitleArabic = /[\u0600-\u06FF]/.test(article?.title); // Detect Arabic characters
+
+        if (article?.title) {
+          if (language === "ar" && !isTitleArabic) {
+            translatedTitle = await translateText(article.title, "en", "ar");
+          } else if (language === "en" && isTitleArabic) {
+            translatedTitle = await translateText(article.title, "ar", "en");
+          }
+        }
+
+        setArticleData({
+          ...articleData,
+          title: translatedTitle,
+          summaryArabic: article?.summaryArabic,
+          summaryEnglish: article?.summaryEnglish,
+          slides: [article?.image],
+          time: article?.publishedAt,
+          shareLinks: article?.shareLinks,
+        });
+      }
+    };
+
+    updateArticleData();
+  }, [data, language]);
+
+  useEffect(() => {
+    const translateHeadlines = async () => {
+      if (trendingArticles) {
+        const translatedArticles = await Promise.all(
+          trendingArticles?.data?.articles?.map(async (item) => {
+            let headline = item?.title;
+
+            const isArabic = /[\u0600-\u06FF]/.test(headline);
+
+            if (language === "ar" && !isArabic) {
+              headline = await translateText(item?.title, "en", "ar");
+            }
+
+            if (language === "en" && isArabic) {
+              headline = await translateText(item?.title, "ar", "en");
+            }
+
+            return {
+              id: item?.id,
+              image: item?.image,
+              headline,
+              source: item?.source,
+              date: item?.createdAt,
+              shareLinks: item?.shareLinks,
+            };
+          })
+        );
+        setTrendingData(translatedArticles);
+      }
+    };
+
+    translateHeadlines();
+  }, [trendingArticles, language]);
 
   return (
     <Stack direction="row" justifyContent="center" alignItems="flex-start">
@@ -54,33 +174,55 @@ const ArticleDetails = () => {
               src={newsIcon}
               alt="news-logo"
             />
+            {isLoading ? (
+              <Skeleton variant="text" />
+            ) : (
+              <Typography
+                sx={{
+                  fontSize: { xs: "10px", sm: "16px" },
+                  color: "#3835357A",
+                  ml: "40px",
+                  mt: "-10px",
+                }}
+              >
+                Time:{" "}
+                {dayjs(articleData?.time)
+                  .locale(language === "ar" ? "ar" : "en")
+                  .format("LT")}
+              </Typography>
+            )}
+          </Stack>
+          {isLoading ? (
+            <Skeleton variant="text" />
+          ) : (
             <Typography
+              mt={2}
+              padding="0px 16px"
+              lineHeight="114.99999999999999%"
+              textAlign="center"
+              fontWeight={800}
+              fontFamily="Mondia"
               sx={{
-                fontSize: { xs: "10px", sm: "16px" },
-                color: "#3835357A",
-                ml: "40px",
-                mt: "-10px",
+                letterSpacing: "0.7px",
+                fontSize: { xs: "18px", sm: "35px" },
               }}
             >
-              Time: 10:00 pm
+              {articleData?.title}
             </Typography>
-          </Stack>
-          <Typography
-            mt={2}
-            padding="0px 16px"
-            lineHeight="114.99999999999999%"
-            textAlign="center"
-            fontWeight={800}
-            fontFamily="Mondia"
-            sx={{
-              letterSpacing: "0.7px",
-              fontSize: { xs: "18px", sm: "35px" },
-            }}
-          >
-            {t("article_detail_title")}
-          </Typography>
+          )}
         </Box>
-        <CustomSwiper />
+        {isLoading ? (
+          <Skeleton
+            variant="rectangular"
+            sx={{
+              width: { xs: "80%", md: "400px", lg: "100%" },
+              height: "300px",
+              mb: "20px",
+            }}
+          />
+        ) : (
+          <CustomSwiper slides={articleData?.slides} />
+        )}
         <Box
           sx={{
             width: { xs: "100%", md: "500px", lg: "738px" },
@@ -90,22 +232,20 @@ const ArticleDetails = () => {
           }}
         >
           <Box sx={{ padding: "0px 8px" }}>
-            <Typography
-              mt={2}
-              textAlign="center"
-              fontWeight={400}
-              sx={{ fontSize: { xs: "12px", sm: "20px" } }}
-            >
-              {t("para1")}
-            </Typography>
-            <Typography
-              mt={2}
-              textAlign="center"
-              fontWeight={400}
-              sx={{ fontSize: { xs: "12px", sm: "20px" } }}
-            >
-              {t("para2")}
-            </Typography>
+            {isLoading ? (
+              <Skeleton variant="text" />
+            ) : (
+              <Typography
+                mt={2}
+                textAlign="center"
+                fontWeight={400}
+                sx={{ fontSize: { xs: "12px", sm: "20px" } }}
+              >
+                {language === "ar"
+                  ? articleData?.summaryArabic
+                  : articleData?.summaryEnglish}
+              </Typography>
+            )}
             <Typography
               textAlign="center"
               mt={4}
@@ -131,7 +271,7 @@ const ArticleDetails = () => {
           >
             {t("article_details_button")}
           </Button>
-          <SocialBox detailPage />
+          <SocialBox detailPage shareLinks={articleData?.shareLinks} />
           <Typography
             sx={{ cursor: "pointer" }}
             mt={1}
@@ -141,7 +281,28 @@ const ArticleDetails = () => {
           >
             {t("share_news")}
           </Typography>
-          <CommentBox />
+          {commentsLoading ? (
+            <Box sx={{ display: "flex", gap: 2, mb: 2, width: "100%" }}>
+              <Skeleton variant="circular" width={40} height={40} />
+              <Box sx={{ flex: 1 }}>
+                <Skeleton variant="text" width="20%" height={20} />{" "}
+                {/* Username */}
+                <Skeleton variant="text" width="15%" height={16} />{" "}
+                {/* Timestamp */}
+                <Skeleton variant="text" width="90%" height={20} />{" "}
+                {/* First line of comment */}
+                <Skeleton variant="text" width="80%" height={20} />{" "}
+                {/* Second line */}
+              </Box>
+            </Box>
+          ) : (
+            <CommentBox
+              data={comments}
+              total={totalComments}
+              hasMore={hasMorePages}
+              handleMore={() => setCommentsPage(commentsPage + 1)}
+            />
+          )}
           <Box
             sx={{
               width: { xs: "100%", lg: "738px" },
@@ -178,16 +339,37 @@ const ArticleDetails = () => {
             gap: "20px",
           }}
         >
-          {relativeNews?.map((item, index) => (
-            <NewsCard
-              key={index}
-              image={item?.image}
-              headline={item?.headline}
-              date={item?.date}
-              source={item?.source}
-              id={item?.id}
-            />
-          ))}
+          {tredningLoading
+            ? [...Array(5)].map((_, index) => (
+                <Skeleton
+                  key={`skeleton-${index}`}
+                  variant="rounded"
+                  width="90%"
+                  height={143}
+                  sx={{ borderRadius: "9px" }}
+                />
+              ))
+            : tredningData?.map((item, index) =>
+                item?.ad ? (
+                  <Box
+                    component={"img"}
+                    src={item?.ad}
+                    alt="Ad"
+                    loading="lazy"
+                    key={index}
+                  />
+                ) : (
+                  <NewsCard
+                    key={index}
+                    image={item?.image}
+                    headline={item?.headline}
+                    date={item?.date}
+                    source={item?.source}
+                    id={item?.id}
+                    shareLinks={item?.shareLinks}
+                  />
+                )
+              )}
         </Box>
       </Stack>
       {!isTablet && (
@@ -219,16 +401,23 @@ const ArticleDetails = () => {
                 src={newsIcon}
                 alt="news-logo"
               />
-              <Typography
-                sx={{
-                  fontSize: { xs: "10px", sm: "16px" },
-                  color: "#3835357A",
-                  ml: "40px",
-                  mt: "-10px",
-                }}
-              >
-                Time: 10:00 pm
-              </Typography>
+              {isLoading ? (
+                <Skeleton variant="text" />
+              ) : (
+                <Typography
+                  sx={{
+                    fontSize: { xs: "10px", sm: "16px" },
+                    color: "#3835357A",
+                    ml: "40px",
+                    mt: "-10px",
+                  }}
+                >
+                  Time:{" "}
+                  {dayjs(articleData?.time)
+                    .locale(language === "ar" ? "ar" : "en")
+                    .format("LT")}
+                </Typography>
+              )}
             </Stack>
             <Box
               sx={{ marginTop: "25px", width: { xs: "153px", lg: "215px" } }}

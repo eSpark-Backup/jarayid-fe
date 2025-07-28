@@ -1,4 +1,4 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Skeleton, Typography } from "@mui/material";
 import {
   comment,
   facebook,
@@ -15,12 +15,19 @@ import { useSelector } from "react-redux";
 import { useToggleReadLaterMutation } from "../../services/feed";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
+import dayjs from "dayjs";
+import "dayjs/locale/ar";
+import relativeTime from "dayjs/plugin/relativeTime";
+
+dayjs.extend(relativeTime);
 
 const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
   const [toggleReadLater, { isLoading }] = useToggleReadLaterMutation();
   const navigate = useNavigate();
+
+  const toArabicDigits = (str) => str.replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
 
   const handleToggle = async () => {
     try {
@@ -70,21 +77,32 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               }}
               loading="lazy"
             />
-            <Box
-              component="img"
-              src={save}
-              alt="Save"
-              sx={{
-                width: { xs: "12px", sm: "15px", md: "21px" },
-                height: { xs: "12px", sm: "15px", md: "21px" },
-              }}
-              loading="lazy"
-              onClick={(e) => {
-                if (isLoading) return;
-                e.stopPropagation();
-                handleToggle();
-              }}
-            />
+            {isLoading ? (
+              <Skeleton
+                variant="rectangular"
+                sx={{
+                  borderRadius: "50%",
+                  height: { xs: "12px", sm: "15px", md: "21px" },
+                  width: { xs: "12px", sm: "15px", md: "21px" },
+                }}
+              />
+            ) : (
+              <Box
+                component="img"
+                src={save}
+                alt="Save"
+                sx={{
+                  width: { xs: "12px", sm: "15px", md: "21px" },
+                  height: { xs: "12px", sm: "15px", md: "21px" },
+                }}
+                loading="lazy"
+                onClick={(e) => {
+                  if (isLoading) return;
+                  e.stopPropagation();
+                  handleToggle();
+                }}
+              />
+            )}
             <Box
               component="img"
               src={like}
@@ -146,13 +164,25 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
           </>
         ) : (
           <>
-            <Box
-              component={"img"}
-              src={facebook}
-              alt={"Facebook"}
-              loading="lazy"
-              sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
-            />
+            {shareLinks?.facebook ? (
+              <a href={shareLinks?.facebook}>
+                <Box
+                  component={"img"}
+                  src={facebook}
+                  alt={"Facebook"}
+                  loading="lazy"
+                  sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+                />
+              </a>
+            ) : (
+              <Box
+                component={"img"}
+                src={facebook}
+                alt={"Facebook"}
+                loading="lazy"
+                sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+              />
+            )}
             <Box
               component={"img"}
               src={instagram}
@@ -167,20 +197,44 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               loading="lazy"
               sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
             />
-            <Box
-              component={"img"}
-              src={twitter}
-              alt={"Twitter"}
-              loading="lazy"
-              sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
-            />
-            <Box
-              component={"img"}
-              src={whatsapp}
-              alt={"Whatsapp"}
-              loading="lazy"
-              sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
-            />
+            {shareLinks?.twitter ? (
+              <a href={shareLinks?.twitter}>
+                <Box
+                  component={"img"}
+                  src={twitter}
+                  alt={"Twitter"}
+                  loading="lazy"
+                  sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+                />
+              </a>
+            ) : (
+              <Box
+                component={"img"}
+                src={twitter}
+                alt={"Twitter"}
+                loading="lazy"
+                sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+              />
+            )}
+            {shareLinks?.whatsapp ? (
+              <a href={shareLinks?.whatsapp}>
+                <Box
+                  component={"img"}
+                  src={whatsapp}
+                  alt={"Whatsapp"}
+                  loading="lazy"
+                  sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+                />
+              </a>
+            ) : (
+              <Box
+                component={"img"}
+                src={whatsapp}
+                alt={"Whatsapp"}
+                loading="lazy"
+                sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+              />
+            )}
           </>
         )}
       </Box>
@@ -219,7 +273,11 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
             }}
             component={"h4"}
           >
-            {t("date")}
+            {language === "ar"
+              ? `التاريخ : ${toArabicDigits(
+                  dayjs().locale("ar").format("DD-MM-YYYY")
+                )}`
+              : `Date : ${dayjs().locale("en").format("DD-MM-YYYY")}`}
           </Typography>
         </>
       )}

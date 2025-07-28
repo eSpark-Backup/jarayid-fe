@@ -823,7 +823,7 @@ const Home = () => {
                     <Skeleton
                       key={`skeleton-${index}`}
                       variant="rounded"
-                      width="90%"
+                      // width="90%"
                       height={143}
                       sx={{ borderRadius: "9px" }}
                     />

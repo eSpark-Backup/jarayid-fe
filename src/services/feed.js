@@ -46,6 +46,36 @@ const FeedApi = api.injectEndpoints({
         credentials: "include",
       }),
     }),
+    trendingArticles: builder.query({
+      query: ({ page = 1, limit = 10, period = "7d" }) => ({
+        url: "/articles/trending",
+        method: "GET",
+        params: {
+          page,
+          limit,
+          period,
+        },
+      }),
+    }),
+    getComments: builder.query({
+      query: ({ articleId, page = 1, limit = 10, sortBy = "newest" }) => ({
+        url: `/comments/article${articleId}`,
+        method: "GET",
+        params: {
+          page,
+          limit,
+          sortBy,
+        },
+      }),
+    }),
+    postComment: builder.mutation({
+      query: ({ articleId, content }) => ({
+        url: "/comments",
+        method: "POST",
+        body: { articleId, content },
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -54,4 +84,7 @@ export const {
   useGetArticlesQuery,
   useGetArticleByIdQuery,
   useToggleReadLaterMutation,
+  useTrendingArticlesQuery,
+  useGetCommentsQuery,
+  usePostCommentMutation,
 } = FeedApi;

@@ -22,7 +22,7 @@ const arrowBtn = {
   "&:hover": { backgroundColor: "#fff" },
 };
 
-const ImageSlider = () => {
+const ImageSlider = ({ slides }) => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [swiperReady, setSwiperReady] = useState(false);
@@ -66,7 +66,7 @@ const ImageSlider = () => {
           setSwiperReady(true);
         }}
       >
-        {[slider, slider, slider].map((img, index) => (
+        {slides?.map((img, index) => (
           <SwiperSlide key={index}>
             <Box
               component="img"
