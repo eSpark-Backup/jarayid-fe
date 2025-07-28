@@ -1624,3 +1624,12 @@ export const categoryOptions = [
   "Health",
   "All",
 ];
+
+export const socialOptions = [
+  "Facebook",
+  "WhatsApp",
+  "YouTube",
+  "X",
+  "Instagram",
+  "TikTok",
+];
