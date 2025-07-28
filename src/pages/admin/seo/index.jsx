@@ -1,21 +1,69 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { Box, Button } from "@mui/material";
 import { DynamicTable, SubHeader } from "../../../components";
 import { columns } from "../../../columns/seo";
-import { seoData } from "../../../constant";
+import { useGetAllCateoriesQuery } from "../../../services/categories";
+import AddSeoCategoryModal from "./add-seo-category-modal";
+import EditSeoCategoryModal from "./edit-seo-category-modal";
 
 const SeoManagement = () => {
-  const [data] = useState(seoData || []);
+  const [openAdd, setOpenAdd] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [pageSize] = useState(11);
-  const [total] = useState(11);
+  const [pageSize] = useState(10);
+  const [total, setTotal] = useState(0);
+
+  const {
+    data: data2,
+    isSuccess,
+    isError,
+    error,
+    isLoading,
+    refetch,
+    isFetching,
+  } = useGetAllCateoriesQuery({
+    page,
+    pageSize,
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      setData(
+        data2?.data?.items?.map((item) => {
+          return {
+            ...item,
+            metaTitle:
+              typeof item?.seoMeta === "string"
+                ? JSON.parse(item?.seoMeta)?.title
+                : "" || "",
+            metaDescription:
+              typeof item?.seoMeta === "string"
+                ? JSON.parse(item?.seoMeta)?.description
+                : "" || "",
+            metaCanonicalUrl:
+              typeof item?.seoMeta === "string"
+                ? JSON.parse(item?.seoMeta)?.canonicalUrl
+                : "" || "",
+          };
+        })
+      );
+      setTotal(data2?.data?.pagination?.total);
+      return;
+    }
+    if (isError) {
+      toast.error(error?.data?.message);
+      return;
+    }
+  }, [isSuccess, isError, isFetching]);
 
   const handlePageChange = (page) => {
     setPage(page);
   };
 
-  const handleDelete = (item) => {
-    console.log(item);
+  const handleEdit = (item) => {
+    setOpenEdit(item);
   };
 
   return (
@@ -24,6 +72,7 @@ const SeoManagement = () => {
         title="SEO Management"
         rightNode={
           <Button
+            onClick={() => setOpenAdd(true)}
             variant="contained"
             color="primary"
             sx={{
@@ -50,17 +99,29 @@ const SeoManagement = () => {
         <DynamicTable
           data={data}
           columns={columns()}
-          isLoading={false}
+          isLoading={isLoading || isFetching}
           page={page}
           pageSize={pageSize}
           handlePageChange={handlePageChange}
           total={total}
-          hideEdit={true}
-          handleDelete={handleDelete}
+          hideDelete={true}
+          handleEdit={handleEdit}
           hideSwitch={true}
           headerBorder={true}
         />
       </Box>
+      <AddSeoCategoryModal
+        categories={data || []}
+        open={openAdd}
+        onClose={() => setOpenAdd(false)}
+        onSuccess={refetch}
+      />
+      <EditSeoCategoryModal
+        categories={data || []}
+        open={openEdit}
+        onClose={() => setOpenEdit(false)}
+        onSuccess={refetch}
+      />
     </>
   );
 };
