@@ -14,7 +14,6 @@ import {
   useDeleteArticleMutation,
   useGetAllArticlesForAdminQuery,
 } from "../../../services/articles";
-import { translateText } from "../../../utils";
 import DeleteModal from "../../../components/delete-modal";
 
 const ArticlesManagement = () => {
