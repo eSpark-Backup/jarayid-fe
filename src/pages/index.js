@@ -35,6 +35,8 @@ import VisiualAd from "./admin/visual-ad-placement";
 import Notification from "./admin/notification";
 import Openai from "./admin/openai";
 import Social from "./admin/social";
+import SocialMediaForm from "./admin/social-media";
+import OpenAIKey from "./admin/open-ai-key";
 
 export {
   Login,
@@ -69,4 +71,6 @@ export {
   Notification,
   Openai,
   Social,
+  SocialMediaForm,
+  OpenAIKey,
 };
