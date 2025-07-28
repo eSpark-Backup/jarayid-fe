@@ -19,6 +19,7 @@ const GlobalModal = ({
   disableSubmit = false,
   width = "475px",
   height = "485px",
+  loading,
 }) => {
   return (
     <Dialog
@@ -75,7 +76,8 @@ const GlobalModal = ({
             height: "40px",
             fontSize: "12px",
           }}
-          disabled={disableSubmit}
+          disabled={loading || disableSubmit}
+          loading={loading}
         >
           {submitText}
         </Button>

@@ -30,6 +30,8 @@ import DateRangePicker from "./range-picker";
 import WordsInput from "./words-input";
 import CustomCheckbox from "./custome-checkbox";
 import RssInfoCard from "./rss-info-card";
+import OutlineInput from "./outline-input";
+import OutlineSelect from "./outline-select";
 
 export {
   Button,
@@ -64,4 +66,6 @@ export {
   WordsInput,
   CustomCheckbox,
   RssInfoCard,
+  OutlineInput,
+  OutlineSelect,
 };
