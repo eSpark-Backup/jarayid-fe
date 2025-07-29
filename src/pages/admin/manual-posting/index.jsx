@@ -1,22 +1,56 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import dayjs from "dayjs";
+import { toast } from "react-toastify";
 import { Box, Button } from "@mui/material";
 import { DynamicTable, SubHeader } from "../../../components";
 import { columns } from "../../../columns/manual-posting";
-import { manualPostingData } from "../../../constant";
+import { useGetAllArticlesForAdminQuery } from "../../../services/articles";
+import AddPostModal from "./add-post";
+import EditPostModal from "./edit-post";
 
 const ManualPosting = () => {
-  const [data] = useState(manualPostingData || []);
+  const [openAdd, setOpenAdd] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [pageSize] = useState(11);
-  const [total] = useState(11);
+  const [pageSize] = useState(10);
+  const [total, setTotal] = useState(0);
 
   const handlePageChange = (page) => {
     setPage(page);
   };
 
   const handleEdit = (item) => {
-    console.log(item);
+    setOpenEdit(item);
   };
+
+  const {
+    data: data2,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+    refetch,
+    isFetching,
+  } = useGetAllArticlesForAdminQuery({ page, pageSize });
+
+  useEffect(() => {
+    if (isSuccess) {
+      setData(
+        data2?.data?.items?.map((item) => {
+          return {
+            ...item,
+            publishedDate: dayjs(item?.createdAt).format("MMMM DD,YYYY"),
+            category: item?.category?.name,
+          };
+        })
+      );
+      setTotal(data2?.data?.pagination?.total);
+    }
+    if (isError) {
+      toast.error(error?.data?.message);
+    }
+  }, [isSuccess, isError, data2]);
 
   return (
     <>
@@ -24,6 +58,7 @@ const ManualPosting = () => {
         title="Manual News posting"
         rightNode={
           <Button
+            onClick={() => setOpenAdd(true)}
             variant="contained"
             color="primary"
             sx={{
@@ -50,7 +85,7 @@ const ManualPosting = () => {
         <DynamicTable
           data={data}
           columns={columns()}
-          isLoading={false}
+          isLoading={isLoading || isFetching}
           page={page}
           pageSize={pageSize}
           handlePageChange={handlePageChange}
@@ -61,6 +96,16 @@ const ManualPosting = () => {
           headerBorder={true}
         />
       </Box>
+      <AddPostModal
+        open={openAdd}
+        onClose={() => setOpenAdd(false)}
+        onSuccess={refetch}
+      />
+      <EditPostModal
+        open={openEdit}
+        onClose={() => setOpenEdit(false)}
+        onSuccess={refetch}
+      />
     </>
   );
 };
