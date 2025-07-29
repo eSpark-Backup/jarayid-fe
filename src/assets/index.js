@@ -113,6 +113,7 @@ import healthyResources from "./icons/healthy-resources.svg";
 import warningIcon from "./icons/warning-icon.svg";
 import error from "./icons/error.svg";
 import refresh from "./icons/refresh.svg";
+import upload from "./icons/admin-upload.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
@@ -245,4 +246,5 @@ export {
   adminSocial,
   adminContact,
   adminAdplacement,
+  upload,
 };

@@ -16,7 +16,9 @@ const DeleteModal = ({
   handleCancel,
   handleConfirm,
   heading = "Are you sure you want to Delete ?",
+  desc = "Deleting is permanent and your Article will automatically be deleted after 30 days if you do not log in again.",
   confirmText = "Delete",
+  loading,
 }) => {
   return (
     <Dialog
@@ -52,10 +54,7 @@ const DeleteModal = ({
       </DialogTitle>
 
       <DialogContent>
-        <Typography color="textSecondary">
-          Deleting is permanent and your Article will automatically be deleted
-          after 30 days if you do not log in again.
-        </Typography>
+        <Typography color="textSecondary">{desc}</Typography>
       </DialogContent>
 
       <DialogActions sx={{ px: 3, pb: 2 }}>
@@ -72,12 +71,17 @@ const DeleteModal = ({
           Cancel
         </Button>
         <Button
+          loading={loading}
+          disabled={loading}
           sx={{
             width: "280px",
             height: "48px",
             borderRadius: "8px",
             color: "#fff",
             backgroundColor: "#FF0000",
+            ":hover": {
+              backgroundColor: "#FF0000",
+            },
           }}
           onClick={handleConfirm}
           variant="contained"

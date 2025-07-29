@@ -40,3 +40,48 @@ export const getYouTubeEmbedUrl = (youtubeUrl) => {
   const videoId = url.searchParams.get("v");
   return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
 };
+export const isObjectValid = (obj) => {
+  return Object.values(obj).every(
+    (val) =>
+      val !== null &&
+      val !== undefined &&
+      !(typeof val === "string" && val.trim() === "")
+  );
+};
+
+export const isObjectSame = (obj1, obj2) => {
+  if (!obj1 || !obj2) return false;
+
+  const normalize = (val) => {
+    if (val === null || val === undefined) return "";
+    if (typeof val === "string") return val.trim();
+    return val;
+  };
+
+  const keys = new Set([...Object.keys(obj1), ...Object.keys(obj2)]);
+
+  for (const key of keys) {
+    if (normalize(obj1[key]) !== normalize(obj2[key])) {
+      return false;
+    }
+  }
+
+  return true;
+};
+
+export const buildQueryParams = (params) => {
+  const query = new URLSearchParams();
+
+  Object.entries(params).forEach(([key, value]) => {
+    const isEmpty =
+      value === undefined ||
+      value === null ||
+      (typeof value === "string" && value.trim() === "");
+
+    if (!isEmpty) {
+      query.append(key, value);
+    }
+  });
+
+  return query.toString();
+};
