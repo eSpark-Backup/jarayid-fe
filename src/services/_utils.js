@@ -1,3 +1,5 @@
+import { VITE_BASE_URL } from "../config";
+
 export const prepareHeaders = (headers) => {
   const token = localStorage.getItem("token");
   if (token) {
@@ -6,4 +8,4 @@ export const prepareHeaders = (headers) => {
   return headers;
 };
 
-export const baseUrl = import.meta.env.VITE_BASE_URL;
+export const baseUrl = VITE_BASE_URL;
