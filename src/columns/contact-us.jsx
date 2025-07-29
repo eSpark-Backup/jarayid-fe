@@ -4,5 +4,6 @@ export const columns = () => {
     { name: "Email ", key: "contact_email" },
     { name: "Message Preview", key: "message" },
     { name: "Date Received", key: "date" },
+    { name: "Actions", key: "action" },
   ];
 };

@@ -488,26 +488,62 @@ export const tabletCountries = [
 
 export const adminSidebarNavs = [
   { title: "Dashboard", icon: adminDashboard, link: "/admin/dashboard" },
-  { title: "Article Management", icon: adminArticle, link: "/admin/articles-management" },
+  {
+    title: "Article Management",
+    icon: adminArticle,
+    link: "/admin/articles-management",
+  },
   { title: "Category", icon: adminCategory, link: "/admin/categories" },
   { title: "Seo Category", icon: adminSeo, link: "/admin/seo-management" },
-  { title: "RSS sources", icon: adminRss, link: "/admin/rss-source-management" },
-  { title: "Sponsor account", icon: adminSponsor, link: "/admin/sponsor-account" },
+  {
+    title: "RSS sources",
+    icon: adminRss,
+    link: "/admin/rss-source-management",
+  },
+  {
+    title: "Sponsor account",
+    icon: adminSponsor,
+    link: "/admin/sponsor-account",
+  },
   { title: "Manual post", icon: adminManual, link: "/admin/manual-posting" },
-  { title: "YouTube Channel", icon: adminYoutube, link: "/admin/youtube-management" },
+  {
+    title: "YouTube Channel",
+    icon: adminYoutube,
+    link: "/admin/youtube-management",
+  },
   { title: "CooKies", icon: adminCookies, link: "/admin/cookies" },
   { title: "FAQ", icon: adminFaq, link: "/admin/faq" },
   { title: "User", icon: adminUser, link: "/admin/users" },
-  { title: "TOS / privacy policy", icon: adminTos, link: "/admin/term-privacy" },
-  { title: "Notification", icon: adminNotification, link: "/admin/notifications" },
-  { title: "Sentry Bug Monitoring", icon: adminBug, link: "/admin/sentry-bug-monitor" },
+  {
+    title: "TOS / privacy policy",
+    icon: adminTos,
+    link: "/admin/term-privacy",
+  },
+  {
+    title: "Notification",
+    icon: adminNotification,
+    link: "/admin/notifications",
+  },
+  {
+    title: "Sentry Bug Monitoring",
+    icon: adminBug,
+    link: "/admin/sentry-bug-monitor",
+  },
   { title: "Open AI", icon: adminOpenai, link: "/admin/openai" },
   { title: "ad-free subscriptions", icon: adminAdfree, link: "/admin/ad-free" },
-  { title: "External Link", icon: adminExternal, link: "/admin/external-links" },
+  {
+    title: "External Link",
+    icon: adminExternal,
+    link: "/admin/external-links",
+  },
   { title: "Social media page", icon: adminSocial, link: "/admin/social" },
   { title: "Contacts Us", icon: adminContact, link: "/admin/contact-us" },
   { title: "RSS summarization", icon: adminRss, link: "/admin/rss" },
-  { title: "Ad Placement Map", icon: adminAdplacement, link: "/admin/visiual-ad-placement" },
+  {
+    title: "Ad Placement Map",
+    icon: adminAdplacement,
+    link: "/admin/visiual-ad-placement",
+  },
 ];
 
 export const SummaryCardContent = [
@@ -1490,40 +1526,34 @@ export const rssSourceManagementData = [
   },
 ];
 
-export const rssStats = [
-  {
-    icon: allResources,
-    title: "Total Resources",
-    value: "40,689",
-    trending: "up",
-    perc: "8.5%",
-    timeStamp: "yesterday",
-  },
-  {
-    icon: healthyResources,
-    title: "Healthy Resources",
-    value: "10293",
-    trending: "up",
-    perc: "1.3%",
-    timeStamp: "past week",
-  },
-  {
-    icon: warningIcon,
-    title: "Warning",
-    value: "4563",
-    trending: "down",
-    perc: "4.3%",
-    timeStamp: "yesterday",
-  },
-  {
-    icon: error,
-    title: "Error",
-    value: "458",
-    trending: "up",
-    perc: "1.8%",
-    timeStamp: "yesterday",
-  },
-];
+export const rssStats = (data) => {
+  return [
+    {
+      icon: allResources,
+      title: "Total Resources",
+      value: data?.totalRSSFeeds,
+      trending: "up",
+      perc: `100%`,
+      timeStamp: "yesterday",
+    },
+    {
+      icon: healthyResources,
+      title: "Healthy Resources",
+      value: data?.publishedRSSFeeds,
+      trending: "up",
+      perc: `${data?.publishedRSSFeedsPercentage}%`,
+      timeStamp: "past week",
+    },
+    {
+      icon: error,
+      title: "Error",
+      value: data?.inactiveRSSFeeds,
+      trending: "up",
+      perc: `${data?.inactiveRSSFeedsPercentage}%`,
+      timeStamp: "yesterday",
+    },
+  ];
+};
 
 export const rssResourcesData = [
   {
