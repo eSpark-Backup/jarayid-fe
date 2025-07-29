@@ -31,8 +31,32 @@ export const articleApi = api.injectEndpoints({
         };
       },
     }),
+    addArticle: builder.mutation({
+      query: (credentials) => {
+        return {
+          url: `/articles`,
+          method: "POST",
+          body: credentials,
+          credentials: "include",
+        };
+      },
+    }),
+    editArticle: builder.mutation({
+      query: ({ id, credentials }) => {
+        return {
+          url: `/articles/${id}`,
+          method: "PUT",
+          body: credentials,
+          credentials: "include",
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetAllArticlesForAdminQuery, useDeleteArticleMutation } =
-  articleApi;
+export const {
+  useGetAllArticlesForAdminQuery,
+  useDeleteArticleMutation,
+  useAddArticleMutation,
+  useEditArticleMutation,
+} = articleApi;

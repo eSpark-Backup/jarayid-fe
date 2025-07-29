@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { FormControl, Select, MenuItem } from "@mui/material";
 import { styled } from "@mui/system";
 import { dropdownArrow } from "../../assets";
@@ -37,15 +37,24 @@ const CustomIcon = () => (
 );
 
 const Dropdown = ({ placeholder, options, value, onChange }) => {
-  const [mainOptions] = useState([
+  const [mainOptions, setMainOptions] = useState([
     {
       label: placeholder,
       value: placeholder,
     },
     ...options,
   ]);
+  useEffect(() => {
+    setMainOptions([
+      {
+        label: placeholder,
+        value: placeholder,
+      },
+      ...options,
+    ]);
+  }, [options]);
   return (
-    <FormControl>
+    <FormControl sx={{ width: "100%" }}>
       <CustomSelect
         aria-placeholder="Role"
         value={value === "" ? placeholder : value}
