@@ -4,7 +4,7 @@ export const columns = () => {
   return [
     {
       name: "Articles",
-      key: "articleName",
+      key: "articleTitle",
       component: (item) => {
         return (
           <>
@@ -14,9 +14,13 @@ export const columns = () => {
                 textAlign: "left",
                 color: "#403A44",
                 fontWeight: 600,
+                width: "300px",
+                whiteSpace: "nowrap",
+                textOverflow: "ellipsis",
+                overflow: "hidden",
               }}
             >
-              {item?.articleName}
+              {item?.articleTitle}
             </Typography>
             <Typography
               sx={{
@@ -32,9 +36,9 @@ export const columns = () => {
         );
       },
     },
-    { name: "Date", key: "createAt" },
-    { name: "Views", key: "views" },
-    { name: "Comments", key: "comments" },
+    { name: "Date", key: "date" },
+    { name: "Views", key: "viewCount" },
+    { name: "Comments", key: "commentCount" },
     { name: "Status", key: "status", chip: true },
     { name: "Action", key: "action" },
   ];

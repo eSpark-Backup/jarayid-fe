@@ -32,6 +32,7 @@ import CustomCheckbox from "./custome-checkbox";
 import RssInfoCard from "./rss-info-card";
 import OutlineInput from "./outline-input";
 import OutlineSelect from "./outline-select";
+import OutlinedFileInput from "./outline-image-input";
 
 export {
   Button,
@@ -68,4 +69,5 @@ export {
   RssInfoCard,
   OutlineInput,
   OutlineSelect,
+  OutlinedFileInput,
 };

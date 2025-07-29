@@ -9,12 +9,13 @@ import store from "./store/index.js";
 import App from "./App.jsx";
 import "./language/i18n.js";
 import { Auth0Provider } from "@auth0/auth0-react";
+import { VITE_AUTH0_DOMAIN, VITE_CLIENT_ID } from "./config/index.js";
 
 createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Auth0Provider
-      domain={import.meta.env.VITE_AUTH0_DOMAIN}
-      clientId={import.meta.env.VITE_CLIENT_ID}
+      domain={VITE_AUTH0_DOMAIN}
+      clientId={VITE_CLIENT_ID}
       authorizationParams={{
         redirect_uri: `${window.location.origin}/signup`,
       }}

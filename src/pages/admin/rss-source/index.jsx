@@ -1,6 +1,16 @@
-import { useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { Box, Chip, Grid, Stack, Typography } from "@mui/material";
+import { toast } from "react-toastify";
+import dayjs from "dayjs";
+import {
+  Box,
+  Chip,
+  Grid,
+  LinearProgress,
+  Skeleton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import {
   InfoCard,
   SubHeader,
@@ -9,13 +19,157 @@ import {
   Button,
   RssInfoCard,
 } from "../../../components";
-import { rssResourcesData, rssStats } from "../../../constant";
+import { rssStats as rssStats2 } from "../../../constant";
+import {
+  useDeleteRssFeedMutation,
+  useGetRssFeedQuery,
+  useGetRssStatsQuery,
+  useRefreshRssFeedMutation,
+  useUpdateRssMutation,
+} from "../../../services/rss";
 
 const RssSource = () => {
   const navigate = useNavigate();
+  const [loadingId, setLoadingId] = useState(null);
   const [search, setSearch] = useState("");
   const tabs = ["24 hours", "7 days", "30 days"];
   const [activeTab, setActiveTab] = useState("7 days");
+  const dateFrom = useMemo(() => {
+    const now = dayjs();
+    switch (activeTab) {
+      case "24 hours":
+        return now.subtract(1, "day").toISOString();
+      case "7 days":
+        return now.subtract(7, "day").toISOString();
+      case "30 days":
+        return now.subtract(30, "day").toISOString();
+      default:
+        return now.subtract(7, "day").toISOString();
+    }
+  }, [activeTab]);
+
+  const dateTo = useMemo(() => dayjs().toISOString(), []);
+
+  const [rssResourcesData, setRssResourcesData] = useState([]);
+  const [rssStats, setRssStats] = useState(Array.from({ length: 3 }));
+
+  const { data, isLoading, isSuccess, isError, error, refetch, isFetching } =
+    useGetRssStatsQuery();
+
+  useEffect(() => {
+    if (isSuccess) {
+      setRssStats(rssStats2(data?.data));
+    }
+    if (isError) {
+      toast.error(error?.data?.message);
+    }
+  }, [data, isSuccess, isError, error]);
+
+  const {
+    data: rssData,
+    isLoading: rssLoading,
+    isSuccess: rssIsSuccess,
+    isError: rssIsError,
+    error: rssError,
+  } = useGetRssFeedQuery(
+    {
+      page: 1,
+      pageSize: 30,
+      search: search ?? "",
+      dateFrom,
+      dateTo,
+    },
+    {
+      skip: !dateFrom,
+      refetchOnMountOrArgChange: true,
+    }
+  );
+
+  useEffect(() => {
+    if (rssIsSuccess) {
+      setRssResourcesData(rssData?.data?.items);
+    }
+    if (rssIsError) {
+      toast.error(rssError?.data?.message);
+    }
+  }, [rssData, rssIsSuccess, rssIsError, rssError]);
+
+  const [updateRss, { isLoading: isToggleLoading }] = useUpdateRssMutation();
+  const handleToggle = (id, value) => {
+    setLoadingId(id);
+    updateRss({
+      id: id,
+      credentials: { status: value ? "PUBLISH" : "ARCHIVE" },
+    }).then((res) => {
+      if (res?.error) {
+        toast.error(res?.error?.data?.message);
+        setLoadingId(null);
+        return;
+      }
+      if (res?.data) {
+        toast.success(res?.data?.message);
+        setRssResourcesData((prev) =>
+          prev?.map((rss) => {
+            if (rss?.id === id) {
+              return {
+                ...rss,
+                status: value ? "PUBLISH" : "ARCHIVE",
+              };
+            } else {
+              return rss;
+            }
+          })
+        );
+        refetch();
+        setLoadingId(null);
+        return;
+      }
+    });
+  };
+
+  const [deleteRss, { isLoading: isDeleteLoading }] =
+    useDeleteRssFeedMutation();
+
+  const handleDelete = (id) => {
+    setLoadingId(id);
+    deleteRss(id).then((res) => {
+      if (res?.error) {
+        toast.error(res?.error?.data?.message);
+        setLoadingId(null);
+        return;
+      }
+      if (res?.data) {
+        toast.success(res?.data?.message);
+        setRssResourcesData((prev) => prev?.filter((rss) => rss?.id !== id));
+        refetch();
+        setLoadingId(null);
+      }
+    });
+  };
+
+  const [refreshRss, { isLoading: isRefreshLoading }] =
+    useRefreshRssFeedMutation();
+  const handleRefresh = (id) => {
+    setLoadingId(id);
+    refreshRss(id).then((res) => {
+      if (res?.error) {
+        toast.error(res?.error?.data?.message);
+        setLoadingId(null);
+        return;
+      }
+      if (res?.data) {
+        setRssResourcesData((prev) =>
+          prev.map((item) =>
+            item.id === res?.data?.data?.rssFeed?.id
+              ? { ...item, ...res?.data?.data?.rssFeed }
+              : item
+          )
+        );
+        toast.success("Rss refresh successfully");
+        setLoadingId(null);
+      }
+    });
+  };
 
   return (
     <>
@@ -41,8 +195,12 @@ const RssSource = () => {
         spacing={2}
       >
         {rssStats?.map((stat) => (
-          <Grid key={stat.title} size={{ xs: 12, md: 6, lg: 3 }}>
-            <InfoCard {...stat} />
+          <Grid key={stat?.title} size={{ xs: 12, md: 6, lg: 4 }}>
+            {isLoading || isFetching ? (
+              <Skeleton height={160} />
+            ) : (
+              <InfoCard {...stat} />
+            )}
           </Grid>
         ))}
       </Grid>
@@ -114,18 +272,34 @@ const RssSource = () => {
           />
         </Stack>
         <Box sx={{ width: "100%", overflowX: "auto" }}>
-          <Stack
-            sx={{ minWidth: "800px" }}
-            direction="column"
-            justifyContent="flex-start"
-            alignItems="flex-start"
-            gap={"15px"}
-            mt="26px"
-          >
-            {rssResourcesData.map((item) => {
-              return <RssInfoCard key={item?.id} {...item} />;
-            })}
-          </Stack>
+          {!rssLoading ? (
+            <Stack
+              sx={{ minWidth: "800px" }}
+              direction="column"
+              justifyContent="flex-start"
+              alignItems="flex-start"
+              gap={"15px"}
+              mt="26px"
+            >
+              {rssResourcesData.map((item) => {
+                return (
+                  <RssInfoCard
+                    key={item?.id}
+                    handleToggle={handleToggle}
+                    loading={isToggleLoading}
+                    loadingId={loadingId}
+                    handleDelete={handleDelete}
+                    isDeleteLoading={isDeleteLoading}
+                    handleRefresh={handleRefresh}
+                    isRefreshLoading={isRefreshLoading}
+                    {...item}
+                  />
+                );
+              })}
+            </Stack>
+          ) : (
+            <LinearProgress />
+          )}
         </Box>
       </Box>
     </>
