@@ -1,34 +1,118 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import { useSelector } from "react-redux";
 import { Box, Button, Stack } from "@mui/material";
 import { DynamicTable, SubHeader, Dropdown } from "../../../components";
 import { columns } from "../../../columns/rss-source-management";
-import { rssSourceManagementData } from "../../../constant";
+import {
+  useGetAllRssFeedForAdminQuery,
+  useUpdateRssMutation,
+} from "../../../services/rss";
+import AddRssModal from "./add-rss";
+import EditRssModal from "./edit-rss";
 
 const RssSourceManagement = () => {
-  const catOptions = [
-    { label: "Labenon", value: "lebanon" },
-    { label: "Egypt", value: "egypt" },
-  ];
+  const { category } = useSelector((state) => state?.category);
+  const [catOptions, setCatOptions] = useState(
+    category?.map((cat) => {
+      return { label: cat?.name, value: cat?.id };
+    }) || []
+  );
+  useEffect(() => {
+    setCatOptions(
+      category?.map((cat) => {
+        return { label: cat?.name, value: cat?.id };
+      }) || []
+    );
+  }, [category]);
+  const [openAdd, setOpenAdd] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const [cat, setCat] = useState("");
-  const [data, setData] = useState(rssSourceManagementData || []);
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [pageSize] = useState(11);
-  const [total] = useState(11);
+  const [pageSize] = useState(10);
+  const [total, setTotal] = useState(0);
+  const [loadingId, setLoadingId] = useState(null);
 
   const handlePageChange = (page) => {
     setPage(page);
   };
 
   const handleEdit = (item) => {
-    console.log(item);
+    setOpenEdit(item);
   };
 
+  const {
+    data: data2,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+    refetch,
+    isFetching,
+  } = useGetAllRssFeedForAdminQuery(
+    {
+      page,
+      pageSize,
+      ...(cat !== "" && { cat }),
+    },
+    { refetchOnMountOrArgChange: true }
+  );
+
+  useEffect(() => {
+    if (isSuccess) {
+      setData(
+        data2?.data?.items?.map((item) => {
+          return {
+            ...item,
+            cat: item?.category?.name,
+            rssStatus: {
+              label: item?.active ? "Active" : "Refresh Inactive",
+              variant: item?.active ? "green" : "red",
+            },
+            active: item?.status === "PUBLISH" ? true : false,
+          };
+        })
+      );
+      setTotal(data2?.data?.pagination?.total);
+      return;
+    }
+    if (isError) {
+      toast.error(error?.data?.message);
+      return;
+    }
+  }, [isSuccess, isError, isFetching]);
+
+  const [updateRss, { isLoading: isToggleLoading }] = useUpdateRssMutation();
   const handleToggle = (item, value) => {
-    setData(
-      data.map((rss) => {
-        return rss.id === item.id ? { ...rss, active: value } : rss;
-      })
-    );
+    setLoadingId(item?.id);
+    updateRss({
+      id: item?.id,
+      credentials: { status: value ? "PUBLISH" : "ARCHIVE" },
+    }).then((res) => {
+      if (res?.error) {
+        toast.error(res?.error?.data?.message);
+        setLoadingId(null);
+        return;
+      }
+      if (res?.data) {
+        toast.success(res?.data?.message);
+        setData((prev) =>
+          prev?.map((rss) => {
+            if (rss?.id === item?.id) {
+              return {
+                ...rss,
+                active: value,
+              };
+            } else {
+              return rss;
+            }
+          })
+        );
+        setLoadingId(null);
+        return;
+      }
+    });
   };
 
   return (
@@ -44,7 +128,9 @@ const RssSourceManagement = () => {
             sx={{ width: { xs: "100%", sm: "max-content" } }}
           >
             <Box sx={{ width: "max-content", height: "39px" }}>
-              <Button variant="gradient">+ Add RSS Source</Button>
+              <Button onClick={() => setOpenAdd(true)} variant="gradient">
+                + Add RSS Source
+              </Button>
             </Box>
             <Stack
               direction="row"
@@ -73,7 +159,9 @@ const RssSourceManagement = () => {
         <DynamicTable
           data={data}
           columns={columns()}
-          isLoading={false}
+          isLoading={isLoading || isFetching}
+          isToggleLoading={isToggleLoading}
+          loadingId={loadingId}
           handleEdit={handleEdit}
           page={page}
           pageSize={pageSize}
@@ -84,6 +172,16 @@ const RssSourceManagement = () => {
           onToggle={handleToggle}
         />
       </Box>
+      <AddRssModal
+        open={openAdd}
+        onClose={() => setOpenAdd(false)}
+        onSuccess={refetch}
+      />
+      <EditRssModal
+        open={openEdit}
+        onClose={() => setOpenEdit(false)}
+        onSuccess={refetch}
+      />
     </>
   );
 };
