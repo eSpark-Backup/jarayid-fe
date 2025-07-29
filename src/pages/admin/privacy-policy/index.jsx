@@ -1,61 +1,62 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Box, Tabs, Tab, Typography, Paper } from "@mui/material";
-import { dummyText } from "../../../constant";
 import { SubHeader } from "../../../components";
+import { useGetAllPagesQuery } from "../../../services/static-pages";
 
 const TermsPrivacyScreen = () => {
   const [value, setValue] = useState(0);
+  const [termsContent, setTermsContent] = useState("");
+  const [privacyContent, setPrivacyContent] = useState("");
 
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-  };
+  const { data, isLoading, error } = useGetAllPagesQuery();
+
+  useEffect(() => {
+    if (data?.data?.items) {
+      const pages = data.data.items;
+      const terms = pages.find((p) => p.slug?.toLowerCase().includes("terms"));
+      const privacy = pages.find((p) =>
+        p.slug?.toLowerCase().includes("privacy")
+      );
+
+      setTermsContent(terms?.content || "No Terms of Service found");
+      setPrivacyContent(privacy?.content || "No Privacy Policy found");
+    }
+  }, [data]);
+
+  const handleChange = (event, newValue) => setValue(newValue);
 
   return (
-    <Box
-      sx={{
-        fontFamily: "Inter, sans-serif",
-      }}
-    >
-      <SubHeader title="Term of Service/ Privacy Policy" />
+    <Box sx={{ fontFamily: "Inter, sans-serif" }}>
+      <SubHeader title="Terms of Service / Privacy Policy" />
+
       <Paper
         elevation={1}
-        sx={{
-          mt: 2,
-          borderRadius: "14px",
-          overflow: "hidden",
-          mb: 0,
-        }}
+        sx={{ mt: 2, borderRadius: "14px", overflow: "hidden" }}
       >
         <Tabs
           value={value}
           onChange={handleChange}
           textColor="primary"
           TabIndicatorProps={{
-            style: {
-              backgroundColor: "#007BFF",
-              height: "4px",
-            },
+            style: { backgroundColor: "#007BFF", height: "4px" },
           }}
-          sx={{
-            borderBottom: 1,
-            borderColor: "divider",
-          }}
+          sx={{ borderBottom: 1, borderColor: "divider" }}
         >
           <Tab
+            label="Terms of Service"
             sx={{
               fontSize: "20px",
               fontWeight: "400",
               color: "#101828 !important",
             }}
-            label="Term of Service"
           />
           <Tab
+            label="Privacy Policy"
             sx={{
               fontSize: "20px",
               fontWeight: "400",
               color: "#101828 !important",
             }}
-            label="Privacy Policy"
           />
         </Tabs>
 
@@ -84,7 +85,13 @@ const TermsPrivacyScreen = () => {
             mb="0"
             paragraph
           >
-            {dummyText.repeat(6)}
+            {isLoading
+              ? "Loading content..."
+              : error
+              ? "Error loading static pages."
+              : value === 0
+              ? termsContent
+              : privacyContent}
           </Typography>
         </Box>
       </Paper>

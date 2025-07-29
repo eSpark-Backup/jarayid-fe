@@ -31,7 +31,6 @@ const DeleteModal = ({
         },
       }}
     >
-      {/* Close Icon */}
       <IconButton
         aria-label="close"
         onClick={handleClose}
@@ -66,6 +65,10 @@ const DeleteModal = ({
             borderRadius: "8px",
             border: "1px solid #6E6F70",
             color: "#000000",
+            "&:hover": {
+              backgroundColor: "transparent",
+              color: "#000000",
+            },
           }}
           onClick={handleCancel}
         >
@@ -78,6 +81,10 @@ const DeleteModal = ({
             borderRadius: "8px",
             color: "#fff",
             backgroundColor: "#FF0000",
+            "&:hover": {
+              backgroundColor: "#FF0000",
+              color: "#FFFFFF",
+            },
           }}
           onClick={handleConfirm}
           variant="contained"
