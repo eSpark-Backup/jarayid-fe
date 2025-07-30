@@ -1531,7 +1531,7 @@ export const rssStats = (data) => {
     {
       icon: allResources,
       title: "Total Resources",
-      value: data?.totalRSSFeeds,
+      value: data?.totalRSSFeeds === "undefined" ? "" : data?.totalRSSFeeds,
       trending: "up",
       perc: `100%`,
       timeStamp: "yesterday",
@@ -1539,17 +1539,19 @@ export const rssStats = (data) => {
     {
       icon: healthyResources,
       title: "Healthy Resources",
-      value: data?.publishedRSSFeeds,
+      value:
+        data?.publishedRSSFeeds === "undefined" ? "" : data?.publishedRSSFeeds,
       trending: "up",
-      perc: `${data?.publishedRSSFeedsPercentage}%`,
+      perc: `${data?.publishedRSSFeedsPercentage || 0}%`,
       timeStamp: "past week",
     },
     {
       icon: error,
       title: "Error",
-      value: data?.inactiveRSSFeeds,
+      value:
+        data?.inactiveRSSFeeds === "undefined" ? "" : data?.inactiveRSSFeeds,
       trending: "up",
-      perc: `${data?.inactiveRSSFeedsPercentage}%`,
+      perc: `${data?.inactiveRSSFeedsPercentage || 0}%`,
       timeStamp: "yesterday",
     },
   ];

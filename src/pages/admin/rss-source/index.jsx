@@ -61,6 +61,7 @@ const RssSource = () => {
       setRssStats(rssStats2(data?.data));
     }
     if (isError) {
+      setRssStats(rssStats2(null));
       toast.error(error?.data?.message);
     }
   }, [data, isSuccess, isError, error]);
@@ -281,21 +282,32 @@ const RssSource = () => {
               gap={"15px"}
               mt="26px"
             >
-              {rssResourcesData.map((item) => {
-                return (
-                  <RssInfoCard
-                    key={item?.id}
-                    handleToggle={handleToggle}
-                    loading={isToggleLoading}
-                    loadingId={loadingId}
-                    handleDelete={handleDelete}
-                    isDeleteLoading={isDeleteLoading}
-                    handleRefresh={handleRefresh}
-                    isRefreshLoading={isRefreshLoading}
-                    {...item}
-                  />
-                );
-              })}
+              {rssResourcesData?.length > 0 ? (
+                rssResourcesData.map((item) => {
+                  return (
+                    <RssInfoCard
+                      key={item?.id}
+                      handleToggle={handleToggle}
+                      loading={isToggleLoading}
+                      loadingId={loadingId}
+                      handleDelete={handleDelete}
+                      isDeleteLoading={isDeleteLoading}
+                      handleRefresh={handleRefresh}
+                      isRefreshLoading={isRefreshLoading}
+                      {...item}
+                    />
+                  );
+                })
+              ) : (
+                <Typography
+                  fontSize={20}
+                  fontWeight={900}
+                  mt="50px"
+                  textAlign="center"
+                >
+                  No Data Found
+                </Typography>
+              )}
             </Stack>
           ) : (
             <LinearProgress />
