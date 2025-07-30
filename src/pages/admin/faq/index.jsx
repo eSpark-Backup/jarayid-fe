@@ -1,56 +1,76 @@
-import {
-  Box,
-  Button,
-  Container,
-  Dialog,
-  DialogActions,
-  DialogContent,
-  DialogTitle,
-  Typography,
-} from "@mui/material";
-import { useState } from "react";
+import { Box, Button, Container, Typography } from "@mui/material";
+import { useState, useEffect } from "react";
 import { SubHeader } from "../../../components";
 import FAQList from "../../../components/faq-list";
-import FAQModal from "../../../components/faq-modal";
-import { faqs as initialFaqs } from "../../../constant";
 import DeleteModal from "../../../components/delete-modal";
+import {
+  useGetAllPagesQuery,
+  useUpdatePageMutation,
+} from "../../../services/static-pages";
+import AddFAQModal from "./add-faq-modal";
+import EditFAQModal from "./edit-faq-modal";
 
 const FAQ = () => {
-  const [expanded, setExpanded] = useState(0);
-  const [openEdit, setOpenEdit] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
-  const [currentIndex, setCurrentIndex] = useState(null);
-  const [formData, setFormData] = useState({ question: "", answer: "" });
+  const { data: allPages, isLoading, refetch, error } = useGetAllPagesQuery();
+  const [updateFAQ] = useUpdatePageMutation();
+
+  const [faqs, setFaqs] = useState([]);
+  const [editingFaq, setEditingFaq] = useState(null); 
+  const [faqToDelete, setFaqToDelete] = useState(null); 
   const [openAdd, setOpenAdd] = useState(false);
-  const [formDataAdd, setFormDataAdd] = useState({ question: "", answer: "" });
-  const [faqsData, setFaqsData] = useState(initialFaqs);
 
-  const handleChange = (panelIndex) => (event, isExpanded) => {
-    setExpanded(isExpanded ? panelIndex : false);
+  const faqPage = allPages?.data?.items?.find((page) => page.slug === "faq");
+  const pageId = faqPage?.id;
+
+  useEffect(() => {
+    if (faqPage?.content) {
+      const processed = faqPage.content.map((f) => ({
+        id: f.id || crypto.randomUUID(), 
+        question: f.question?.trim() || "",
+        answer: f.answer?.trim() || "",
+      }));
+      setFaqs(processed);
+    }
+    if (error) {
+      console.error("Failed to fetch FAQs:", error);
+    }
+  }, [faqPage, error]);
+
+  const handleEdit = (faq) => {
+    setEditingFaq(faq);
   };
 
-  const handleEdit = (faq, index) => {
-    setFormData(faq);
-    setCurrentIndex(index);
-    setOpenEdit(true);
+  const handleUpdate = async (updatedFaq) => {
+    const updatedList = faqs.map((f) =>
+      f.id === updatedFaq.id ? updatedFaq : f
+    );
+    await updateFAQ({
+      id: pageId,
+      credentials: { title: "FAQ", slug: "faq", content: updatedList },
+    });
+    setFaqs(updatedList);
+    setEditingFaq(null);
+    refetch();
   };
 
-  const handleEditSubmit = () => {
-    const updatedFaqs = [...faqsData];
-    updatedFaqs[currentIndex] = formData;
-    setFaqsData(updatedFaqs);
-    setOpenEdit(false);
+  const handleDelete = (faq) => {
+    setFaqToDelete(faq);
   };
 
-  const handleDelete = (faq, index) => {
-    setCurrentIndex(index);
-    setOpenDelete(true);
+  const confirmDelete = async () => {
+    const updatedList = faqs.filter((f) => f.id !== faqToDelete.id);
+    await updateFAQ({
+      id: pageId,
+      credentials: { title: "FAQ", slug: "faq", content: updatedList },
+    });
+    setFaqs(updatedList);
+    setFaqToDelete(null);
+    refetch();
   };
 
-  const confirmDelete = () => {
-    const updatedFaqs = faqsData.filter((_, i) => i !== currentIndex);
-    setFaqsData(updatedFaqs);
-    setOpenDelete(false);
+  const handleAdded = (newList) => {
+    setFaqs(newList);
+    refetch();
   };
 
   return (
@@ -69,10 +89,7 @@ const FAQ = () => {
               fontSize: "12px",
               textTransform: "none",
             }}
-            onClick={() => {
-              setFormDataAdd({ question: "", answer: "" });
-              setOpenAdd(true);
-            }}
+            onClick={() => setOpenAdd(true)}
           >
             Add New FAQ
           </Button>
@@ -84,7 +101,6 @@ const FAQ = () => {
         sx={{
           py: { xs: 3, sm: 5 },
           px: { xs: 2, sm: 3 },
-          position: "relative",
           borderRadius: "8px",
           backgroundColor: "#fff",
           mt: "10px",
@@ -101,51 +117,45 @@ const FAQ = () => {
         </Typography>
 
         <Box display="flex" justifyContent="center" flexDirection="column">
-          <FAQList
-            faqs={faqsData}
-            expanded={expanded}
-            handleChange={handleChange}
-            showEditDeleteIcons={true}
-            onEdit={handleEdit}
-            onDelete={handleDelete}
-          />
+          {!isLoading && faqs.length > 0 ? (
+            <FAQList
+              faqs={faqs}
+              showEditDeleteIcons
+              onEdit={handleEdit}
+              onDelete={handleDelete}
+            />
+          ) : (
+            <Typography align="center" color="gray">
+              No FAQ Found
+            </Typography>
+          )}
         </Box>
       </Container>
 
       <DeleteModal
-        open={openDelete}
-        handleClose={() => setOpenDelete(false)}
-        handleCancel={() => setOpenDelete(false)}
+        open={!!faqToDelete}
+        handleClose={() => setFaqToDelete(null)}
+        handleCancel={() => setFaqToDelete(null)}
         handleConfirm={confirmDelete}
         heading="Are you sure you want to delete this FAQ?"
         confirmText="Delete"
       />
-      <FAQModal
+
+      <AddFAQModal
         open={openAdd}
         onClose={() => setOpenAdd(false)}
-        onSubmit={() => {
-          setFaqsData([...faqsData, formDataAdd]);
-          setOpenAdd(false);
-        }}
-        formData={formDataAdd}
-        setFormData={setFormDataAdd}
-        title="Add New FAQ"
-        buttonText="Add FAQ"
+        faqList={faqs}
+        pageId={pageId}
+        onAdded={handleAdded}
       />
 
-      <FAQModal
-        open={openEdit}
-        onClose={() => setOpenEdit(false)}
-        onSubmit={() => {
-          const updatedFaqs = [...faqsData];
-          updatedFaqs[currentIndex] = formData;
-          setFaqsData(updatedFaqs);
-          setOpenEdit(false);
-        }}
-        formData={formData}
-        setFormData={setFormData}
-        title="Edit FAQ"
-        buttonText="Save"
+      <EditFAQModal
+        open={!!editingFaq}
+        onClose={() => setEditingFaq(null)}
+        faq={editingFaq}
+        faqList={faqs}
+        pageId={pageId}
+        onUpdated={handleUpdate}
       />
     </>
   );

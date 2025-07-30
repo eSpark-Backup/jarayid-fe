@@ -7,6 +7,7 @@ import {
   IconButton,
   useTheme,
   useMediaQuery,
+  CircularProgress,
 } from "@mui/material";
 import ButtonUp from "../../assets/icons/button-close.svg";
 import ButtonDown from "../../assets/icons/button-open.svg";
@@ -21,9 +22,26 @@ const FAQList = ({
   showEditDeleteIcons = false,
   onEdit,
   onDelete,
+  isLoading,
 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
+
+  if (isLoading) {
+    return (
+      <Box display="flex" justifyContent="center" mt={3}>
+        <CircularProgress />
+      </Box>
+    );
+  }
+
+  if (!faqs || faqs.length === 0) {
+    return (
+      <Typography align="center" color="textSecondary" mt={3}>
+        No FAQs available.
+      </Typography>
+    );
+  }
 
   return (
     <Box
@@ -37,7 +55,7 @@ const FAQList = ({
     >
       {faqs.map((faq, index) => (
         <Accordion
-          key={index}
+          key={faq.id || index}
           expanded={expanded === index}
           onChange={handleChange(index)}
           elevation={0}
@@ -135,7 +153,7 @@ const FAQList = ({
                 <IconButton
                   onClick={(e) => {
                     e.stopPropagation();
-                    onEdit?.(faq, index);
+                    onEdit?.(faq);
                   }}
                   sx={{ "&:hover": { backgroundColor: "#fff" } }}
                 >
@@ -144,7 +162,7 @@ const FAQList = ({
                 <IconButton
                   onClick={(e) => {
                     e.stopPropagation();
-                    onDelete?.(faq, index);
+                    onDelete?.(faq);
                   }}
                   sx={{ "&:hover": { backgroundColor: "#fff" } }}
                 >
