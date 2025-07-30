@@ -7,6 +7,7 @@ import {
   IconButton,
   useTheme,
   useMediaQuery,
+  CircularProgress,
 } from "@mui/material";
 import ButtonUp from "../../assets/icons/button-close.svg";
 import ButtonDown from "../../assets/icons/button-open.svg";
@@ -28,9 +29,9 @@ const FAQList = ({
 
   if (isLoading) {
     return (
-      <Typography align="center" mt={3}>
-        Loading FAQs...
-      </Typography>
+      <Box display="flex" justifyContent="center" mt={3}>
+        <CircularProgress />
+      </Box>
     );
   }
 
@@ -152,7 +153,7 @@ const FAQList = ({
                 <IconButton
                   onClick={(e) => {
                     e.stopPropagation();
-                    onEdit?.(faq); 
+                    onEdit?.(faq);
                   }}
                   sx={{ "&:hover": { backgroundColor: "#fff" } }}
                 >
@@ -161,7 +162,7 @@ const FAQList = ({
                 <IconButton
                   onClick={(e) => {
                     e.stopPropagation();
-                    onDelete?.(faq); 
+                    onDelete?.(faq);
                   }}
                   sx={{ "&:hover": { backgroundColor: "#fff" } }}
                 >

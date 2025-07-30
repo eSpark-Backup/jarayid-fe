@@ -1,17 +1,20 @@
 import { useEffect, useState } from "react";
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
-  TextField,
-  Box,
-} from "@mui/material";
+import { Box, FormControl, InputLabel, OutlinedInput } from "@mui/material";
 import { toast } from "react-toastify";
-import { Button } from "../../../components";
+import GlobalModal from "../../../components/global-modal";
+import { useUpdatePageMutation } from "../../../services/static-pages";
 
-const EditFAQModal = ({ open, onClose, onSubmit, faq }) => {
+const EditFAQModal = ({
+  open,
+  onClose,
+  faq,
+  index,
+  faqList,
+  pageId,
+  onUpdated,
+}) => {
   const [formData, setFormData] = useState({ question: "", answer: "" });
+  const [updateFAQ, { isLoading }] = useUpdatePageMutation();
 
   useEffect(() => {
     if (faq) setFormData(faq);
@@ -21,58 +24,64 @@ const EditFAQModal = ({ open, onClose, onSubmit, faq }) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSave = () => {
+  const handleSave = async () => {
     if (!formData.question.trim() || !formData.answer.trim()) {
       toast.error("Please fill in all fields");
       return;
     }
 
-    onSubmit(formData); 
-    onClose();
+    try {
+      const updatedList = [...faqList];
+      updatedList[index] = formData;
+
+      await updateFAQ({
+        id: pageId,
+        credentials: { title: "FAQ", slug: "faq", content: updatedList },
+      }).unwrap();
+
+      toast.success("FAQ updated successfully!");
+      onUpdated?.(updatedList);
+      onClose();
+    } catch (err) {
+      toast.error("Failed to update FAQ");
+    }
   };
 
   return (
-    <Dialog open={open} onClose={onClose} maxWidth="sm" fullWidth>
-      <DialogTitle>Edit FAQ</DialogTitle>
-      <DialogContent>
-        <Box display="flex" flexDirection="column" gap={2} mt={1}>
-          <TextField
+    <GlobalModal
+      open={open}
+      onClose={onClose}
+      onSubmit={handleSave}
+      title="Edit FAQ"
+      submitText="Save Changes"
+      loading={isLoading}
+    >
+      <Box display="flex" flexDirection="column" gap={2} mt={1}>
+        <FormControl fullWidth>
+          <InputLabel htmlFor="edit-question">Question</InputLabel>
+          <OutlinedInput
+            id="edit-question"
             label="Question"
             name="question"
             value={formData.question}
             onChange={handleChange}
-            fullWidth
           />
-          <TextField
+        </FormControl>
+
+        <FormControl fullWidth>
+          <InputLabel htmlFor="edit-answer">Answer</InputLabel>
+          <OutlinedInput
+            id="edit-answer"
             label="Answer"
             name="answer"
             value={formData.answer}
             onChange={handleChange}
-            fullWidth
             multiline
             rows={4}
           />
-        </Box>
-      </DialogContent>
-      <DialogActions sx={{ px: 3, pb: 2 }}>
-        <Button
-          onClick={onClose}
-          variant="outlined"
-          sx={{
-            "&:hover": {
-              backgroundColor: "transparent",
-              color: "#0056b3",
-            },
-          }}
-        >
-          Cancel
-        </Button>
-
-        <Button onClick={handleSave} variant="gradient">
-          Save Changes
-        </Button>
-      </DialogActions>
-    </Dialog>
+        </FormControl>
+      </Box>
+    </GlobalModal>
   );
 };
 
