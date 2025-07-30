@@ -13,9 +13,10 @@ import { useTranslation } from "react-i18next";
 import { usePostCommentMutation } from "../../services/feed";
 import { useLocation } from "react-router-dom";
 import { toast } from "react-toastify";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { logout } from "../../store/slices/auth";
 
 dayjs.extend(relativeTime);
 const mockUser = {
@@ -34,32 +35,9 @@ const CommentBox = ({ data, total, hasMore, handleMore }) => {
   const { pathname } = useLocation();
   const { user } = useSelector((state) => state.auth);
   const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    // const initialComments = [
-    //   {
-    //     id: 1,
-    //     name: "Ayaan",
-    //     avatar: "https://i.pravatar.cc/150?img=1",
-    //     text: t("Comments.initial.0"),
-    //     date: "2 hours ago",
-    //   },
-    //   {
-    //     id: 2,
-    //     name: "Sara",
-    //     avatar: "https://i.pravatar.cc/150?img=12",
-    //     text: t("Comments.initial.1"),
-    //     date: "1 hour ago",
-    //   },
-    //   {
-    //     id: 3,
-    //     name: "Ali",
-    //     avatar: "https://i.pravatar.cc/150?img=8",
-    //     text: t("Comments.initial.2"),
-    //     date: t("Comments.justNow"),
-    //   },
-    // ];
-
     if (data?.length > 0) {
       setComments((prevComments) => [...prevComments, ...data]);
     } else {
@@ -94,7 +72,12 @@ const CommentBox = ({ data, total, hasMore, handleMore }) => {
       setNewComment("");
       console.log("Comment added:", response);
     } catch (error) {
-      console.error("Failed to post comment:", error);
+      console.error("Failed to post comment:", error?.data?.message);
+      if (error?.data?.message === "You are banned from commenting") {
+        toast.error(error?.data?.message);
+        dispatch(logout());
+        setNewComment("");
+      }
     }
   };
 
@@ -115,7 +98,7 @@ const CommentBox = ({ data, total, hasMore, handleMore }) => {
           alignItems="flex-start"
           mb={1}
         >
-          <Avatar src={mockUser?.avatar} />
+          <Avatar src={user?.image} alt="User" />
           <TextField
             variant="outlined"
             fullWidth

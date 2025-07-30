@@ -40,18 +40,12 @@ const ArticleDetails = () => {
   const [comments, setComments] = useState([]);
   const [totalComments, setTotalComments] = useState(0);
   const [commentsPage, setCommentsPage] = useState(1);
-  const { data, isLoading } = useGetArticleByIdQuery(pathname, {
+  const { data, isLoading, isFetching } = useGetArticleByIdQuery(pathname, {
     skip: !pathname,
+    refetchOnMountOrArgChange: true,
+    refetchOnFocus: true,
+    refetchOnReconnect: true,
   });
-
-  useEffect(() => {
-    if (state?.scrollToOffset) {
-      window.scrollTo({
-        top: 100,
-        behavior: "smooth",
-      });
-    }
-  }, []);
 
   const hasMorePages = commentsPage < Math.ceil(totalComments / 3);
 
@@ -82,15 +76,15 @@ const ArticleDetails = () => {
         const article = data?.data?.article;
         let translatedTitle = article?.title;
 
-        const isTitleArabic = /[\u0600-\u06FF]/.test(article?.title); // Detect Arabic characters
+        // const isTitleArabic = /[\u0600-\u06FF]/.test(article?.title);
 
-        if (article?.title) {
-          if (language === "ar" && !isTitleArabic) {
-            translatedTitle = await translateText(article.title, "en", "ar");
-          } else if (language === "en" && isTitleArabic) {
-            translatedTitle = await translateText(article.title, "ar", "en");
-          }
-        }
+        // if (article?.title) {
+        //   if (language === "ar" && !isTitleArabic) {
+        //     translatedTitle = await translateText(article.title, "en", "ar");
+        //   } else if (language === "en" && isTitleArabic) {
+        //     translatedTitle = await translateText(article.title, "ar", "en");
+        //   }
+        // }
 
         setArticleData({
           ...articleData,
@@ -108,21 +102,25 @@ const ArticleDetails = () => {
   }, [data, language]);
 
   useEffect(() => {
+    setArticleData({});
+  }, [pathname]);
+
+  useEffect(() => {
     const translateHeadlines = async () => {
       if (trendingArticles) {
         const translatedArticles = await Promise.all(
           trendingArticles?.data?.articles?.map(async (item) => {
             let headline = item?.title;
 
-            const isArabic = /[\u0600-\u06FF]/.test(headline);
+            // const isArabic = /[\u0600-\u06FF]/.test(headline);
 
-            if (language === "ar" && !isArabic) {
-              headline = await translateText(item?.title, "en", "ar");
-            }
+            // if (language === "ar" && !isArabic) {
+            //   headline = await translateText(item?.title, "en", "ar");
+            // }
 
-            if (language === "en" && isArabic) {
-              headline = await translateText(item?.title, "ar", "en");
-            }
+            // if (language === "en" && isArabic) {
+            //   headline = await translateText(item?.title, "ar", "en");
+            // }
 
             return {
               id: item?.id,
@@ -174,7 +172,7 @@ const ArticleDetails = () => {
               src={newsIcon}
               alt="news-logo"
             />
-            {isLoading ? (
+            {isLoading || isFetching ? (
               <Skeleton variant="text" />
             ) : (
               <Typography
@@ -192,7 +190,7 @@ const ArticleDetails = () => {
               </Typography>
             )}
           </Stack>
-          {isLoading ? (
+          {isLoading || isFetching ? (
             <Skeleton variant="text" />
           ) : (
             <Typography
@@ -211,7 +209,7 @@ const ArticleDetails = () => {
             </Typography>
           )}
         </Box>
-        {isLoading ? (
+        {(isLoading || isFetching) && !articleData?.slides ? (
           <Skeleton
             variant="rectangular"
             sx={{
@@ -232,7 +230,7 @@ const ArticleDetails = () => {
           }}
         >
           <Box sx={{ padding: "0px 8px" }}>
-            {isLoading ? (
+            {isLoading || isFetching ? (
               <Skeleton variant="text" />
             ) : (
               <Typography
@@ -344,7 +342,7 @@ const ArticleDetails = () => {
                 <Skeleton
                   key={`skeleton-${index}`}
                   variant="rounded"
-                  width="90%"
+                  width="100%"
                   height={143}
                   sx={{ borderRadius: "9px" }}
                 />
@@ -401,7 +399,7 @@ const ArticleDetails = () => {
                 src={newsIcon}
                 alt="news-logo"
               />
-              {isLoading ? (
+              {isLoading || isFetching ? (
                 <Skeleton variant="text" />
               ) : (
                 <Typography

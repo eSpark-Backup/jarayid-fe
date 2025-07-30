@@ -24,7 +24,7 @@ export const translateText = async (text, from = "en", to = "ar") => {
     const response = await fetch(
       `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
         text
-      )}&langpair=${from}|${to}&de=aniwellexchange@gmail.com`
+      )}&langpair=${from}|${to}&de=aniwellxchange@gmail.com`
     );
 
     const data = await response.json();

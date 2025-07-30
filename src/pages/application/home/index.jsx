@@ -34,12 +34,13 @@ import { forwardArrow, settingsWhite } from "../../../assets";
 import {
   useGetArticlesQuery,
   useGetCategoriesQuery,
+  useGetShortsQuery,
 } from "../../../services/feed";
 import { getYouTubeEmbedUrl, translateText } from "../../../utils";
 
 const Home = () => {
   const { t } = useTranslation();
-  const [activeCategory, setActiveCategory] = useState("Sport");
+  const [activeCategory, setActiveCategory] = useState("");
   const [searchParams, setSearchParams] = useSearchParams();
   const { user } = useSelector((state) => state.auth);
   const language = useSelector((state) => state.language);
@@ -59,14 +60,19 @@ const Home = () => {
   const [articles, setArticles] = useState([]);
   const [hasNextPage, setHasNextPage] = useState(false);
   const [hasPrevPage, setHasPrevPage] = useState(false);
+  const [translating, setTranslating] = useState(false);
+  const [activeCategoryType, setActiveCategoryType] = useState("");
+  const [shortsPage, setShortsPage] = useState(1);
+  const [shortsCOntent, setShortsContent] = useState([]);
 
   const skeletonArray = new Array(14).fill(null);
 
-  const { data, isLoading } = useGetCategoriesQuery({ type: "COUNTRY" });
+  const { data, isLoading } = useGetCategoriesQuery({});
   const {
     data: articlesData,
     isLoading: articleLoading,
     isFetching,
+    refetch,
   } = useGetArticlesQuery(
     {
       page,
@@ -78,55 +84,33 @@ const Home = () => {
           ? "SPORTS"
           : "POLITICS",
     },
-    { skip: !activeId }
+    { skip: !activeId || !activeCategory }
+  );
+
+  const { data: shortsData, isLoading: shortsLoading } = useGetShortsQuery(
+    { page: shortsPage, categoryId: activeId },
+    { skip: !activeId || activeCategoryType !== "NORMAL" }
   );
 
   useEffect(() => {
-    const fetchAndTranslate = async () => {
+    const fetchData = () => {
       if (!data) return;
 
       const items = data?.data?.items || [];
       const originalNames = items.map((item) => item?.name);
       const originalIds = items.map((item) => item?.id);
 
-      if (language === "ar") {
-        setTranslationLoading(true);
-        try {
-          const translatedNames = await Promise.all(
-            originalNames.map((name) => translateText(name, "en", language))
-          );
+      setCountries(originalNames);
 
-          setCountries(originalNames);
-          setArabicCountries(translatedNames);
+      const initialIndex = queryCountry
+        ? originalNames.indexOf(queryCountry)
+        : 0;
 
-          const initialIndex = queryCountry
-            ? originalNames.indexOf(queryCountry)
-            : 0;
-          setActiveItem(translatedNames[initialIndex] || translatedNames[0]);
-          setActiveId(originalIds[initialIndex] || originalIds[0]);
-        } catch (error) {
-          console.error("Translation failed", error);
-          setCountries(originalNames);
-          setActiveItem(queryCountry || originalNames[0]);
-          setActiveId(
-            items.find(
-              (item) => item.name === (queryCountry || originalNames[0])
-            )?.id
-          );
-        } finally {
-          setTranslationLoading(false);
-        }
-      } else {
-        setCountries(originalNames);
-        setActiveItem(queryCountry || originalNames[0]);
-        setActiveId(
-          items.find((item) => item.name === (queryCountry || originalNames[0]))
-            ?.id
-        );
-      }
+      setActiveItem(originalNames[initialIndex] || originalNames[0]);
+      setActiveId(originalIds[initialIndex] || originalIds[0]);
     };
 
-    fetchAndTranslate();
+    fetchData();
   }, [data, language]);
 
   const handleClick2 = (event) => {
@@ -179,6 +163,7 @@ const Home = () => {
       } else {
         setActiveCategory(item);
         newParams.set("category", item);
+        // refetch();
       }
 
       return newParams;
@@ -187,10 +172,18 @@ const Home = () => {
 
   const handleNextPage = () => {
     setPage(page + 1);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   const handlePrevPage = () => {
     setPage(page - 1);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
   };
 
   useEffect(() => {
@@ -199,74 +192,73 @@ const Home = () => {
     const newParams = new URLSearchParams(searchParams);
     let updated = false;
 
-    if (!queryCategory && categories.length) {
+    // Handle category logic
+    if (newParams.has("category")) {
+      const urlCategory = newParams.get("category");
+      if (urlCategory !== activeCategory) {
+        setActiveCategory(urlCategory);
+      }
+    } else if (categories.length) {
       newParams.set("category", "Sport");
+      setActiveCategory("Sport");
       updated = true;
     }
 
-    if (!queryCountry && countries[0]) {
+    if (newParams.has("country")) {
+      const urlCountry = newParams.get("country");
+      setChannels(generalCategories?.includes(urlCountry));
+    }
+
+    // Handle country logic
+    else if (!newParams.has("country") && countries[0]) {
       newParams.set("country", countries[0]);
+      setChannels(generalCategories?.includes(countries[0]));
       updated = true;
     }
 
     if (updated) {
       setSearchParams(newParams, { replace: true });
     }
-  }, [countries, categories]);
+  }, [countries, categories, searchParams, activeCategory]);
 
   useEffect(() => {
-    const fetchData = async () => {
+    const fetchData = () => {
       if (!data?.data || !activeItem) return;
 
-      const targetCountry =
-        language === "ar"
-          ? countries[arabicCountries.indexOf(activeItem)]
-          : activeItem;
+      const targetCountry = activeItem;
 
       const activeData = data.data.items.filter(
         (item) => item.name.toLowerCase() === targetCountry?.toLowerCase()
       );
 
-      let activeYoutube = activeData[0]?.youtubeContents?.map((item) => ({
+      const activeYoutube = activeData[0]?.youtubeContents?.map((item) => ({
         heading: item.title,
         videoUrl: item.youtubeUrl,
       }));
-
-      if (language === "ar" && activeYoutube) {
-        setVideosLoading(true);
-        activeYoutube = await Promise.all(
-          activeYoutube.map(async (video) => ({
-            ...video,
-            heading: await translateText(video.heading),
-          }))
-        );
-        setVideosLoading(false);
-      }
 
       setYoutubeVideos(activeYoutube);
     };
 
     fetchData();
-  }, [activeItem, language]);
+  }, [activeItem]);
 
   useEffect(() => {
     const translateHeadlines = async () => {
       if (articlesData) {
+        setTranslating(true);
         const translatedArticles = await Promise.all(
           articlesData?.data?.items?.map(async (item) => {
             let headline = item?.title;
 
-            const isArabic = /[\u0600-\u06FF]/.test(headline);
+            // const isArabic = /[\u0600-\u06FF]/.test(headline);
 
-            // Translate English → Arabic
-            if (language === "ar" && !isArabic) {
-              headline = await translateText(item?.title, "en", "ar");
-            }
+            // if (language === "ar" && !isArabic) {
+            //   headline = await translateText(item?.title, "en", "ar");
+            // }
 
-            // Translate Arabic → English
-            if (language === "en" && isArabic) {
-              headline = await translateText(item?.title, "ar", "en");
-            }
+            // if (language === "en" && isArabic) {
+            //   headline = await translateText(item?.title, "ar", "en");
+            // }
 
             return {
               id: item?.id,
@@ -278,7 +270,7 @@ const Home = () => {
             };
           })
         );
-
+        setTranslating(false);
         setArticles(translatedArticles);
         setHasNextPage(articlesData?.data?.pagination?.hasNextPage);
         setHasPrevPage(articlesData?.data?.pagination?.hasPrevPage);
@@ -287,6 +279,23 @@ const Home = () => {
 
     translateHeadlines();
   }, [articlesData, language]);
+
+  useEffect(() => {
+    if (!data || !activeItem) {
+      return;
+    }
+    const items = data?.data?.items;
+    const item = items?.filter(
+      (cat) => cat?.name?.toLowerCase() === activeItem?.toLowerCase()
+    );
+    setActiveCategoryType(item[0]?.type);
+  }, [activeItem, data]);
+
+  useEffect(() => {
+    if (shortsData) {
+      console.log(shortsData);
+    }
+  }, [shortsData]);
 
   return (
     <>
@@ -504,27 +513,38 @@ const Home = () => {
             alignItems: "center",
           }}
         >
-          {categories?.map((item, index) => (
-            <Chip
-              label={t(item)}
-              variant="rounded"
-              key={index}
-              sx={{
-                background:
-                  activeCategory === item
-                    ? "linear-gradient(180deg, #007BFF 33%, #004A99 100%)"
-                    : "#F3EEEE",
-                color: activeCategory === item ? "white" : "#000000",
-                border:
-                  activeCategory === item ? "none" : "1px solid #01000142",
-                width: { xs: "100px", md: "157px", lg: "200px" },
-                fontSize: { xs: "11px", md: "14px", lg: "17.96px" },
-                fontWeight: "600",
-              }}
-              onClick={() => handleChipClick(item, "category")}
-              disableRipple
-            />
-          ))}
+          {activeCategory === ""
+            ? [...Array(3)]?.map((item) => (
+                <Skeleton
+                  variant="rectangular"
+                  height={32}
+                  sx={{
+                    borderRadius: "0px",
+                    width: { xs: "100px", md: "157px", lg: "200px" },
+                  }}
+                />
+              ))
+            : categories?.map((item, index) => (
+                <Chip
+                  label={t(item)}
+                  variant="rounded"
+                  key={index}
+                  sx={{
+                    background:
+                      activeCategory === item
+                        ? "linear-gradient(180deg, #007BFF 33%, #004A99 100%)"
+                        : "#F3EEEE",
+                    color: activeCategory === item ? "white" : "#000000",
+                    border:
+                      activeCategory === item ? "none" : "1px solid #01000142",
+                    width: { xs: "100px", md: "157px", lg: "200px" },
+                    fontSize: { xs: "11px", md: "14px", lg: "17.96px" },
+                    fontWeight: "600",
+                  }}
+                  onClick={() => handleChipClick(item, "category")}
+                  disableRipple
+                />
+              ))}
         </Box>
         <Box
           sx={{
@@ -689,7 +709,7 @@ const Home = () => {
             />
           </Grid>
 
-          {showChannels && (
+          {activeCategoryType === "NORMAL" && (
             <Grid
               container
               columnSpacing={1}
@@ -771,7 +791,7 @@ const Home = () => {
               },
             }}
           >
-            {showChannels && (
+            {activeCategoryType === "NORMAL" && (
               <Grid
                 container
                 columnSpacing={1}
@@ -818,7 +838,7 @@ const Home = () => {
                 p: "15px",
               }}
             >
-              {articleLoading
+              {articleLoading || translating
                 ? [...Array(5)].map((_, index) => (
                     <Skeleton
                       key={`skeleton-${index}`}

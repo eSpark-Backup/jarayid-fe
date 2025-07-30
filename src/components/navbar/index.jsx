@@ -135,7 +135,7 @@ const Navbar = () => {
             loading="lazy"
             src={logo}
             sx={{ width: { md: "170px", lg: "auto" }, cursor: "pointer" }}
-            onClick={() => navigate("/?category=Sport&country=Lebanon")}
+            onClick={() => navigate("/")}
           />
           <Box
             sx={{ display: "flex", flexDirection: "column", rowGap: "15px" }}
@@ -190,7 +190,7 @@ const Navbar = () => {
                           textOverflow: "ellipsis",
                           width: "70px",
                           whiteSpace: "nowrap",
-                          lineHeight: "10px"
+                          lineHeight: "10px",
                         }}
                       >
                         {user?.name || "Your name"}

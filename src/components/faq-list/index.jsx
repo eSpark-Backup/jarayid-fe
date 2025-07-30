@@ -35,7 +35,7 @@ const FAQList = ({
         textAlign: isArabic ? "right" : "left",
       }}
     >
-      {faqs.map((faq, index) => (
+      {faqs?.map((faq, index) => (
         <Accordion
           key={index}
           expanded={expanded === index}

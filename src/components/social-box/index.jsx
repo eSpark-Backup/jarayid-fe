@@ -32,7 +32,6 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
   const handleToggle = async () => {
     try {
       const response = await toggleReadLater({ id }).unwrap();
-      console.log("Toggled successfully:", response);
       toast.success(response?.message);
     } catch (error) {
       console.error("Error toggling read later:", error);
@@ -190,13 +189,25 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               loading="lazy"
               sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
             />
-            <Box
-              component={"img"}
-              src={tiktok}
-              alt={"TikTok"}
-              loading="lazy"
-              sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
-            />
+            {shareLinks?.tiktok ? (
+              <a href={shareLinks?.tiktok}>
+                <Box
+                  component={"img"}
+                  src={tiktok}
+                  alt={"TikTok"}
+                  loading="lazy"
+                  sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+                />
+              </a>
+            ) : (
+              <Box
+                component={"img"}
+                src={tiktok}
+                alt={"TikTok"}
+                loading="lazy"
+                sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+              />
+            )}
             {shareLinks?.twitter ? (
               <a href={shareLinks?.twitter}>
                 <Box

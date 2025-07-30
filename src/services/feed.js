@@ -3,11 +3,11 @@ import { api } from "./rtk";
 const FeedApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getCategories: builder.query({
-      query: ({ type = "COUNTRY" }) => ({
+      query: ({ type }) => ({
         url: `/categories`,
         method: "GET",
         credentials: "include",
-        params: { type },
+        params: { ...(type && { type }) },
       }),
     }),
     getArticles: builder.query({
@@ -45,6 +45,7 @@ const FeedApi = api.injectEndpoints({
         method: "POST",
         credentials: "include",
       }),
+      invalidatesTags: ["read-later"],
     }),
     trendingArticles: builder.query({
       query: ({ page = 1, limit = 10, period = "7d" }) => ({
@@ -76,6 +77,26 @@ const FeedApi = api.injectEndpoints({
         credentials: "include",
       }),
     }),
+    getReadLaterArticles: builder.query({
+      query: ({ page = 1, limit = 10 }) => ({
+        url: `/articles/feeds/read-later`,
+        method: "GET",
+        params: {
+          page,
+          limit,
+        },
+        credentials: "include",
+      }),
+      providesTags: ["read-later"],
+    }),
+    getShorts: builder.query({
+      query: ({ page = 1, limit = 6, contentType = "SHORTS", categoryId }) => ({
+        url: "/youtube-content",
+        method: "GET",
+        params: { page, limit, contentType, categoryId },
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -87,4 +108,6 @@ export const {
   useTrendingArticlesQuery,
   useGetCommentsQuery,
   usePostCommentMutation,
+  useGetReadLaterArticlesQuery,
+  useGetShortsQuery,
 } = FeedApi;

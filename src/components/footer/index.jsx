@@ -9,6 +9,8 @@ import { useState } from "react";
 import DynamicModal from "../modal";
 import ContactModal from "../contact-modal";
 import { useTrendingArticlesQuery } from "../../services/feed";
+import { useGetAllPagesQuery } from "../../services/static-pages";
+import { translateText } from "../../utils";
 
 const Footer = () => {
   const language = useSelector((state) => state.language);
@@ -16,6 +18,11 @@ const Footer = () => {
   const navigate = useNavigate();
   const [contactModal, setContactModal] = useState(false);
   const { data, isLoading } = useTrendingArticlesQuery({ page: 1, limit: 3 });
+  const [footerData, setFooterData] = useState({});
+
+  const { data: staticPageData, isLoading: staticPageLoading } =
+    useGetAllPagesQuery({ search: "about-us" });
+
   const [articles, setArticles] = useState([]);
 
   const handleChoice = (item) => {
@@ -31,16 +38,45 @@ const Footer = () => {
   };
 
   useEffect(() => {
-    if (data) {
-      const trending = data?.data?.articles?.map((item) => ({
-        image: item?.image,
-        title: item?.title,
-        summaryArabic: item?.summaryArabic,
-        summaryEnglish: item?.summaryEnglish,
-      }));
-      setArticles(trending);
+    if (staticPageData) {
+      setFooterData({
+        ...footerData,
+        content: staticPageData?.data?.items[0]?.content,
+      });
     }
-  }, [data]);
+  }, [staticPageData]);
+
+  useEffect(() => {
+    const updateTrendingArticles = async () => {
+      if (!data) return;
+
+      // const isArabic = (text) => /[\u0600-\u06FF]/.test(text);
+      // const isEnglish = (text) => /^[A-Za-z0-9\s.,'":!?()&%$#@\-]*$/.test(text);
+
+      const articles = await Promise.all(
+        data?.data?.articles?.map(async (item) => {
+          let translatedTitle = item?.title;
+
+          // if (language === "ar" && item?.title && isEnglish(item.title)) {
+          //   translatedTitle = await translateText(item.title, "en", "ar");
+          // } else if (language === "en" && item?.title && isArabic(item.title)) {
+          //   translatedTitle = await translateText(item.title, "ar", "en");
+          // }
+
+          return {
+            image: item?.image,
+            title: translatedTitle,
+            summaryArabic: item?.summaryArabic,
+            summaryEnglish: item?.summaryEnglish,
+          };
+        })
+      );
+
+      setArticles(articles);
+    };
+
+    updateTrendingArticles();
+  }, [data, language]);
 
   return (
     <Box
@@ -78,50 +114,58 @@ const Footer = () => {
             alt="Logo"
             loading="lazy"
             style={{ cursor: "pointer" }}
-            onClick={() => navigate("/?category=Sport&country=Lebanon")}
+            onClick={() => navigate("/")}
           />
-          <Typography
-            sx={{
-              fontSize: { xs: "9px", md: "9px", lg: "16px" },
-              color: "#fff",
-              textAlign: language === "ar" ? "right" : "unset",
-            }}
-            component={"p"}
-          >
-            {t("footer1")}
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: { xs: "9px", md: "9px", lg: "16px" },
-              color: "#fff",
-              textAlign: language === "ar" ? "right" : "unset",
-            }}
-            component={"p"}
-          >
-            {t("footer2")}
-          </Typography>
-          <Typography
-            sx={{
-              fontSize: { xs: "9px", md: "9px", lg: "16px" },
-              color: "#fff",
-              textAlign: language === "ar" ? "right" : "unset",
-            }}
-            component={"h3"}
-          >
-            {language === "ar" ? (
-              <>
-                info@example.com: {t("email")}
-                <br />
-                +91 54679865287: {t("phone")}
-              </>
-            ) : (
-              <>
-                {t("email")}: info@example.com
-                <br />
-                {t("phone")}: +91 54679865287
-              </>
-            )}
-          </Typography>
+          {staticPageLoading ? (
+            <Skeleton variant="text" />
+          ) : (
+            <>
+              <Typography
+                sx={{
+                  fontSize: { xs: "9px", md: "9px", lg: "16px" },
+                  color: "#fff",
+                  textAlign: language === "ar" ? "right" : "unset",
+                }}
+                component={"p"}
+              >
+                {t(footerData?.content?.welcomeMessage)}
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: { xs: "9px", md: "9px", lg: "16px" },
+                  color: "#fff",
+                  textAlign: language === "ar" ? "right" : "unset",
+                }}
+                component={"p"}
+              >
+                {t(footerData?.content?.helpingLine)}
+              </Typography>
+              {footerData?.content && (
+                <Typography
+                  sx={{
+                    fontSize: { xs: "9px", md: "9px", lg: "16px" },
+                    color: "#fff",
+                    textAlign: language === "ar" ? "right" : "unset",
+                  }}
+                  component={"h3"}
+                >
+                  {language === "ar" ? (
+                    <>
+                      {t(footerData?.content?.email)}: {t("email")}
+                      <br />
+                      {t(footerData?.content?.contact)}: {t("phone")}
+                    </>
+                  ) : (
+                    <>
+                      {t("email")}: {t(footerData?.content?.email)}
+                      <br />
+                      {t("phone")}: {t(footerData?.content?.contact)}
+                    </>
+                  )}
+                </Typography>
+              )}
+            </>
+          )}
         </Box>
         <Box sx={{ width: { xs: "100%", md: "28%" } }}>
           <Typography
