@@ -91,7 +91,7 @@ const CommentBox = ({ data, total, hasMore, handleMore }) => {
 
       <Divider sx={{ mb: 3 }} />
 
-      {mockUser.isLoggedIn ? (
+      {user ? (
         <Stack
           direction={{ xs: "column", sm: "row" }}
           spacing={2}

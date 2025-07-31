@@ -52,14 +52,12 @@ const EditSourceModal = () => {
 
   useEffect(() => {
     if (rssData) {
-      console.log(rssData);
       const data = rssData?.data?.items?.map((item) => ({
         id: item?.id,
         link: item?.url,
         img: item?.logo,
         checked: true,
       }));
-      console.log(data);
       setItems(data);
     }
   }, [rssData]);
@@ -108,6 +106,7 @@ const EditSourceModal = () => {
           flexDirection: "column",
           //   rowGap: "10px",
           px: "15px",
+          minHeight: "250px",
         }}
       >
         {isLoading || isFetching

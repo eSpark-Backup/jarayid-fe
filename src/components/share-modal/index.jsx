@@ -67,14 +67,14 @@ const ShareModal = ({ heading }) => {
             <Box
               key={index}
               sx={{
-                display: "flex",
+                display: link ? "flex" : "none",
                 flexDirection: "column",
                 justifyContent: "center",
                 alignItems: "center",
                 rowGap: "7px",
               }}
             >
-              {link ? (
+              {link && (
                 <a
                   href={link}
                   target="_blank"
@@ -111,34 +111,6 @@ const ShareModal = ({ heading }) => {
                     {item?.name}
                   </Typography>
                 </a>
-              ) : (
-                <>
-                  <Box
-                    component={"img"}
-                    src={item?.logo}
-                    sx={{
-                      width: {
-                        xs: "24px",
-                        sm: "32px",
-                        md: "48px",
-                        lg: "69.36px",
-                      },
-                      height: {
-                        xs: "24px",
-                        sm: "32px",
-                        md: "48px",
-                        lg: "69.36px",
-                      },
-                    }}
-                    alt={item?.name}
-                    loading="lazy"
-                  />
-                  <Typography
-                    sx={{ fontSize: "10px", fontWeight: "600", opacity: 0.4 }}
-                  >
-                    {item?.name}
-                  </Typography>
-                </>
               )}
             </Box>
           );

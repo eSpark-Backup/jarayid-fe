@@ -7,7 +7,7 @@ import { useSelector } from "react-redux";
 import { translateText } from "../../../utils";
 
 const ReadLater = () => {
-  const { data, isLoading } = useGetReadLaterArticlesQuery(
+  const { data, isLoading, isFetching } = useGetReadLaterArticlesQuery(
     {
       page: 1,
       limit: 10,
@@ -88,7 +88,7 @@ const ReadLater = () => {
             p: "15px",
           }}
         >
-          {isLoading || translating ? (
+          {isLoading || translating || isFetching ? (
             [...Array(5)].map((_, index) => (
               <Skeleton
                 key={`skeleton-${index}`}

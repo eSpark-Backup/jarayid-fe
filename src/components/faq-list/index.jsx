@@ -37,7 +37,7 @@ const FAQList = ({
 
   if (!faqs || faqs.length === 0) {
     return (
-      <Typography align="center" color="textSecondary" mt={3}>
+      <Typography align="center" color="textSecondary" mt={3} my={5}>
         No FAQs available.
       </Typography>
     );

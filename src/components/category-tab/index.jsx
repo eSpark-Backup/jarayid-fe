@@ -12,6 +12,7 @@ const CategoryDropdown = ({
   selectedText,
   setSelectedText,
   width = "414px",
+  options,
 }) => {
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
 

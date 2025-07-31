@@ -130,7 +130,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
                 }}
               />
             )}
-            <Box
+            {/* <Box
               component="img"
               src={like}
               alt="Like"
@@ -139,7 +139,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
                 height: { xs: "12px", sm: "15px", md: "21px" },
               }}
               loading="lazy"
-            />
+            /> */}
             <a
               href={shareLinks?.twitter}
               target="_blank"
@@ -201,22 +201,16 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
                   sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
                 />
               </a>
-            ) : (
+            ) : null}
+            {!detailPage && (shareLinks?.instagram || myLinks?.instagram) && (
               <Box
                 component={"img"}
-                src={facebook}
-                alt={"Facebook"}
+                src={instagram}
+                alt={"Instagram"}
                 loading="lazy"
                 sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
               />
             )}
-            <Box
-              component={"img"}
-              src={instagram}
-              alt={"Instagram"}
-              loading="lazy"
-              sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
-            />
             {shareLinks?.tiktok || myLinks?.tiktok ? (
               <a href={shareLinks?.tiktok || myLinks?.tiktok}>
                 <Box
@@ -227,15 +221,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
                   sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
                 />
               </a>
-            ) : (
-              <Box
-                component={"img"}
-                src={tiktok}
-                alt={"TikTok"}
-                loading="lazy"
-                sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
-              />
-            )}
+            ) : null}
             {shareLinks?.twitter || myLinks?.twitter ? (
               <a href={shareLinks?.twitter || myLinks?.twitter}>
                 <Box
@@ -246,15 +232,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
                   sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
                 />
               </a>
-            ) : (
-              <Box
-                component={"img"}
-                src={twitter}
-                alt={"Twitter"}
-                loading="lazy"
-                sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
-              />
-            )}
+            ) : null}
             {shareLinks?.whatsapp || myLinks?.whatsapp ? (
               <a href={shareLinks?.whatsapp || myLinks?.whatsapp}>
                 <Box
@@ -265,15 +243,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
                   sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
                 />
               </a>
-            ) : (
-              <Box
-                component={"img"}
-                src={whatsapp}
-                alt={"Whatsapp"}
-                loading="lazy"
-                sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
-              />
-            )}
+            ) : null}
           </>
         )}
       </Box>

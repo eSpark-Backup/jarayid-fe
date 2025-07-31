@@ -24,10 +24,8 @@ import { translateText } from "../../../utils";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ar";
-import localizedFormat from "dayjs/plugin/localizedFormat";
 
 dayjs.extend(relativeTime);
-dayjs.extend(localizedFormat);
 
 const ArticleDetails = () => {
   const isTablet = useMediaQuery("(max-width:800px)");
@@ -92,7 +90,7 @@ const ArticleDetails = () => {
           summaryArabic: article?.summaryArabic,
           summaryEnglish: article?.summaryEnglish,
           slides: [article?.image],
-          time: article?.publishedAt,
+          time: article?.createdAt,
           shareLinks: article?.shareLinks,
         });
       }
@@ -186,7 +184,7 @@ const ArticleDetails = () => {
                 Time:{" "}
                 {dayjs(articleData?.time)
                   .locale(language === "ar" ? "ar" : "en")
-                  .format("LT")}
+                  .fromNow()}
               </Typography>
             )}
           </Stack>
@@ -413,7 +411,7 @@ const ArticleDetails = () => {
                   Time:{" "}
                   {dayjs(articleData?.time)
                     .locale(language === "ar" ? "ar" : "en")
-                    .format("LT")}
+                    .fromNow()}
                 </Typography>
               )}
             </Stack>

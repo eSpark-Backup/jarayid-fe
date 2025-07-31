@@ -64,6 +64,8 @@ const Home = () => {
   const [activeCategoryType, setActiveCategoryType] = useState("");
   const [shortsPage, setShortsPage] = useState(1);
   const [shortsCOntent, setShortsContent] = useState([]);
+  const [hasFetched, setHasFetched] = useState(false);
+  const [hasMoreShorts, setHasMoreSHorts] = useState(false);
 
   const skeletonArray = new Array(14).fill(null);
 
@@ -166,6 +168,7 @@ const Home = () => {
         // refetch();
       }
       setPage(1);
+      refetch();
       return newParams;
     });
   };
@@ -234,6 +237,7 @@ const Home = () => {
       const activeYoutube = activeData[0]?.youtubeContents?.map((item) => ({
         heading: item.title,
         videoUrl: item.youtubeUrl,
+        type: item?.contentType,
       }));
 
       setYoutubeVideos(activeYoutube);
@@ -274,6 +278,7 @@ const Home = () => {
         setArticles(translatedArticles);
         setHasNextPage(articlesData?.data?.pagination?.hasNextPage);
         setHasPrevPage(articlesData?.data?.pagination?.hasPrevPage);
+        setHasFetched(true);
       }
     };
 
@@ -293,7 +298,13 @@ const Home = () => {
 
   useEffect(() => {
     if (shortsData) {
-      console.log(shortsData);
+      const data = shortsData?.data?.items?.map((item) => ({
+        name: item?.title,
+        image: item?.thumbnailUrl,
+        link: item?.youtubeUrl,
+      }));
+      setHasMoreSHorts(shortsData?.data?.pagination?.hasNextPage);
+      setShortsContent(data);
     }
   }, [shortsData]);
 
@@ -637,73 +648,80 @@ const Home = () => {
                     </Grid>
                   </React.Fragment>
                 ))
-              : youTubeVideos?.map((item, index) => (
-                  <React.Fragment key={index}>
-                    <Grid
-                      item
-                      sx={{
-                        display: { xs: "block", md: "none" },
-                        width: { xs: "229px", sm: "33%", md: "213px" },
-                        flexShrink: 0,
-                      }}
-                    >
-                      <Typography
-                        sx={{
-                          fontSize: { xs: "14px", md: "27.69px" },
-                          textAlign: "center",
-                          mb: "15px",
-                          fontWeight: "600",
-                        }}
-                        component={"h1"}
-                      >
-                        {item?.heading}
-                      </Typography>
-                      <Box
-                        component="iframe"
-                        src={item?.videoUrl}
-                        sx={{
-                          width: "100%",
-                          height: "455px",
-                          borderRadius: "8px",
-                          boxShadow: "none",
-                        }}
-                      />
-                    </Grid>
+              : youTubeVideos?.map(
+                  (item, index) =>
+                    item?.type !== "SHORTS" && (
+                      <React.Fragment key={index}>
+                        <Grid
+                          item
+                          sx={{
+                            display: { xs: "block", md: "none" },
+                            width: { xs: "229px", sm: "33%", md: "213px" },
+                            flexShrink: 0,
+                          }}
+                        >
+                          <Typography
+                            sx={{
+                              fontSize: { xs: "14px", md: "27.69px" },
+                              textAlign: "center",
+                              mb: "15px",
+                              fontWeight: "600",
+                            }}
+                            component={"h1"}
+                          >
+                            {item?.heading}
+                          </Typography>
+                          <Box
+                            component="iframe"
+                            src={item?.videoUrl}
+                            sx={{
+                              width: "100%",
+                              height: "455px",
+                              borderRadius: "8px",
+                              boxShadow: "none",
+                            }}
+                          />
+                        </Grid>
 
-                    <Grid
-                      item
-                      key={index}
-                      sx={{
-                        flex: "0 0 auto",
-                        display: { xs: "none", md: "block" },
-                        mx: 0.5,
-                      }}
-                      size={{ xs: 6, md: 4 }}
-                    >
-                      <Typography
-                        sx={{
-                          fontSize: { sm: "14px", md: "24.69px", lg: "27px" },
-                          fontWeight: "600",
-                          textAlign: "center",
-                          mb: "15px",
-                        }}
-                        component={"h1"}
-                      >
-                        {item?.heading}
-                      </Typography>
-                      <Box
-                        component="iframe"
-                        src={item?.videoUrl}
-                        sx={{
-                          width: "100%",
-                          height: "455px",
-                          borderRadius: "8px",
-                          boxShadow: "none",
-                        }}
-                      />
-                    </Grid>
-                  </React.Fragment>
-                ))}
+                        <Grid
+                          item
+                          key={index}
+                          sx={{
+                            flex: "0 0 auto",
+                            display: { xs: "none", md: "block" },
+                            mx: 0.5,
+                          }}
+                          size={{ xs: 6, md: 4 }}
+                        >
+                          <Typography
+                            sx={{
+                              fontSize: {
+                                sm: "14px",
+                                md: "24.69px",
+                                lg: "27px",
+                              },
+                              fontWeight: "600",
+                              textAlign: "center",
+                              mb: "15px",
+                            }}
+                            component={"h1"}
+                          >
+                            {item?.heading}
+                          </Typography>
+                          <Box
+                            component="iframe"
+                            src={item?.videoUrl}
+                            sx={{
+                              width: "100%",
+                              height: "455px",
+                              borderRadius: "8px",
+                              boxShadow: "none",
+                            }}
+                          />
+                        </Grid>
+                      </React.Fragment>
+                    )
+                )}
             <Box
               sx={{ display: { xs: "none", md: "block" }, flex: "0 0 auto" }}
             />
@@ -717,37 +735,81 @@ const Home = () => {
               sx={{
                 mt: "20px",
                 display: { xs: "none", md: "flex" },
-                justifyContent: "center",
+                // justifyContent: "center",
                 userSelect: "none",
+                justifyContent: language === "ar" ? "flex-end" : "flex-start",
               }}
             >
-              {channels?.map((item, index) => (
-                <Grid
-                  size={{ xs: 6, md: 4 }}
-                  sx={{
-                    display: "flex",
-                    flexDirection: "column",
-                    alignItems: "center",
-                    rowGap: "15px",
-                  }}
-                  key={index}
-                >
-                  <Box
-                    component={"img"}
-                    src={item?.image}
-                    sx={{ borderRadius: "7.1px", width: "100%" }}
-                    alt="News Image"
-                    loading="lazy"
-                  />
-                  <Typography
-                    sx={{ fontSize: "15.09px", fontWeight: "600" }}
-                    component={"h2"}
-                  >
-                    {item?.name}
-                  </Typography>
-                </Grid>
-              ))}
+              {shortsLoading
+                ? Array.from({ length: 6 }).map((_, index) => (
+                    <Grid
+                      key={index}
+                      size={{ xs: 6, md: 4 }}
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        rowGap: "15px",
+                      }}
+                    >
+                      <Skeleton
+                        variant="rectangular"
+                        width="100%"
+                        height={150}
+                        sx={{ borderRadius: "7.1px" }}
+                      />
+                      <Skeleton variant="text" width="80%" height={30} />
+                    </Grid>
+                  ))
+                : shortsCOntent?.map((item, index) => (
+                    <Grid
+                      key={index}
+                      size={{ xs: 6, md: 4 }}
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        rowGap: "15px",
+                      }}
+                    >
+                      <a
+                        href={item?.link}
+                        target="_blank"
+                        style={{ textDecoration: "none" }}
+                      >
+                        <Box
+                          component={"img"}
+                          src={item?.image}
+                          sx={{ borderRadius: "7.1px", width: "100%" }}
+                          alt="News Image"
+                          loading="lazy"
+                        />
+                        <Typography
+                          sx={{
+                            fontSize: "15.09px",
+                            fontWeight: "600",
+                            textDecoration: "none",
+                            textAlign: "center",
+                            color: "black",
+                          }}
+                          component={"h2"}
+                        >
+                          {item?.name}
+                        </Typography>
+                      </a>
+                    </Grid>
+                  ))}
             </Grid>
+          )}
+          {hasMoreShorts && (
+            <Box sx={{ width: "200px", height: "40px", m: "0 auto" }}>
+              <Button
+                variant="gradient"
+                onClick={() => setShortsPage(shortsPage + 1)}
+              >
+                {t("Next Page")}
+              </Button>
+            </Box>
           )}
         </Box>
         {isFetching && (
@@ -802,32 +864,73 @@ const Home = () => {
                   p: "15px",
                 }}
               >
-                {channels?.map((item, index) => (
-                  <Grid
-                    size={{ xs: 6, md: 4 }}
-                    sx={{
-                      display: "flex",
-                      flexDirection: "column",
-                      alignItems: "center",
-                      rowGap: "15px",
-                    }}
-                    key={index}
-                  >
-                    <Box
-                      component={"img"}
-                      src={item?.image}
-                      sx={{ borderRadius: "7.1px", width: "100%" }}
-                      alt="Image"
-                      loading="lazy"
-                    />
-                    <Typography
-                      sx={{ fontSize: "10.09px", fontWeight: "600" }}
-                      component={"h2"}
-                    >
-                      {item?.name}
-                    </Typography>
-                  </Grid>
-                ))}
+                {shortsLoading
+                  ? Array.from({ length: 6 }).map((_, index) => (
+                      <Grid
+                        key={index}
+                        size={{ xs: 6, md: 4 }}
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          rowGap: "15px",
+                        }}
+                      >
+                        <Skeleton
+                          variant="rectangular"
+                          width="100%"
+                          height={150}
+                          sx={{ borderRadius: "7.1px" }}
+                        />
+                        <Skeleton variant="text" width="80%" height={30} />
+                      </Grid>
+                    ))
+                  : shortsCOntent?.map((item, index) => (
+                      <Grid
+                        size={{ xs: 6, md: 4 }}
+                        sx={{
+                          display: "flex",
+                          flexDirection: "column",
+                          alignItems: "center",
+                          rowGap: "15px",
+                        }}
+                        key={index}
+                      >
+                        <Box
+                          component="a"
+                          href={item?.link}
+                          target="_blank"
+                          sx={{
+                            textDecoration: "none",
+                            color: "inherit", // Optional: prevent default blue color
+                          }}
+                        >
+                          <Box
+                            component={"img"}
+                            src={item?.image}
+                            sx={{
+                              borderRadius: "7.1px",
+                              width: "100%",
+                              textDecoration: "none !important",
+                            }}
+                            alt="News Image"
+                            loading="lazy"
+                          />
+                          <Typography
+                            sx={{
+                              fontSize: "15.09px",
+                              fontWeight: "600",
+                              textDecoration: "none !important",
+                              textAlign: "center",
+                              color: "black !important",
+                            }}
+                            component={"h2"}
+                          >
+                            {item?.name}
+                          </Typography>
+                        </Box>
+                      </Grid>
+                    ))}
               </Grid>
             )}
             <Box
@@ -901,7 +1004,8 @@ const Home = () => {
         {!isLoading &&
           !isFetching &&
           Array.isArray(articles) &&
-          articles.length === 0 && (
+          articles.length === 0 &&
+          hasFetched && (
             <Box
               sx={{
                 height: "calc(100vh - 600px)",

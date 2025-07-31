@@ -100,10 +100,11 @@ const Navbar = () => {
     } else if (event === "Jarayid Social Media") {
       setSocialModal(true);
       setAnchorEl(null);
-    } else if (event === "Edit New Source") {
-      setEditSource(true);
-      setAnchorEl(null);
     }
+    // else if (event === "Edit New Source") {
+    //   setEditSource(true);
+    //   setAnchorEl(null);
+    // }
   };
 
   const [chatAi, setChatAi] = useState(false);
