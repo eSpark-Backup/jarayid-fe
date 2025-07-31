@@ -97,6 +97,13 @@ const FeedApi = api.injectEndpoints({
         credentials: "include",
       }),
     }),
+    soicalLinks: builder.query({
+      query: ({ page = 1, limit = 10 }) => ({
+        url: "/users/social-media-links",
+        method: "GET",
+        params: { page, limit },
+      }),
+    }),
   }),
 });
 
@@ -110,4 +117,5 @@ export const {
   usePostCommentMutation,
   useGetReadLaterArticlesQuery,
   useGetShortsQuery,
+  useSoicalLinksQuery,
 } = FeedApi;

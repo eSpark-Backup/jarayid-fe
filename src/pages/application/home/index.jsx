@@ -57,7 +57,7 @@ const Home = () => {
   const [videosLoading, setVideosLoading] = useState(false);
   const [activeId, setActiveId] = useState(null);
   const [page, setPage] = useState(1);
-  const [articles, setArticles] = useState([]);
+  const [articles, setArticles] = useState(null);
   const [hasNextPage, setHasNextPage] = useState(false);
   const [hasPrevPage, setHasPrevPage] = useState(false);
   const [translating, setTranslating] = useState(false);
@@ -165,7 +165,7 @@ const Home = () => {
         newParams.set("category", item);
         // refetch();
       }
-
+      setPage(1);
       return newParams;
     });
   };
@@ -898,6 +898,23 @@ const Home = () => {
             </Box>
           </Box>
         )}
+        {!isLoading &&
+          !isFetching &&
+          Array.isArray(articles) &&
+          articles.length === 0 && (
+            <Box
+              sx={{
+                height: "calc(100vh - 600px)",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <Typography sx={{ fontSize: "32px" }}>
+                No Articles Found
+              </Typography>
+            </Box>
+          )}
       </Box>
       <CountryMenu anchorEl={anchorEl2} open={open2} onClose={handleClose2} />
     </>

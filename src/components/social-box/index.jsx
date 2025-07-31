@@ -18,6 +18,7 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
+import { useEffect, useState } from "react";
 
 dayjs.extend(relativeTime);
 
@@ -26,6 +27,8 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
   const language = useSelector((state) => state.language);
   const [toggleReadLater, { isLoading }] = useToggleReadLaterMutation();
   const navigate = useNavigate();
+  const links = useSelector((state) => state.socialLinks.links);
+  const [myLinks, setMyLinks] = useState({});
 
   const toArabicDigits = (str) => str.replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
 
@@ -38,6 +41,31 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
       toast.error("Something went wrong");
     }
   };
+
+  useEffect(() => {
+    const platformMap = {
+      TWITTER: "twitter",
+      X: "twitter",
+      FACEBOOK: "facebook",
+      INSTAGRAM: "instagram",
+      LINKEDIN: "linkedin",
+      YOUTUBE: "youtube",
+      TIKTOK: "tiktok",
+    };
+
+    const socialLinksObj = links.reduce((acc, item) => {
+      if (item.isActive && item.socialMedia) {
+        const key = platformMap[item.socialMedia.toUpperCase()];
+        if (key) {
+          acc[key] = item.link;
+        }
+      }
+      return acc;
+    }, {});
+
+    setMyLinks(socialLinksObj);
+  }, [links]);
+
   return (
     <Box
       sx={{
@@ -163,8 +191,8 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
           </>
         ) : (
           <>
-            {shareLinks?.facebook ? (
-              <a href={shareLinks?.facebook}>
+            {shareLinks?.facebook || myLinks?.facebook ? (
+              <a href={shareLinks?.facebook || myLinks?.facebook}>
                 <Box
                   component={"img"}
                   src={facebook}
@@ -189,8 +217,8 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               loading="lazy"
               sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
             />
-            {shareLinks?.tiktok ? (
-              <a href={shareLinks?.tiktok}>
+            {shareLinks?.tiktok || myLinks?.tiktok ? (
+              <a href={shareLinks?.tiktok || myLinks?.tiktok}>
                 <Box
                   component={"img"}
                   src={tiktok}
@@ -208,8 +236,8 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
                 sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
               />
             )}
-            {shareLinks?.twitter ? (
-              <a href={shareLinks?.twitter}>
+            {shareLinks?.twitter || myLinks?.twitter ? (
+              <a href={shareLinks?.twitter || myLinks?.twitter}>
                 <Box
                   component={"img"}
                   src={twitter}
@@ -227,8 +255,8 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
                 sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
               />
             )}
-            {shareLinks?.whatsapp ? (
-              <a href={shareLinks?.whatsapp}>
+            {shareLinks?.whatsapp || myLinks?.whatsapp ? (
+              <a href={shareLinks?.whatsapp || myLinks?.whatsapp}>
                 <Box
                   component={"img"}
                   src={whatsapp}

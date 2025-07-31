@@ -1,6 +1,9 @@
 import { Box, Button, Typography } from "@mui/material";
 import CustomInput from "../input";
 import { useFormik } from "formik";
+import { usePostContactUsMutation } from "../../services/contact-us.js";
+import { contactUsSchema } from "../../schemas/index.js";
+import { toast } from "react-toastify";
 
 const sharedInputStyles = {
   "& .MuiOutlinedInput-root": {
@@ -21,9 +24,11 @@ const fields = [
 
   { name: "email", label: "Contact Email", placeholder: "", type: "email" },
   { name: "country", label: "Country ", placeholder: "" },
+  { name: "message", label: "Message", placeholder: "" },
 ];
 
 const ContactModal = ({ handleSubmit }) => {
+  const [contactData, { isLoading }] = usePostContactUsMutation();
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -31,10 +36,29 @@ const ContactModal = ({ handleSubmit }) => {
       email: "",
       number: "",
       country: "",
+      message: "",
     },
-    onSubmit: (values) => {
+    validationSchema: contactUsSchema,
+    onSubmit: async (values) => {
       console.log(values);
-      handleSubmit();
+      const body = {
+        name: values?.name,
+        business_name: values?.businessName,
+        contact_number: values?.number,
+        contact_email: values?.email,
+        message: values?.message,
+        country: values?.country,
+      };
+      try {
+        const resposne = await contactData({ body });
+        if (resposne.data) {
+          toast.success("Your message sent successfully");
+          handleSubmit();
+        }
+      } catch (error) {
+        toast.error("Something went wrong");
+        handleSubmit();
+      }
     },
   });
   const renderInput = ({ name, label, placeholder, type }) => (
@@ -73,7 +97,12 @@ const ContactModal = ({ handleSubmit }) => {
       </Box>
       <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
         <Box sx={{ width: { xs: "100%", md: "162px" }, height: "58.64px" }}>
-          <Button variant="contained" disableRipple type="submit">
+          <Button
+            variant="contained"
+            disableRipple
+            type="submit"
+            loading={isLoading}
+          >
             Submit
           </Button>
         </Box>

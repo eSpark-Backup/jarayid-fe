@@ -4,7 +4,7 @@ import { categoriesFooter, footerLinks } from "../../constant";
 import { useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import React, { useEffect } from "react";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import DynamicModal from "../modal";
 import ContactModal from "../contact-modal";
@@ -16,14 +16,26 @@ const Footer = () => {
   const language = useSelector((state) => state.language);
   const { t } = useTranslation();
   const navigate = useNavigate();
+  const location = useLocation();
   const [contactModal, setContactModal] = useState(false);
-  const { data, isLoading } = useTrendingArticlesQuery({ page: 1, limit: 3 });
+  const { data, isLoading, refetch } = useTrendingArticlesQuery(
+    { page: 1, limit: 3 },
+    {
+      refetchOnMountOrArgChange: true,
+      refetchOnFocus: true,
+      refetchOnReconnect: true,
+    }
+  );
   const [footerData, setFooterData] = useState({});
 
   const { data: staticPageData, isLoading: staticPageLoading } =
     useGetAllPagesQuery({ search: "about-us" });
 
   const [articles, setArticles] = useState([]);
+
+  useEffect(() => {
+    refetch();
+  }, [location]);
 
   const handleChoice = (item) => {
     if (item === "Term & Condition") {

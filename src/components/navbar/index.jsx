@@ -25,6 +25,9 @@ import QRModal from "../qr-modal";
 import CustomInput from "../input";
 import { logout } from "../../store/slices/auth";
 import { useAuth0 } from "@auth0/auth0-react";
+import EditSourceModal from "../edit-source-modal";
+import { useSoicalLinksQuery } from "../../services/feed";
+import { addLinks } from "../../store/slices/social.js";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -40,6 +43,11 @@ const Navbar = () => {
   const [shareModal, setShareModal] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
   const [qrModal, setQrModal] = useState(false);
+  const [socialModal, setSocialModal] = useState(false);
+  const [editSource, setEditSource] = useState(false);
+
+  const { data: socialLinks, isLoading: socailLinksLoading } =
+    useSoicalLinksQuery({ page: 1, limit: 10 });
 
   const navigate = useNavigate();
 
@@ -89,6 +97,12 @@ const Navbar = () => {
     } else if (event === "Read Later") {
       navigate("/read-later");
       setAnchorEl(null);
+    } else if (event === "Jarayid Social Media") {
+      setSocialModal(true);
+      setAnchorEl(null);
+    } else if (event === "Edit New Source") {
+      setEditSource(true);
+      setAnchorEl(null);
     }
   };
 
@@ -108,6 +122,12 @@ const Navbar = () => {
       document.removeEventListener("mousedown", handleClickOutside);
     };
   }, [chatAi]);
+
+  useEffect(() => {
+    if (socialLinks) {
+      dispatch(addLinks(socialLinks?.data?.socialMediaLinks));
+    }
+  }, [socialLinks]);
 
   return (
     <>
@@ -346,7 +366,7 @@ const Navbar = () => {
         handleClose={() => setShareModal(false)}
         sx={{ padding: { xs: "15px", md: "25px", lg: "35px" } }}
       >
-        <ShareModal />
+        <ShareModal heading={"Share Jarayid"} />
       </DynamicModal>
       <ConfirmModal
         open={logoutModal}
@@ -377,6 +397,23 @@ const Navbar = () => {
         }}
       >
         <QRModal />
+      </DynamicModal>
+      <DynamicModal
+        open={socialModal}
+        handleClose={() => setSocialModal(false)}
+        sx={{ padding: { xs: "15px", md: "25px", lg: "35px" } }}
+      >
+        <ShareModal heading={"Jarayid Social Media"} />
+      </DynamicModal>
+      <DynamicModal
+        open={editSource}
+        handleClose={() => setEditSource(false)}
+        sx={{
+          padding: { xs: "15px", md: "20px", lg: "25px" },
+          maxWidth: "910px",
+        }}
+      >
+        <EditSourceModal />
       </DynamicModal>
       <Box
         ref={boxRef}
