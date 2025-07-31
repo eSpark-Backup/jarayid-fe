@@ -1,10 +1,10 @@
 // src/components/CategoryDropdown.jsx
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
 import { Box, ClickAwayListener, Button } from "@mui/material";
 import DownArrow from "../../assets/icons/arrow-down.svg";
 import CheckOn from "../../assets/icons/check-on.svg";
 import CheckOff from "../../assets/icons/check-off.svg";
-import { categoryOptions } from "../../constant";
 
 const CategoryDropdown = ({
   selectedCategories,
@@ -14,6 +14,15 @@ const CategoryDropdown = ({
   width = "414px",
   options,
 }) => {
+  const { category } = useSelector((state) => state.category);
+  const catOptions =
+    category?.map((cat) => {
+      return { label: cat?.name, value: cat?.id };
+    }) || [];
+  const [categoryOptions, setCategoryOptions] = useState(catOptions);
+  useEffect(() => {
+    setCategoryOptions(catOptions);
+  }, [category]);
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
 
   const toggleCategory = (name) => {
@@ -53,16 +62,18 @@ const CategoryDropdown = ({
     <Box sx={{ position: "relative", width }}>
       {/* Category Button */}
       <Box
+        variant="outlined"
         onClick={() => setShowCategoryDropdown((prev) => !prev)}
-        sx={boxStyle}
+        fullWidth
+        sx={buttonStyle}
       >
         <Box
           sx={{
-            overflow: "hidden",
+            cursor: "pointer",
             textOverflow: "ellipsis",
+            overflow: "hidden",
             whiteSpace: "nowrap",
           }}
-          title={selectedText}
         >
           {selectedText || "Category"}
         </Box>
@@ -105,7 +116,7 @@ const CategoryDropdown = ({
                 }}
               >
                 <img
-                  src={selectedCategories[option] ? CheckOn : CheckOff}
+                  src={selectedCategories[option?.label] ? CheckOn : CheckOff}
                   alt="checkbox"
                   style={{
                     cursor: "pointer",
@@ -113,9 +124,9 @@ const CategoryDropdown = ({
                     height: 16,
                     marginRight: 8,
                   }}
-                  onClick={() => toggleCategory(option)}
+                  onClick={() => toggleCategory(option?.label)}
                 />
-                {option}
+                {option?.label}
               </Box>
             ))}
           </Box>

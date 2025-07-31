@@ -55,29 +55,29 @@ const VideoUpload = ({
   }, [resetSignal]);
 
   const { category } = useSelector((state) => state?.category);
-  const [catOptions, setCatOptions] = useState(
-    category?.map((cat) => {
-      return { label: cat?.name, value: cat?.id };
-    }) || []
-  );
+  const filtered =
+    title === "Shorts"
+      ? category.filter((cat) => cat?.type === "NORMAL")
+      : category;
+
+  const options = filtered.map((cat) => ({
+    label: cat?.name,
+    value: cat?.id,
+  }));
+  const [catOptions, setCatOptions] = useState(options || []);
   useEffect(() => {
-    setCatOptions(
-      category?.map((cat) => {
-        return { label: cat?.name, value: cat?.id };
-      }) || []
-    );
+    setCatOptions(options || []);
   }, [category]);
 
   const [dataForm, setDataForm] = useState([]);
 
   useEffect(() => {
-    console.log("test");
     const youtubeDataForm = youtubeVideos?.length
       ? youtubeVideos
           .filter((item) =>
             tabValue === 0
-              ? item?.deviceType === "WEB"
-              : item?.deviceType === "MOBILE"
+              ? item?.deviceType === "WEB" || item?.deviceType === "BOTH"
+              : item?.deviceType === "MOBILE" || item?.deviceType === "BOTH"
           )
           ?.map((item) => {
             return {
@@ -137,8 +137,8 @@ const VideoUpload = ({
           youtubeVideos
             .filter((item) =>
               tabValue === 0
-                ? item?.deviceType === "WEB"
-                : item?.deviceType === "MOBILE"
+                ? item?.deviceType === "WEB" || item?.deviceType === "BOTH"
+                : item?.deviceType === "MOBILE" || item?.deviceType === "BOTH"
             )
             .map((video, index) => (
               <Grid key={index} item xs={12} sm="auto">
@@ -297,8 +297,8 @@ const VideoUpload = ({
         {(!showAdd ||
           !youtubeVideos.filter((item) =>
             tabValue === 0
-              ? item?.deviceType === "WEB"
-              : item?.deviceType === "MOBILE"
+              ? item?.deviceType === "WEB" || item?.deviceType === "BOTH"
+              : item?.deviceType === "MOBILE" || item?.deviceType === "BOTH"
           )?.length > 0) && (
           <Grid item xs={12} sm="auto">
             <Paper
@@ -372,8 +372,8 @@ const VideoUpload = ({
         {showAdd &&
           youtubeVideos.filter((item) =>
             tabValue === 0
-              ? item?.deviceType === "WEB"
-              : item?.deviceType === "MOBILE"
+              ? item?.deviceType === "WEB" || item?.deviceType === "BOTH"
+              : item?.deviceType === "MOBILE" || item?.deviceType === "BOTH"
           )?.length > 0 && (
             <Grid
               item
