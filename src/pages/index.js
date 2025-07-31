@@ -33,8 +33,6 @@ import RssSource from "./admin/rss-source";
 import YoutubeManagement from "./admin/youtube-management";
 import VisiualAd from "./admin/visual-ad-placement";
 import Notification from "./admin/notification";
-import Openai from "./admin/openai";
-import Social from "./admin/social";
 import SocialMediaForm from "./admin/social-media";
 import OpenAIKey from "./admin/open-ai-key";
 
@@ -69,8 +67,6 @@ export {
   YoutubeManagement,
   VisiualAd,
   Notification,
-  Openai,
-  Social,
   SocialMediaForm,
   OpenAIKey,
 };

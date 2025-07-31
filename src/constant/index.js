@@ -488,26 +488,62 @@ export const tabletCountries = [
 
 export const adminSidebarNavs = [
   { title: "Dashboard", icon: adminDashboard, link: "/admin/dashboard" },
-  { title: "Article Management", icon: adminArticle, link: "/admin/articles-management" },
+  {
+    title: "Article Management",
+    icon: adminArticle,
+    link: "/admin/articles-management",
+  },
   { title: "Category", icon: adminCategory, link: "/admin/categories" },
   { title: "Seo Category", icon: adminSeo, link: "/admin/seo-management" },
-  { title: "RSS sources", icon: adminRss, link: "/admin/rss-source-management" },
-  { title: "Sponsor account", icon: adminSponsor, link: "/admin/sponsor-account" },
+  {
+    title: "RSS sources",
+    icon: adminRss,
+    link: "/admin/rss-source-management",
+  },
+  {
+    title: "Sponsor account",
+    icon: adminSponsor,
+    link: "/admin/sponsor-account",
+  },
   { title: "Manual post", icon: adminManual, link: "/admin/manual-posting" },
-  { title: "YouTube Channel", icon: adminYoutube, link: "/admin/youtube-management" },
+  {
+    title: "YouTube Channel",
+    icon: adminYoutube,
+    link: "/admin/youtube-management",
+  },
   { title: "CooKies", icon: adminCookies, link: "/admin/cookies" },
   { title: "FAQ", icon: adminFaq, link: "/admin/faq" },
   { title: "User", icon: adminUser, link: "/admin/users" },
-  { title: "TOS / privacy policy", icon: adminTos, link: "/admin/term-privacy" },
-  { title: "Notification", icon: adminNotification, link: "/admin/notifications" },
-  { title: "Sentry Bug Monitoring", icon: adminBug, link: "/admin/sentry-bug-monitor" },
-  { title: "Open AI", icon: adminOpenai, link: "/admin/openai" },
+  {
+    title: "TOS / privacy policy",
+    icon: adminTos,
+    link: "/admin/term-privacy",
+  },
+  {
+    title: "Notification",
+    icon: adminNotification,
+    link: "/admin/notifications",
+  },
+  {
+    title: "Sentry Bug Monitoring",
+    icon: adminBug,
+    link: "/admin/sentry-bug-monitor",
+  },
+  { title: "Open AI", icon: adminOpenai, link: "/admin/open-ai-key" },
   { title: "ad-free subscriptions", icon: adminAdfree, link: "/admin/ad-free" },
-  { title: "External Link", icon: adminExternal, link: "/admin/external-links" },
-  { title: "Social media page", icon: adminSocial, link: "/admin/social" },
+  {
+    title: "External Link",
+    icon: adminExternal,
+    link: "/admin/external-links",
+  },
+  { title: "Social media page", icon: adminSocial, link: "/admin/social-media" },
   { title: "Contacts Us", icon: adminContact, link: "/admin/contact-us" },
   { title: "RSS summarization", icon: adminRss, link: "/admin/rss" },
-  { title: "Ad Placement Map", icon: adminAdplacement, link: "/admin/visiual-ad-placement" },
+  {
+    title: "Ad Placement Map",
+    icon: adminAdplacement,
+    link: "/admin/visiual-ad-placement",
+  },
 ];
 
 export const SummaryCardContent = [
@@ -615,40 +651,42 @@ export const faqs = [
   },
 ];
 
-export const userStats = [
-  {
-    icon: allUsers,
-    title: "Total User",
-    value: "40,689",
-    trending: "up",
-    perc: "8.5%",
-    timeStamp: "yesterday",
-  },
-  {
-    icon: activeUsers,
-    title: "Active Users",
-    value: "10293",
-    trending: "up",
-    perc: "1.3%",
-    timeStamp: "past week",
-  },
-  {
-    icon: premiumUsers,
-    title: "Premium Users",
-    value: "4563",
-    trending: "down",
-    perc: "4.3%",
-    timeStamp: "yesterday",
-  },
-  {
-    icon: guestVisit,
-    title: "Guest Visits",
-    value: "458",
-    trending: "up",
-    perc: "1.8%",
-    timeStamp: "yesterday",
-  },
-];
+export const userStats = (data) => {
+  return [
+    {
+      icon: allUsers,
+      title: "Total User",
+      value: data ? data?.overview?.totalUsers : 0,
+      trending: "up",
+      perc: data ? `${data?.summary?.keyMetrics?.userEngagement?.replace(".00%","") || 0}%` : "0%",
+      timeStamp: data?.period === "30d" ? "last month" : "yesterday",
+    },
+    {
+      icon: activeUsers,
+      title: "Active Users",
+      value: data ? data?.overview?.activeUsers : 0,
+      trending: "up",
+      perc: data ? `${data?.userEngagement?.keyMetrics?.activeViewers?.percentage?.replace(".00%","") || 0}%` : "0%",
+      timeStamp: data?.period === "30d" ? "last month" : "past week",
+    },
+    {
+      icon: premiumUsers,
+      title: "Premium Users",
+      value: data ? data?.subscriptions?.premium : 0,
+      trending: "up",
+      perc: data ? `${data?.subscriptions?.premiumPercentage?.replace(".00%","") || 0}%` : "0%",
+      timeStamp: data?.period === "30d" ? "last month" : "yesterday",
+    },
+    {
+      icon: guestVisit,
+      title: "Guest Visits",
+      value: data ? data?.summary?.guestViews : 0,
+      trending: "up",
+      perc: data ? `${data?.summary?.keyMetrics?.guestTraffic?.replace(".00%","") || 0}%` : "0%",
+      timeStamp: data?.period === "30d" ? "last month" : "yesterday",
+    },
+  ];
+};
 
 export const articlesData = [
   {
@@ -1490,40 +1528,36 @@ export const rssSourceManagementData = [
   },
 ];
 
-export const rssStats = [
-  {
-    icon: allResources,
-    title: "Total Resources",
-    value: "40,689",
-    trending: "up",
-    perc: "8.5%",
-    timeStamp: "yesterday",
-  },
-  {
-    icon: healthyResources,
-    title: "Healthy Resources",
-    value: "10293",
-    trending: "up",
-    perc: "1.3%",
-    timeStamp: "past week",
-  },
-  {
-    icon: warningIcon,
-    title: "Warning",
-    value: "4563",
-    trending: "down",
-    perc: "4.3%",
-    timeStamp: "yesterday",
-  },
-  {
-    icon: error,
-    title: "Error",
-    value: "458",
-    trending: "up",
-    perc: "1.8%",
-    timeStamp: "yesterday",
-  },
-];
+export const rssStats = (data) => {
+  return [
+    {
+      icon: allResources,
+      title: "Total Resources",
+      value: data?.totalRSSFeeds === "undefined" ? "" : data?.totalRSSFeeds,
+      trending: "up",
+      perc: `100%`,
+      timeStamp: "yesterday",
+    },
+    {
+      icon: healthyResources,
+      title: "Healthy Resources",
+      value:
+        data?.publishedRSSFeeds === "undefined" ? "" : data?.publishedRSSFeeds,
+      trending: "up",
+      perc: `${data?.publishedRSSFeedsPercentage || 0}%`,
+      timeStamp: "past week",
+    },
+    {
+      icon: error,
+      title: "Error",
+      value:
+        data?.inactiveRSSFeeds === "undefined" ? "" : data?.inactiveRSSFeeds,
+      trending: "up",
+      perc: `${data?.inactiveRSSFeedsPercentage || 0}%`,
+      timeStamp: "yesterday",
+    },
+  ];
+};
 
 export const rssResourcesData = [
   {

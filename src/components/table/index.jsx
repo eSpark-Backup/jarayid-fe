@@ -2,6 +2,7 @@ import {
   Box,
   Checkbox,
   Chip,
+  CircularProgress,
   LinearProgress,
   Pagination,
   Stack,
@@ -15,7 +16,7 @@ import {
 } from "@mui/material";
 import CustomSwitch from "../custom-switch";
 import { getValue } from "../../utils";
-import { adminTrash, adminEdit, sortArrow } from "../../assets";
+import { adminTrash, adminEdit, sortArrow, eye } from "../../assets";
 
 const DynamicTable = ({
   data,
@@ -27,6 +28,8 @@ const DynamicTable = ({
   hideDelete,
   hideSwitch,
   checked,
+  isToggleLoading,
+  loadingId,
   onToggle,
   page,
   pageSize,
@@ -42,6 +45,8 @@ const DynamicTable = ({
   sortBy,
   sortDirection,
   headerBorder,
+  showView = false,
+  handleView,
 }) => {
   const renderSortIcon = (columnKey) => {
     if (sortBy !== columnKey) return null;
@@ -67,6 +72,17 @@ const DynamicTable = ({
           alignItems="center"
           spacing={1}
         >
+          {showView && (
+            <img
+              src={eye}
+              alt="view"
+              style={{ cursor: "pointer" }}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleView(item);
+              }}
+            />
+          )}
           {!hideEdit && (
             <img
               src={adminEdit}
@@ -78,51 +94,55 @@ const DynamicTable = ({
               }}
             />
           )}
-          {!hideSwitch && (
-            <CustomSwitch
-              sx={{
-                background: item.active
-                  ? "linear-gradient(180deg, #004A99 0%, #007BFF 100%)"
-                  : "linear-gradient(180deg, #282B30 0%, #1E2124 100%)",
-                boxShadow: "0px 0.88px 5.88px 0px #00000026 inset",
-                width: "42.33px !important",
-                height: "16.65px !important",
-                borderRadius: "24.41px !important",
-                position: "relative",
-                "::before": {
-                  content: "''",
+          {!hideSwitch &&
+            ((isToggleLoading && item?.id === loadingId) ? (
+              <CircularProgress size={16} />
+            ) : (
+              <CustomSwitch
+                sx={{
                   background: item.active
-                    ? "linear-gradient(180deg, #0095FF 0%, #004A99 100%)"
-                    : "",
-                  width: "41.25px !important",
-                  height: "15.57px !important",
+                    ? "linear-gradient(180deg, #004A99 0%, #007BFF 100%)"
+                    : "linear-gradient(180deg, #282B30 0%, #1E2124 100%)",
+                  boxShadow: "0px 0.88px 5.88px 0px #00000026 inset",
+                  width: "42.33px !important",
+                  height: "16.65px !important",
                   borderRadius: "24.41px !important",
-                  position: "absolute",
-                  left: "1px",
-                },
-              }}
-              insideSx={{
-                background: "linear-gradient(180deg, #0095FF 0%, #004A99 100%)",
-                boxShadow: "0px 0px 1.18px 0px #00000059",
-                width: "14.18px!important",
-                height: "13.18px !important",
-                left: !item.active ? "4%" : "68%",
-                "::before": {
-                  content: "''",
+                  position: "relative",
+                  "::before": {
+                    content: "''",
+                    background: item.active
+                      ? "linear-gradient(180deg, #0095FF 0%, #004A99 100%)"
+                      : "",
+                    width: "41.25px !important",
+                    height: "15.57px !important",
+                    borderRadius: "24.41px !important",
+                    position: "absolute",
+                    left: "1px",
+                  },
+                }}
+                insideSx={{
                   background:
-                    "linear-gradient(180deg, #ECECEC 20.59%, #C9C9C9 85.35%)",
-                  width: "12px !important",
-                  height: "12px !important",
-                  borderRadius: "24.41px !important",
-                  position: "absolute",
-                  left: "0.6px",
-                  top: "0.2px",
-                },
-              }}
-              checked={item.active}
-              onToggle={() => onToggle(item, !item.active)}
-            />
-          )}
+                    "linear-gradient(180deg, #0095FF 0%, #004A99 100%)",
+                  boxShadow: "0px 0px 1.18px 0px #00000059",
+                  width: "14.18px!important",
+                  height: "13.18px !important",
+                  left: !item.active ? "4%" : "68%",
+                  "::before": {
+                    content: "''",
+                    background:
+                      "linear-gradient(180deg, #ECECEC 20.59%, #C9C9C9 85.35%)",
+                    width: "12px !important",
+                    height: "12px !important",
+                    borderRadius: "24.41px !important",
+                    position: "absolute",
+                    left: "0.6px",
+                    top: "0.2px",
+                  },
+                }}
+                checked={item.active}
+                onToggle={() => onToggle(item, !item.active)}
+              />
+            ))}
           {!hideDelete && (
             <img
               src={adminTrash}

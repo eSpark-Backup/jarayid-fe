@@ -34,8 +34,6 @@ import {
   YoutubeManagement,
   RssSource,
   Notification,
-  Openai,
-  Social,
   SocialMediaForm,
   OpenAIKey,
 } from "./pages";
@@ -94,8 +92,6 @@ const Router = () => {
           />
           <Route path="/admin/visiual-ad-placement" element={<VisiualAd />} />
           <Route path="/admin/notifications" element={<Notification />} />
-          <Route path="/admin/openai" element={<Openai />} />
-          <Route path="/admin/social" element={<Social />} />
           <Route path="/admin/social-media" element={<SocialMediaForm />} />
           <Route path="/admin/open-ai-key" element={<OpenAIKey />} />
         </Route>

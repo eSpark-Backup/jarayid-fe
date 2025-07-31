@@ -7,6 +7,7 @@ import Sidebar from "./sidebar";
 import Header from "./header";
 
 const AdminLayout = () => {
+  const token = localStorage.getItem("token");
   const [open, setOpen] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const navigate = useNavigate();
@@ -18,10 +19,10 @@ const AdminLayout = () => {
     { skip: user?.role !== "ADMIN" }
   );
   useEffect(() => {
-    if (user?.role !== "ADMIN") {
-      navigate(-1);
+    if (!token || user?.role !== "ADMIN") {
+      navigate("/login");
     }
-  }, [user]);
+  }, [user, token]);
   return (
     <Box
       sx={{

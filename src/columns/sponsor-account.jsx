@@ -2,7 +2,7 @@ import { Typography } from "@mui/material";
 
 export const columns = () => {
   return [
-    { name: "ID", key: "id" },
+    // { name: "ID", key: "id" },
     { name: "Name", key: "name" },
     { name: "Business Name", key: "businessName" },
     {
@@ -29,7 +29,7 @@ export const columns = () => {
     },
     {
       name: "Contact Email",
-      key: "email",
+      key: "contactEmail",
       component: (item) => {
         return (
           <Typography
@@ -39,7 +39,7 @@ export const columns = () => {
               fontWeight: 400,
             }}
           >
-            {item?.email?.replace(/@.*/, "@...")}
+            {item?.contactEmail?.replace(/@.*/, "@...")}
           </Typography>
         );
       },

@@ -57,7 +57,7 @@ const Dropdown = ({ placeholder, options, value, onChange }) => {
     <FormControl sx={{ width: "100%" }}>
       <CustomSelect
         aria-placeholder="Role"
-        value={value === "" ? placeholder : value}
+        value={!value || value === "" ? placeholder : value}
         onChange={onChange}
         IconComponent={CustomIcon}
         MenuProps={{

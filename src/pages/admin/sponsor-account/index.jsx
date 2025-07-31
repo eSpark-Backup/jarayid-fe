@@ -1,18 +1,47 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Box } from "@mui/material";
 import { DynamicTable, SubHeader } from "../../../components";
 import { columns } from "../../../columns/sponsor-account";
-import { sponsorAccountData } from "../../../constant";
+import { useGetAllSponsorAccountQuery } from "../../../services/sponsor-account";
+import { toast } from "react-toastify";
 
 const SponsorAccount = () => {
-  const [data] = useState(sponsorAccountData || []);
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [pageSize] = useState(11);
-  const [total] = useState(11);
+  const [pageSize] = useState(10);
+  const [total, setTotal] = useState(0);
 
   const handlePageChange = (page) => {
     setPage(page);
   };
+
+  const {
+    data: data2,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetAllSponsorAccountQuery({ page, pageSize });
+
+  useEffect(() => {
+    if (isSuccess) {
+      setData(
+        data2?.data?.items?.map((item) => {
+          return {
+            ...item,
+            status: {
+              label: item?.status === "ACTIVE" ? "Active" : "Banned",
+              variant: item?.status === "ACTIVE" ? "green" : "red",
+            },
+          };
+        })
+      );
+      setTotal(data2?.data?.pagination?.total);
+    }
+    if (isError) {
+      toast.error(error?.data?.message);
+    }
+  }, [isSuccess, isError, data2]);
 
   return (
     <>
@@ -28,7 +57,7 @@ const SponsorAccount = () => {
         <DynamicTable
           data={data}
           columns={columns()}
-          isLoading={false}
+          isLoading={isLoading}
           page={page}
           pageSize={pageSize}
           handlePageChange={handlePageChange}

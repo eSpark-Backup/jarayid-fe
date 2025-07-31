@@ -115,6 +115,8 @@ import error from "./icons/error.svg";
 import refresh from "./icons/refresh.svg";
 import upload from "./icons/admin-upload.svg";
 import rssSource from "./icons/rssSource.svg";
+import eye from "./icons/eye.svg";
+import blackTrash from "./icons/black-trash.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
@@ -249,4 +251,6 @@ export {
   adminAdplacement,
   upload,
   rssSource,
+  eye,
+  blackTrash,
 };
