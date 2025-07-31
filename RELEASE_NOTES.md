@@ -3,6 +3,7 @@
 ## 🚀 Initial Release – v1.0.0 (July 2025)
 
 ### 📋 Overview
+
 This is the **first official release** of the **Jarayid frontend web application**, which includes complete **user-side pages**, a fully functioning **authentication system**, and the **UI scaffolding for the Admin Dashboard**. A select number of admin modules are already integrated with the backend, while others will be functional in upcoming releases.
 
 ---
@@ -14,12 +15,14 @@ This is the **first official release** of the **Jarayid frontend web application
 ### 🔐 Authentication System
 
 #### ✅ Auth Pages (UI)
+
 - Login
 - Sign Up
 - Forget Password
 - Set Password
 
 #### ✅ API Integration
+
 - Email/password login and signup
 - Forgot/reset password workflow
 - Google OAuth signup/login
@@ -30,6 +33,7 @@ This is the **first official release** of the **Jarayid frontend web application
 ### 🌐 User-Side Web App
 
 #### ✅ UI Pages
+
 - Landing Page
 - Article Details Page
 - Read Later
@@ -38,27 +42,29 @@ This is the **first official release** of the **Jarayid frontend web application
 - Privacy Policy
 
 #### ✅ API Integration
+
 - Article listing and detail rendering
 - Categories and youtube video and shorts rendering
 - Edit profile flow
+- Language Translation Integration (EN/AR)
 - Contact us flow
 - Read Later management
 - FAQs, Terms, and Privacy content retrieval
 
 #### ⏳ Pending API Integration (in progress):
-- Chatbot AI interface  
-- Edit RSS source  
-- Font size toggle  
-- Settings dropdown  
-- Footer categories  
-- Article like functionality  
-- Source image in article details  
-- Instagram share option  
-- Subscription logic  
-- Advertise Here CTA  
-- QR code generation  
-- Ad display logic  
-- Smart Reader  
+
+- Chatbot AI interface
+- Edit RSS source
+- Font size toggle
+- Settings dropdown
+- Footer categories
+- Article like functionality
+- Instagram share option (Instagram does not allow direct share feature)
+- Subscription logic
+- Advertise Here CTA
+- QR code generation
+- Ad display logic
+- Smart Reader
 - View Original Summary
 
 ---
@@ -66,61 +72,63 @@ This is the **first official release** of the **Jarayid frontend web application
 ### 🛠️ Admin Dashboard
 
 #### ✅ UI Modules Created (Design-Only)
+
 > These pages have **completed UI/UX**, but **do not yet have full backend API integration** unless listed below.
 
 - Dashboard Home
-- Article Management  
-- Category Management  
-- SEO Categories  
-- RSS Resource  
-- RSS Resource Management  
-- Sponsor Account  
-- Manual Post  
-- YouTube Channel  
-- Cookies Management  
-- FAQs  
-- Users  
-- TOS & Privacy Pages  
-- Sentry Bug Reports  
-- OpenAI Interface  
-- Ad-Free Subscription Controls  
-- External Links  
-- Social Media Links  
-- Contact Us Management  
-- RSS Summarization  
-- Ad Placement Map  
+- Article Management
+- Category Management
+- SEO Categories
+- RSS Resource
+- RSS Resource Management
+- Sponsor Account
+- Manual Post
+- YouTube Channel
+- Cookies Management
+- FAQs
+- Users
+- TOS & Privacy Pages
+- Sentry Bug Reports
+- OpenAI Interface
+- Ad-Free Subscription Controls
+- External Links
+- Social Media Links
+- Contact Us Management
+- RSS Summarization
+- Ad Placement Map
 
 #### ✅ API-Integrated Modules (Working End-to-End)
-- Article Management  
-- Category Management  
-- SEO Categories  
-- RSS Resource  
-- RSS Resource Management  
-- Sponsor Account  
-- Manual Post  
-- YouTube Channel  
-- Cookies  
-- FAQs  
-- Users  
-- TOS / Privacy Policy  
-- OpenAI  
-- External Links  
-- Social Media Links  
+
+- Article Management
+- Category Management
+- SEO Categories
+- RSS Resource
+- RSS Resource Management
+- Sponsor Account
+- Manual Post
+- YouTube Channel
+- Cookies
+- FAQs
+- Users
+- TOS / Privacy Policy
+- OpenAI
+- External Links
+- Social Media Links
 - Contact Us
 
 ---
 
 ## 🧱 Technical Overview
 
-| Stack         | Description                          |
-|---------------|--------------------------------------|
-| Framework     | React (Vite)                         |
-| State Mgmt    | Redux Toolkit + RTK Query            |
-| UI Styling    | Material UI                          |
-| Forms         | Formik + Yup                         |
-| Auth          | JWT + OAuth (Google)                 |
-| Routing       | React Router DOM                     |
-| Payments      | Paddle Integration (upcoming)        |
+| Stack      | Description                   |
+| ---------- | ----------------------------- |
+| Framework  | React (Vite)                  |
+| State Mgmt | Redux Toolkit + RTK Query     |
+| UI Styling | Material UI                   |
+| Forms      | Formik + Yup                  |
+| Auth       | JWT + OAuth (Google)          |
+| Routing    | React Router DOM              |
+| Payments   | Paddle Integration (upcoming) |
 
 ---
 
@@ -137,6 +145,7 @@ This is the **first official release** of the **Jarayid frontend web application
 ## 🔜 Roadmap
 
 ### Upcoming Priorities
+
 - Complete remaining Admin API integrations
 - Finalize all User Side API endpoints
 - Add Paddle payment UI and logic
@@ -160,6 +169,7 @@ npm run dev
 ```
 
 ### `.env` Sample
+
 ```env
 VITE_BASE_URL= your_backend_baseurl
 VITE_AUTH0_DOMAIN= your_auth0_domain

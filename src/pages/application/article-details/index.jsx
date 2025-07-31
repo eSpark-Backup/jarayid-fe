@@ -92,6 +92,7 @@ const ArticleDetails = () => {
           slides: [article?.image],
           time: article?.createdAt,
           shareLinks: article?.shareLinks,
+          sourceImg: article?.rssFeed?.logo,
         });
       }
     };
@@ -167,7 +168,7 @@ const ArticleDetails = () => {
           >
             <img
               style={{ width: "152px", height: "86px" }}
-              src={newsIcon}
+              src={articleData?.sourceImg}
               alt="news-logo"
             />
             {isLoading || isFetching ? (
@@ -394,7 +395,7 @@ const ArticleDetails = () => {
             >
               <img
                 style={{ width: "152px", height: "86px" }}
-                src={newsIcon}
+                src={articleData?.sourceImg}
                 alt="news-logo"
               />
               {isLoading || isFetching ? (

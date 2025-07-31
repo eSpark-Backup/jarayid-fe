@@ -187,7 +187,7 @@ export default function SocialMediaForm() {
                   gap: "10px",
                 }}
               >
-                {socialOptions.map((option) => (
+                {socialOptions?.map((option) => (
                   <Box
                     key={option?.value}
                     sx={{
@@ -253,7 +253,7 @@ export default function SocialMediaForm() {
         {isLoading || isFetching ? (
           <LinearProgress sx={{ mt: 2 }} />
         ) : items?.length > 0 ? (
-          items.map((item, index) => (
+          items?.map((item, index) => (
             <Stack
               sx={{
                 width: {

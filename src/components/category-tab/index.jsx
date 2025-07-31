@@ -34,7 +34,7 @@ const CategoryDropdown = ({
     });
   };
 
-  const boxStyle = {
+  const buttonStyle = {
     backgroundColor: "#EAF4FF",
     fontSize: "17px",
     fontWeight: "600",
