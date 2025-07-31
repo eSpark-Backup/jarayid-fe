@@ -1,21 +1,67 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
 import { Box } from "@mui/material";
 import { DynamicTable, SubHeader } from "../../../components";
 import { columns } from "../../../columns/cookies";
-import { cookiesData } from "../../../constant";
+import {
+  useGetCookiesQuery,
+  useDeleteCookieMutation,
+} from "../../../services/cookies";
+import DeleteModal from "../../../components/delete-modal";
 
 const Cookies = () => {
-  const [data] = useState(cookiesData || []);
+  const [openDelete, setOpenDelete] = useState(false);
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [pageSize] = useState(11);
-  const [total] = useState(11);
+  const [pageSize] = useState(10);
+  const [total, setTotal] = useState(0);
 
   const handlePageChange = (page) => {
     setPage(page);
   };
 
   const handleDelete = (item) => {
-    console.log(item);
+    setOpenDelete(item?.id);
+  };
+
+  const {
+    data: cookiesData,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+    refetch,
+    isFetching,
+  } = useGetCookiesQuery({ page, pageSize });
+
+  useEffect(() => {
+    if (isSuccess) {
+      setData(cookiesData?.data?.cookies);
+      setTotal(cookiesData?.data?.pagination?.total);
+      return;
+    }
+    if (isError) {
+      toast.error(error?.data?.message);
+      return;
+    }
+  }, [isSuccess, isError, cookiesData]);
+
+  const [deleteCookie, { isLoading: deleteLoading }] =
+    useDeleteCookieMutation();
+  const handleDeleteFinal = () => {
+    deleteCookie(openDelete).then((res) => {
+      if (res?.error) {
+        toast.error(res?.error?.data?.message);
+        setOpenDelete(false);
+        return;
+      }
+      if (res?.data) {
+        toast.success(res?.data?.message);
+        setOpenDelete(false);
+        refetch();
+        return;
+      }
+    });
   };
 
   return (
@@ -32,7 +78,7 @@ const Cookies = () => {
         <DynamicTable
           data={data}
           columns={columns()}
-          isLoading={false}
+          isLoading={isLoading || isFetching}
           page={page}
           pageSize={pageSize}
           handlePageChange={handlePageChange}
@@ -43,6 +89,16 @@ const Cookies = () => {
           headerBorder={true}
         />
       </Box>
+      <DeleteModal
+        open={openDelete}
+        handleClose={() => setOpenDelete(false)}
+        handleCancel={() => setOpenDelete(false)}
+        handleConfirm={handleDeleteFinal}
+        heading="Are you sure you want to Delete?"
+        desc={`Are you sure you want to delete cookie?`}
+        confirmText="Delete"
+        loading={deleteLoading}
+      />
     </>
   );
 };
