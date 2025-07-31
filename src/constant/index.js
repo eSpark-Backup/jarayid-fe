@@ -529,14 +529,14 @@ export const adminSidebarNavs = [
     icon: adminBug,
     link: "/admin/sentry-bug-monitor",
   },
-  { title: "Open AI", icon: adminOpenai, link: "/admin/openai" },
+  { title: "Open AI", icon: adminOpenai, link: "/admin/open-ai-key" },
   { title: "ad-free subscriptions", icon: adminAdfree, link: "/admin/ad-free" },
   {
     title: "External Link",
     icon: adminExternal,
     link: "/admin/external-links",
   },
-  { title: "Social media page", icon: adminSocial, link: "/admin/social" },
+  { title: "Social media page", icon: adminSocial, link: "/admin/social-media" },
   { title: "Contacts Us", icon: adminContact, link: "/admin/contact-us" },
   { title: "RSS summarization", icon: adminRss, link: "/admin/rss" },
   {
