@@ -1,50 +1,52 @@
 import { useEffect, useState } from "react";
-import { Box, FormControl, InputLabel, OutlinedInput } from "@mui/material";
 import { toast } from "react-toastify";
+import { Box, FormControl, InputLabel, OutlinedInput } from "@mui/material";
 import GlobalModal from "../../../components/global-modal";
 import { useUpdatePageMutation } from "../../../services/static-pages";
+import { isObjectSame } from "../../../utils";
 
-const EditFAQModal = ({
-  open,
-  onClose,
-  faq,
-  index,
-  faqList,
-  pageId,
-  onUpdated,
-}) => {
-  const [formData, setFormData] = useState({ question: "", answer: "" });
-  const [updateFAQ, { isLoading }] = useUpdatePageMutation();
-
+const EditFAQModal = ({ open, onClose, isFaqCreated, onSuccess, faqs }) => {
+  const [formData, setFormData] = useState({
+    question: "",
+    answer: "",
+    id: crypto.randomUUID(),
+  });
   useEffect(() => {
-    if (faq) setFormData(faq);
-  }, [faq]);
+    if (open) setFormData(open);
+  }, [open]);
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSave = async () => {
+  const [updateFAQ, { isLoading }] = useUpdatePageMutation();
+  const handleSave = () => {
     if (!formData.question.trim() || !formData.answer.trim()) {
       toast.error("Please fill in all fields");
       return;
     }
-
-    try {
-      const updatedList = [...faqList];
-      updatedList[index] = formData;
-
-      await updateFAQ({
-        id: pageId,
-        credentials: { title: "FAQ", slug: "faq", content: updatedList },
-      }).unwrap();
-
-      toast.success("FAQ updated successfully!");
-      onUpdated?.(updatedList);
-      onClose();
-    } catch (err) {
-      toast.error("Failed to update FAQ");
-    }
+    const updatedFaq = faqs?.map((item) => {
+      if (item?.id === open?.id) {
+        return formData;
+      } else {
+        return item;
+      }
+    });
+    updateFAQ({
+      id: isFaqCreated,
+      credentials: { title: "FAQ", slug: "faq", content: { faq: updatedFaq } },
+    }).then((res) => {
+      if (res?.error) {
+        toast.error(res?.error?.data?.message);
+        return;
+      }
+      if (res?.data) {
+        toast.success("FAQ updated successfully!");
+        setFormData({ question: "", answer: "", id: crypto.randomUUID() });
+        onSuccess();
+        onClose();
+      }
+    });
   };
 
   return (
@@ -55,6 +57,7 @@ const EditFAQModal = ({
       title="Edit FAQ"
       submitText="Save Changes"
       loading={isLoading}
+      disableSubmit={isObjectSame(formData, open)}
     >
       <Box display="flex" flexDirection="column" gap={2} mt={1}>
         <FormControl fullWidth>

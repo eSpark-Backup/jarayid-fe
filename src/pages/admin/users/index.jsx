@@ -1,5 +1,15 @@
-import { useEffect, useState } from "react";
-import { Box, Chip, Grid, Stack, Typography } from "@mui/material";
+import { useEffect, useMemo, useState } from "react";
+import { toast } from "react-toastify";
+import dayjs from "dayjs";
+import {
+  Box,
+  Button,
+  Chip,
+  Grid,
+  Skeleton,
+  Stack,
+  Typography,
+} from "@mui/material";
 import {
   DynamicTable,
   InfoCard,
@@ -10,33 +20,97 @@ import {
   DateRangePicker,
 } from "../../../components";
 import { columns } from "../../../columns/user";
-import { usersData, userStats } from "../../../constant";
+import { userStats } from "../../../constant";
+import {
+  useBanUnbanUserMutation,
+  useDeleteUserMutation,
+  useGetAllUsersForAdminQuery,
+  useGetUsersStatsQuery,
+} from "../../../services/user";
+import DeleteModal from "../../../components/delete-modal";
 
 const Users = () => {
   const roleOptions = [
-    { label: "Admin", value: "admin" },
-    { label: "User", value: "user" },
+    { label: "Admin", value: "ADMIN" },
+    { label: "User", value: "USER" },
   ];
   const statusOptions = [
-    { label: "Active", value: "active" },
-    { label: "Guest", value: "guest" },
+    { label: "Free", value: "free" },
+    { label: "Trial", value: "trial" },
+    { label: "Premium", value: "premium" },
   ];
+  const [userStatsData, setUserStatsData] = useState(userStats(null));
   const [startDate, setStartDate] = useState(null);
   const [endDate, setEndDate] = useState(null);
   const [status, setStatus] = useState("");
   const [role, setRole] = useState("");
   const [search, setSearch] = useState("");
-  const [data, setData] = useState(usersData || []);
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [pageSize] = useState(11);
-  const [total] = useState(11);
+  const [pageSize] = useState(10);
+  const [total, setTotal] = useState(0);
+  const [loadingId, setLoadingId] = useState(null);
+  const [openDelete, setOpenDelete] = useState(null);
   const [selectedRows, setSelectedRows] = useState([]);
-  const isAllSelected = data.length > 0 && selectedRows.length === data.length;
+  const isAllSelected =
+    data?.length > 0 && selectedRows.length === data?.length;
 
   const [sortBy, setSortBy] = useState("email");
   const [sortDirection, setSortDirection] = useState("asc");
   const tabs = ["24 hours", "7 days", "30 days"];
   const [activeTab, setActiveTab] = useState("7 days");
+
+  const now = dayjs();
+  const defaultDateFrom = useMemo(() => {
+    switch (activeTab) {
+      case "24 hours":
+        return now.subtract(1, "day").format("YYYY-MM-DD");
+      case "7 days":
+        return now.subtract(7, "day").format("YYYY-MM-DD");
+      case "30 days":
+        return now.subtract(30, "day").format("YYYY-MM-DD");
+      default:
+        return now.subtract(7, "day").format("YYYY-MM-DD");
+    }
+  }, [activeTab]);
+
+  const defaultDateTo = useMemo(() => now.format("YYYY-MM-DD"), []);
+
+  const shouldUseCustomDate = Boolean(startDate && endDate);
+
+  const queryArgs = useMemo(() => {
+    const base = {
+      page,
+      pageSize,
+      search: search ?? "",
+      sortBy,
+      sortDirection,
+      ...(status !== "" && { status }),
+      ...(role !== "" && { role }),
+    };
+
+    return {
+      ...base,
+      dateFrom: shouldUseCustomDate
+        ? dayjs(startDate).format("YYYY-MM-DD")
+        : defaultDateFrom,
+      dateTo: shouldUseCustomDate
+        ? dayjs(endDate).format("YYYY-MM-DD")
+        : defaultDateTo,
+    };
+  }, [
+    page,
+    pageSize,
+    search,
+    sortBy,
+    sortDirection,
+    status,
+    role,
+    startDate,
+    endDate,
+    defaultDateFrom,
+    defaultDateTo,
+  ]);
 
   const handleSort = (columnKey) => {
     if (sortBy === columnKey) {
@@ -61,43 +135,133 @@ const Users = () => {
     setPage(page);
   };
 
-  const handleDelete = (item) => {
-    console.log(item);
+  const {
+    data: data2,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+    refetch,
+    isFetching,
+  } = useGetAllUsersForAdminQuery(queryArgs, {
+    skip: (startDate && !endDate) || (!startDate && endDate),
+    refetchOnMountOrArgChange: true,
+  });
+
+  useEffect(() => {
+    if (isSuccess) {
+      setData(
+        data2?.data?.users?.map((item) => {
+          return {
+            ...item,
+            user:
+              typeof item?.name === "string"
+                ? item?.name
+                : typeof item?.name === "object"
+                ? item?.name?.en
+                : "",
+            joinDate: dayjs(item?.createdAt).format("DD/MM/YY"),
+            lastLogin: item?.lastLoginAt
+              ? dayjs(item?.lastLoginAt).format("DD/MM/YY")
+              : "",
+            active: item?.isBanned ? true : false,
+            status: {
+              label: item?.subscription?.isPremium ? "Premium" : "Normal",
+              variant: "blue",
+            },
+          };
+        })
+      );
+      setTotal(data2?.data?.pagination?.total);
+    }
+    if (isError) {
+      toast.error(error?.data?.message);
+    }
+  }, [isSuccess, isError, data2]);
+
+  const {
+    data: statsData,
+    isLoading: isStatsLoading,
+    isSuccess: isStatsSuccess,
+    isError: isStatsError,
+    error: statsError,
+    refetch: statsRefetch,
+    isFetching: isStatsFetching,
+  } = useGetUsersStatsQuery("", {
+    refetchOnMountOrArgChange: true,
+  });
+
+  useEffect(() => {
+    if (isStatsSuccess) {
+      setUserStatsData(userStats(statsData?.data));
+    }
+    if (isStatsError) {
+      toast.error(statsError?.data?.message);
+    }
+  }, [isStatsSuccess, isStatsError, statsError, statsData]);
+
+  const [deleteUser, { isLoading: deleteLoading }] = useDeleteUserMutation();
+
+  const handleDeleteFinal = () => {
+    deleteUser({ userIds: openDelete }).then((res) => {
+      if (res?.error) {
+        toast.error(res?.error?.data?.message);
+        return;
+      }
+      if (res?.data) {
+        if (
+          res?.data?.message ===
+          "No users were deleted (all were already banned or are admin users)"
+        ) {
+          toast.error(res?.data?.message);
+          setOpenDelete(false);
+        } else {
+          toast.success(res?.data?.message);
+          setOpenDelete(false);
+          refetch();
+          statsRefetch();
+        }
+        return;
+      }
+    });
   };
 
-  useEffect(() => {
-    const filtered = usersData.filter((item) =>
-      Object.values(item).some((val) =>
-        String(val).toLowerCase().includes(search.toLowerCase())
-      )
-    );
-    setData(filtered);
-    setPage(1);
-  }, [search]);
+  const handleDelete = (item) => {
+    setOpenDelete([item?.id]);
+  };
 
-  useEffect(() => {
-    let sorted = [...usersData];
+  const deleteSelected = () => {
+    setOpenDelete(selectedRows);
+  };
 
-    if (sortBy) {
-      sorted.sort((a, b) => {
-        const aValue = a[sortBy];
-        const bValue = b[sortBy];
+  const [banUser, { isLoading: banLoading }] = useBanUnbanUserMutation();
 
-        if (aValue < bValue) return sortDirection === "desc" ? -1 : 1;
-        if (aValue > bValue) return sortDirection === "asc" ? 1 : -1;
-        return 0;
-      });
-    }
-
-    const filtered = sorted.filter((item) =>
-      Object.values(item).some((val) =>
-        String(val).toLowerCase().includes(search.toLowerCase())
-      )
-    );
-
-    setData(filtered);
-    setPage(1);
-  }, [search, sortBy, sortDirection]);
+  const handleBan = (item, value) => {
+    setLoadingId(item?.id);
+    banUser(item?.id).then((res) => {
+      if (res?.error) {
+        toast.error(res?.error?.data?.message);
+        setLoadingId(false);
+        return;
+      }
+      if (res?.data) {
+        setData((prev) =>
+          prev?.map((data) => {
+            if (data?.id === item?.id) {
+              return {
+                ...data,
+                active: value,
+              };
+            } else {
+              return data;
+            }
+          })
+        );
+        setLoadingId(false);
+        return;
+      }
+    });
+  };
 
   return (
     <>
@@ -110,9 +274,13 @@ const Users = () => {
         container
         spacing={2}
       >
-        {userStats?.map((stat) => (
-          <Grid key={stat.title} size={{ xs: 12, md: 6, lg: 3 }}>
-            <InfoCard {...stat} />
+        {userStatsData?.map((stat) => (
+          <Grid key={stat?.title} size={{ xs: 12, md: 6, lg: 3 }}>
+            {isStatsLoading || isStatsFetching ? (
+              <Skeleton height={160} />
+            ) : (
+              <InfoCard {...stat} />
+            )}
           </Grid>
         ))}
       </Grid>
@@ -127,25 +295,39 @@ const Users = () => {
         <Stack
           direction="row"
           alignItems="center"
-          justifyContent="flex-start"
+          justifyContent="space-between"
           gap="8px"
         >
-          <Typography
-            sx={{ fontSize: "18px", fontWeight: 600, color: "#101828" }}
+          <Stack
+            direction="row"
+            alignItems="center"
+            justifyContent="flex-start"
+            gap="8px"
           >
-            Users
-          </Typography>
-          <Chip
-            sx={{
-              padding: "6px",
-              background: "#D7E4F2",
-              border: 0,
-              width: "max-content",
-              ".MuiChip-label": { fontWeight: 700 },
-            }}
-            label="25002"
-            variant="blue"
-          />
+            <Typography
+              sx={{ fontSize: "18px", fontWeight: 600, color: "#101828" }}
+            >
+              Users
+            </Typography>
+            <Chip
+              sx={{
+                padding: "6px",
+                background: "#D7E4F2",
+                border: 0,
+                width: "max-content",
+                ".MuiChip-label": { fontWeight: 700 },
+              }}
+              label="25002"
+              variant="blue"
+            />
+          </Stack>
+          {selectedRows?.length > 0 && (
+            <Box sx={{ width: "max-content", height: "39px" }}>
+              <Button onClick={deleteSelected} variant="gradient">
+                Delete Selected
+              </Button>
+            </Box>
+          )}
         </Stack>
         <Typography
           sx={{
@@ -218,7 +400,7 @@ const Users = () => {
         <DynamicTable
           data={data}
           columns={columns()}
-          isLoading={false}
+          isLoading={isLoading || isFetching}
           handleDelete={handleDelete}
           page={page}
           pageSize={pageSize}
@@ -233,9 +415,23 @@ const Users = () => {
           onSort={handleSort}
           sortBy={sortBy}
           sortDirection={sortDirection}
-          hideSwitch={true}
+          onToggle={handleBan}
+          isToggleLoading={banLoading}
+          loadingId={loadingId}
         />
       </Box>
+      <DeleteModal
+        open={openDelete}
+        handleClose={() => setOpenDelete(false)}
+        handleCancel={() => setOpenDelete(false)}
+        handleConfirm={handleDeleteFinal}
+        heading="Are you sure you want to Delete?"
+        desc={`Are you sure you want to delete ${
+          openDelete?.length > 1 ? "these" : "this"
+        } User?`}
+        confirmText="Delete"
+        loading={deleteLoading}
+      />
     </>
   );
 };
