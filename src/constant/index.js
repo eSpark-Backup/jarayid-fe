@@ -519,11 +519,11 @@ export const adminSidebarNavs = [
     icon: adminTos,
     link: "/admin/term-privacy",
   },
-  {
-    title: "Notification",
-    icon: adminNotification,
-    link: "/admin/notifications",
-  },
+  // {
+  //   title: "Notification",
+  //   icon: adminNotification,
+  //   link: "/admin/notifications",
+  // },
   {
     title: "Sentry Bug Monitoring",
     icon: adminBug,
