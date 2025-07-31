@@ -33,6 +33,7 @@ import RssInfoCard from "./rss-info-card";
 import OutlineInput from "./outline-input";
 import OutlineSelect from "./outline-select";
 import OutlinedFileInput from "./outline-image-input";
+import EditSourceModal from "./edit-source-modal";
 
 export {
   Button,
@@ -70,4 +71,5 @@ export {
   OutlineInput,
   OutlineSelect,
   OutlinedFileInput,
+  EditSourceModal,
 };

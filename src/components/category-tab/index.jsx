@@ -12,6 +12,7 @@ const CategoryDropdown = ({
   selectedText,
   setSelectedText,
   width = "414px",
+  options,
 }) => {
   const { category } = useSelector((state) => state.category);
   const catOptions =
@@ -33,21 +34,23 @@ const CategoryDropdown = ({
     });
   };
 
-  const buttonStyle = {
+  const boxStyle = {
     backgroundColor: "#EAF4FF",
     fontSize: "17px",
     fontWeight: "600",
     color: "#6C727F",
     border: "1px solid #D1E5FA",
     borderRadius: "5px",
-    textTransform: "none",
-    height: 42,
+    height: "42px",
     boxShadow: "none",
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
-    gap: 1,
-    paddingX: 2,
+    gap: "8px",
+    padding: "0 16px",
+    width: "100%",
+    cursor: "pointer",
+    minWidth: 0,
     "&:hover": {
       backgroundColor: "#EAF4FF",
       color: "#6C727F",

@@ -33,6 +33,7 @@ const MobileNavbar = () => {
   const [contactModal, setContactModal] = useState(false);
   const [shareModal, setShareModal] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
+  const [socialModal, setSocialModal] = useState(false);
 
   const navigate = useNavigate();
 
@@ -98,6 +99,9 @@ const MobileNavbar = () => {
       setAnchorEl(null);
     } else if (event === "Read Later") {
       navigate("/read-later");
+      setAnchorEl(null);
+    } else if (event === "Jarayid Social Media Accounts") {
+      setSocialModal(true);
       setAnchorEl(null);
     }
   };
@@ -237,7 +241,7 @@ const MobileNavbar = () => {
         handleClose={() => setShareModal(false)}
         sx={{ padding: { xs: "15px", md: "25px", lg: "35px" } }}
       >
-        <ShareModal />
+        <ShareModal heading={"Share Jarayid"} />
       </DynamicModal>
       <ConfirmModal
         open={logoutModal}
@@ -254,6 +258,13 @@ const MobileNavbar = () => {
           industry. Lorem Ipsum has been the industry's standard
         </Typography>
       </ConfirmModal>
+      <DynamicModal
+        open={socialModal}
+        handleClose={() => setSocialModal(false)}
+        sx={{ padding: { xs: "15px", md: "25px", lg: "35px" } }}
+      >
+        <ShareModal heading={"Jarayid Social Media"} />
+      </DynamicModal>
     </>
   );
 };

@@ -22,11 +22,12 @@ const arrowBtn = {
   "&:hover": { backgroundColor: "#fff" },
 };
 
-const ImageSlider = () => {
+const ImageSlider = ({ slides }) => {
   const prevRef = useRef(null);
   const nextRef = useRef(null);
   const [swiperReady, setSwiperReady] = useState(false);
   const [swiperInstance, setSwiperInstance] = useState(null);
+  console.log(slides?.length);
 
   useEffect(() => {
     if (
@@ -52,26 +53,42 @@ const ImageSlider = () => {
       maxWidth="538px"
       margin="auto"
     >
-      <Swiper
-        modules={[Navigation, Autoplay]}
-        spaceBetween={20}
-        slidesPerView={1}
-        loop={true}
-        autoplay={{
-          delay: 3000,
-          disableOnInteraction: false,
-        }}
-        onSwiper={(swiper) => {
-          setSwiperInstance(swiper);
-          setSwiperReady(true);
-        }}
-      >
-        {[slider, slider, slider].map((img, index) => (
-          <SwiperSlide key={index}>
+      {slides?.length > 0 && (
+        <Swiper
+          modules={[Navigation, Autoplay]}
+          spaceBetween={20}
+          slidesPerView={1}
+          loop={true}
+          autoplay={{
+            delay: 3000,
+            disableOnInteraction: false,
+          }}
+          onSwiper={(swiper) => {
+            setSwiperInstance(swiper);
+            setSwiperReady(true);
+          }}
+        >
+          {slides?.length > 1 ? (
+            slides?.map((img, index) => (
+              <SwiperSlide key={index}>
+                <Box
+                  component="img"
+                  src={img}
+                  alt={`slide-${index}`}
+                  sx={{
+                    width: "100%",
+                    height: "auto",
+                    borderRadius: "8px",
+                    objectFit: "cover",
+                  }}
+                />
+              </SwiperSlide>
+            ))
+          ) : (
             <Box
               component="img"
-              src={img}
-              alt={`slide-${index}`}
+              src={slides[0]}
+              alt={`slide`}
               sx={{
                 width: "100%",
                 height: "auto",
@@ -79,37 +96,41 @@ const ImageSlider = () => {
                 objectFit: "cover",
               }}
             />
-          </SwiperSlide>
-        ))}
-      </Swiper>
+          )}
+        </Swiper>
+      )}
 
-      <IconButton
-        ref={prevRef}
-        sx={{
-          ...arrowBtn,
-          left: { xs: "-30px", sm: "-40px", lg: "-60px" },
-        }}
-      >
-        <img
-          style={{ width: "100%", height: "100%" }}
-          src={arrowLeft}
-          alt="left-arrow"
-        />
-      </IconButton>
+      {slides && slides?.length > 1 && (
+        <>
+          <IconButton
+            ref={prevRef}
+            sx={{
+              ...arrowBtn,
+              left: { xs: "-30px", sm: "-40px", lg: "-60px" },
+            }}
+          >
+            <img
+              style={{ width: "100%", height: "100%" }}
+              src={arrowLeft}
+              alt="left-arrow"
+            />
+          </IconButton>
 
-      <IconButton
-        ref={nextRef}
-        sx={{
-          ...arrowBtn,
-          right: { xs: "-30px", sm: "-40px", lg: "-60px" },
-        }}
-      >
-        <img
-          style={{ width: "100%", height: "100%" }}
-          src={arrowRight}
-          alt="right-arrow"
-        />
-      </IconButton>
+          <IconButton
+            ref={nextRef}
+            sx={{
+              ...arrowBtn,
+              right: { xs: "-30px", sm: "-40px", lg: "-60px" },
+            }}
+          >
+            <img
+              style={{ width: "100%", height: "100%" }}
+              src={arrowRight}
+              alt="right-arrow"
+            />
+          </IconButton>
+        </>
+      )}
     </Box>
   );
 };

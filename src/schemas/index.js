@@ -47,3 +47,14 @@ export const verifyEmailSchema = Yup.object({
     .email("Invalid email address")
     .required("Email is required"),
 });
+
+export const contactUsSchema = Yup.object({
+  name: Yup.string().required("Name is required"),
+  businessName: Yup.string().required("Business name is required"),
+  email: Yup.string()
+    .email("Invalid email address")
+    .required("Email is required"),
+  number: Yup.string().required("Contact number is required"),
+  country: Yup.string().required("Country name is required"),
+  message: Yup.string().required("Message is required"),
+});

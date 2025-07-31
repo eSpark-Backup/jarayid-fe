@@ -10,7 +10,15 @@ export const contactsApi = api.injectEndpoints({
         };
       },
     }),
+    postContactUs: builder.mutation({
+      query: ({ body }) => ({
+        url: "/contact-us",
+        method: "POST",
+        body,
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
-export const { useGetContactsQuery } = contactsApi;
+export const { useGetContactsQuery, usePostContactUsMutation } = contactsApi;

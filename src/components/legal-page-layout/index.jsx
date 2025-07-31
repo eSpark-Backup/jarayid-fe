@@ -58,20 +58,19 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
               {title}
             </Typography>
 
-            {paragraphs.map((text, index) => (
-              <Typography
-                key={index}
-                variant="body1"
-                sx={{
-                  fontSize: "16px",
-                  textAlign: isArabic ? "right" : "justify",
-                  mb: 2,
-                  fontWeight: "600",
-                }}
-              >
-                {text}
-              </Typography>
-            ))}
+            {/* {paragraphs.map((text, index) => ( */}
+            <Typography
+              variant="body1"
+              sx={{
+                fontSize: "16px",
+                textAlign: isArabic ? "right" : "justify",
+                mb: 2,
+                fontWeight: "600",
+              }}
+            >
+              {paragraphs}
+            </Typography>
+            {/* ))} */}
           </Box>
 
           <Box

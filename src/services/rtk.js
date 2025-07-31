@@ -22,6 +22,11 @@ const customBaseQuery = async (args, api, extraOptions) => {
 
 export const api = createApi({
   reducerPath: "api",
+  baseQuery: fetchBaseQuery({
+    baseUrl,
+    prepareHeaders,
+  }),
+  tagTypes: ["auth", "read-later"],
   baseQuery: customBaseQuery,
   tagTypes: ["auth"],
   endpoints: () => ({}),

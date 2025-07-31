@@ -17,6 +17,29 @@ export function getValue(item, keys) {
   return value;
 }
 
+// utils/translateText.js
+
+export const translateText = async (text, from = "en", to = "ar") => {
+  try {
+    const response = await fetch(
+      `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
+        text
+      )}&langpair=${from}|${to}&de=aniwellxchange@gmail.com`
+    );
+
+    const data = await response.json();
+    return data.responseData.translatedText;
+  } catch (error) {
+    console.error("Translation error:", error);
+    return "Translation failed";
+  }
+};
+
+export const getYouTubeEmbedUrl = (youtubeUrl) => {
+  const url = new URL(youtubeUrl);
+  const videoId = url.searchParams.get("v");
+  return videoId ? `https://www.youtube.com/embed/${videoId}` : null;
+};
 export const isObjectValid = (obj) => {
   return Object.values(obj).every(
     (val) =>
@@ -62,4 +85,3 @@ export const buildQueryParams = (params) => {
 
   return query.toString();
 };
-

@@ -114,6 +114,7 @@ import warningIcon from "./icons/warning-icon.svg";
 import error from "./icons/error.svg";
 import refresh from "./icons/refresh.svg";
 import upload from "./icons/admin-upload.svg";
+import rssSource from "./icons/rssSource.svg";
 import eye from "./icons/eye.svg";
 import blackTrash from "./icons/black-trash.svg";
 
@@ -249,6 +250,7 @@ export {
   adminContact,
   adminAdplacement,
   upload,
+  rssSource,
   eye,
   blackTrash,
 };

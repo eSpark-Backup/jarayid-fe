@@ -3,9 +3,13 @@ import { api } from "./rtk";
 export const pagesApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllPages: builder.query({
-      query: () => ({
+      query: ({ search }) => ({
         url: `/static-pages`,
         method: "GET",
+        params: {
+          ...(search && { search }),
+        },
+        credentials: "include",
       }),
     }),
 
