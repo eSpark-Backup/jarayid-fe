@@ -651,40 +651,42 @@ export const faqs = [
   },
 ];
 
-export const userStats = [
-  {
-    icon: allUsers,
-    title: "Total User",
-    value: "40,689",
-    trending: "up",
-    perc: "8.5%",
-    timeStamp: "yesterday",
-  },
-  {
-    icon: activeUsers,
-    title: "Active Users",
-    value: "10293",
-    trending: "up",
-    perc: "1.3%",
-    timeStamp: "past week",
-  },
-  {
-    icon: premiumUsers,
-    title: "Premium Users",
-    value: "4563",
-    trending: "down",
-    perc: "4.3%",
-    timeStamp: "yesterday",
-  },
-  {
-    icon: guestVisit,
-    title: "Guest Visits",
-    value: "458",
-    trending: "up",
-    perc: "1.8%",
-    timeStamp: "yesterday",
-  },
-];
+export const userStats = (data) => {
+  return [
+    {
+      icon: allUsers,
+      title: "Total User",
+      value: data ? data?.overview?.totalUsers : 0,
+      trending: "up",
+      perc: data ? `${data?.summary?.keyMetrics?.userEngagement?.replace(".00%","") || 0}%` : "0%",
+      timeStamp: data?.period === "30d" ? "last month" : "yesterday",
+    },
+    {
+      icon: activeUsers,
+      title: "Active Users",
+      value: data ? data?.overview?.activeUsers : 0,
+      trending: "up",
+      perc: data ? `${data?.userEngagement?.keyMetrics?.activeViewers?.percentage?.replace(".00%","") || 0}%` : "0%",
+      timeStamp: data?.period === "30d" ? "last month" : "past week",
+    },
+    {
+      icon: premiumUsers,
+      title: "Premium Users",
+      value: data ? data?.subscriptions?.premium : 0,
+      trending: "up",
+      perc: data ? `${data?.subscriptions?.premiumPercentage?.replace(".00%","") || 0}%` : "0%",
+      timeStamp: data?.period === "30d" ? "last month" : "yesterday",
+    },
+    {
+      icon: guestVisit,
+      title: "Guest Visits",
+      value: data ? data?.summary?.guestViews : 0,
+      trending: "up",
+      perc: data ? `${data?.summary?.keyMetrics?.guestTraffic?.replace(".00%","") || 0}%` : "0%",
+      timeStamp: data?.period === "30d" ? "last month" : "yesterday",
+    },
+  ];
+};
 
 export const articlesData = [
   {

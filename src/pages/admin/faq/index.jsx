@@ -1,5 +1,6 @@
-import { Box, Button, Container, Typography } from "@mui/material";
 import { useState, useEffect } from "react";
+import { toast } from "react-toastify";
+import { Box, Button, Container, Typography } from "@mui/material";
 import { SubHeader } from "../../../components";
 import FAQList from "../../../components/faq-list";
 import DeleteModal from "../../../components/delete-modal";
@@ -11,66 +12,64 @@ import AddFAQModal from "./add-faq-modal";
 import EditFAQModal from "./edit-faq-modal";
 
 const FAQ = () => {
-  const { data: allPages, isLoading, refetch, error } = useGetAllPagesQuery();
-  const [updateFAQ] = useUpdatePageMutation();
-
+  const {
+    data: allPages,
+    isLoading,
+    isSuccess,
+    isError,
+    refetch,
+    error,
+    isFetching,
+  } = useGetAllPagesQuery();
   const [faqs, setFaqs] = useState([]);
-  const [editingFaq, setEditingFaq] = useState(null); 
-  const [faqToDelete, setFaqToDelete] = useState(null); 
   const [openAdd, setOpenAdd] = useState(false);
-
-  const faqPage = allPages?.data?.items?.find((page) => page.slug === "faq");
-  const pageId = faqPage?.id;
+  const [openEdit, setOpenEdit] = useState(false);
+  const [deleteModal, setDeleteModal] = useState(false);
+  const [isFaqCreated, setIsFaqCreated] = useState(false);
 
   useEffect(() => {
-    if (faqPage?.content) {
-      const processed = faqPage.content.map((f) => ({
-        id: f.id || crypto.randomUUID(), 
+    if (isSuccess) {
+      const faqPage = allPages?.data?.items?.find(
+        (page) => page.slug === "faq"
+      );
+      const processed = faqPage?.content?.faq?.map((f) => ({
+        id: f.id,
         question: f.question?.trim() || "",
         answer: f.answer?.trim() || "",
       }));
       setFaqs(processed);
+      setIsFaqCreated(
+        allPages?.data?.items?.some((item) => item?.slug?.includes("faq"))
+          ? allPages?.data?.items?.find((item) => item?.slug === "faq")?.id
+          : null
+      );
     }
-    if (error) {
-      console.error("Failed to fetch FAQs:", error);
+    if (isError) {
+      toast.error(error?.data?.message);
     }
-  }, [faqPage, error]);
+  }, [allPages, isSuccess, isError, error]);
 
-  const handleEdit = (faq) => {
-    setEditingFaq(faq);
-  };
-
-  const handleUpdate = async (updatedFaq) => {
-    const updatedList = faqs.map((f) =>
-      f.id === updatedFaq.id ? updatedFaq : f
-    );
-    await updateFAQ({
-      id: pageId,
-      credentials: { title: "FAQ", slug: "faq", content: updatedList },
+  const [updateFaq, { isLoading: deleteLoading }] = useUpdatePageMutation();
+  const confirmDelete = () => {
+    const updatedList = faqs.filter((f) => f.id !== deleteModal);
+    updateFaq({
+      id: isFaqCreated,
+      credentials: { title: "FAQ", slug: "faq", content: { faq: updatedList } },
+    }).then((res) => {
+      if (res?.error) {
+        toast.error(res?.error?.data?.message);
+        return;
+      }
+      if (res?.data) {
+        setFaqs(updatedList);
+        setDeleteModal(false);
+      }
     });
-    setFaqs(updatedList);
-    setEditingFaq(null);
-    refetch();
   };
 
-  const handleDelete = (faq) => {
-    setFaqToDelete(faq);
-  };
-
-  const confirmDelete = async () => {
-    const updatedList = faqs.filter((f) => f.id !== faqToDelete.id);
-    await updateFAQ({
-      id: pageId,
-      credentials: { title: "FAQ", slug: "faq", content: updatedList },
-    });
-    setFaqs(updatedList);
-    setFaqToDelete(null);
-    refetch();
-  };
-
-  const handleAdded = (newList) => {
-    setFaqs(newList);
-    refetch();
+  const [expanded, setExpanded] = useState(0);
+  const handleChange = (panelIndex) => (event, isExpanded) => {
+    setExpanded(isExpanded ? panelIndex : false);
   };
 
   return (
@@ -117,45 +116,42 @@ const FAQ = () => {
         </Typography>
 
         <Box display="flex" justifyContent="center" flexDirection="column">
-          {!isLoading && faqs.length > 0 ? (
-            <FAQList
-              faqs={faqs}
-              showEditDeleteIcons
-              onEdit={handleEdit}
-              onDelete={handleDelete}
-            />
-          ) : (
-            <Typography align="center" color="gray">
-              No FAQ Found
-            </Typography>
-          )}
+          <FAQList
+            faqs={faqs}
+            showEditDeleteIcons
+            onEdit={(e) => setOpenEdit(e)}
+            onDelete={(e) => setDeleteModal(e?.id)}
+            isLoading={isLoading || isFetching}
+            expanded={expanded}
+            handleChange={handleChange}
+          />
         </Box>
       </Container>
 
       <DeleteModal
-        open={!!faqToDelete}
-        handleClose={() => setFaqToDelete(null)}
-        handleCancel={() => setFaqToDelete(null)}
+        open={deleteModal}
+        handleClose={() => setDeleteModal(null)}
+        handleCancel={() => setDeleteModal(null)}
         handleConfirm={confirmDelete}
         heading="Are you sure you want to delete this FAQ?"
+        desc="Are you sure you want to delete this FAQ"
         confirmText="Delete"
+        loading={deleteLoading}
       />
 
       <AddFAQModal
         open={openAdd}
         onClose={() => setOpenAdd(false)}
-        faqList={faqs}
-        pageId={pageId}
-        onAdded={handleAdded}
+        isFaqCreated={isFaqCreated}
+        faqs={faqs}
+        onSuccess={refetch}
       />
-
       <EditFAQModal
-        open={!!editingFaq}
-        onClose={() => setEditingFaq(null)}
-        faq={editingFaq}
-        faqList={faqs}
-        pageId={pageId}
-        onUpdated={handleUpdate}
+        open={openEdit}
+        onClose={() => setOpenEdit(null)}
+        isFaqCreated={isFaqCreated}
+        faqs={faqs}
+        onSuccess={refetch}
       />
     </>
   );

@@ -6,10 +6,14 @@ const OutlineInput = ({
   placeholder,
   value,
   onChange,
+  name,
+  multiline,
+  rows,
   rest,
 }) => {
   return (
     <TextField
+      name={name}
       label={
         <Box component="span" display="flex" alignItems="center">
           <Typography
@@ -58,6 +62,8 @@ const OutlineInput = ({
           fontSize: "14px",
         },
       }}
+      multiline={multiline || false}
+      rows={rows}
       {...rest}
     />
   );
