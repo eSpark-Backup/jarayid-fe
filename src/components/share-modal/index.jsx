@@ -7,20 +7,50 @@ import {
   whatsapp,
   youtube,
 } from "../../assets";
+import { useSelector } from "react-redux";
+import { useEffect, useState } from "react";
 
-const ShareModal = () => {
+const ShareModal = ({ heading }) => {
   const items = [
-    { logo: facebook, name: "Facebook" },
-    { logo: instagram, name: "Instagram" },
-    { logo: tiktok, name: "Tiktok" },
-    { logo: twitter, name: "Thread" },
-    { logo: whatsapp, name: "Whatsapp" },
-    { logo: youtube, name: "Youtube" },
+    { logo: facebook, name: "Facebook", key: "facebook" },
+    { logo: instagram, name: "Instagram", key: "instagram" },
+    { logo: tiktok, name: "Tiktok", key: "tiktok" },
+    { logo: twitter, name: "Thread", key: "twitter" },
+    { logo: whatsapp, name: "Whatsapp", key: "whatsapp" },
+    { logo: youtube, name: "Youtube", key: "youtube" },
   ];
+
+  const links = useSelector((state) => state.socialLinks.links);
+  const [myLinks, setMyLinks] = useState({});
+
+  useEffect(() => {
+    const platformMap = {
+      TWITTER: "twitter",
+      X: "twitter",
+      FACEBOOK: "facebook",
+      INSTAGRAM: "instagram",
+      LINKEDIN: "linkedin",
+      YOUTUBE: "youtube",
+      TIKTOK: "tiktok",
+    };
+
+    const socialLinksObj = links.reduce((acc, item) => {
+      if (item.isActive && item.socialMedia) {
+        const key = platformMap[item.socialMedia.toUpperCase()];
+        if (key) {
+          acc[key] = item.link;
+        }
+      }
+      return acc;
+    }, {});
+
+    setMyLinks(socialLinksObj);
+  }, [links]);
+
   return (
     <Box>
       <Typography sx={{ fontSize: "32px", fontWeight: "600" }}>
-        Share Jarayid
+        {heading}
       </Typography>
       <Box
         sx={{
@@ -30,31 +60,61 @@ const ShareModal = () => {
           mt: "30px",
         }}
       >
-        {items?.map((item, index) => (
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              justifyContent: "center",
-              alignItems: "center",
-              rowGap: "7px",
-            }}
-          >
+        {items?.map((item, index) => {
+          const link = myLinks[item.key];
+
+          return (
             <Box
-              component={"img"}
-              src={item?.logo}
+              key={index}
               sx={{
-                width: { xs: "24px", sm: "32px", md: "48px", lg: "69.36px" },
-                height: { xs: "24px", sm: "32px", md: "48px", lg: "69.36px" },
+                display: link ? "flex" : "none",
+                flexDirection: "column",
+                justifyContent: "center",
+                alignItems: "center",
+                rowGap: "7px",
               }}
-              alt={item?.name}
-              loading="lazy"
-            />
-            <Typography sx={{ fontSize: "10px", fontWeight: "600" }}>
-              {item?.name}
-            </Typography>
-          </Box>
-        ))}
+            >
+              {link && (
+                <a
+                  href={link}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  style={{ textDecoration: "none", color: "inherit" }}
+                >
+                  <Box
+                    component={"img"}
+                    src={item?.logo}
+                    sx={{
+                      width: {
+                        xs: "24px",
+                        sm: "32px",
+                        md: "48px",
+                        lg: "69.36px",
+                      },
+                      height: {
+                        xs: "24px",
+                        sm: "32px",
+                        md: "48px",
+                        lg: "69.36px",
+                      },
+                    }}
+                    alt={item?.name}
+                    loading="lazy"
+                  />
+                  <Typography
+                    sx={{
+                      fontSize: "10px",
+                      fontWeight: "600",
+                      textAlign: "center",
+                    }}
+                  >
+                    {item?.name}
+                  </Typography>
+                </a>
+              )}
+            </Box>
+          );
+        })}
       </Box>
     </Box>
   );

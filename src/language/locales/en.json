@@ -34,8 +34,8 @@
   "newsHeadline": "SCCI finalizes preparations",
   "newsDate": "Date: 02-08-20",
   "shareNews": "Share the news",
-  "footer1": "Your source for the lifestyle news. This demo is crafted specifically to exhibit the use of the theme as a lifestyle site. Visit our main page for more demos.",
-  "footer2": "We’re accepting new partnerships right now.",
+  "Your source for the lifestyle news. This demo is crafted specifically to exhibit the use of the theme as a lifestyle site. Visit our main page for more demos.": "Your source for the lifestyle news. This demo is crafted specifically to exhibit the use of the theme as a lifestyle site. Visit our main page for more demos.",
+  "We’re accepting new partnerships right now.": "We’re accepting new partnerships right now.",
   "email": "Email Us",
   "phone": "Contact",
   "picks": "Our picks",
@@ -161,7 +161,7 @@
         "answer": "Typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged."
       }
     ]
-  }, 
+  },
   "Comments": {
     "title": "Comments ({{count}})",
     "placeholder": "Write a comment...",
@@ -175,5 +175,8 @@
       "Thanks for sharing!",
       "Looking forward to more content like this."
     ]
-  }
+  },
+  "Next Page": "Next Page",
+  "Previous Page": "Previous Page",
+  "Source": "Source"
 }

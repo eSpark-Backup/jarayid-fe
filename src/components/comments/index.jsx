@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -10,81 +10,95 @@ import {
   Stack,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
+import { usePostCommentMutation } from "../../services/feed";
+import { useLocation } from "react-router-dom";
+import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
+import { logout } from "../../store/slices/auth";
 
+dayjs.extend(relativeTime);
 const mockUser = {
   isLoggedIn: true,
   name: "Fariha",
   avatar: "https://i.pravatar.cc/150?img=5",
 };
 
-const CommentBox = () => {
+const CommentBox = ({ data, total, hasMore, handleMore }) => {
   const { t, i18n } = useTranslation();
 
   const [comments, setComments] = useState([]);
   const [newComment, setNewComment] = useState("");
   const [showAll, setShowAll] = useState(false);
+  const [commentData, { isLoading }] = usePostCommentMutation();
+  const { pathname } = useLocation();
+  const { user } = useSelector((state) => state.auth);
+  const [count, setCount] = useState(0);
+  const dispatch = useDispatch();
 
   React.useEffect(() => {
-    const initialComments = [
-      {
-        id: 1,
-        name: "Ayaan",
-        avatar: "https://i.pravatar.cc/150?img=1",
-        text: t("Comments.initial.0"),
-        date: "2 hours ago",
-      },
-      {
-        id: 2,
-        name: "Sara",
-        avatar: "https://i.pravatar.cc/150?img=12",
-        text: t("Comments.initial.1"),
-        date: "1 hour ago",
-      },
-      {
-        id: 3,
-        name: "Ali",
-        avatar: "https://i.pravatar.cc/150?img=8",
-        text: t("Comments.initial.2"),
-        date: t("Comments.justNow"),
-      },
-    ];
+    if (data?.length > 0) {
+      setComments((prevComments) => [...prevComments, ...data]);
+    } else {
+      setComments([]);
+    }
+  }, [i18n.language, t, data]);
 
-    setComments(initialComments);
-  }, [i18n.language, t]); 
+  useEffect(() => {
+    setCount(total);
+  }, [total]);
 
-  const handleAddComment = () => {
+  const handleAddComment = async () => {
     if (!newComment.trim()) return;
 
-    const comment = {
-      id: Date.now(),
-      name: mockUser.name,
-      avatar: mockUser.avatar,
-      text: newComment,
-      date: t("Comments.justNow"),
-    };
+    try {
+      const comment = {
+        articleId: pathname?.slice(1),
+        content: newComment,
+      };
 
-    setComments([comment, ...comments]);
-    setNewComment("");
+      const response = await commentData(comment).unwrap();
+      toast.success("Comment Added Successfully");
+      const myComment = {
+        id: response?.data?.comment?.id,
+        name: response?.data?.comment?.user?.name || "User",
+        avatar: response?.data?.comment?.user?.image,
+        text: response?.data?.comment?.content,
+        date: dayjs(response?.data?.comment?.createdAt).fromNow(),
+      };
+      setComments([myComment, ...comments]);
+      setCount(count + 1);
+      setNewComment("");
+      console.log("Comment added:", response);
+    } catch (error) {
+      console.error("Failed to post comment:", error?.data?.message);
+      if (error?.data?.message === "You are banned from commenting") {
+        toast.error(error?.data?.message);
+        dispatch(logout());
+        setNewComment("");
+      }
+    }
   };
 
-  const displayedComments = showAll ? comments : comments.slice(0, 2);
+  // const displayedComments = showAll ? comments : comments.slice(0, 2);
 
   return (
     <Box sx={{ width: "100%" }}>
       <Typography variant="h5" sx={{ fontWeight: 600, mb: 2 }}>
-        {t("Comments.title", { count: comments.length })}
+        {t("Comments.title", { count })}
       </Typography>
 
       <Divider sx={{ mb: 3 }} />
 
-      {mockUser.isLoggedIn ? (
+      {user ? (
         <Stack
           direction={{ xs: "column", sm: "row" }}
           spacing={2}
           alignItems="flex-start"
           mb={1}
         >
-          <Avatar src={mockUser.avatar} />
+          <Avatar src={user?.image} alt="User" />
           <TextField
             variant="outlined"
             fullWidth
@@ -111,6 +125,7 @@ const CommentBox = () => {
               width: { xs: "70px", sm: "80px" },
               height: { xs: "35px", sm: "34px" },
             }}
+            loading={isLoading}
           >
             {t("Comments.post")}
           </Button>
@@ -122,27 +137,29 @@ const CommentBox = () => {
       )}
 
       <Stack>
-        {displayedComments.map((comment) => (
-          <Paper key={comment.id} elevation={2} sx={{ p: 1, borderRadius: 2 }}>
+        {comments?.map((comment) => (
+          <Paper key={comment?.id} elevation={2} sx={{ p: 1, borderRadius: 2 }}>
             <Stack direction="row" spacing={2}>
-              <Avatar src={comment.avatar} />
+              <Avatar src={comment?.avatar} />
               <Box>
-                <Typography sx={{ fontWeight: 600 }}>{comment.name}</Typography>
+                <Typography sx={{ fontWeight: 600 }}>
+                  {comment?.name}
+                </Typography>
                 <Typography
                   sx={{ fontSize: "0.8rem", color: "text.secondary", mb: 0.5 }}
                 >
-                  {comment.date}
+                  {comment?.date}
                 </Typography>
-                <Typography>{comment.text}</Typography>
+                <Typography>{comment?.text}</Typography>
               </Box>
             </Stack>
           </Paper>
         ))}
       </Stack>
 
-      {comments.length > 2 && (
+      {hasMore && (
         <Button
-          onClick={() => setShowAll((prev) => !prev)}
+          onClick={handleMore}
           disableRipple
           sx={{
             mt: 2,
@@ -161,7 +178,8 @@ const CommentBox = () => {
             },
           }}
         >
-          {showAll ? t("Comments.seeLess") : t("Comments.seeMore")}
+          {/* {showAll ? t("Comments.seeLess") : t("Comments.seeMore")} */}
+          {hasMore && t("Comments.seeMore")}
         </Button>
       )}
     </Box>
