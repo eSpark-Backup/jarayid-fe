@@ -536,7 +536,11 @@ export const adminSidebarNavs = [
     icon: adminExternal,
     link: "/admin/external-links",
   },
-  { title: "Social media page", icon: adminSocial, link: "/admin/social-media" },
+  {
+    title: "Social media page",
+    icon: adminSocial,
+    link: "/admin/social-media",
+  },
   { title: "Contacts Us", icon: adminContact, link: "/admin/contact-us" },
   { title: "RSS summarization", icon: adminRss, link: "/admin/rss" },
   {
@@ -658,7 +662,11 @@ export const userStats = (data) => {
       title: "Total User",
       value: data ? data?.overview?.totalUsers : 0,
       trending: "up",
-      perc: data ? `${data?.summary?.keyMetrics?.userEngagement?.replace(".00%","") || 0}%` : "0%",
+      perc: data
+        ? `${
+            data?.summary?.keyMetrics?.userEngagement?.replace(".00%", "") || 0
+          }%`
+        : "0%",
       timeStamp: data?.period === "30d" ? "last month" : "yesterday",
     },
     {
@@ -666,7 +674,14 @@ export const userStats = (data) => {
       title: "Active Users",
       value: data ? data?.overview?.activeUsers : 0,
       trending: "up",
-      perc: data ? `${data?.userEngagement?.keyMetrics?.activeViewers?.percentage?.replace(".00%","") || 0}%` : "0%",
+      perc: data
+        ? `${
+            data?.userEngagement?.keyMetrics?.activeViewers?.percentage?.replace(
+              ".00%",
+              ""
+            ) || 0
+          }%`
+        : "0%",
       timeStamp: data?.period === "30d" ? "last month" : "past week",
     },
     {
@@ -674,7 +689,9 @@ export const userStats = (data) => {
       title: "Premium Users",
       value: data ? data?.subscriptions?.premium : 0,
       trending: "up",
-      perc: data ? `${data?.subscriptions?.premiumPercentage?.replace(".00%","") || 0}%` : "0%",
+      perc: data
+        ? `${data?.subscriptions?.premiumPercentage?.replace(".00%", "") || 0}%`
+        : "0%",
       timeStamp: data?.period === "30d" ? "last month" : "yesterday",
     },
     {
@@ -682,7 +699,11 @@ export const userStats = (data) => {
       title: "Guest Visits",
       value: data ? data?.summary?.guestViews : 0,
       trending: "up",
-      perc: data ? `${data?.summary?.keyMetrics?.guestTraffic?.replace(".00%","") || 0}%` : "0%",
+      perc: data
+        ? `${
+            data?.summary?.keyMetrics?.guestTraffic?.replace(".00%", "") || 0
+          }%`
+        : "0%",
       timeStamp: data?.period === "30d" ? "last month" : "yesterday",
     },
   ];
@@ -1660,10 +1681,10 @@ export const categoryOptions = [
 ];
 
 export const socialOptions = [
-  "Facebook",
-  "WhatsApp",
-  "YouTube",
-  "X",
-  "Instagram",
-  "TikTok",
+  { label: "Facebook", value: "FACEBOOK" },
+  { label: "WhatsApp", value: "WHATSAPP" },
+  { label: "YouTube", value: "YOUTUBE" },
+  { label: "X", value: "X" },
+  { label: "Instagram", value: "INSTAGRAM" },
+  { label: "TikTok", value: "TIKTOK" },
 ];
