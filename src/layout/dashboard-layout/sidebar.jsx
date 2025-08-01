@@ -104,8 +104,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         <Typography
           sx={{ fontSize: "16px", fontWeight: "400", opacity: "56%" }}
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard
+          Are you sure you want to Logout?
         </Typography>
       </ConfirmModal>
     </>

@@ -22,6 +22,7 @@ import SubscriptionModal from "../subscription-modal";
 import ContactModal from "../contact-modal";
 import ShareModal from "../share-modal";
 import ConfirmModal from "../confirm-modal";
+import EditSourceModal from "../edit-source-modal";
 
 const MobileNavbar = () => {
   const { t } = useTranslation();
@@ -34,6 +35,7 @@ const MobileNavbar = () => {
   const [shareModal, setShareModal] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
   const [socialModal, setSocialModal] = useState(false);
+  const [editSource, setEditSource] = useState(false);
 
   const navigate = useNavigate();
 
@@ -102,6 +104,9 @@ const MobileNavbar = () => {
       setAnchorEl(null);
     } else if (event === "Jarayid Social Media Accounts") {
       setSocialModal(true);
+      setAnchorEl(null);
+    } else if (event === "Edit New Source") {
+      setEditSource(true);
       setAnchorEl(null);
     }
   };
@@ -254,8 +259,7 @@ const MobileNavbar = () => {
         <Typography
           sx={{ fontSize: "16px", fontWeight: "400", opacity: "56%" }}
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard
+          Are you sure you want to Logout?
         </Typography>
       </ConfirmModal>
       <DynamicModal
@@ -264,6 +268,16 @@ const MobileNavbar = () => {
         sx={{ padding: { xs: "15px", md: "25px", lg: "35px" } }}
       >
         <ShareModal heading={"Jarayid Social Media"} />
+      </DynamicModal>
+      <DynamicModal
+        open={editSource}
+        handleClose={() => setEditSource(false)}
+        sx={{
+          padding: { xs: "15px", md: "20px", lg: "25px" },
+          maxWidth: "910px",
+        }}
+      >
+        <EditSourceModal />
       </DynamicModal>
     </>
   );

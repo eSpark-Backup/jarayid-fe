@@ -1,6 +1,6 @@
 import { api } from "./rtk";
 
-const FeedApi = api.injectEndpoints({
+export const FeedApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getCategories: builder.query({
       query: ({ type }) => ({
@@ -25,9 +25,9 @@ const FeedApi = api.injectEndpoints({
         params: {
           page,
           limit,
-          categoryId,
-          subType,
+
           pinned,
+          ...(!search && { categoryId, subType }),
           ...(search && { search }),
         },
       }),

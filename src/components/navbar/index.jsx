@@ -10,7 +10,7 @@ import SocialBox from "../social-box";
 import { blueSearch, downArrow, login, logo, message } from "../../assets";
 import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
-import { Link, useNavigate } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import LanguageToggler from "../lang-toggler";
 import { useEffect, useState, useRef } from "react";
 import { otherSettingsNavbarItems } from "../../constant";
@@ -28,6 +28,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import EditSourceModal from "../edit-source-modal";
 import { useSoicalLinksQuery } from "../../services/feed";
 import { addLinks } from "../../store/slices/social.js";
+import { addSearch } from "../../store/slices/chatbot.js";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,8 @@ const Navbar = () => {
   const [qrModal, setQrModal] = useState(false);
   const [socialModal, setSocialModal] = useState(false);
   const [editSource, setEditSource] = useState(false);
+  const value = useSelector((state) => state.chatbot.value);
+  const location = useLocation();
 
   const { data: socialLinks, isLoading: socailLinksLoading } =
     useSoicalLinksQuery({ page: 1, limit: 10 });
@@ -100,11 +103,10 @@ const Navbar = () => {
     } else if (event === "Jarayid Social Media") {
       setSocialModal(true);
       setAnchorEl(null);
+    } else if (event === "Edit New Source") {
+      setEditSource(true);
+      setAnchorEl(null);
     }
-    // else if (event === "Edit New Source") {
-    //   setEditSource(true);
-    //   setAnchorEl(null);
-    // }
   };
 
   const [chatAi, setChatAi] = useState(false);
@@ -129,6 +131,14 @@ const Navbar = () => {
       dispatch(addLinks(socialLinks?.data?.socialMediaLinks));
     }
   }, [socialLinks]);
+
+  useEffect(() => {
+    if (value) {
+      if (location?.search === "") {
+        navigate("/");
+      }
+    }
+  }, [value]);
 
   return (
     <>
@@ -385,8 +395,7 @@ const Navbar = () => {
         <Typography
           sx={{ fontSize: "16px", fontWeight: "400", opacity: "56%" }}
         >
-          Lorem Ipsum is simply dummy text of the printing and typesetting
-          industry. Lorem Ipsum has been the industry's standard
+          Are you sure you want to Logout?
         </Typography>
       </ConfirmModal>
       <DynamicModal
@@ -448,6 +457,8 @@ const Navbar = () => {
               </InputAdornment>
             ),
           }}
+          value={value}
+          onChange={(e) => dispatch(addSearch(e.target.value))}
           placeholder="Search here..."
           sx={{
             width: "100%",
