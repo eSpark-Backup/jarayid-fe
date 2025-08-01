@@ -62,11 +62,12 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
             overflow: "hidden",
             textOverflow: "ellipsis",
             textAlign: "center",
-            fontWeight: "600",
+            fontWeight: "400",
             maxWidth: "100%",
             display: "-webkit-box",
             WebkitLineClamp: 1,
             WebkitBoxOrient: "vertical",
+            fontFamily: "Gilroy-Bold",
           }}
           component={"h2"}
           title={headline}
@@ -81,7 +82,7 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
           flexDirection: "column",
           flexShrink: 0,
           alignItems: {
-            xs: "center",
+            xs: "flex-end",
             md: language === "ar" ? "flex-start" : "flex-end",
           },
           rowGap: "2px",
@@ -105,6 +106,7 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
             display: "-webkit-box",
             WebkitLineClamp: 1,
             WebkitBoxOrient: "vertical",
+            textAlignLast: { xs: "right", lg: "unset" },
           }}
           title={source}
           component={"h3"}
@@ -132,10 +134,11 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
             overflow: "hidden",
             textOverflow: "ellipsis",
             textAlign: "center",
-            fontWeight: "600",
+            fontWeight: "400",
             maxWidth: "100%",
             WebkitLineClamp: 1, // Show only 1 line
             WebkitBoxOrient: "vertical",
+            fontFamily: "Gilroy-Bold",
           }}
           component={"h2"}
         >

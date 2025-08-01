@@ -127,6 +127,7 @@ const Footer = () => {
             loading="lazy"
             style={{ cursor: "pointer" }}
             onClick={() => navigate("/")}
+            sx={{ maxWidth: "258px", maxHeight: "87.54px" }}
           />
           {staticPageLoading ? (
             <Skeleton variant="text" />
@@ -185,7 +186,8 @@ const Footer = () => {
               fontSize: { xs: "11px", lg: "20px" },
               color: "#FFFFFF",
               textAlign: language === "ar" ? "right" : "unset",
-              fontWeight: "700",
+              fontWeight: "400",
+              fontFamily: "Gilroy-Heavy",
             }}
             component={"h2"}
           >
@@ -260,7 +262,8 @@ const Footer = () => {
                           fontSize: { xs: "8px", lg: "15px" },
                           color: "#FFFFFFB2",
                           textAlign: language === "ar" ? "right" : "unset",
-                          fontWeight: "600",
+                          fontWeight: "400",
+                          fontFamily: "Gilroy-Medium",
                         }}
                         component={"h3"}
                       >
@@ -271,7 +274,8 @@ const Footer = () => {
                           color: "#FFFFFF",
                           fontSize: { xs: "8px", lg: "14px" },
                           textAlign: language === "ar" ? "right" : "unset",
-                          fontWeight: "600",
+                          fontWeight: "400",
+                          fontFamily: "Gilroy-Medium",
                           display: "-webkit-box",
                           WebkitLineClamp: 2,
                           WebkitBoxOrient: "vertical",
@@ -301,7 +305,8 @@ const Footer = () => {
               fontSize: { xs: "11px", lg: "20px" },
               color: "#FFFFFF",
               textAlign: language === "ar" ? "right" : "unset",
-              fontWeight: "700",
+              fontWeight: "400",
+              fontFamily: "Gilroy-Heavy",
             }}
             component={"h2"}
           >
@@ -362,7 +367,8 @@ const Footer = () => {
               fontSize: "14px",
               mt: "15px",
               textAlign: language === "ar" ? "right" : "unset",
-              pr: language === "ar" ? "25px" : "0px",
+              pr: language === "ar" ? "15px" : "0px",
+              pl: language === "ar" ? "0px" : "10px",
             }}
             component={"h6"}
           >

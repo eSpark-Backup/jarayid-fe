@@ -22,8 +22,43 @@
 }
 
 @font-face {
-  font-family: "Gilroy";
+  font-family: "Gilroy-Bold";
+  src: url("./assets/font/Gilroy-Bold.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gilroy-Heavy";
+  src: url("./assets/font/Gilroy-Heavy.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gilroy-Light";
+  src: url("./assets/font/Gilroy-Light.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gilroy-Medium";
+  src: url("./assets/font/Gilroy-Medium.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gilroy-Regular";
   src: url("./assets/font/Gilroy-Regular.ttf") format("opentype");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Gilroy-SemiBold";
+  src: url("./assets/font/Gilroy-SemiBold.ttf") format("opentype");
   font-weight: normal;
   font-style: normal;
 }
@@ -38,6 +73,7 @@
 body {
   font-family: "Gilroy", sans-serif;
 }
+
 .highcharts-drilldown-axis-label,
 .highcharts-yaxis-labels text,
 .highcharts-xaxis-labels text {

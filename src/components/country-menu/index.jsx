@@ -52,10 +52,13 @@ const CountryMenu = ({ anchorEl, open, onClose, navbar }) => {
           overflowY: "auto",
           position: "fixed",
           ...(navbar && {
-            left: `10% !important`,
+            // left: `10% !important`,
             top: "5%",
             transform: "translate(-50%, -50%)",
           }),
+          // left: `10% !important`,
+          top: "5%",
+          transform: "translate(-50%, -50%)",
         },
       }}
     >
@@ -136,6 +139,8 @@ const CountryMenu = ({ anchorEl, open, onClose, navbar }) => {
                   color: "#004A99",
                   textAlign: "center",
                   mt: index > 0 ? "20px" : "0px",
+                  fontFamily: "Gilroy-Heavy",
+                  fontWeight: "400",
                 }}
               >
                 {t(item.heading)}
@@ -151,7 +156,12 @@ const CountryMenu = ({ anchorEl, open, onClose, navbar }) => {
                   py={1.5}
                   flexDirection={language === "ar" ? "row-reverse" : "row"}
                 >
-                  <Typography fontWeight={500} fontSize="20px" color="black">
+                  <Typography
+                    fontWeight={500}
+                    fontSize="20px"
+                    color="black"
+                    sx={{ fontFamily: "Gilroy-Medium", fontWeight: "400" }}
+                  >
                     {checkItem}
                   </Typography>
                   <CustomSwitch

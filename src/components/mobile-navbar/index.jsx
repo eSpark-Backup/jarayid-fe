@@ -34,6 +34,7 @@ const MobileNavbar = () => {
   const [shareModal, setShareModal] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
   const [socialModal, setSocialModal] = useState(false);
+  const { user } = useSelector((state) => state.auth);
 
   const navigate = useNavigate();
 
@@ -135,7 +136,10 @@ const MobileNavbar = () => {
           <img
             src={userBlack}
             alt="Icon"
-            style={{ cursor: "pointer" }}
+            style={{
+              cursor: "pointer",
+              visibility: !user ? "hidden" : "visible",
+            }}
             onClick={handleClick}
           />
         </Box>

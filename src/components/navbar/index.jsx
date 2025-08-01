@@ -199,7 +199,8 @@ const Navbar = () => {
                       sx={{
                         display: "flex",
                         flexDirection: "column",
-                        rowGap: "2px",
+                        // rowGap: "2px",
+                        rowGap: "0px",
                       }}
                     >
                       <Typography
@@ -211,10 +212,11 @@ const Navbar = () => {
                           textOverflow: "ellipsis",
                           width: "70px",
                           whiteSpace: "nowrap",
-                          lineHeight: "10px",
+                          lineHeight: "unset",
+                          // lineHeight: "10px",
                         }}
                       >
-                        {user?.name || "Your name"}
+                        {user?.name?.slice(0, 5) || "Name"}
                       </Typography>
                       <Typography
                         sx={{

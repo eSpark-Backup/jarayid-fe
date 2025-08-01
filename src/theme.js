@@ -64,7 +64,7 @@ export const theme = createTheme({
         {
           props: { variant: "delete" },
           style: {
-            background: "#DF1C41",
+            background: "#DF1C41 !important",
             border: "none",
             borderRadius: "12px",
             color: "#FFFFFF",
@@ -75,6 +75,8 @@ export const theme = createTheme({
               boxShadow: "none",
             },
           },
+        },
+        {
           props: { variant: "outlined" },
           style: {
             backgroundColor: "transparent",

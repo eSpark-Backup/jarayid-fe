@@ -144,7 +144,9 @@ const Signup = () => {
           variant="contained"
           sx={{
             height: { xs: "38px", lg: "46px" },
-            fontSize: { xs: "11px", md: "16px" },
+            fontSize: { xs: "12px", md: "16px" },
+            borderRadius: "0px",
+            backgroundColor: "#3281CA",
           }}
         >
           {t("Create new account")}
@@ -194,7 +196,16 @@ const Signup = () => {
       <Typography
         // variant="body2"
         align="center"
-        sx={{ mt: 3, fontSize: { xs: "11px", md: "14px" } }}
+        sx={{
+          mt: 3,
+          fontSize: {
+            xs: "11px",
+            md: "16px",
+          },
+          fontFamily: "Gilroy-Regular",
+          fontWeight: 400,
+          color: "#8F8F8F",
+        }}
       >
         {t("Already have an account")}
         <Link to="/login" style={{ color: "#3281CA", textDecoration: "none" }}>

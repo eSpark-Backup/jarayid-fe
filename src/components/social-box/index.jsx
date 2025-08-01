@@ -1,4 +1,4 @@
-import { Box, Skeleton, Typography } from "@mui/material";
+import { Box, Chip, Skeleton, Typography } from "@mui/material";
 import {
   comment,
   facebook,
@@ -75,7 +75,11 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
       }}
     >
       <Box
-        sx={{ display: "flex", columnGap: { xs: "3px", md: "4px", lg: "9px" } }}
+        sx={{
+          display: "flex",
+          columnGap: { xs: "3px", md: "4px", lg: "9px" },
+          justifyContent: newsCard ? "flex-end" : "unset",
+        }}
       >
         {newsCard ? (
           <>
@@ -244,22 +248,58 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
                 />
               </a>
             ) : null}
+            {shareLinks?.youtube || myLinks?.youtube ? (
+              <a href={shareLinks?.youtube || myLinks?.youtube}>
+                <Box
+                  component={"img"}
+                  src={youtube}
+                  alt={"Youtube"}
+                  loading="lazy"
+                  sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+                />
+              </a>
+            ) : null}
           </>
         )}
       </Box>
       {detailPage ? null : newsCard ? (
-        <Typography
+        <Box
           sx={{
-            textAlign: {
-              xs: "center",
-              md: language === "ar" ? "left" : "right",
-            },
-            fontSize: { xs: "7px", sm: "14px", md: "12px" },
+            display: "flex",
+            justifyContent: "space-between",
+            alignItems: "center",
+            columnGap: "20px",
+            height: "14px",
           }}
-          component={"h4"}
         >
-          {t("shareNews")}
-        </Typography>
+          <Chip
+            sx={{
+              width: "50px",
+              backgroundColor: "#B1E4FF",
+              border: "1px solid #8BC3FF",
+              fontFamily: "Gilroy-Medium",
+              fontSize: "10px",
+              fontWeight: "400",
+              color: "#4C4545",
+              borderRadius: "4px",
+              height: "14px",
+            }}
+            label="2451"
+          />
+          <Typography
+            sx={{
+              textAlign: {
+                xs: "center",
+                md: language === "ar" ? "left" : "right",
+              },
+              fontSize: { xs: "7px", sm: "14px", md: "12px" },
+              color: "#8F8F8F",
+            }}
+            component={"h4"}
+          >
+            {t("shareNews")}
+          </Typography>
+        </Box>
       ) : (
         <>
           <Typography
@@ -267,7 +307,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               fontSize: { md: "12px", lg: "16px" },
               fontWeight: "600",
               textAlign: language === "ar" ? "right" : "left",
-              color: language === "ar" ? "#8F8F8F" : "black",
+              color: "black",
             }}
             component={"h3"}
           >

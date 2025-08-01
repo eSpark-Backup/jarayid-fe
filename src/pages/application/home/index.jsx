@@ -318,6 +318,7 @@ const Home = () => {
           flexDirection: "column",
           rowGap: "35px",
           pb: "30px",
+          mt: "15px",
         }}
       >
         <Box
@@ -439,9 +440,12 @@ const Home = () => {
                             : "#F3EEEE",
                         color: activeItem === item ? "#fff" : "#000",
                         border:
-                          activeItem === item ? "none" : "1px solid #01000142",
+                          activeItem === item
+                            ? "none"
+                            : "0.89px solid #01000142",
                         fontSize: 14,
-                        fontWeight: "600",
+                        fontWeight: "400",
+                        fontFamily: "Gilroy-Medium",
                       }}
                       onClick={() => handleChipClick(item, "country")}
                       disableRipple
@@ -550,7 +554,8 @@ const Home = () => {
                       activeCategory === item ? "none" : "1px solid #01000142",
                     width: { xs: "100px", md: "157px", lg: "200px" },
                     fontSize: { xs: "11px", md: "14px", lg: "17.96px" },
-                    fontWeight: "600",
+                    fontWeight: "400",
+                    fontFamily: "Gilroy-Medium",
                   }}
                   onClick={() => handleChipClick(item, "category")}
                   disableRipple
@@ -580,6 +585,7 @@ const Home = () => {
               flexDirection: language === "ar" ? "row-reverse" : "row",
               userSelect: "none",
             }}
+            spacing={1}
           >
             <Box
               sx={{
@@ -656,7 +662,7 @@ const Home = () => {
                           item
                           sx={{
                             display: { xs: "block", md: "none" },
-                            width: { xs: "229px", sm: "33%", md: "213px" },
+                            width: { xs: "148px", sm: "33%", md: "213px" },
                             flexShrink: 0,
                           }}
                         >
@@ -665,7 +671,8 @@ const Home = () => {
                               fontSize: { xs: "14px", md: "27.69px" },
                               textAlign: "center",
                               mb: "15px",
-                              fontWeight: "600",
+                              fontWeight: "400",
+                              fontFamily: "Gilroy-Medium",
                             }}
                             component={"h1"}
                           >
@@ -679,6 +686,7 @@ const Home = () => {
                               height: "455px",
                               borderRadius: "8px",
                               boxShadow: "none",
+                              border: "none",
                             }}
                           />
                         </Grid>
@@ -690,6 +698,7 @@ const Home = () => {
                             flex: "0 0 auto",
                             display: { xs: "none", md: "block" },
                             mx: 0.5,
+                            maxWidth: "287px",
                           }}
                           size={{ xs: 6, md: 4 }}
                         >
@@ -698,9 +707,10 @@ const Home = () => {
                               fontSize: {
                                 sm: "14px",
                                 md: "24.69px",
-                                lg: "27px",
+                                lg: "32px",
                               },
-                              fontWeight: "600",
+                              fontWeight: "400",
+                              fontFamily: "Gilroy-Medium",
                               textAlign: "center",
                               mb: "15px",
                             }}
@@ -716,6 +726,7 @@ const Home = () => {
                               height: "455px",
                               borderRadius: "8px",
                               boxShadow: "none",
+                              border: "none",
                             }}
                           />
                         </Grid>
