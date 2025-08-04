@@ -1,4 +1,5 @@
 import { useLocation } from "react-router-dom";
+import store from "../store";
 
 export function useQuery() {
   return new URLSearchParams(useLocation().search);
@@ -84,4 +85,15 @@ export const buildQueryParams = (params) => {
   });
 
   return query.toString();
+};
+
+export const getFont = (fontSize = "14px") => {
+  const state = store.getState();
+  const fontType = state.font.fontType;
+
+  const baseSize = Number(fontSize.replace("px", ""));
+  const updatedFont =
+    fontType === "large" ? `${baseSize + 3}px` : `${baseSize}px`;
+
+  return updatedFont;
 };

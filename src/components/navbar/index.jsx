@@ -29,6 +29,7 @@ import EditSourceModal from "../edit-source-modal";
 import { useSoicalLinksQuery } from "../../services/feed";
 import { addLinks } from "../../store/slices/social.js";
 import { addSearch } from "../../store/slices/chatbot.js";
+import FontSizeModal from "../font-size-modal/index.jsx";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -38,6 +39,7 @@ const Navbar = () => {
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
   const [editProfileModal, setEditProfileModal] = useState(false);
+  const [fontSizeModal, setFontSizeModal] = useState(false);
   const [advertiseModal, setAdvertiseModal] = useState(false);
   const [subscriptionModal, setSubscriptionModal] = useState(false);
   const [contactModal, setContactModal] = useState(false);
@@ -106,6 +108,8 @@ const Navbar = () => {
     } else if (event === "Edit New Source") {
       setEditSource(true);
       setAnchorEl(null);
+    } else if (event === "Font Size") {
+      setFontSizeModal(true);
     }
   };
 
@@ -424,6 +428,13 @@ const Navbar = () => {
         }}
       >
         <EditSourceModal />
+      </DynamicModal>
+      <DynamicModal
+        open={fontSizeModal}
+        handleClose={() => setFontSizeModal(false)}
+        sx={{ padding: { xs: "15px", md: "25px", lg: "35px" } }}
+      >
+        <FontSizeModal />
       </DynamicModal>
       <Box
         ref={boxRef}
