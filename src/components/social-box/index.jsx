@@ -51,6 +51,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
       LINKEDIN: "linkedin",
       YOUTUBE: "youtube",
       TIKTOK: "tiktok",
+      WHATSAPP: "whatsapp",
     };
 
     const socialLinksObj = links.reduce((acc, item) => {
@@ -245,6 +246,17 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
                   component={"img"}
                   src={whatsapp}
                   alt={"Whatsapp"}
+                  loading="lazy"
+                  sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+                />
+              </a>
+            ) : null}
+            {shareLinks?.youtube || myLinks?.youtube ? (
+              <a href={shareLinks?.youtube || myLinks?.youtube}>
+                <Box
+                  component={"img"}
+                  src={youtube}
+                  alt={"Youtube"}
                   loading="lazy"
                   sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
                 />
