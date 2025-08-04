@@ -222,6 +222,25 @@ export const theme = createTheme({
           },
         },
         {
+          props: { variant: "yellow" },
+          style: {
+            padding: "0",
+            width: "88px",
+            padding: "0 5px",
+            height: "20px",
+            border: "1.43px solid #F59E0B",
+            borderRadius: "11.11px",
+            background: "transparent",
+            color: "#B45309",
+            "& .MuiChip-label": {
+              padding: 0,
+              fontSize: "10.14px",
+              fontWeight: "400",
+              fontFamily: "Gilroy",
+            },
+          },
+        },
+        {
           props: { variant: "darkblue" },
           style: {
             padding: "0",

@@ -1,18 +1,55 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
+import { toast } from "react-toastify";
+import dayjs from "dayjs";
 import { Box } from "@mui/material";
 import { DynamicTable, SubHeader } from "../../../components";
 import { columns } from "../../../columns/sentry-bug-monitor";
-import { sentryBugMonitorData } from "../../../constant";
+import { useGetAllBugsQuery } from "../../../services/sentry-bug";
 
 const SentryBugMonitor = () => {
-  const [data] = useState(sentryBugMonitorData || []);
+  const [data, setData] = useState([]);
   const [page, setPage] = useState(1);
-  const [pageSize] = useState(11);
-  const [total] = useState(11);
+  const [pageSize] = useState(10);
+  const [total, setTotal] = useState(0);
 
   const handlePageChange = (page) => {
     setPage(page);
   };
+
+  const {
+    data: bugData,
+    isLoading,
+    isSuccess,
+    isError,
+    error,
+  } = useGetAllBugsQuery();
+
+  useEffect(() => {
+    if (isSuccess) {
+      setData(
+        bugData?.data?.items?.map((item) => {
+          return {
+            ...item,
+            level: {
+              label: item?.level,
+              variant:
+                item?.level === "warn"
+                  ? "yellow"
+                  : item?.level === "error"
+                  ? "red"
+                  : "green",
+            },
+            time: dayjs(item?.createdAt).format("HH:mm:ss")
+          };
+        })
+      );
+      setTotal(bugData?.data?.pagination?.total);
+      return;
+    }
+    if (isError) {
+      toast.error(error?.data?.message);
+    }
+  }, [isSuccess, isError, error, bugData]);
 
   return (
     <>
@@ -28,7 +65,7 @@ const SentryBugMonitor = () => {
         <DynamicTable
           data={data}
           columns={columns()}
-          isLoading={false}
+          isLoading={isLoading}
           page={page}
           pageSize={pageSize}
           handlePageChange={handlePageChange}
