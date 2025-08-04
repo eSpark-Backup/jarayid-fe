@@ -6,6 +6,7 @@ import { useFormik } from "formik";
 import CustomInput from "../input";
 import { useUpdateUserMutation } from "../../services/auth";
 import { toast } from "react-toastify";
+import { getFont } from "../../utils";
 
 const sharedInputStyles = {
   mt: 0,
@@ -20,7 +21,7 @@ const sharedInputStyles = {
     backgroundColor: "transparent",
     borderRadius: 0,
     height: "40px",
-    fontSize: { xs: "15px", md: "26px" },
+    fontSize: { xs: getFont("15px"), md: getFont("26px") },
     color: "#4B5563",
     border: "none",
     padding: 0,
@@ -168,12 +169,20 @@ const EditProfileModal = ({ handleClose }) => {
 
           <Box sx={{ display: "flex", flexDirection: "column", rowGap: "5px" }}>
             <Typography
-              sx={{ color: "#1F2937", fontSize: "26.06px", fontWeight: "400" }}
+              sx={{
+                color: "#1F2937",
+                fontSize: getFont("26.06px"),
+                fontWeight: "400",
+              }}
             >
               {user?.name || "Your name"}
             </Typography>
             <Typography
-              sx={{ color: "#6B7280", fontSize: "22.06px", fontWeight: "400" }}
+              sx={{
+                color: "#6B7280",
+                fontSize: getFont("22.06px"),
+                fontWeight: "400",
+              }}
             >
               {user?.email}
             </Typography>
@@ -208,7 +217,10 @@ const EditProfileModal = ({ handleClose }) => {
           }}
         >
           <Typography
-            sx={{ fontSize: { xs: "15px", md: "26px" }, color: "#1F2937" }}
+            sx={{
+              fontSize: { xs: getFont("15px"), md: getFont("26px") },
+              color: "#1F2937",
+            }}
           >
             Name
           </Typography>
@@ -234,7 +246,7 @@ const EditProfileModal = ({ handleClose }) => {
           ) : (
             <Typography
               sx={{
-                fontSize: { xs: "15px", md: "26px" },
+                fontSize: { xs: getFont("15px"), md: getFont("26px") },
                 color: "#4B5563",
               }}
               onClick={handleNameClick}
@@ -255,12 +267,18 @@ const EditProfileModal = ({ handleClose }) => {
           }}
         >
           <Typography
-            sx={{ fontSize: { xs: "15px", md: "26px" }, color: "#1F2937" }}
+            sx={{
+              fontSize: { xs: getFont("15px"), md: getFont("26px") },
+              color: "#1F2937",
+            }}
           >
             Email account
           </Typography>
           <Typography
-            sx={{ fontSize: { xs: "15px", md: "26px" }, color: "#4B5563" }}
+            sx={{
+              fontSize: { xs: getFont("15px"), md: getFont("26px") },
+              color: "#4B5563",
+            }}
           >
             {user?.email}
           </Typography>
@@ -277,7 +295,10 @@ const EditProfileModal = ({ handleClose }) => {
           }}
         >
           <Typography
-            sx={{ fontSize: { xs: "15px", md: "26px" }, color: "#1F2937" }}
+            sx={{
+              fontSize: { xs: getFont("15px"), md: getFont("26px") },
+              color: "#1F2937",
+            }}
           >
             Mobile number
           </Typography>
@@ -303,7 +324,7 @@ const EditProfileModal = ({ handleClose }) => {
           ) : (
             <Typography
               sx={{
-                fontSize: { xs: "15px", md: "26px" },
+                fontSize: { xs: getFont("15px"), md: getFont("26px") },
                 color: "#4B5563",
               }}
               onClick={() => setEditMobile(true)}
@@ -324,7 +345,10 @@ const EditProfileModal = ({ handleClose }) => {
           }}
         >
           <Typography
-            sx={{ fontSize: { xs: "15px", md: "26px" }, color: "#1F2937" }}
+            sx={{
+              fontSize: { xs: getFont("15px"), md: getFont("26px") },
+              color: "#1F2937",
+            }}
           >
             Location
           </Typography>
@@ -352,7 +376,7 @@ const EditProfileModal = ({ handleClose }) => {
           ) : (
             <Typography
               sx={{
-                fontSize: { xs: "15px", md: "26px" },
+                fontSize: { xs: getFont("15px"), md: getFont("26px") },
                 color: "#4B5563",
               }}
               onClick={() => setEditLocation(true)}

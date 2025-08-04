@@ -4,7 +4,7 @@ import { Button, NewsCard } from "../../../components";
 import { useEffect, useState } from "react";
 import { useGetReadLaterArticlesQuery } from "../../../services/feed";
 import { useSelector } from "react-redux";
-import { translateText } from "../../../utils";
+import { getFont, translateText } from "../../../utils";
 
 const ReadLater = () => {
   const { data, isLoading, isFetching } = useGetReadLaterArticlesQuery(
@@ -98,7 +98,7 @@ const ReadLater = () => {
               />
             ))
           ) : readLaterData?.length === 0 && !isLoading ? (
-            <Typography sx={{ textAlign: "center", fontSize: "32px" }}>
+            <Typography sx={{ textAlign: "center", fontSize: getFont("32px") }}>
               No Data Found
             </Typography>
           ) : (

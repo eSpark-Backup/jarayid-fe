@@ -6,6 +6,7 @@ import { logo } from "../../assets";
 import { LanguageToggler } from "../../components";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { getFont } from "../../utils";
 
 const AuthLayout = () => {
   const location = useLocation();
@@ -98,7 +99,7 @@ const AuthLayout = () => {
                 sx={{
                   mb: 1,
                   textAlign: language === "ar" ? "right" : "left",
-                  fontSize: { xs: "22.5px", md: "32px" },
+                  fontSize: { xs: getFont("22.5px"), md: getFont("32px") },
                   fontFamily: "Gilroy-Bold",
                   fontWeight: "400",
                 }}
@@ -110,7 +111,7 @@ const AuthLayout = () => {
                 sx={{
                   color: "#8F8F8F",
                   mb: 3,
-                  fontSize: { xs: "11px", md: "16px" },
+                  fontSize: { xs: getFont("11px"), md: getFont("16px") },
                   textAlign: language === "ar" ? "right" : "left",
                   fontFamily: "Gilroy-Regular",
                   fontWeight: 400,

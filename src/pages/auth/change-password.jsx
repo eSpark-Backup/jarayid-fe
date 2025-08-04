@@ -4,7 +4,7 @@ import { CustomInput } from "../../components";
 import { changePasswordSchema } from "../../schemas";
 import { lock } from "../../assets";
 import { useTranslation } from "react-i18next";
-import { useQuery } from "../../utils";
+import { getFont, useQuery } from "../../utils";
 import { toast } from "react-toastify";
 import { useNavigate } from "react-router-dom";
 import { useResetPasswordMutation } from "../../services/auth";
@@ -75,7 +75,7 @@ const ChangePassword = () => {
         disabled={isLoading}
         type="submit"
         variant="contained"
-        sx={{ mt: 2, fontSize: { xs: "12px", md: "16px" } }}
+        sx={{ mt: 2, fontSize: { xs: getFont("12px"), md: getFont("16px") } }}
       >
         {t("Save")}
       </Button>

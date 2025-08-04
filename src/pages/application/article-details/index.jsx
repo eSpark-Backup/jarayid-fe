@@ -20,7 +20,7 @@ import {
   useTrendingArticlesQuery,
 } from "../../../services/feed";
 import { useLocation } from "react-router-dom";
-import { translateText } from "../../../utils";
+import { getFont, translateText } from "../../../utils";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ar";
@@ -149,11 +149,12 @@ const ArticleDetails = () => {
             const englishTitle =
               item?.originalContent?.scrapedContent?.translatedContent?.englishContent
                 ?.split("-")[0]
-                ?.replace("Title: ", "");
+                ?.replace("Title:", "");
             const arabicTitle =
               item?.originalContent?.scrapedContent?.translatedContent?.arabicContent
                 ?.split("-")[0]
-                ?.replace("عنوان:", "");
+                ?.replace("عنوان:", "")
+                ?.replace("Title:", "");
             // const isArabic = /[\u0600-\u06FF]/.test(headline);
 
             // if (language === "ar" && !isArabic) {
@@ -228,7 +229,7 @@ const ArticleDetails = () => {
             ) : (
               <Typography
                 sx={{
-                  fontSize: { xs: "10px", sm: "16px" },
+                  fontSize: { xs: getFont("10px"), sm: getFont("16px") },
                   color: "#3835357A",
                   // ml: "40px",
                   // mt: "-10px",
@@ -253,7 +254,7 @@ const ArticleDetails = () => {
               fontFamily="Mondia"
               sx={{
                 letterSpacing: "0.7px",
-                fontSize: { xs: "18px", sm: "35px" },
+                fontSize: { xs: getFont("18px"), sm: getFont("35px") },
               }}
             >
               {showOriginal && articleData?.sourceLanguage === language
@@ -292,7 +293,7 @@ const ArticleDetails = () => {
                 mt={2}
                 textAlign="center"
                 fontWeight={400}
-                sx={{ fontSize: { xs: "12px", sm: "20px" } }}
+                sx={{ fontSize: { xs: getFont("12px"), sm: getFont("20px") } }}
               >
                 {showOriginal
                   ? articleData?.sourceLanguage === language
@@ -311,7 +312,7 @@ const ArticleDetails = () => {
                 mt={4}
                 sx={{
                   padding: { xs: "0px 22px", sm: "22px" },
-                  fontSize: { xs: "10px", sm: "18px" },
+                  fontSize: { xs: getFont("10px"), sm: getFont("18px") },
                 }}
                 fontWeight={700}
               >
@@ -325,7 +326,7 @@ const ArticleDetails = () => {
               my: 2,
               padding: "0px",
               borderRadius: { xs: "5.14px", sm: "10.08px" },
-              fontSize: { xs: "9.14px", sm: "17.92px" },
+              fontSize: { xs: getFont("9.14px"), sm: getFont("17.92px") },
               width: "max-content",
               height: { xs: "20px", sm: "40px" },
               px: "10px",
@@ -339,7 +340,7 @@ const ArticleDetails = () => {
             sx={{ cursor: "pointer" }}
             mt={1}
             textAlign="center"
-            fontSize="12px"
+            fontSize={getFont("12px")}
             fontWeight={600}
           >
             {t("share_news")}
@@ -382,7 +383,7 @@ const ArticleDetails = () => {
           </Box> */}
         </Box>
         <Typography
-          sx={{ fontSize: { xs: "18px", sm: "35px" } }}
+          sx={{ fontSize: { xs: getFont("18px"), sm: getFont("35px") } }}
           fontWeight={800}
           fontFamily="Mondia"
           textAlign={language === "ar" ? "right" : "left"}
@@ -495,7 +496,7 @@ const ArticleDetails = () => {
               ) : (
                 <Typography
                   sx={{
-                    fontSize: { xs: "10px", sm: "16px" },
+                    fontSize: { xs: getFont("10px"), sm: getFont("16px") },
                     color: "#3835357A",
                     // ml: "40px",
                     // mt: "-10px",

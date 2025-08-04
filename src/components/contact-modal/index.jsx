@@ -4,6 +4,7 @@ import { useFormik } from "formik";
 import { usePostContactUsMutation } from "../../services/contact-us.js";
 import { contactUsSchema } from "../../schemas/index.js";
 import { toast } from "react-toastify";
+import { getFont } from "../../utils/index.js";
 
 const sharedInputStyles = {
   "& .MuiOutlinedInput-root": {
@@ -12,7 +13,7 @@ const sharedInputStyles = {
     height: "72px",
     color: "#000",
     border: "1px solid #8B8383",
-    fontSize: "16px",
+    fontSize: getFont("16px"),
     my: "0px",
   },
 };
@@ -81,7 +82,7 @@ const ContactModal = ({ handleSubmit }) => {
 
   return (
     <Box component={"form"} onSubmit={formik.handleSubmit}>
-      <Typography sx={{ fontSize: "32px", fontWeight: "600" }}>
+      <Typography sx={{ fontSize: getFont("32px"), fontWeight: "600" }}>
         Contact Us
       </Typography>
       <Box

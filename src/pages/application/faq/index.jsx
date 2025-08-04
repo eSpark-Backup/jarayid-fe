@@ -4,6 +4,7 @@ import { useTranslation } from "react-i18next";
 import SmartReaderCard from "../../../components/smart-reader";
 import FAQList from "../../../components/faq-list";
 import { useGetAllPagesQuery } from "../../../services/static-pages";
+import { getFont } from "../../../utils";
 
 const FAQSection = () => {
   const { t, i18n } = useTranslation();
@@ -37,7 +38,7 @@ const FAQSection = () => {
         variant="h1"
         align="center"
         fontWeight="600"
-        fontSize="35px"
+        fontSize={getFont("35px")}
         mb="22px"
         sx={{
           fontFamily: "'Poppins', 'sans-serif'",

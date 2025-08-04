@@ -13,6 +13,7 @@ import ButtonUp from "../../assets/icons/button-close.svg";
 import ButtonDown from "../../assets/icons/button-open.svg";
 import EditIcon from "../../assets/icons/edit.svg";
 import DeleteIcon from "../../assets/icons/delete.svg";
+import { getFont } from "../../utils";
 
 const FAQList = ({
   faqs,
@@ -89,7 +90,7 @@ const FAQList = ({
             >
               <Typography
                 fontWeight="600"
-                fontSize="22px"
+                fontSize={getFont("22px")}
                 sx={{
                   textAlign: isArabic ? "right" : "left",
                   pr: { xs: 0, sm: 2 },
@@ -132,7 +133,7 @@ const FAQList = ({
             <Typography
               color="#737373"
               fontWeight="400"
-              fontSize="16px"
+              fontSize={getFont("16px")}
               sx={{
                 textAlign: isArabic ? "right" : "left",
                 flex: 1,

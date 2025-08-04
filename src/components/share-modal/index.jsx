@@ -9,6 +9,7 @@ import {
 } from "../../assets";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
+import { getFont } from "../../utils";
 
 const ShareModal = ({ heading }) => {
   const items = [
@@ -49,7 +50,7 @@ const ShareModal = ({ heading }) => {
 
   return (
     <Box>
-      <Typography sx={{ fontSize: "32px", fontWeight: "600" }}>
+      <Typography sx={{ fontSize: getFont("32px"), fontWeight: "600" }}>
         {heading}
       </Typography>
       <Box
@@ -103,7 +104,7 @@ const ShareModal = ({ heading }) => {
                   />
                   <Typography
                     sx={{
-                      fontSize: "10px",
+                      fontSize: getFont("10px"),
                       fontWeight: "600",
                       textAlign: "center",
                     }}

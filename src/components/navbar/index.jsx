@@ -29,6 +29,8 @@ import EditSourceModal from "../edit-source-modal";
 import { useSoicalLinksQuery } from "../../services/feed";
 import { addLinks } from "../../store/slices/social.js";
 import { addSearch } from "../../store/slices/chatbot.js";
+import FontSizeModal from "../font-size-modal/index.jsx";
+import { getFont } from "../../utils/index.js";
 
 const Navbar = () => {
   const dispatch = useDispatch();
@@ -38,6 +40,7 @@ const Navbar = () => {
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
   const [editProfileModal, setEditProfileModal] = useState(false);
+  const [fontSizeModal, setFontSizeModal] = useState(false);
   const [advertiseModal, setAdvertiseModal] = useState(false);
   const [subscriptionModal, setSubscriptionModal] = useState(false);
   const [contactModal, setContactModal] = useState(false);
@@ -107,6 +110,8 @@ const Navbar = () => {
     } else if (event === "Edit New Source") {
       setEditSource(true);
       setAnchorEl(null);
+    } else if (event === "Font Size") {
+      setFontSizeModal(true);
     }
   };
 
@@ -198,7 +203,7 @@ const Navbar = () => {
                     alignItems: "center",
                     width: "136px",
                     cursor: "pointer",
-                    height: "35px",
+                    height: "40px",
                   }}
                   onClick={handleClick}
                 >
@@ -225,7 +230,7 @@ const Navbar = () => {
                       <Typography
                         sx={{
                           color: "white",
-                          fontSize: "15.51px",
+                          fontSize: getFont("15.51px"),
                           fontWeight: "500",
                           overflow: "hidden",
                           textOverflow: "ellipsis",
@@ -240,7 +245,7 @@ const Navbar = () => {
                       <Typography
                         sx={{
                           color: "white",
-                          fontSize: "7.89px",
+                          fontSize: getFont("7.89px"),
                           fontWeight: "500",
                           overflow: "hidden",
                           textOverflow: "ellipsis",
@@ -266,7 +271,7 @@ const Navbar = () => {
                   <Typography
                     sx={{
                       color: "#007BFF",
-                      fontSize: { md: "13px", lg: "17px" },
+                      fontSize: { md: getFont("13px"), lg: getFont("17px") },
                       fontWeight: "500",
                     }}
                   >
@@ -320,7 +325,7 @@ const Navbar = () => {
         <Typography
           sx={{
             color: "#004A99",
-            fontSize: "23.67px",
+            fontSize: getFont("23.67px"),
             textAlign: "center",
             pb: "20px",
           }}
@@ -341,7 +346,7 @@ const Navbar = () => {
             <Typography
               sx={{
                 color: "#383535",
-                fontSize: "15.7px",
+                fontSize: getFont("15.7px"),
                 textAlign: language === "ar" ? "right" : "left",
               }}
             >
@@ -404,7 +409,7 @@ const Navbar = () => {
         button2Text={"Logout"}
       >
         <Typography
-          sx={{ fontSize: "16px", fontWeight: "400", opacity: "56%" }}
+          sx={{ fontSize: getFont("16px"), fontWeight: "400", opacity: "56%" }}
         >
           Are you sure you want to Logout?
         </Typography>
@@ -435,6 +440,13 @@ const Navbar = () => {
         }}
       >
         <EditSourceModal />
+      </DynamicModal>
+      <DynamicModal
+        open={fontSizeModal}
+        handleClose={() => setFontSizeModal(false)}
+        sx={{ padding: { xs: "15px", md: "25px", lg: "35px" } }}
+      >
+        <FontSizeModal />
       </DynamicModal>
       <Box
         ref={boxRef}
@@ -480,7 +492,7 @@ const Navbar = () => {
               height: "100%",
               padding: 0,
               color: "#A098AE",
-              fontSize: "14.7px",
+              fontSize: getFont("14.7px"),
               fontWeight: 700,
             },
             ".MuiInputBase-root": {

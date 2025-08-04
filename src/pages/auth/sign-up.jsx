@@ -10,6 +10,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect, useState } from "react";
 import { useSignupMutation } from "../../services/auth";
 import { toast } from "react-toastify";
+import { getFont } from "../../utils";
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -157,7 +158,7 @@ const Signup = () => {
           variant="contained"
           sx={{
             height: { xs: "38px", lg: "46px" },
-            fontSize: { xs: "12px", md: "16px" },
+            fontSize: { xs: getFont("12px"), md: getFont("16px") },
             borderRadius: "0px",
             backgroundColor: "#3281CA",
           }}
@@ -176,7 +177,7 @@ const Signup = () => {
           py: 1.5,
           boxShadow: "none",
           color: "#000",
-          fontSize: { xs: "11px", md: "16px" },
+          fontSize: { xs: getFont("11px"), md: getFont("16px") },
           backgroundColor: "#fff",
           border: "1px solid #D9D9D9",
           display: "flex",
@@ -212,8 +213,8 @@ const Signup = () => {
         sx={{
           mt: 3,
           fontSize: {
-            xs: "11px",
-            md: "16px",
+            xs: getFont("11px"),
+            md: getFont("16px"),
           },
           fontFamily: "Gilroy-Regular",
           fontWeight: 400,

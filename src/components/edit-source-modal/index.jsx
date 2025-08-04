@@ -8,6 +8,7 @@ import { useSearchParams } from "react-router-dom";
 import { useGetCategoriesQuery } from "../../services/feed";
 import { useRssFeedQuery } from "../../services/rss";
 import { useSelector } from "react-redux";
+import { getFont } from "../../utils";
 
 const EditSourceModal = () => {
   const [selectedCategories, setSelectedCategories] = useState({});
@@ -85,7 +86,7 @@ const EditSourceModal = () => {
           flexDirection: { xs: "column", md: "row" },
         }}
       >
-        <Typography sx={{ fontSize: "32px", fontWeight: "600" }}>
+        <Typography sx={{ fontSize: getFont("32px"), fontWeight: "600" }}>
           Edit New Source
         </Typography>
         <Box
@@ -152,7 +153,7 @@ const EditSourceModal = () => {
                   />
                   <Typography
                     sx={{
-                      fontSize: "20.38px",
+                      fontSize: getFont("20.38px"),
                       color: "#101828",
                       fontWeight: "600",
                     }}

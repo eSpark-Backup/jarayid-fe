@@ -1,6 +1,7 @@
 import { TextField, InputAdornment, Typography, Box } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { getFont } from "../../utils";
 
 const CustomInput = ({
   name,
@@ -27,7 +28,9 @@ const CustomInput = ({
       {label && (
         <Typography
           sx={{
-            fontSize: modal ? "22px" : { xs: "10px", md: "12px" },
+            fontSize: modal
+              ? getFont("22px")
+              : { xs: getFont("10px"), md: getFont("12px") },
             mb: "-12px",
             mt: modal ? 0 : 2,
             textAlign: language === "ar" ? "right" : "left",
@@ -93,7 +96,7 @@ const CustomInput = ({
         <Typography
           sx={{
             color: "#d32f2f",
-            fontSize: "0.75rem",
+            fontSize: getFont("0.75rem"),
             fontWeight: "400",
             textAlign: language === "ar" ? "right" : "left",
           }}

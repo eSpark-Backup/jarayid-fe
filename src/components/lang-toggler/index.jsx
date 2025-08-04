@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import useLanguageSwitcher from "../../hooks/change-language";
 import { useSelector } from "react-redux";
+import { getFont } from "../../utils";
 
 const LanguageToggler = () => {
   const { t } = useTranslation();
@@ -12,7 +13,7 @@ const LanguageToggler = () => {
       onClick={() => switchLanguage(language === "en" ? "ar" : "en")}
       sx={{
         height: "38px",
-        width: "110px",
+        width: "125px",
         backgroundColor: "#ECECEC",
         border: "1px solid #E8E0E0",
         borderRadius: "21px",
@@ -33,7 +34,7 @@ const LanguageToggler = () => {
           borderRadius: "50%",
           position: "absolute",
           top: "7px",
-          left: language === "ar" ? "5px" : "75px",
+          left: language === "ar" ? "5px" : "85px",
           transition: "left 0.3s ease",
         }}
       ></Box>
@@ -41,7 +42,7 @@ const LanguageToggler = () => {
       <Typography
         sx={{
           color: "#4A4A4B",
-          fontSize: "17.36px",
+          fontSize: getFont("17.36px"),
           fontWeight: "500",
           marginLeft: language === "ar" ? "30px" : "10px",
           transition: "margin 0.3s ease",

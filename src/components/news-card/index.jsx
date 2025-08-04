@@ -7,6 +7,7 @@ import { useNavigate } from "react-router-dom";
 import dayjs from "dayjs";
 import relativeTime from "dayjs/plugin/relativeTime";
 import "dayjs/locale/ar";
+import { getFont } from "../../utils";
 
 dayjs.extend(relativeTime);
 
@@ -95,7 +96,11 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
         >
           <Typography
             sx={{
-              fontSize: { xs: "15.49px", md: "18px", lg: "22.49px" },
+              fontSize: {
+                xs: getFont("15.49px"),
+                md: getFont("18px"),
+                lg: getFont("22.49px"),
+              },
               whiteSpace: "normal",
               fontWeight: "600",
               maxWidth: "100%",
@@ -160,7 +165,7 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
             >
               <Typography
                 sx={{
-                  fontSize: { xs: "8px", md: "12px" },
+                  fontSize: { xs: getFont("8px"), md: getFont("12px") },
                   color: "#007BFF",
                   textAlign: {
                     // : "center",
@@ -187,7 +192,12 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
                   // width: { xs: "max-content", md: "200px" },
                   mt: { xs: "0px", md: "5px" },
                   color: "#8F8F8F",
-                  fontSize: { xs: "7px", sm: "14px", md: "9.82px", lg: "12px" },
+                  fontSize: {
+                    xs: getFont("7px"),
+                    sm: getFont("14px"),
+                    md: getFont("9.82px"),
+                    lg: getFont("12px"),
+                  },
                   mb: { xs: "0px", md: "5px" },
                   alignSelf: {
                     // xs: language === "ar" ? "flex-start" : "flex-end",

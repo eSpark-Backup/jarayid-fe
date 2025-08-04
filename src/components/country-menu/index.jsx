@@ -6,6 +6,7 @@ import CustomSwitch from "../custom-switch";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useSearchParams } from "react-router-dom";
+import { getFont } from "../../utils";
 
 const CountryMenu = ({ anchorEl, open, onClose, navbar }) => {
   const [showCountries, setShowCountries] = useState(false);
@@ -100,7 +101,7 @@ const CountryMenu = ({ anchorEl, open, onClose, navbar }) => {
             )}
             <Typography
               sx={{
-                fontSize: "23.67px",
+                fontSize: getFont("23.67px"),
                 color: "#004A99",
                 textAlign: "center",
               }}
@@ -138,7 +139,7 @@ const CountryMenu = ({ anchorEl, open, onClose, navbar }) => {
             }}
             onClick={handleCountryClick}
           >
-            <Typography sx={{ color: "white", fontSize: "17.96px" }}>
+            <Typography sx={{ color: "white", fontSize: getFont("17.96px") }}>
               {activeCountry}
             </Typography>
             <img
@@ -155,7 +156,7 @@ const CountryMenu = ({ anchorEl, open, onClose, navbar }) => {
             <Box key={index}>
               <Typography
                 sx={{
-                  fontSize: "17.96px",
+                  fontSize: getFont("17.96px"),
                   color: "#004A99",
                   textAlign: "center",
                   mt: index > 0 ? "20px" : "0px",
@@ -178,7 +179,7 @@ const CountryMenu = ({ anchorEl, open, onClose, navbar }) => {
                 >
                   <Typography
                     fontWeight={500}
-                    fontSize="20px"
+                    fontSize={getFont("20px")}
                     color="black"
                     sx={{ fontFamily: "Gilroy-Medium", fontWeight: "400" }}
                   >

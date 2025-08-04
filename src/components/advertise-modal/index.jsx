@@ -1,6 +1,7 @@
 import { Box, Button, Typography } from "@mui/material";
 import CustomInput from "../input";
 import { useFormik } from "formik";
+import { getFont } from "../../utils";
 
 const sharedInputStyles = {
   "& .MuiOutlinedInput-root": {
@@ -9,7 +10,7 @@ const sharedInputStyles = {
     height: "72px",
     color: "#000",
     border: "1px solid rgba(255, 255, 255, 0.93)",
-    fontSize: "16px",
+    fontSize: getFont("16px"),
     my: "0px",
   },
 };
@@ -63,7 +64,7 @@ const AdvertiseModal = ({ handleSubmit }) => {
   );
   return (
     <Box component={"form"} onSubmit={formik.handleSubmit}>
-      <Typography sx={{ fontSize: "32px", fontWeight: "600" }}>
+      <Typography sx={{ fontSize: getFont("32px"), fontWeight: "600" }}>
         Advertise here
       </Typography>
       <Box
