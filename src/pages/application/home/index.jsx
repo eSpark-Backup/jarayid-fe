@@ -105,9 +105,13 @@ const Home = () => {
       const items = data?.data?.items || [];
       console.log(data);
       const originalNames = items.map((item) => item?.name);
+      const arabiclNames = items.map(
+        (item) => item?.translatedContent?.arabic?.name
+      );
       const originalIds = items.map((item) => item?.id);
 
       setCountries(originalNames);
+      setArabicCountries(arabiclNames);
 
       const initialIndex = queryCountry
         ? originalNames.indexOf(queryCountry)
@@ -118,7 +122,7 @@ const Home = () => {
     };
 
     fetchData();
-  }, [data, language]);
+  }, [data]);
 
   const handleClick2 = (event) => {
     setAnchorEl2(event.currentTarget);
@@ -462,7 +466,7 @@ const Home = () => {
             {(isLoading || translationLoading
               ? skeletonArray
               : language === "ar"
-              ? countries
+              ? arabicCountries
               : countries
             )?.map((item, index) => (
               <Grid

@@ -15,7 +15,6 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
         // pt: "80px",
         // pb: "100px",
         backgroundColor: "#fff",
-        minHeight: "100vh",
         direction: isArabic ? "rtl" : "ltr",
       }}
     >

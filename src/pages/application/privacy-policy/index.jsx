@@ -3,6 +3,7 @@ import LegalPageLayout from "../../../components/legal-page-layout";
 import { useGetAllPagesQuery } from "../../../services/static-pages";
 import { useEffect, useState } from "react";
 import { Container, Skeleton } from "@mui/material";
+import { useSelector } from "react-redux";
 
 const PrivacyPolicy = () => {
   const { t } = useTranslation();
@@ -11,10 +12,15 @@ const PrivacyPolicy = () => {
   const { data: staticPageData, isLoading: staticPageLoading } =
     useGetAllPagesQuery({ search: "policy" });
   const [data, setData] = useState("");
+  const [translatedData, setTranslatedData] = useState("");
+  const language = useSelector((state) => state.language);
 
   useEffect(() => {
     if (staticPageData) {
       setData(staticPageData?.data?.items[0]?.content?.message);
+      setTranslatedData(
+        staticPageData?.data?.items[0]?.translatedContent?.arabic?.content
+      );
     }
   }, [staticPageData]);
 
@@ -39,7 +45,10 @@ const PrivacyPolicy = () => {
           ))}
         </Container>
       ) : (
-        <LegalPageLayout title={title} paragraphs={data} />
+        <LegalPageLayout
+          title={title}
+          paragraphs={language === "en" ? data : translatedData}
+        />
       )}
     </>
   );
