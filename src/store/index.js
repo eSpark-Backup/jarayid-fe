@@ -4,6 +4,7 @@ import auth from "./slices/auth";
 import category from "./slices/categories";
 import { authApi } from "../services/auth";
 import socialLinksReducer from "./slices/social";
+import ChatbotSlice from "./slices/chatbot.js";
 
 const store = configureStore({
   reducer: {
@@ -11,6 +12,7 @@ const store = configureStore({
     auth,
     category,
     socialLinks: socialLinksReducer,
+    chatbot: ChatbotSlice,
     [authApi.reducerPath]: authApi.reducer,
   },
   middleware: (getDefaultMiddleware) =>

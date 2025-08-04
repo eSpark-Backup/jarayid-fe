@@ -20,6 +20,7 @@ const Signup = () => {
       email: "",
       password: "",
       confirmPassword: "",
+      name: "",
     },
     validationSchema: signupValidationSchema,
     onSubmit: (values) => {
@@ -28,6 +29,7 @@ const Signup = () => {
         email: values?.email,
         loginType: "local",
         password: values?.password,
+        name: values?.name,
       };
       signup(objToSend).then((res) => {
         if (res?.data) {
@@ -94,6 +96,17 @@ const Signup = () => {
   return (
     <>
       <Box component={"form"} onSubmit={formik.handleSubmit}>
+        <CustomInput
+          name="name"
+          label={t("Name")}
+          placeholder={t("name placeholder")}
+          value={formik.values.name}
+          onChange={formik.handleChange}
+          onBlur={formik.handleBlur}
+          error={formik.touched.name && Boolean(formik.errors.name)}
+          helperText={formik.touched.name && formik.errors.name}
+        />
+
         <CustomInput
           name="email"
           label={t("Email address")}

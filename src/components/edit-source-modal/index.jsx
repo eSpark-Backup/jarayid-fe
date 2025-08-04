@@ -7,46 +7,31 @@ import { rssSource } from "../../assets";
 import { useSearchParams } from "react-router-dom";
 import { useGetCategoriesQuery } from "../../services/feed";
 import { useRssFeedQuery } from "../../services/rss";
+import { useSelector } from "react-redux";
 
 const EditSourceModal = () => {
   const [selectedCategories, setSelectedCategories] = useState({});
   const [category, setCategory] = useState("");
-  const [searchParams, setSearchParams] = useSearchParams();
   const [activeId, setActiveId] = useState("");
-  const [activeSubCategory, setActiveSubCategory] = useState("");
-  const { data, isLoading } = useGetCategoriesQuery({});
   const [rssPage, setRssPage] = useState(1);
+  const { category: categoriesData } = useSelector((state) => state.category);
+  const [fetched, setFetched] = useState(false);
+  const [hasMoreData, setHasMoreData] = useState(false);
 
   const {
     data: rssData,
     isLoading: rssLoading,
     isFetching,
+    isSuccess,
+    refetch,
   } = useRssFeedQuery(
     {
       page: rssPage,
       limit: 7,
       categoryId: activeId,
-      subType:
-        activeSubCategory === "Economy"
-          ? "ECONOMICS"
-          : activeSubCategory === "Sport"
-          ? "SPORTS"
-          : "POLITICS",
     },
-    { skip: !activeId || !activeSubCategory }
+    { skip: activeId === "" }
   );
-
-  useEffect(() => {
-    if (!data) return;
-    if (!searchParams.get("country") || !searchParams.get("category")) return;
-
-    const active = data?.data?.items?.filter(
-      (item) =>
-        item?.name?.toLowerCase() === searchParams.get("country")?.toLowerCase()
-    );
-    setActiveId(active[0]?.id);
-    setActiveSubCategory(searchParams.get("category"));
-  }, [data, searchParams, activeSubCategory]);
 
   const [items, setItems] = useState([]);
 
@@ -58,7 +43,9 @@ const EditSourceModal = () => {
         img: item?.logo,
         checked: true,
       }));
+      setFetched(true);
       setItems(data);
+      setHasMoreData(rssData?.data?.pagination?.hasNextPage);
     }
   }, [rssData]);
 
@@ -69,6 +56,24 @@ const EditSourceModal = () => {
       )
     );
   };
+
+  useEffect(() => {
+    const filtered = categoriesData.filter(
+      (item) => selectedCategories[item.name] === true
+    );
+    console.log("HELLO");
+
+    const newIds = filtered?.map((item) => item?.id);
+    // console.log(newIds, "NEWS IDS");
+    setActiveId(newIds?.join(","));
+  }, [selectedCategories]);
+
+  useEffect(() => {
+    if (activeId === "") {
+      setItems([]);
+    }
+  }, [activeId]);
+
   return (
     <>
       <Box
@@ -104,16 +109,17 @@ const EditSourceModal = () => {
         sx={{
           display: "flex",
           flexDirection: "column",
-          //   rowGap: "10px",
+          rowGap: "10px",
           px: "15px",
           minHeight: "250px",
+          mt: "20px",
         }}
       >
-        {isLoading || isFetching
-          ? [...Array(5)]?.map((_, index) => (
+        {rssLoading || isFetching
+          ? [...Array(2)]?.map((_, index) => (
               <Skeleton
                 variant="rectangular"
-                sx={{ height: "140px", mt: "10px" }}
+                sx={{ height: "100px", mt: "10px" }}
                 key={index}
               />
             ))
@@ -168,6 +174,22 @@ const EditSourceModal = () => {
                 />
               </Box>
             ))}
+        {!rssLoading && !isFetching && hasMoreData && (
+          <Box>
+            <Box
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                mt: "15px",
+              }}
+            >
+              <Box sx={{ width: "200px", height: "40px" }}>
+                <Button variant="gradient">View More</Button>
+              </Box>
+            </Box>
+          </Box>
+        )}
       </Box>
     </>
   );
