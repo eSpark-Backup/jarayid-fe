@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { Footer, MobileNavbar, Navbar } from "../../components";
-import { useGetPlansQuery } from "../../services/payment";
+import { Box } from "@mui/material";
+// import { useGetPlansQuery } from "../../services/payment";
 
 const PrivateLayout = () => {
   const { user } = useSelector((state) => state.auth);
@@ -18,7 +19,7 @@ const PrivateLayout = () => {
         minHeight: "100vh",
         display: "flex",
         flexDirection: "column",
-        justifyContent: "flex-start"
+        justifyContent: "flex-start",
       }}
     >
       <Navbar />

@@ -149,11 +149,12 @@ const ArticleDetails = () => {
             const englishTitle =
               item?.originalContent?.scrapedContent?.translatedContent?.englishContent
                 ?.split("-")[0]
-                ?.replace("Title: ", "");
+                ?.replace("Title:", "");
             const arabicTitle =
               item?.originalContent?.scrapedContent?.translatedContent?.arabicContent
                 ?.split("-")[0]
-                ?.replace("عنوان:", "");
+                ?.replace("عنوان:", "")
+                ?.replace("Title:", "");
             // const isArabic = /[\u0600-\u06FF]/.test(headline);
 
             // if (language === "ar" && !isArabic) {

@@ -507,7 +507,7 @@ const Home = () => {
                             ? "none"
                             : "0.89px solid #01000142",
                         fontSize: getFont("14px"),
-                        fontWeight: "400",
+                        fontWeight: language === "ar" ? "600" : "400",
                         fontFamily: "Gilroy-Medium",
                       }}
                       onClick={() => handleChipClick(item, "country")}
@@ -618,7 +618,7 @@ const Home = () => {
                       md: getFont("14px"),
                       lg: getFont("17.96px"),
                     },
-                    fontWeight: "400",
+                    fontWeight: language === "ar" ? "600" : "400",
                     fontFamily: "Gilroy-Medium",
                     display: activeCategoryType === "NORMAL" ? "none" : "flex",
                   }}

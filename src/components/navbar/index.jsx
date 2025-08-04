@@ -203,7 +203,7 @@ const Navbar = () => {
                     alignItems: "center",
                     width: "136px",
                     cursor: "pointer",
-                    height: "35px",
+                    height: "40px",
                   }}
                   onClick={handleClick}
                 >
