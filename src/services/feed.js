@@ -28,6 +28,7 @@ export const FeedApi = api.injectEndpoints({
 
           pinned,
           ...(!search && { categoryId, subType }),
+          sortOrder: "asc",
           ...(search && { search }),
         },
       }),

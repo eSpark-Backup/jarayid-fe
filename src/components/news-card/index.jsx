@@ -22,8 +22,8 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
         alignItems: "center",
         justifyContent: "space-between",
         flexDirection: {
-          xs: "row",
-          md: language === "ar" ? "row-reverse" : "row",
+          // xs: "row",
+          xs: language === "ar" ? "row-reverse" : "row",
         },
         px: { xs: "10px", md: "15px" },
         cursor: "pointer",
@@ -43,8 +43,108 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
         }}
         loading="lazy"
       />
+      <Box sx={{ flex: 1 }}>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: language === "ar" ? "flex-start" : "flex-end",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: { xs: "8 px", md: "14px", lg: "17.6px" },
+              color: "#007BFF",
+              textAlign: {
+                // : "center",
+                xs: language === "ar" ? "left" : "right",
+              },
+              whiteSpace: {
+                xs: "normal",
+                md: "nowrap",
+              },
+              overflow: "hidden",
+              textOverflow: "ellipsis",
+              maxWidth: "100%",
+              display: "-webkit-box",
+              WebkitLineClamp: 1,
+              WebkitBoxOrient: "vertical",
+            }}
+            title={source}
+            component={"h3"}
+          >
+            {`${t("Source")}: ${source}`}
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            alignItems: "flex-start",
+            justifyContent: "space-between",
+            flexDirection: {
+              xs: "column",
+              md: language === "ar" ? "row-reverse" : "row",
+            },
+            gap: "10px",
+          }}
+        >
+          <Typography
+            sx={{
+              fontSize: { xs: "15.49px", md: "18px", lg: "22.49px" },
+              whiteSpace: "normal",
+              fontWeight: "600",
+              maxWidth: "100%",
+              [language === "ar" ? "marginRight" : "marginLeft"]: "10px",
+              textAlign: language === "ar" ? "right" : "left",
+              alignSelf: {
+                xs: language === "ar" ? "flex-end" : "flex-start",
+                md: "flex-start",
+              },
+            }}
+            component={"h2"}
+            title={headline}
+            dir={language === "ar" ? "rtl" : "ltr"}
+          >
+            {headline}
+          </Typography>
+          <Typography
+            sx={{
+              width: { xs: "max-content", md: "200px" },
+              mt: { xs: "0px", md: "5px" },
+              color: "#8F8F8F",
+              fontSize: { xs: "7px", sm: "14px", md: "9.82px", lg: "12px" },
+              mb: { xs: "0px", md: "5px" },
+              alignSelf: {
+                xs: language === "ar" ? "flex-start" : "flex-end",
+                md: "flex-start",
+              },
+              textAlign: {
+                // xs: "center",
+                xs: language === "ar" ? "left" : "right",
+              },
+            }}
+            component={"h5"}
+          >
+            {dayjs(date)
+              .locale(language === "ar" ? "ar" : "en")
+              .fromNow()}
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            width: "100%",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: language === "ar" ? "flex-start" : "flex-end",
+          }}
+        >
+          <SocialBox newsCard={true} shareLinks={shareLinks} id={id} />
+        </Box>
+      </Box>
 
-      <Box
+      {/* <Box
         sx={{
           flexGrow: 1,
           overflow: "hidden",
@@ -54,28 +154,21 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
         <Typography
           sx={{
             fontSize: { xs: "15.49px", md: "18px", lg: "22.49px" },
-            mb: "20px",
-            whiteSpace: {
-              xs: "normal",
-              md: "nowrap",
-            },
-            overflow: "hidden",
-            textOverflow: "ellipsis",
-            textAlign: "center",
+            whiteSpace: "normal",
             fontWeight: "600",
             maxWidth: "100%",
-            display: "-webkit-box",
-            WebkitLineClamp: 1,
-            WebkitBoxOrient: "vertical",
+            [language === "ar" ? "marginRight" : "marginLeft"]: "10px",
+            textAlign: language === "ar" ? "right" : "left",
           }}
           component={"h2"}
           title={headline}
+          dir={language === "ar" ? "rtl" : "ltr"}
         >
-          {headline?.length > 25 ? `${headline.substring(0, 25)}...` : headline}
+          {headline}
         </Typography>
-      </Box>
+      </Box> */}
 
-      <Box
+      {/* <Box
         sx={{
           display: "flex",
           flexDirection: "column",
@@ -109,17 +202,7 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
           title={source}
           component={"h3"}
         >
-          {language === "ar" ? (
-            <>
-              {source?.length > 30 ? `${source.substring(0, 30)}...` : source}
-              {":" + t("Source")}
-            </>
-          ) : (
-            <>
-              {t("Source") + ": "}
-              {source?.length > 30 ? `${source.substring(0, 30)}...` : source}
-            </>
-          )}
+          {`${t("Source")}: ${source}`}
         </Typography>
         <Typography
           sx={{
@@ -159,7 +242,7 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
             .fromNow()}
         </Typography>
         <SocialBox newsCard={true} shareLinks={shareLinks} id={id} />
-      </Box>
+      </Box> */}
     </Paper>
   );
 };

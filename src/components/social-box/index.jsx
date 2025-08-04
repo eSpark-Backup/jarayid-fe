@@ -75,7 +75,11 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
       }}
     >
       <Box
-        sx={{ display: "flex", columnGap: { xs: "3px", md: "4px", lg: "9px" } }}
+        sx={{
+          display: "flex",
+          alignItems: "center",
+          columnGap: { xs: "3px", md: "4px", lg: "9px" },
+        }}
       >
         {newsCard ? (
           <>
@@ -251,8 +255,8 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
         <Typography
           sx={{
             textAlign: {
-              xs: "center",
-              md: language === "ar" ? "left" : "right",
+              // xs: "center",
+              xs: language === "ar" ? "left" : "right",
             },
             fontSize: { xs: "7px", sm: "14px", md: "12px" },
           }}

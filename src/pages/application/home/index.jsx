@@ -269,14 +269,26 @@ const Home = () => {
 
   useEffect(() => {
     if (articlesData) {
-      const formattedArticles = articlesData?.data?.items?.map((item) => ({
-        id: item?.id,
-        image: item?.image,
-        headline: item?.title,
-        source: item?.source,
-        date: item?.createdAt,
-        shareLinks: item?.shareLinks,
-      }));
+      const formattedArticles = articlesData?.data?.items?.map((item) => {
+        const englishTitle =
+          item?.originalContent?.scrapedContent?.translatedContent?.englishContent
+            ?.split("-")[0]
+            ?.replace("Title: ", "");
+        const arabicTitle =
+          item?.originalContent?.scrapedContent?.translatedContent?.arabicContent
+            ?.split("-")[0]
+            ?.replace("عنوان:", "");
+        return {
+          id: item?.id,
+          image: item?.image,
+          headline: item?.title,
+          source: item?.source?.split("- ")[1],
+          date: item?.createdAt,
+          shareLinks: item?.shareLinks,
+          englishTitle,
+          arabicTitle,
+        };
+      });
 
       setArticles(formattedArticles || []); // Fallback to empty array if undefined
       setHasNextPage(articlesData?.data?.pagination?.hasNextPage);
@@ -418,7 +430,7 @@ const Home = () => {
             {(isLoading || translationLoading
               ? skeletonArray
               : language === "ar"
-              ? arabicCountries
+              ? countries
               : countries
             )?.map((item, index) => (
               <Grid
@@ -974,7 +986,11 @@ const Home = () => {
                       <NewsCard
                         key={index}
                         image={item?.image}
-                        headline={item?.headline}
+                        headline={
+                          language === "ar"
+                            ? item?.arabicTitle
+                            : item?.englishTitle
+                        }
                         date={item?.date}
                         source={item?.source}
                         id={item?.id}
