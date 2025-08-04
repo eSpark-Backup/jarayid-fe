@@ -3,11 +3,11 @@ import { api } from "./rtk";
 export const FeedApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getCategories: builder.query({
-      query: ({ type }) => ({
+      query: ({ type, limit = 100 }) => ({
         url: `/categories`,
         method: "GET",
         credentials: "include",
-        params: { ...(type && { type }) },
+        params: { ...(type && { type }), limit },
       }),
     }),
     getArticles: builder.query({

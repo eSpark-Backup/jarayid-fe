@@ -207,13 +207,15 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               </a>
             ) : null}
             {!detailPage && (shareLinks?.instagram || myLinks?.instagram) && (
-              <Box
-                component={"img"}
-                src={instagram}
-                alt={"Instagram"}
-                loading="lazy"
-                sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
-              />
+              <a href={shareLinks?.instagram || myLinks?.instagram}>
+                <Box
+                  component={"img"}
+                  src={instagram}
+                  alt={"Instagram"}
+                  loading="lazy"
+                  sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+                />
+              </a>
             )}
             {shareLinks?.tiktok || myLinks?.tiktok ? (
               <a href={shareLinks?.tiktok || myLinks?.tiktok}>

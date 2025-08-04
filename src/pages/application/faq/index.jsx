@@ -88,7 +88,11 @@ const FAQSection = () => {
               alignSelf: { xs: "center", md: "flex-start", lg: "flex-start" },
             }}
           >
-            <SmartReaderCard />
+            <SmartReaderCard
+              paragraphs={data?.map(
+                (item) => `${item?.question} ${item?.answer}`
+              )}
+            />
           </Box>
         )}
       </Box>
