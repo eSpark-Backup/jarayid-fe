@@ -147,6 +147,7 @@ const Navbar = () => {
           display: { xs: "none", md: "flex" },
           justifyContent: "center",
           alignItems: "center",
+          position: "relative",
         }}
       >
         <Box
@@ -165,7 +166,14 @@ const Navbar = () => {
             alt="Logo"
             loading="lazy"
             src={logo}
-            sx={{ width: { md: "170px", lg: "auto" }, cursor: "pointer" }}
+            sx={{
+              width: { md: "170px", lg: "auto" },
+              cursor: "pointer",
+              position: "absolute",
+              top: "50%",
+              left: "50%",
+              transform: "translate(-50%, -50%)",
+            }}
             onClick={() => navigate("/")}
           />
           <Box
