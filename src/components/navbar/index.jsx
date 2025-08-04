@@ -77,7 +77,8 @@ const Navbar = () => {
       setSubscriptionModal(true);
       setAnchorEl(null);
     } else if (event === "Contact Us") {
-      setContactModal(true);
+      // setContactModal(true);
+      navigate("/contact-us");
       setAnchorEl(null);
     } else if (event === "Share Jarayid") {
       setShareModal(true);
@@ -156,7 +157,7 @@ const Navbar = () => {
             py: "20px",
             display: "flex",
             justifyContent: "space-between",
-            flexDirection: language === "ar" ? "row-reverse" : "row",
+            flexDirection: "row",
           }}
         >
           <SocialBox />
@@ -217,7 +218,8 @@ const Navbar = () => {
                       sx={{
                         display: "flex",
                         flexDirection: "column",
-                        rowGap: "2px",
+                        // rowGap: "2px",
+                        rowGap: "0px",
                       }}
                     >
                       <Typography
@@ -229,10 +231,11 @@ const Navbar = () => {
                           textOverflow: "ellipsis",
                           width: "70px",
                           whiteSpace: "nowrap",
-                          lineHeight: "10px",
+                          lineHeight: "unset",
+                          // lineHeight: "10px",
                         }}
                       >
-                        {user?.name || "Your name"}
+                        {user?.name?.slice(0, 5) || "Name"}
                       </Typography>
                       <Typography
                         sx={{
@@ -280,7 +283,7 @@ const Navbar = () => {
               sx={{
                 cursor: "pointer",
                 display: "flex",
-                justifyContent: language === "ar" ? "flex-start" : "flex-end",
+                justifyContent: "flex-end",
                 width: "100%",
               }}
             >

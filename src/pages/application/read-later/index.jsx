@@ -67,8 +67,7 @@ const ReadLater = () => {
         sx={{
           backgroundColor:
             readLaterData?.length > 0 ? "#EDEDED" : "transparent",
-          borderTopRightRadius: "9px",
-          borderTopLeftRadius: "9px",
+          borderRadius: "9px",
           width: { xs: "90%", md: "75%", lg: "45%" },
           display: "flex",
           flexDirection: "column",

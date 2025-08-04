@@ -12,8 +12,8 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
     <Box
       component="main"
       sx={{
-        pt: "80px",
-        pb: "100px",
+        // pt: "80px",
+        // pb: "100px",
         backgroundColor: "#fff",
         direction: isArabic ? "rtl" : "ltr",
       }}
@@ -74,10 +74,10 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
 
           <Box
             sx={{
-              alignSelf: { xs: "center", md: "flex-start" },
+              alignSelf: { xs: "flex-start", md: "flex-start" },
               order: { xs: 1, md: isArabic ? 1 : 2 },
-              ml: isArabic ? 0 : 4,
-              mr: isArabic ? 4 : 0,
+              // ml: isArabic ? 0 : 4,
+              // mr: isArabic ? 4 : 0,
             }}
           >
             <Suspense fallback={<div>Loading Smart Reader...</div>}>

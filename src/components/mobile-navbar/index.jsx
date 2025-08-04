@@ -35,6 +35,7 @@ const MobileNavbar = () => {
   const [shareModal, setShareModal] = useState(false);
   const [logoutModal, setLogoutModal] = useState(false);
   const [socialModal, setSocialModal] = useState(false);
+  const { user } = useSelector((state) => state.auth);
   const [editSource, setEditSource] = useState(false);
 
   const navigate = useNavigate();
@@ -82,7 +83,8 @@ const MobileNavbar = () => {
       setSubscriptionModal(true);
       setAnchorEl(null);
     } else if (event === "Contact Us") {
-      setContactModal(true);
+      // setContactModal(true);
+      navigate("/contact-us");
       setAnchorEl(null);
     } else if (event === "Share the App") {
       setShareModal(true);
@@ -136,11 +138,15 @@ const MobileNavbar = () => {
             src={logo}
             alt="Logo"
             style={{ width: "124px", height: "42px" }}
+            onClick={() => navigate("/")}
           />
           <img
             src={userBlack}
             alt="Icon"
-            style={{ cursor: "pointer" }}
+            style={{
+              cursor: "pointer",
+              visibility: !user ? "hidden" : "visible",
+            }}
             onClick={handleClick}
           />
         </Box>

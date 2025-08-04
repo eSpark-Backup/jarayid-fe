@@ -75,7 +75,7 @@ const ChangePassword = () => {
         disabled={isLoading}
         type="submit"
         variant="contained"
-        sx={{ mt: 2, fontSize: { xs: "11px", md: "16px" } }}
+        sx={{ mt: 2, fontSize: { xs: "12px", md: "16px" } }}
       >
         {t("Save")}
       </Button>

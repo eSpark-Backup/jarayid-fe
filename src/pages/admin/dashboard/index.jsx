@@ -5,7 +5,7 @@ import {
   SummaryCardContent,
   systemStatuses,
 } from "../../../constant";
-import { check } from "../../../assets";
+import { check, lastMonthIcon, thisMonthIcon } from "../../../assets";
 import WeeklyColumnChart from "../../../components/bar-charts";
 import StackedAreaChart from "../../../components/stacked-area-chart";
 
@@ -124,7 +124,7 @@ const Dashboard = () => {
           </Paper>
         </Grid>
         <Grid size={{ xs: 12, md: 5, lg: 3.5 }}>
-          <Paper variant="adminPaper">
+          <Paper variant="adminPaper" sx={{ position: "relative" }}>
             <Typography
               sx={{
                 color: "#05004E",
@@ -136,6 +136,92 @@ const Dashboard = () => {
               Page Views Over Time
             </Typography>
             <StackedAreaChart data={stackedChartData} />
+            <Box
+              sx={{
+                position: "absolute",
+                bottom: "20px",
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+                columnGap: "15px",
+              }}
+            >
+              <Box
+                sx={{
+                  display: "flex",
+                  columnGap: "5px",
+                  alignItems: "baseline",
+                }}
+              >
+                <img src={lastMonthIcon} alt="Icon" />
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    rowGap: "5px",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: "#96A5B8",
+                      fontSize: "10.67px",
+                    }}
+                  >
+                    Last Month
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#222B45",
+                      fontSize: "9.33px",
+                    }}
+                  >
+                    3,004
+                  </Typography>
+                </Box>
+              </Box>
+              <Box
+                sx={{
+                  width: "0.66px",
+                  height: "16px",
+                  backgroundColor: "#BDC9D3",
+                  mb: "10px",
+                }}
+              ></Box>
+              <Box
+                sx={{
+                  display: "flex",
+                  columnGap: "5px",
+                  alignItems: "baseline",
+                }}
+              >
+                <img src={thisMonthIcon} alt="Icon" />
+                <Box
+                  sx={{
+                    display: "flex",
+                    flexDirection: "column",
+                    rowGap: "5px",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      color: "#96A5B8",
+                      fontSize: "10.67px",
+                    }}
+                  >
+                    This Month
+                  </Typography>
+                  <Typography
+                    sx={{
+                      color: "#222B45",
+                      fontSize: "9.33px",
+                    }}
+                  >
+                    4,504
+                  </Typography>
+                </Box>
+              </Box>
+            </Box>
           </Paper>
         </Grid>
         <Grid size={{ xs: 12, md: 7, lg: 4 }}>

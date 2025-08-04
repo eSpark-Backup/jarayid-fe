@@ -1,4 +1,4 @@
-import { Box, Skeleton, Typography } from "@mui/material";
+import { Box, Chip, Skeleton, Typography } from "@mui/material";
 import {
   comment,
   facebook,
@@ -29,6 +29,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
   const navigate = useNavigate();
   const links = useSelector((state) => state.socialLinks.links);
   const [myLinks, setMyLinks] = useState({});
+  const { user } = useSelector((state) => state.auth);
 
   const toArabicDigits = (str) => str.replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
 
@@ -72,14 +73,15 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        rowGap: { xs: newsCard ? "2px" : "10px", md: "10px" },
+        // rowGap: { xs: newsCard ? "2px" : "10px", md: "10px" },
       }}
     >
       <Box
         sx={{
           display: "flex",
-          alignItems: "center",
           columnGap: { xs: "3px", md: "4px", lg: "9px" },
+          justifyContent: newsCard ? "flex-end" : "flex-start",
+          alignItems: "center",
         }}
       >
         {newsCard ? (
@@ -126,6 +128,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
                 sx={{
                   width: { xs: "12px", sm: "15px", md: "21px" },
                   height: { xs: "12px", sm: "15px", md: "21px" },
+                  display: user ? "block" : "none",
                 }}
                 loading="lazy"
                 onClick={(e) => {
@@ -266,26 +269,56 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
         )}
       </Box>
       {detailPage ? null : newsCard ? (
-        <Typography
-          sx={{
-            textAlign: {
-              // xs: "center",
-              xs: language === "ar" ? "left" : "right",
-            },
-            fontSize: { xs: "7px", sm: "14px", md: "12px" },
-          }}
-          component={"h4"}
+        <Box
+        // sx={{
+        //   display: "flex",
+        //   justifyContent: "space-between",
+        //   alignItems: "center",
+        //   columnGap: "20px",
+        //   height: "14px",
+        //   textAlign: {
+        //     // xs: "center",
+        //     xs: language === "ar" ? "left" : "right",
+        //   },
+        //   fontSize: { xs: "7px", sm: "14px", md: "12px" },
+        // }}
         >
-          {t("shareNews")}
-        </Typography>
+          {/* <Chip
+            sx={{
+              width: "50px",
+              backgroundColor: "#B1E4FF",
+              border: "1px solid #8BC3FF",
+              fontFamily: "Gilroy-Medium",
+              fontSize: "10px",
+              fontWeight: "400",
+              color: "#4C4545",
+              borderRadius: "4px",
+              height: "14px",
+            }}
+            label="2451"
+          /> */}
+          {/* <Typography
+            sx={{
+              textAlign: {
+                xs: "center",
+                md: language === "ar" ? "left" : "right",
+              },
+              fontSize: { xs: "7px", sm: "14px", md: "12px" },
+              color: "#8F8F8F",
+            }}
+            component={"h4"}
+          >
+            {t("shareNews")}
+          </Typography> */}
+        </Box>
       ) : (
         <>
           <Typography
             sx={{
               fontSize: { md: "12px", lg: "16px" },
               fontWeight: "600",
-              textAlign: language === "ar" ? "right" : "left",
-              color: language === "ar" ? "#8F8F8F" : "black",
+              textAlign: "left",
+              color: "black",
             }}
             component={"h3"}
           >
@@ -296,7 +329,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               fontSize: { md: "12px", lg: "16px" },
               fontWeight: "500",
               color: "#8F8F8F",
-              textAlign: language === "ar" ? "right" : "left",
+              textAlign: "left",
             }}
             component={"h4"}
           >

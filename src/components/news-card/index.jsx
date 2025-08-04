@@ -19,7 +19,7 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
     <Paper
       sx={{
         display: "flex",
-        alignItems: "center",
+        // alignItems: "center",
         justifyContent: "space-between",
         flexDirection: {
           // xs: "row",
@@ -27,6 +27,8 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
         },
         px: { xs: "10px", md: "15px" },
         cursor: "pointer",
+        borderBottom: "1px solid #5c5c5c !important",
+        borderRadius: "0px !important",
       }}
       onClick={() => navigate(`/${id}`)}
     >
@@ -44,7 +46,7 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
         loading="lazy"
       />
       <Box sx={{ flex: 1 }}>
-        <Box
+        {/* <Box
           sx={{
             width: "100%",
             display: "flex",
@@ -76,18 +78,19 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
           >
             {`${t("Source")}: ${source}`}
           </Typography>
-        </Box>
+        </Box> */}
         <Box
           sx={{
             width: "100%",
             display: "flex",
             alignItems: "flex-start",
             justifyContent: "space-between",
+            height: "100%",
             flexDirection: {
               xs: "column",
-              md: language === "ar" ? "row-reverse" : "row",
+              // md: language === "ar" ? "row-reverse" : "row",
             },
-            gap: "10px",
+            // gap: "10px",
           }}
         >
           <Typography
@@ -98,10 +101,11 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
               maxWidth: "100%",
               [language === "ar" ? "marginRight" : "marginLeft"]: "10px",
               textAlign: language === "ar" ? "right" : "left",
-              alignSelf: {
-                xs: language === "ar" ? "flex-end" : "flex-start",
-                md: "flex-start",
-              },
+              // alignSelf: {
+              //   xs: language === "ar" ? "flex-end" : "flex-start",
+              //   md: "flex-start",
+              // },
+              alignSelf: language === "ar" ? "flex-end" : "flex-start",
             }}
             component={"h2"}
             title={headline}
@@ -109,7 +113,7 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
           >
             {headline}
           </Typography>
-          <Typography
+          {/* <Typography
             sx={{
               width: { xs: "max-content", md: "200px" },
               mt: { xs: "0px", md: "5px" },
@@ -121,7 +125,6 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
                 md: "flex-start",
               },
               textAlign: {
-                // xs: "center",
                 xs: language === "ar" ? "left" : "right",
               },
             }}
@@ -130,9 +133,80 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
             {dayjs(date)
               .locale(language === "ar" ? "ar" : "en")
               .fromNow()}
-          </Typography>
+          </Typography> */}
+          <Box
+            sx={{
+              px: "10px",
+              display: "flex",
+              justifyContent: "space-between",
+              alignItems: { xs: "flex-start", md: "center" },
+              width: "100%",
+              flexDirection: { xs: "column", md: "row" },
+            }}
+          >
+            <SocialBox newsCard={true} shareLinks={shareLinks} id={id} />
+
+            <Box
+              sx={{
+                display: "flex",
+                alignItems: { xs: "flex-start", md: "center" },
+                justifyContent: "flex-end",
+                columnGap: "10px",
+                flexDirection: {
+                  xs: "column",
+                  md: language === "ar" ? "row-reverse" : "row",
+                },
+              }}
+            >
+              <Typography
+                sx={{
+                  fontSize: { xs: "8px", md: "12px" },
+                  color: "#007BFF",
+                  textAlign: {
+                    // : "center",
+                    // xs: language === "ar" ? "left" : "right",
+                  },
+                  // whiteSpace: {
+                  //   xs: "normal",
+                  //   md: "nowrap",
+                  // },
+                  // overflow: "hidden",
+                  // textOverflow: "ellipsis",
+                  // maxWidth: "100%",
+                  // display: "-webkit-box",
+                  // WebkitLineClamp: 1,
+                  // WebkitBoxOrient: "vertical",
+                }}
+                title={source}
+                component={"h3"}
+              >
+                {`${source}`}
+              </Typography>
+              <Typography
+                sx={{
+                  // width: { xs: "max-content", md: "200px" },
+                  mt: { xs: "0px", md: "5px" },
+                  color: "#8F8F8F",
+                  fontSize: { xs: "7px", sm: "14px", md: "9.82px", lg: "12px" },
+                  mb: { xs: "0px", md: "5px" },
+                  alignSelf: {
+                    // xs: language === "ar" ? "flex-start" : "flex-end",
+                    // md: "flex-start",
+                  },
+                  textAlign: {
+                    // xs: language === "ar" ? "left" : "right",
+                  },
+                }}
+                component={"h5"}
+              >
+                {dayjs(date)
+                  .locale(language === "ar" ? "ar" : "en")
+                  .fromNow()}
+              </Typography>
+            </Box>
+          </Box>
         </Box>
-        <Box
+        {/* <Box
           sx={{
             width: "100%",
             display: "flex",
@@ -141,7 +215,7 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
           }}
         >
           <SocialBox newsCard={true} shareLinks={shareLinks} id={id} />
-        </Box>
+        </Box> */}
       </Box>
 
       {/* <Box
@@ -174,7 +248,7 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
           flexDirection: "column",
           flexShrink: 0,
           alignItems: {
-            xs: "center",
+            xs: "flex-end",
             md: language === "ar" ? "flex-start" : "flex-end",
           },
           rowGap: "2px",
@@ -198,6 +272,7 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
             display: "-webkit-box",
             WebkitLineClamp: 1,
             WebkitBoxOrient: "vertical",
+            textAlignLast: { xs: "right", lg: "unset" },
           }}
           title={source}
           component={"h3"}
@@ -215,10 +290,11 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
             overflow: "hidden",
             textOverflow: "ellipsis",
             textAlign: "center",
-            fontWeight: "600",
+            fontWeight: "700",
             maxWidth: "100%",
             WebkitLineClamp: 1, // Show only 1 line
             WebkitBoxOrient: "vertical",
+            fontFamily: "Gilroy-Bold",
           }}
           component={"h2"}
         >
