@@ -83,7 +83,8 @@ const MobileNavbar = () => {
       setSubscriptionModal(true);
       setAnchorEl(null);
     } else if (event === "Contact Us") {
-      setContactModal(true);
+      // setContactModal(true);
+      navigate("/contact-us");
       setAnchorEl(null);
     } else if (event === "Share the App") {
       setShareModal(true);

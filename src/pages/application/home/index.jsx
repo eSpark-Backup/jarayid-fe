@@ -103,6 +103,7 @@ const Home = () => {
       if (!data) return;
 
       const items = data?.data?.items || [];
+      console.log(data);
       const originalNames = items.map((item) => item?.name);
       const originalIds = items.map((item) => item?.id);
 
@@ -356,6 +357,8 @@ const Home = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [articlesData]);
+
+  console.log("Loading states:", { articleLoading, isFetching });
 
   return (
     <>
@@ -997,63 +1000,92 @@ const Home = () => {
                   ))}
             </Grid>
           )}
-          <Box
-            sx={{
-              display: "flex",
-              flexDirection: "column",
-              rowGap: "15px",
-              p: "15px",
-              // maxHeight: "1950px",
-              // overflowY: "auto",
-              // border: "1px solid red",
-            }}
-          >
-            <InfiniteScroll
-              dataLength={articles?.length || 0}
-              next={fetchMoreArticles}
-              hasMore={hasNextPage}
-              loader={
-                (articleLoading || isFetching) &&
-                [...Array(3)].map((_, index) => (
-                  <Skeleton
-                    key={`skeleton-${index}`}
-                    variant="rounded"
-                    height={143}
-                    sx={{ borderRadius: "9px", mb: "15px" }}
-                  />
-                ))
-              }
-              scrollThreshold={0.7}
-              style={{
+          {(articleLoading || isFetching) && !articles?.length ? (
+            <Box
+              sx={{
                 display: "flex",
                 flexDirection: "column",
                 rowGap: "15px",
+                p: "15px",
               }}
             >
-              {articles?.map((item, index) =>
-                item?.ad ? (
-                  <Box
-                    component="img"
-                    src={item?.ad}
-                    alt="Ad"
-                    loading="lazy"
-                    key={`ad-${index}`}
-                  />
-                ) : (
-                  <NewsCard
-                    key={`news-${index}`}
-                    image={item?.image}
-                    headline={item?.headline}
-                    date={item?.date}
-                    source={item?.source}
-                    id={item?.id}
-                    shareLinks={item?.shareLinks}
-                  />
-                )
-              )}
-            </InfiniteScroll>
-          </Box>
+              {[...Array(5)].map((_, index) => (
+                <Skeleton
+                  key={`initial-skeleton-${index}`}
+                  variant="rounded"
+                  height={143}
+                  sx={{ borderRadius: "9px" }}
+                />
+              ))}
+            </Box>
+          ) : (
+            <Box
+              sx={{
+                display: "flex",
+                flexDirection: "column",
+                rowGap: "15px",
+                p: "15px",
+                height: "auto",
+                overflowY: "auto",
+              }}
+            >
+              <InfiniteScroll
+                dataLength={articles?.length || 0}
+                next={fetchMoreArticles}
+                hasMore={hasNextPage}
+                loader={
+                  (articleLoading || isFetching) && (
+                    <Box
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        rowGap: "15px",
+                      }}
+                    >
+                      {[...Array(3)].map((_, index) => (
+                        <Skeleton
+                          key={`load-more-skeleton-${index}`}
+                          variant="rounded"
+                          height={143}
+                          sx={{ borderRadius: "9px" }}
+                        />
+                      ))}
+                    </Box>
+                  )
+                }
+                scrollThreshold={0.7}
+                style={{
+                  display: "flex",
+                  flexDirection: "column",
+                  rowGap: "15px",
+                }}
+              >
+                {articles?.map((item, index) =>
+                  item?.ad ? (
+                    <Box
+                      component="img"
+                      src={item?.ad}
+                      alt="Ad"
+                      loading="lazy"
+                      key={`ad-${index}`}
+                    />
+                  ) : (
+                    <NewsCard
+                      key={`news-${index}`}
+                      image={item?.image}
+                      headline={item?.headline}
+                      date={item?.date}
+                      source={item?.source}
+                      id={item?.id}
+                      shareLinks={item?.shareLinks}
+                    />
+                  )
+                )}
+              </InfiniteScroll>
+            </Box>
+          )}
         </Box>
+
         {/* )} */}
         {hasFetched && (
           <Box>

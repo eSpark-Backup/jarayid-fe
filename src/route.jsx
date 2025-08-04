@@ -37,6 +37,7 @@ import {
   SocialMediaForm,
   OpenAIKey,
 } from "./pages";
+import ContactUsSite from "./pages/application/contact-us";
 
 const Router = () => {
   return (
@@ -57,6 +58,7 @@ const Router = () => {
           <Route path="/:id" element={<ArticleDetails />} />
           <Route path="/faq" element={<FAQSection />} />
           <Route path="/read-later" element={<ReadLater />} />
+          <Route path="/contact-us" element={<ContactUsSite />} />
         </Route>
 
         <Route element={<AdminLayout />}>

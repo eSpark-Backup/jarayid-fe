@@ -52,6 +52,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
       LINKEDIN: "linkedin",
       YOUTUBE: "youtube",
       TIKTOK: "tiktok",
+      WHATSAPP: "whatsapp",
     };
 
     const socialLinksObj = links.reduce((acc, item) => {
@@ -79,11 +80,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
         sx={{
           display: "flex",
           columnGap: { xs: "3px", md: "4px", lg: "9px" },
-          justifyContent: newsCard
-            ? "flex-end"
-            : language === "ar"
-            ? "flex-end"
-            : "flex-start",
+          justifyContent: newsCard ? "flex-end" : "flex-start",
           alignItems: "center",
         }}
       >
@@ -214,13 +211,15 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               </a>
             ) : null}
             {!detailPage && (shareLinks?.instagram || myLinks?.instagram) && (
-              <Box
-                component={"img"}
-                src={instagram}
-                alt={"Instagram"}
-                loading="lazy"
-                sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
-              />
+              <a href={shareLinks?.instagram || myLinks?.instagram}>
+                <Box
+                  component={"img"}
+                  src={instagram}
+                  alt={"Instagram"}
+                  loading="lazy"
+                  sx={{ width: { md: 25, lg: 32 }, height: { md: 25, lg: 32 } }}
+                />
+              </a>
             )}
             {shareLinks?.tiktok || myLinks?.tiktok ? (
               <a href={shareLinks?.tiktok || myLinks?.tiktok}>
@@ -318,7 +317,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
             sx={{
               fontSize: { md: "12px", lg: "16px" },
               fontWeight: "600",
-              textAlign: language === "ar" ? "right" : "left",
+              textAlign: "left",
               color: "black",
             }}
             component={"h3"}
@@ -330,7 +329,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               fontSize: { md: "12px", lg: "16px" },
               fontWeight: "500",
               color: "#8F8F8F",
-              textAlign: language === "ar" ? "right" : "left",
+              textAlign: "left",
             }}
             component={"h4"}
           >

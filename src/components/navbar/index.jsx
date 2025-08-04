@@ -77,7 +77,8 @@ const Navbar = () => {
       setSubscriptionModal(true);
       setAnchorEl(null);
     } else if (event === "Contact Us") {
-      setContactModal(true);
+      // setContactModal(true);
+      navigate("/contact-us");
       setAnchorEl(null);
     } else if (event === "Share Jarayid") {
       setShareModal(true);
@@ -274,7 +275,7 @@ const Navbar = () => {
               sx={{
                 cursor: "pointer",
                 display: "flex",
-                justifyContent: language === "ar" ? "flex-start" : "flex-end",
+                justifyContent: "flex-end",
                 width: "100%",
               }}
             >

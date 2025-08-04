@@ -42,7 +42,8 @@ const Footer = () => {
     } else if (item === "FAQs") {
       navigate("/faq");
     } else if (item === "Contact Us") {
-      setContactModal(true);
+      // setContactModal(true);
+      navigate("/contact-us");
     }
   };
 

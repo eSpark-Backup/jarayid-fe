@@ -101,10 +101,11 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
               maxWidth: "100%",
               [language === "ar" ? "marginRight" : "marginLeft"]: "10px",
               textAlign: language === "ar" ? "right" : "left",
-              alignSelf: {
-                xs: language === "ar" ? "flex-end" : "flex-start",
-                md: "flex-start",
-              },
+              // alignSelf: {
+              //   xs: language === "ar" ? "flex-end" : "flex-start",
+              //   md: "flex-start",
+              // },
+              alignSelf: language === "ar" ? "flex-end" : "flex-start",
             }}
             component={"h2"}
             title={headline}
@@ -138,8 +139,9 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
               px: "10px",
               display: "flex",
               justifyContent: "space-between",
-              alignItems: "center",
+              alignItems: { xs: "flex-start", md: "center" },
               width: "100%",
+              flexDirection: { xs: "column", md: "row" },
             }}
           >
             <SocialBox newsCard={true} shareLinks={shareLinks} id={id} />
@@ -147,28 +149,33 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
             <Box
               sx={{
                 display: "flex",
-                alignItems: "center",
+                alignItems: { xs: "flex-start", md: "center" },
                 justifyContent: "flex-end",
+                columnGap: "10px",
+                flexDirection: {
+                  xs: "column",
+                  md: language === "ar" ? "row-reverse" : "row",
+                },
               }}
             >
               <Typography
                 sx={{
-                  fontSize: { xs: "8 px", md: "12px" },
+                  fontSize: { xs: "8px", md: "12px" },
                   color: "#007BFF",
                   textAlign: {
                     // : "center",
                     // xs: language === "ar" ? "left" : "right",
                   },
-                  whiteSpace: {
-                    xs: "normal",
-                    md: "nowrap",
-                  },
-                  overflow: "hidden",
-                  textOverflow: "ellipsis",
-                  maxWidth: "100%",
-                  display: "-webkit-box",
-                  WebkitLineClamp: 1,
-                  WebkitBoxOrient: "vertical",
+                  // whiteSpace: {
+                  //   xs: "normal",
+                  //   md: "nowrap",
+                  // },
+                  // overflow: "hidden",
+                  // textOverflow: "ellipsis",
+                  // maxWidth: "100%",
+                  // display: "-webkit-box",
+                  // WebkitLineClamp: 1,
+                  // WebkitBoxOrient: "vertical",
                 }}
                 title={source}
                 component={"h3"}
