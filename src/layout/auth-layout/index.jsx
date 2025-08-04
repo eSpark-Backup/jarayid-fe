@@ -96,10 +96,11 @@ const AuthLayout = () => {
             >
               <Typography
                 sx={{
-                  fontWeight: 700,
                   mb: 1,
                   textAlign: language === "ar" ? "right" : "left",
                   fontSize: { xs: "22.5px", md: "32px" },
+                  fontFamily: "Gilroy-Bold",
+                  fontWeight: "400",
                 }}
               >
                 {t(title)}
@@ -111,6 +112,8 @@ const AuthLayout = () => {
                   mb: 3,
                   fontSize: { xs: "11px", md: "16px" },
                   textAlign: language === "ar" ? "right" : "left",
+                  fontFamily: "Gilroy-Regular",
+                  fontWeight: 400,
                 }}
               >
                 {t(subtitle)}

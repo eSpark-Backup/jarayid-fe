@@ -236,7 +236,6 @@ const EditProfileModal = ({ handleClose }) => {
               sx={{
                 fontSize: { xs: "15px", md: "26px" },
                 color: "#4B5563",
-                cursor: "pointer",
               }}
               onClick={handleNameClick}
             >
@@ -306,7 +305,6 @@ const EditProfileModal = ({ handleClose }) => {
               sx={{
                 fontSize: { xs: "15px", md: "26px" },
                 color: "#4B5563",
-                cursor: "pointer",
               }}
               onClick={() => setEditMobile(true)}
             >
@@ -356,7 +354,6 @@ const EditProfileModal = ({ handleClose }) => {
               sx={{
                 fontSize: { xs: "15px", md: "26px" },
                 color: "#4B5563",
-                cursor: "pointer",
               }}
               onClick={() => setEditLocation(true)}
             >

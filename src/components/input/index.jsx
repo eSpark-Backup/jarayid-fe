@@ -27,12 +27,13 @@ const CustomInput = ({
       {label && (
         <Typography
           sx={{
-            fontSize: modal ? "22px" : { xs: "10px", md: "14px" },
-            fontWeight: 500,
+            fontSize: modal ? "22px" : { xs: "10px", md: "12px" },
             mb: "-12px",
             mt: modal ? 0 : 2,
             textAlign: language === "ar" ? "right" : "left",
             color: modal ? "#101828" : "#000",
+            fontFamily: "Gilroy-Regular",
+            fontWeight: "400",
           }}
         >
           {label}

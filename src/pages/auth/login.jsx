@@ -80,7 +80,9 @@ const Login = () => {
           sx={{
             height: { xs: "38px", lg: "46px" },
             mt: 2,
-            fontSize: { xs: "11px", md: "16px" },
+            fontSize: { xs: "12px", md: "16px" },
+            borderRadius: "0px",
+            backgroundColor: "#3281CA",
           }}
           loading={isLoading}
           disabled={isLoading}
@@ -94,7 +96,8 @@ const Login = () => {
             cursor: "pointer",
             mt: 2,
             color: "#007BFF",
-            fontWeight: "500",
+            fontFamily: "Gilroy-Regular",
+            fontWeight: 400,
           }}
           onClick={() => navigate("/verify-email")}
         >
@@ -105,7 +108,13 @@ const Login = () => {
       <Typography
         // variant="body2"
         align="center"
-        sx={{ mt: 2, fontSize: { xs: "11px", md: "14px" } }}
+        sx={{
+          mt: 2,
+          fontSize: { xs: "11px", md: "16px" },
+          color: "#8F8F8F",
+          fontFamily: "Gilroy-Regular",
+          fontWeight: 400,
+        }}
       >
         {t("dont have account")}
         <Link

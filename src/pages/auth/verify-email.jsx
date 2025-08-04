@@ -56,7 +56,7 @@ const VerifyEmail = () => {
       ? `أعد الإرسال خلال ${formatted}`
       : `Resend in ${formatted}`;
   };
-  
+
   const emailFormik = useFormik({
     initialValues: {
       email: "",
@@ -106,7 +106,7 @@ const VerifyEmail = () => {
           sx={{
             height: { xs: "38px", lg: "46px" },
             mt: 2,
-            fontSize: { xs: "11px", md: "16px" },
+            fontSize: { xs: "12px", md: "16px" },
           }}
         >
           {timer > 0 ? getTimerText() : t("Send code")}

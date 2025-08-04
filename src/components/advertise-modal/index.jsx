@@ -4,11 +4,11 @@ import { useFormik } from "formik";
 
 const sharedInputStyles = {
   "& .MuiOutlinedInput-root": {
-    backgroundColor: "#D9D9D9",
+    backgroundColor: "#d9d9d93d",
     borderRadius: "6px",
     height: "72px",
     color: "#000",
-    border: "1px solid #8B8383",
+    border: "1px solid rgba(255, 255, 255, 0.93)",
     fontSize: "16px",
     my: "0px",
   },

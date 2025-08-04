@@ -71,7 +71,7 @@ const ConfirmModal = ({
             "::-webkit-scrollbar": {
               display: "none",
             },
-            width: { xs: "100%", lg: "80%" },
+            width: { xs: "100%" },
           }}
         >
           <img src={deleteInfo} alt="" />
