@@ -1684,7 +1684,7 @@ export const socialOptions = [
   { label: "Facebook", value: "FACEBOOK" },
   { label: "WhatsApp", value: "WHATSAPP" },
   { label: "YouTube", value: "YOUTUBE" },
-  { label: "X", value: "X" },
+  { label: "X", value: "TWITTER" },
   { label: "Instagram", value: "INSTAGRAM" },
   { label: "TikTok", value: "TIKTOK" },
 ];

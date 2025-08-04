@@ -3,7 +3,7 @@ import { api } from "./rtk";
 export const categoriesApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllCateories: builder.query({
-      query: ({ page, pageSize }) => ({
+      query: ({ page, pageSize = 30 }) => ({
         url: `/categories?page=${page}&limit=${pageSize}`,
         method: "GET",
       }),
