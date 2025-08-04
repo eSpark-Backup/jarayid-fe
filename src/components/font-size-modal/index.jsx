@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { setFontType } from "../../store/slices/font-type";
 import CheckOn from "../../assets/icons/check-on.svg";
 import CheckOff from "../../assets/icons/check-off.svg";
+import { getFont } from "../../utils";
 
 const FontSizeModal = () => {
   const dispatch = useDispatch();
@@ -10,7 +11,7 @@ const FontSizeModal = () => {
 
   return (
     <Box>
-      <Typography sx={{ fontSize: "32px", fontWeight: "600" }}>
+      <Typography sx={{ fontSize: getFont("32px"), fontWeight: "600" }}>
         Font Size
       </Typography>
       <Box

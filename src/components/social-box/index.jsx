@@ -19,6 +19,7 @@ import dayjs from "dayjs";
 import "dayjs/locale/ar";
 import relativeTime from "dayjs/plugin/relativeTime";
 import { useEffect, useState } from "react";
+import { getFont } from "../../utils";
 
 dayjs.extend(relativeTime);
 
@@ -315,7 +316,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
         <>
           <Typography
             sx={{
-              fontSize: { md: "12px", lg: "16px" },
+              fontSize: { md: getFont("12px"), lg: getFont("16px") },
               fontWeight: "600",
               textAlign: "left",
               color: "black",
@@ -326,7 +327,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
           </Typography>
           <Typography
             sx={{
-              fontSize: { md: "12px", lg: "16px" },
+              fontSize: { md: getFont("12px"), lg: getFont("16px") },
               fontWeight: "500",
               color: "#8F8F8F",
               textAlign: "left",

@@ -8,6 +8,7 @@ import { useTranslation } from "react-i18next";
 import { Link, useNavigate } from "react-router-dom";
 import { useLoginMutation } from "../../services/auth";
 import { toast } from "react-toastify";
+import { getFont } from "../../utils";
 
 const Login = () => {
   const [login, { isLoading }] = useLoginMutation();
@@ -80,7 +81,7 @@ const Login = () => {
           sx={{
             height: { xs: "38px", lg: "46px" },
             mt: 2,
-            fontSize: { xs: "12px", md: "16px" },
+            fontSize: { xs: getFont("12px"), md: getFont("16px") },
             borderRadius: "0px",
             backgroundColor: "#3281CA",
           }}
@@ -91,7 +92,7 @@ const Login = () => {
         </Button>
         <Typography
           sx={{
-            fontSize: { xs: "12px", md: "16px" },
+            fontSize: { xs: getFont("12px"), md: getFont("16px") },
             textAlign: language === "ar" ? "right" : "left",
             cursor: "pointer",
             mt: 2,
@@ -110,7 +111,7 @@ const Login = () => {
         align="center"
         sx={{
           mt: 2,
-          fontSize: { xs: "11px", md: "16px" },
+          fontSize: { xs: getFont("11px"), md: getFont("16px") },
           color: "#8F8F8F",
           fontFamily: "Gilroy-Regular",
           fontWeight: 400,

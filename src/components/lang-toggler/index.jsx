@@ -2,6 +2,7 @@ import { Box, Typography } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import useLanguageSwitcher from "../../hooks/change-language";
 import { useSelector } from "react-redux";
+import { getFont } from "../../utils";
 
 const LanguageToggler = () => {
   const { t } = useTranslation();
@@ -41,7 +42,7 @@ const LanguageToggler = () => {
       <Typography
         sx={{
           color: "#4A4A4B",
-          fontSize: "17.36px",
+          fontSize: getFont("17.36px"),
           fontWeight: "500",
           marginLeft: language === "ar" ? "30px" : "10px",
           transition: "margin 0.3s ease",

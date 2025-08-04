@@ -1,5 +1,6 @@
 import { Box, Typography } from "@mui/material";
 import { qr } from "../../assets";
+import { getFont } from "../../utils";
 
 const QRModal = () => {
   return (
@@ -13,7 +14,11 @@ const QRModal = () => {
       }}
     >
       <Typography
-        sx={{ textAlign: "center", fontSize: "32px", fontWeight: "600" }}
+        sx={{
+          textAlign: "center",
+          fontSize: getFont("32px"),
+          fontWeight: "600",
+        }}
       >
         Scan QR Code To Download App
       </Typography>

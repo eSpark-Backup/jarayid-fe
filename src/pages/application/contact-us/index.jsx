@@ -7,6 +7,7 @@ import ReCAPTCHA from "react-google-recaptcha";
 import { useRef, useState } from "react";
 import { toast } from "react-toastify"; // Assuming you're using this
 import { VITE_CAPTCHA_SITE_KEY } from "../../../config";
+import { getFont } from "../../../utils";
 
 const sharedInputStyles = {
   "& .MuiOutlinedInput-root": {
@@ -15,7 +16,7 @@ const sharedInputStyles = {
     height: "72px",
     color: "#000",
     border: "1px solid #8B8383",
-    fontSize: "16px",
+    fontSize: getFont("16px"),
     my: "0px",
   },
 };
@@ -103,7 +104,7 @@ const ContactUsSite = () => {
         pb: "15px",
       }}
     >
-      <Typography sx={{ fontSize: "32px", fontWeight: "600" }}>
+      <Typography sx={{ fontSize: getFont("32px"), fontWeight: "600" }}>
         Contact Us
       </Typography>
       <Box

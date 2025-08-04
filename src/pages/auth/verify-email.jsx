@@ -7,6 +7,7 @@ import { Button, CustomInput } from "../../components";
 import { verifyEmailSchema } from "../../schemas";
 import { useForgotPasswordMutation } from "../../services/auth";
 import { email } from "../../assets";
+import { getFont } from "../../utils";
 
 const TIMER_DURATION = 300;
 const TIMER_KEY = "verifyEmailTimerExpiresAt";
@@ -106,7 +107,7 @@ const VerifyEmail = () => {
           sx={{
             height: { xs: "38px", lg: "46px" },
             mt: 2,
-            fontSize: { xs: "12px", md: "16px" },
+            fontSize: { xs: getFont("12px"), md: getFont("16px") },
           }}
         >
           {timer > 0 ? getTimerText() : t("Send code")}

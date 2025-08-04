@@ -1,10 +1,11 @@
 import { Box, Typography } from "@mui/material";
 import PriceCard from "../price-card";
+import { getFont } from "../../utils";
 
 const SubscriptionModal = () => {
   return (
     <Box>
-      <Typography sx={{ fontSize: "32px", fontWeight: "600" }}>
+      <Typography sx={{ fontSize: getFont("32px"), fontWeight: "600" }}>
         Subscription Jarayid Plus
       </Typography>
       <Box

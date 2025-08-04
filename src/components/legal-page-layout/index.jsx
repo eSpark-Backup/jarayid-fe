@@ -1,6 +1,7 @@
 import { Box, Typography, Container } from "@mui/material";
 import { memo, Suspense, lazy } from "react";
 import { useTranslation } from "react-i18next";
+import { getFont } from "../../utils";
 
 const SmartReaderCard = lazy(() => import("../smart-reader"));
 
@@ -49,7 +50,7 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
               variant="h1"
               fontWeight="600"
               gutterBottom
-              fontSize="35px"
+              fontSize={getFont("35px")}
               sx={{
                 textAlign: isArabic ? "right" : "left",
                 fontFamily: "'Poppins', 'sans-serif'",
@@ -62,7 +63,7 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
             <Typography
               variant="body1"
               sx={{
-                fontSize: "16px",
+                fontSize: getFont("16px"),
                 textAlign: isArabic ? "right" : "justify",
                 mb: 2,
                 fontWeight: "600",

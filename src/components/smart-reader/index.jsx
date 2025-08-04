@@ -4,13 +4,14 @@ import SmartReaderIcon from "../../assets/icons/smart-read.svg";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import useTTS from "../../hooks/useTTS";
+import { getFont } from "../../utils";
 
 const SmartReaderCard = ({ paragraphs }) => {
   const { speak, stop, isSpeaking } = useTTS();
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
 
-   const handleClick = () => {
+  const handleClick = () => {
     if (isSpeaking) {
       stop();
     } else {
@@ -34,7 +35,7 @@ const SmartReaderCard = ({ paragraphs }) => {
         sx={{
           textDecoration: "none",
           cursor: "pointer",
-          fontSize: "18px",
+          fontSize: getFont("18px"),
           fontWeight: "400",
           textAlign: language === "ar" ? "right" : "center",
         }}
@@ -68,7 +69,7 @@ const SmartReaderCard = ({ paragraphs }) => {
       <Typography
         variant="body2"
         sx={{
-          fontSize: "18px",
+          fontSize: getFont("18px"),
           fontWeight: "400",
           textAlign: language === "ar" ? "right" : "center",
         }}

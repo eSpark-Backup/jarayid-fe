@@ -23,6 +23,7 @@ import ContactModal from "../contact-modal";
 import ShareModal from "../share-modal";
 import ConfirmModal from "../confirm-modal";
 import EditSourceModal from "../edit-source-modal";
+import { getFont } from "../../utils";
 
 const MobileNavbar = () => {
   const { t } = useTranslation();
@@ -176,7 +177,7 @@ const MobileNavbar = () => {
         <Typography
           sx={{
             color: "#004A99",
-            fontSize: "23.67px",
+            fontSize: getFont("23.67px"),
             textAlign: "center",
             pb: "20px",
           }}
@@ -199,7 +200,7 @@ const MobileNavbar = () => {
             <Typography
               sx={{
                 color: "#383535",
-                fontSize: "15.7px",
+                fontSize: getFont("15.7px"),
                 textAlign: language === "ar" ? "right" : "left",
               }}
             >
@@ -263,7 +264,7 @@ const MobileNavbar = () => {
         button2Text={"Logout"}
       >
         <Typography
-          sx={{ fontSize: "16px", fontWeight: "400", opacity: "56%" }}
+          sx={{ fontSize: getFont("16px"), fontWeight: "400", opacity: "56%" }}
         >
           Are you sure you want to Logout?
         </Typography>

@@ -1,5 +1,6 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
 import { deleteInfo, modalClose } from "../../assets";
+import { getFont } from "../../utils";
 
 const ConfirmModal = ({
   open,
@@ -75,7 +76,7 @@ const ConfirmModal = ({
           }}
         >
           <img src={deleteInfo} alt="" />
-          <Typography sx={{ fontSize: "24px", fontWeight: "600" }}>
+          <Typography sx={{ fontSize: getFont("24px"), fontWeight: "600" }}>
             {heading}
           </Typography>
           {children}
@@ -100,7 +101,7 @@ const ConfirmModal = ({
                 height: "44px",
                 color: "#454545",
                 border: "1px solid #373838",
-                fontSize: "16px",
+                fontSize: getFont("16px"),
                 my: "0px",
                 textTransform: "none", // optional: to prevent uppercase text
               }}

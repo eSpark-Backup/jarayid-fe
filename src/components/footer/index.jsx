@@ -10,7 +10,7 @@ import DynamicModal from "../modal";
 import ContactModal from "../contact-modal";
 import { useTrendingArticlesQuery } from "../../services/feed";
 import { useGetAllPagesQuery } from "../../services/static-pages";
-import { translateText } from "../../utils";
+import { getFont, translateText } from "../../utils";
 
 const Footer = () => {
   const language = useSelector((state) => state.language);
@@ -134,7 +134,11 @@ const Footer = () => {
 
           <Typography
             sx={{
-              fontSize: { xs: "9px", md: "9px", lg: "16px" },
+              fontSize: {
+                xs: getFont("9px"),
+                md: getFont("9px"),
+                lg: getFont("16px"),
+              },
               color: "#fff",
               textAlign: language === "ar" ? "right" : "unset",
             }}
@@ -144,7 +148,11 @@ const Footer = () => {
           </Typography>
           <Typography
             sx={{
-              fontSize: { xs: "9px", md: "9px", lg: "16px" },
+              fontSize: {
+                xs: getFont("9px"),
+                md: getFont("9px"),
+                lg: getFont("16px"),
+              },
               color: "#fff",
               textAlign: language === "ar" ? "right" : "unset",
             }}
@@ -155,7 +163,11 @@ const Footer = () => {
 
           <Typography
             sx={{
-              fontSize: { xs: "9px", md: "9px", lg: "16px" },
+              fontSize: {
+                xs: getFont("9px"),
+                md: getFont("9px"),
+                lg: getFont("16px"),
+              },
               color: "#fff",
               textAlign: language === "ar" ? "right" : "unset",
             }}
@@ -179,7 +191,7 @@ const Footer = () => {
         <Box sx={{ width: { xs: "100%", md: "28%" } }}>
           <Typography
             sx={{
-              fontSize: { xs: "11px", lg: "20px" },
+              fontSize: { xs: getFont("11px"), lg: getFont("20px") },
               color: "#FFFFFF",
               textAlign: language === "ar" ? "right" : "unset",
               fontWeight: "400",
@@ -221,12 +233,17 @@ const Footer = () => {
                       <Skeleton
                         variant="text"
                         width={150}
-                        sx={{ fontSize: { xs: "8px", lg: "15px" } }}
+                        sx={{
+                          fontSize: { xs: getFont("8px"), lg: getFont("15px") },
+                        }}
                       />
                       <Skeleton
                         variant="text"
                         width={250}
-                        sx={{ fontSize: { xs: "8px", lg: "14px" }, mt: "3px" }}
+                        sx={{
+                          fontSize: { xs: getFont("8px"), lg: getFont("14px") },
+                          mt: "3px",
+                        }}
                       />
                     </Stack>
                   </Box>
@@ -255,7 +272,7 @@ const Footer = () => {
                     <Stack>
                       <Typography
                         sx={{
-                          fontSize: { xs: "8px", lg: "15px" },
+                          fontSize: { xs: getFont("8px"), lg: getFont("15px") },
                           color: "#FFFFFFB2",
                           textAlign: language === "ar" ? "right" : "unset",
                           fontWeight: "400",
@@ -270,7 +287,7 @@ const Footer = () => {
                       <Typography
                         sx={{
                           color: "#FFFFFF",
-                          fontSize: { xs: "8px", lg: "14px" },
+                          fontSize: { xs: getFont("8px"), lg: getFont("14px") },
                           textAlign: language === "ar" ? "right" : "unset",
                           fontWeight: "400",
                           fontFamily: "Gilroy-Medium",
@@ -300,7 +317,7 @@ const Footer = () => {
         <Box sx={{ width: { xs: "100%", md: "30%" } }}>
           <Typography
             sx={{
-              fontSize: { xs: "11px", lg: "20px" },
+              fontSize: { xs: getFont("11px"), lg: getFont("20px") },
               color: "#FFFFFF",
               textAlign: language === "ar" ? "right" : "unset",
               fontWeight: "400",
@@ -334,7 +351,7 @@ const Footer = () => {
               >
                 <Typography
                   sx={{
-                    fontSize: { xs: "9px", lg: "16px" },
+                    fontSize: { xs: getFont("9px"), lg: getFont("16px") },
                     fontWeight: "600",
                     color: "#FFFFFF",
                     pr: language === "ar" ? "15px" : "0px",
@@ -346,7 +363,7 @@ const Footer = () => {
                 </Typography>
                 <Typography
                   sx={{
-                    fontSize: { xs: "9px", lg: "16px" },
+                    fontSize: { xs: getFont("9px"), lg: getFont("16px") },
                     fontWeight: "400",
                     color: "#FFFFFF",
                     pr: language !== "ar" ? "10px" : "0px",
@@ -362,7 +379,7 @@ const Footer = () => {
           <Typography
             sx={{
               color: "#FFFFFF",
-              fontSize: "14px",
+              fontSize: getFont("14px"),
               mt: "15px",
               textAlign: language === "ar" ? "right" : "unset",
               pr: language === "ar" ? "15px" : "0px",
@@ -385,7 +402,7 @@ const Footer = () => {
         <Typography
           sx={{
             color: "#8F8F8F",
-            fontSize: { xs: "9px", lg: "16px" },
+            fontSize: { xs: getFont("9px"), lg: getFont("16px") },
             fontWeight: "400",
           }}
           component={"h3"}
@@ -398,7 +415,7 @@ const Footer = () => {
               <Typography
                 sx={{
                   color: "#8F8F8F",
-                  fontSize: { xs: "9px", lg: "16px" },
+                  fontSize: { xs: getFont("9px"), lg: getFont("16px") },
                   fontWeight: 400,
                   cursor: "pointer",
                 }}
@@ -412,7 +429,7 @@ const Footer = () => {
                   component="span"
                   sx={{
                     color: "#8F8F8F",
-                    fontSize: { xs: "9px", lg: "16px" },
+                    fontSize: { xs: getFont("9px"), lg: getFont("16px") },
                     fontWeight: 400,
                   }}
                 >

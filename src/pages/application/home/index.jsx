@@ -36,7 +36,7 @@ import {
   useGetCategoriesQuery,
   useGetShortsQuery,
 } from "../../../services/feed";
-import { getYouTubeEmbedUrl, translateText } from "../../../utils";
+import { getFont, getYouTubeEmbedUrl, translateText } from "../../../utils";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 const Home = () => {
@@ -502,7 +502,7 @@ const Home = () => {
                           activeItem === item
                             ? "none"
                             : "0.89px solid #01000142",
-                        fontSize: 14,
+                        fontSize: getFont("14px"),
                         fontWeight: "400",
                         fontFamily: "Gilroy-Medium",
                       }}
@@ -609,7 +609,11 @@ const Home = () => {
                     border:
                       activeCategory === item ? "none" : "1px solid #01000142",
                     width: { xs: "100px", md: "157px", lg: "200px" },
-                    fontSize: { xs: "11px", md: "14px", lg: "17.96px" },
+                    fontSize: {
+                      xs: getFont("11px"),
+                      md: getFont("14px"),
+                      lg: getFont("17.96px"),
+                    },
                     fontWeight: "400",
                     fontFamily: "Gilroy-Medium",
                     display: activeCategoryType === "NORMAL" ? "none" : "flex",
@@ -665,7 +669,10 @@ const Home = () => {
                       <Skeleton
                         variant="text"
                         sx={{
-                          fontSize: { xs: "14px", md: "27.69px" },
+                          fontSize: {
+                            xs: getFont("14px"),
+                            md: getFont("27.69px"),
+                          },
                           mb: "15px",
                           width: "60%",
                           mx: "auto",
@@ -693,7 +700,11 @@ const Home = () => {
                       <Skeleton
                         variant="text"
                         sx={{
-                          fontSize: { sm: "14px", md: "24.69px", lg: "27px" },
+                          fontSize: {
+                            sm: getFont("14px"),
+                            md: getFont("24.69px"),
+                            lg: getFont("27px"),
+                          },
                           mb: "15px",
                           width: "60%",
                           mx: "auto",
@@ -724,7 +735,10 @@ const Home = () => {
                         >
                           <Typography
                             sx={{
-                              fontSize: { xs: "14px", md: "27.69px" },
+                              fontSize: {
+                                xs: getFont("14px"),
+                                md: getFont("27.69px"),
+                              },
                               textAlign: "center",
                               mb: "15px",
                               fontWeight: "400",
@@ -761,9 +775,9 @@ const Home = () => {
                           <Typography
                             sx={{
                               fontSize: {
-                                sm: "14px",
-                                md: "24.69px",
-                                lg: "32px",
+                                sm: getFont("14px"),
+                                md: getFont("24.69px"),
+                                lg: getFont("32px"),
                               },
                               fontWeight: "400",
                               fontFamily: "Gilroy-Medium",
@@ -853,7 +867,7 @@ const Home = () => {
                         />
                         <Typography
                           sx={{
-                            fontSize: "15.09px",
+                            fontSize: getFont("15.09px"),
                             fontWeight: "600",
                             textDecoration: "none",
                             textAlign: "center",
@@ -985,7 +999,7 @@ const Home = () => {
                         />
                         <Typography
                           sx={{
-                            fontSize: "15.09px",
+                            fontSize: getFont("15.09px"),
                             fontWeight: "600",
                             textDecoration: "none !important",
                             textAlign: "center",
@@ -1102,7 +1116,7 @@ const Home = () => {
                   alignItems: "center",
                 }}
               >
-                <Typography sx={{ fontSize: "32px" }}>
+                <Typography sx={{ fontSize: getFont("32px") }}>
                   No Articles Found
                 </Typography>
               </Box>
