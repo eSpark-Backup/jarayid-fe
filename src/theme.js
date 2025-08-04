@@ -43,6 +43,9 @@ export const theme = createTheme({
             boxShadow: "8px 8px 24px 0px #0000001F",
             color: "#FFFFFF",
           },
+          ":disabled": {
+            color: "rgb(213 213 213 / 73%)",
+          },
         },
       },
       variants: [

@@ -15,8 +15,8 @@ const AdminLayout = () => {
     {
       page: 1,
       pageSize: 30,
-    },
-    { skip: user?.role !== "ADMIN" }
+    }
+    // { skip: user?.role !== "ADMIN" }
   );
   useEffect(() => {
     if (!token || user?.role !== "ADMIN") {

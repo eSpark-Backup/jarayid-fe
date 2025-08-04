@@ -25,6 +25,7 @@ const TermsOfUse = () => {
           maxWidth="xl"
           sx={{
             px: { xs: "16px", sm: "32px", md: "80px", lg: "160px" },
+            minHeight: "calc(100vh - 600px)",
           }}
         >
           {[...Array(3)]?.map((_, index) => (

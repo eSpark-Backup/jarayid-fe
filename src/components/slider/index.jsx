@@ -27,7 +27,6 @@ const ImageSlider = ({ slides }) => {
   const nextRef = useRef(null);
   const [swiperReady, setSwiperReady] = useState(false);
   const [swiperInstance, setSwiperInstance] = useState(null);
-  console.log(slides?.length);
 
   useEffect(() => {
     if (

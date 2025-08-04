@@ -44,6 +44,7 @@ const ArticleDetails = () => {
     refetchOnFocus: true,
     refetchOnReconnect: true,
   });
+  const [showOriginal, setShoworiginal] = useState(false);
 
   const hasMorePages = commentsPage < Math.ceil(totalComments / 3);
 
@@ -93,6 +94,7 @@ const ArticleDetails = () => {
           time: article?.createdAt,
           shareLinks: article?.shareLinks,
           sourceImg: article?.rssFeed?.logo,
+          originalArticle: article?.originalContent?.text,
         });
       }
     };
@@ -146,7 +148,7 @@ const ArticleDetails = () => {
         justifyContent="flex-start"
         sx={{ width: { xs: "90%", sm: "80%", lg: "786px" } }}
       >
-        <Box
+        {/* <Box
           sx={{
             width: { xs: "100%", lg: "738px" },
             height: "134px",
@@ -158,7 +160,7 @@ const ArticleDetails = () => {
             src={image1}
             alt="ad"
           />
-        </Box>
+        </Box> */}
         <Box sx={{ width: { xs: "100%", md: "500px", lg: "738px" }, my: 2 }}>
           <Stack
             direction="column"
@@ -166,11 +168,18 @@ const ArticleDetails = () => {
             justifyContent="flex-start"
             sx={{ display: { xs: "flex", sm: "none" } }}
           >
-            <img
-              style={{ width: "152px", height: "86px" }}
-              src={articleData?.sourceImg}
-              alt="news-logo"
-            />
+            {isLoading || isFetching ? (
+              <Skeleton
+                variant="rectangular"
+                sx={{ width: "152px", height: "86px" }}
+              />
+            ) : (
+              <img
+                style={{ width: "152px", height: "86px" }}
+                src={articleData?.sourceImg}
+                alt="news-logo"
+              />
+            )}
             {isLoading || isFetching ? (
               <Skeleton variant="text" />
             ) : (
@@ -178,8 +187,8 @@ const ArticleDetails = () => {
                 sx={{
                   fontSize: { xs: "10px", sm: "16px" },
                   color: "#3835357A",
-                  ml: "40px",
-                  mt: "-10px",
+                  // ml: "40px",
+                  // mt: "-10px",
                 }}
               >
                 Time:{" "}
@@ -238,7 +247,9 @@ const ArticleDetails = () => {
                 fontWeight={400}
                 sx={{ fontSize: { xs: "12px", sm: "20px" } }}
               >
-                {language === "ar"
+                {showOriginal
+                  ? articleData?.originalArticle
+                  : language === "ar"
                   ? articleData?.summaryArabic
                   : articleData?.summaryEnglish}
               </Typography>
@@ -262,11 +273,13 @@ const ArticleDetails = () => {
               padding: "0px",
               borderRadius: { xs: "5.14px", sm: "10.08px" },
               fontSize: { xs: "9.14px", sm: "17.92px" },
-              width: { xs: "102px", sm: "200px" },
+              width: { xs: "102px", sm: "fit-content" },
               height: { xs: "20px", sm: "40px" },
+              px: "10px",
             }}
+            onClick={() => setShoworiginal(!showOriginal)}
           >
-            {t("article_details_button")}
+            {showOriginal ? t("AI generated") : t("article_details_button")}
           </Button>
           <SocialBox detailPage shareLinks={articleData?.shareLinks} />
           <Typography
@@ -300,7 +313,7 @@ const ArticleDetails = () => {
               handleMore={() => setCommentsPage(commentsPage + 1)}
             />
           )}
-          <Box
+          {/* <Box
             sx={{
               width: { xs: "100%", lg: "738px" },
               height: "134px",
@@ -313,7 +326,7 @@ const ArticleDetails = () => {
               src={image2}
               alt="ad"
             />
-          </Box>
+          </Box> */}
         </Box>
         <Typography
           sx={{ fontSize: { xs: "18px", sm: "35px" } }}
@@ -347,15 +360,12 @@ const ArticleDetails = () => {
                 />
               ))
             : tredningData?.map((item, index) =>
-                item?.ad ? (
-                  <Box
-                    component={"img"}
-                    src={item?.ad}
-                    alt="Ad"
-                    loading="lazy"
-                    key={index}
-                  />
-                ) : (
+                item?.ad ? //   src={item?.ad} //   component={"img"} // <Box
+                //   alt="Ad"
+                //   loading="lazy"
+                //   key={index}
+                // />
+                null : (
                   <NewsCard
                     key={index}
                     image={item?.image}
@@ -393,11 +403,18 @@ const ArticleDetails = () => {
               justifyContent="flex-start"
               sx={{ display: { xs: "flex", sm: "block" } }}
             >
-              <img
-                style={{ width: "152px", height: "86px" }}
-                src={articleData?.sourceImg}
-                alt="news-logo"
-              />
+              {isLoading || isFetching ? (
+                <Skeleton
+                  sx={{ width: "152px", height: "86px" }}
+                  variant="rectangular"
+                />
+              ) : (
+                <img
+                  style={{ width: "152px", height: "86px" }}
+                  src={articleData?.sourceImg}
+                  alt="news-logo"
+                />
+              )}
               {isLoading || isFetching ? (
                 <Skeleton variant="text" />
               ) : (
@@ -405,8 +422,8 @@ const ArticleDetails = () => {
                   sx={{
                     fontSize: { xs: "10px", sm: "16px" },
                     color: "#3835357A",
-                    ml: "40px",
-                    mt: "-10px",
+                    // ml: "40px",
+                    // mt: "-10px",
                   }}
                 >
                   Time:{" "}
@@ -416,11 +433,11 @@ const ArticleDetails = () => {
                 </Typography>
               )}
             </Stack>
-            <Box
+            {/* <Box
               sx={{ marginTop: "25px", width: { xs: "153px", lg: "215px" } }}
             >
               <img style={{ width: "100%" }} src={sideImage} alt="add" />
-            </Box>
+            </Box> */}
           </Box>
         </>
       )}

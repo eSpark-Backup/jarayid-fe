@@ -104,9 +104,9 @@ const CategoryDropdown = ({
               },
             }}
           >
-            {categoryOptions.map((option) => (
+            {categoryOptions.map((option, index) => (
               <Box
-                key={option}
+                key={index}
                 sx={{
                   display: "flex",
                   alignItems: "center",

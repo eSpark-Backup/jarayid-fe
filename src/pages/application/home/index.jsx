@@ -66,6 +66,7 @@ const Home = () => {
   const [shortsCOntent, setShortsContent] = useState([]);
   const [hasFetched, setHasFetched] = useState(false);
   const [hasMoreShorts, setHasMoreSHorts] = useState(false);
+  const value = useSelector((state) => state.chatbot.value);
 
   const skeletonArray = new Array(14).fill(null);
 
@@ -75,6 +76,7 @@ const Home = () => {
     isLoading: articleLoading,
     isFetching,
     refetch,
+    isSuccess,
   } = useGetArticlesQuery(
     {
       page,
@@ -85,6 +87,7 @@ const Home = () => {
           : activeCategory === "Sport"
           ? "SPORTS"
           : "POLITICS",
+      search: value,
     },
     { skip: !activeId || !activeCategory }
   );
@@ -139,36 +142,52 @@ const Home = () => {
   }, [queryCountry, language, arabicCountries]);
 
   const handleChipClick = (item, type) => {
+    console.log(item, type);
+
     setSearchParams((prev) => {
       const newParams = new URLSearchParams(prev);
 
+      if (type === "category") {
+        if (item && categories?.includes(item)) {
+          setActiveCategory(item);
+          newParams.set("category", item);
+        }
+      }
+
       if (type === "country") {
+        // Ensure countries and data are available before proceeding
+        if (!countries?.length || !data?.data?.items?.length) return prev;
+
         if (language === "ar") {
           const index = arabicCountries?.findIndex(
             (arabicItem) => arabicItem === item
           );
 
-          if (index !== -1) {
+          if (index !== -1 && countries[index]) {
             const englishCountry = countries[index];
+            const countryItem = data?.data?.items[index];
+
             setActiveItem(item);
-            setActiveId(data?.data?.items[index]?.id);
+            setActiveId(countryItem?.id);
+            setChannels(generalCategories?.includes(englishCountry));
             newParams.set("country", englishCountry);
-            setChannels(generalCategories?.includes(item));
           }
         } else {
           const selectedItem = data?.data?.items.find((i) => i.name === item);
-          setActiveItem(item);
-          setActiveId(selectedItem?.id);
-          setChannels(generalCategories?.includes(item));
-          newParams.set("country", item);
+          if (selectedItem) {
+            setActiveItem(item);
+            setActiveId(selectedItem?.id);
+            setChannels(generalCategories?.includes(item));
+            newParams.set("country", item);
+          }
         }
-      } else {
-        setActiveCategory(item);
-        newParams.set("category", item);
-        // refetch();
       }
+
       setPage(1);
-      refetch();
+      if (isSuccess) {
+        setHasFetched(false);
+        refetch();
+      }
       return newParams;
     });
   };
@@ -190,7 +209,7 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (!countries.length) return;
+    // if (!countries.length) return;
 
     const newParams = new URLSearchParams(searchParams);
     let updated = false;
@@ -207,22 +226,24 @@ const Home = () => {
       updated = true;
     }
 
-    if (newParams.has("country")) {
-      const urlCountry = newParams.get("country");
-      setChannels(generalCategories?.includes(urlCountry));
-    }
+    if (categories?.length) {
+      if (newParams.has("country")) {
+        const urlCountry = newParams.get("country");
+        setChannels(generalCategories?.includes(urlCountry));
+      }
 
-    // Handle country logic
-    else if (!newParams.has("country") && countries[0]) {
-      newParams.set("country", countries[0]);
-      setChannels(generalCategories?.includes(countries[0]));
-      updated = true;
+      // Handle country logic
+      else if (!newParams.has("country") && countries[0]) {
+        newParams.set("country", countries[0]);
+        setChannels(generalCategories?.includes(countries[0]));
+        updated = true;
+      }
     }
 
     if (updated) {
       setSearchParams(newParams, { replace: true });
     }
-  }, [countries, categories, searchParams, activeCategory]);
+  }, [countries, categories, searchParams]);
 
   useEffect(() => {
     const fetchData = () => {
@@ -247,43 +268,25 @@ const Home = () => {
   }, [activeItem]);
 
   useEffect(() => {
-    const translateHeadlines = async () => {
-      if (articlesData) {
-        setTranslating(true);
-        const translatedArticles = await Promise.all(
-          articlesData?.data?.items?.map(async (item) => {
-            let headline = item?.title;
+    if (articlesData) {
+      const formattedArticles = articlesData?.data?.items?.map((item) => ({
+        id: item?.id,
+        image: item?.image,
+        headline: item?.title,
+        source: item?.source,
+        date: item?.createdAt,
+        shareLinks: item?.shareLinks,
+      }));
 
-            // const isArabic = /[\u0600-\u06FF]/.test(headline);
-
-            // if (language === "ar" && !isArabic) {
-            //   headline = await translateText(item?.title, "en", "ar");
-            // }
-
-            // if (language === "en" && isArabic) {
-            //   headline = await translateText(item?.title, "ar", "en");
-            // }
-
-            return {
-              id: item?.id,
-              image: item?.image,
-              headline,
-              source: item?.source,
-              date: item?.createdAt,
-              shareLinks: item?.shareLinks,
-            };
-          })
-        );
-        setTranslating(false);
-        setArticles(translatedArticles);
-        setHasNextPage(articlesData?.data?.pagination?.hasNextPage);
-        setHasPrevPage(articlesData?.data?.pagination?.hasPrevPage);
-        setHasFetched(true);
-      }
-    };
-
-    translateHeadlines();
-  }, [articlesData, language]);
+      setArticles(formattedArticles || []); // Fallback to empty array if undefined
+      setHasNextPage(articlesData?.data?.pagination?.hasNextPage);
+      setHasPrevPage(articlesData?.data?.pagination?.hasPrevPage);
+      setHasFetched(true); // Moved inside to ensure articles are set first
+    } else {
+      setArticles([]); // Explicitly set empty array if no data
+      setHasFetched(true); // Still mark as fetched to avoid infinite loading
+    }
+  }, [articlesData]);
 
   useEffect(() => {
     if (!data || !activeItem) {
@@ -308,6 +311,12 @@ const Home = () => {
     }
   }, [shortsData]);
 
+  useEffect(() => {
+    if (value === "" && activeId && activeCategory) {
+      refetch();
+    }
+  }, [activeId, activeCategory, value]);
+
   return (
     <>
       <Box
@@ -319,6 +328,7 @@ const Home = () => {
           rowGap: "35px",
           pb: "30px",
           mt: "15px",
+          minHeight: "calc(100vh - 600px)",
         }}
       >
         <Box
@@ -952,7 +962,7 @@ const Home = () => {
                 p: "15px",
               }}
             >
-              {articleLoading || translating
+              {articleLoading || isFetching
                 ? [...Array(5)].map((_, index) => (
                     <Skeleton
                       key={`skeleton-${index}`}
@@ -1013,23 +1023,20 @@ const Home = () => {
           </Box>
         )}
         {!isLoading &&
-          !isFetching &&
-          Array.isArray(articles) &&
-          articles.length === 0 &&
-          hasFetched && (
-            <Box
-              sx={{
-                height: "calc(100vh - 600px)",
-                display: "flex",
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Typography sx={{ fontSize: "32px" }}>
-                No Articles Found
-              </Typography>
-            </Box>
-          )}
+        !isFetching &&
+        hasFetched &&
+        (!Array.isArray(articles) || articles.length === 0) ? (
+          <Box
+            sx={{
+              height: "calc(100vh - 600px)",
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <Typography sx={{ fontSize: "32px" }}>No Articles Found</Typography>
+          </Box>
+        ) : null}
       </Box>
       <CountryMenu anchorEl={anchorEl2} open={open2} onClose={handleClose2} />
     </>

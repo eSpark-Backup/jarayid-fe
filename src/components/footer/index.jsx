@@ -28,9 +28,6 @@ const Footer = () => {
   );
   const [footerData, setFooterData] = useState({});
 
-  const { data: staticPageData, isLoading: staticPageLoading } =
-    useGetAllPagesQuery({ search: "about-us" });
-
   const [articles, setArticles] = useState([]);
 
   useEffect(() => {
@@ -48,15 +45,6 @@ const Footer = () => {
       setContactModal(true);
     }
   };
-
-  useEffect(() => {
-    if (staticPageData) {
-      setFooterData({
-        ...footerData,
-        content: staticPageData?.data?.items[0]?.content,
-      });
-    }
-  }, [staticPageData]);
 
   useEffect(() => {
     const updateTrendingArticles = async () => {
@@ -129,56 +117,50 @@ const Footer = () => {
             onClick={() => navigate("/")}
             sx={{ maxWidth: "258px", maxHeight: "87.54px" }}
           />
-          {staticPageLoading ? (
-            <Skeleton variant="text" />
-          ) : (
-            <>
-              <Typography
-                sx={{
-                  fontSize: { xs: "9px", md: "9px", lg: "16px" },
-                  color: "#fff",
-                  textAlign: language === "ar" ? "right" : "unset",
-                }}
-                component={"p"}
-              >
-                {t(footerData?.content?.welcomeMessage)}
-              </Typography>
-              <Typography
-                sx={{
-                  fontSize: { xs: "9px", md: "9px", lg: "16px" },
-                  color: "#fff",
-                  textAlign: language === "ar" ? "right" : "unset",
-                }}
-                component={"p"}
-              >
-                {t(footerData?.content?.helpingLine)}
-              </Typography>
-              {footerData?.content && (
-                <Typography
-                  sx={{
-                    fontSize: { xs: "9px", md: "9px", lg: "16px" },
-                    color: "#fff",
-                    textAlign: language === "ar" ? "right" : "unset",
-                  }}
-                  component={"h3"}
-                >
-                  {language === "ar" ? (
-                    <>
-                      {t(footerData?.content?.email)}: {t("email")}
-                      <br />
-                      {t(footerData?.content?.contact)}: {t("phone")}
-                    </>
-                  ) : (
-                    <>
-                      {t("email")}: {t(footerData?.content?.email)}
-                      <br />
-                      {t("phone")}: {t(footerData?.content?.contact)}
-                    </>
-                  )}
-                </Typography>
-              )}
-            </>
-          )}
+
+          <Typography
+            sx={{
+              fontSize: { xs: "9px", md: "9px", lg: "16px" },
+              color: "#fff",
+              textAlign: language === "ar" ? "right" : "unset",
+            }}
+            component={"p"}
+          >
+            {t("footer1")}
+          </Typography>
+          <Typography
+            sx={{
+              fontSize: { xs: "9px", md: "9px", lg: "16px" },
+              color: "#fff",
+              textAlign: language === "ar" ? "right" : "unset",
+            }}
+            component={"p"}
+          >
+            {t("footer2")}
+          </Typography>
+
+          <Typography
+            sx={{
+              fontSize: { xs: "9px", md: "9px", lg: "16px" },
+              color: "#fff",
+              textAlign: language === "ar" ? "right" : "unset",
+            }}
+            component={"h3"}
+          >
+            {language === "ar" ? (
+              <>
+                {t("info@example.com")}: {t("email")}
+                <br />
+                {t("+91 54679865287")}: {t("phone")}
+              </>
+            ) : (
+              <>
+                {t("email")}: {t("info@example.com")}
+                <br />
+                {t("phone")}: {t("+91 54679865287")}
+              </>
+            )}
+          </Typography>
         </Box>
         <Box sx={{ width: { xs: "100%", md: "28%" } }}>
           <Typography

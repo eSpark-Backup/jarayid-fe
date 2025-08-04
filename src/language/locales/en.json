@@ -34,8 +34,8 @@
   "newsHeadline": "SCCI finalizes preparations",
   "newsDate": "Date: 02-08-20",
   "shareNews": "Share the news",
-  "Your source for the lifestyle news. This demo is crafted specifically to exhibit the use of the theme as a lifestyle site. Visit our main page for more demos.": "Your source for the lifestyle news. This demo is crafted specifically to exhibit the use of the theme as a lifestyle site. Visit our main page for more demos.",
-  "We’re accepting new partnerships right now.": "We’re accepting new partnerships right now.",
+  "footer1": "Your source for the lifestyle news. This demo is crafted specifically to exhibit the use of the theme as a lifestyle site. Visit our main page for more demos.",
+  "footer2": "We’re accepting new partnerships right now.",
   "email": "Email Us",
   "phone": "Contact",
   "picks": "Our picks",
@@ -178,5 +178,9 @@
   },
   "Next Page": "Next Page",
   "Previous Page": "Previous Page",
-  "Source": "Source"
+  "Source": "Source",
+  "AI generated": "View AI Generated",
+  "name placeholder": "Enter your name",
+  "Name is required": "Name is required",
+  "Name": "Name"
 }
