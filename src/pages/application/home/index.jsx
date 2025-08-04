@@ -290,15 +290,27 @@ const Home = () => {
   };
 
   useEffect(() => {
-    if (articlesData && !articleLoading && !isFetching) {
-      const newArticles = articlesData?.data?.items?.map((item) => ({
-        id: item?.id,
-        image: item?.image,
-        headline: item?.title,
-        source: item?.source,
-        date: item?.createdAt,
-        shareLinks: item?.shareLinks,
-      }));
+    if (articlesData) {
+      const newArticles = articlesData?.data?.items?.map((item) => {
+        const englishTitle =
+          item?.originalContent?.scrapedContent?.translatedContent?.englishContent
+            ?.split("-")[0]
+            ?.replace("Title: ", "");
+        const arabicTitle =
+          item?.originalContent?.scrapedContent?.translatedContent?.arabicContent
+            ?.split("-")[0]
+            ?.replace("عنوان:", "");
+        return {
+          id: item?.id,
+          image: item?.image,
+          headline: item?.title,
+          source: item?.source?.split("- ")[1],
+          date: item?.createdAt,
+          shareLinks: item?.shareLinks,
+          englishTitle,
+          arabicTitle,
+        };
+      });
 
       setArticles((prev) =>
         page === 1 ? newArticles : [...(prev || []), ...newArticles]
@@ -447,7 +459,7 @@ const Home = () => {
             {(isLoading || translationLoading
               ? skeletonArray
               : language === "ar"
-              ? arabicCountries
+              ? countries
               : countries
             )?.map((item, index) => (
               <Grid

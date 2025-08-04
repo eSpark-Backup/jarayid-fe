@@ -3,10 +3,20 @@ import { memo } from "react";
 import SmartReaderIcon from "../../assets/icons/smart-read.svg";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import useTTS from "../../hooks/useTTS";
 
-const SmartReaderCard = () => {
+const SmartReaderCard = ({ paragraphs }) => {
+  const { speak, stop, isSpeaking } = useTTS();
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
+
+   const handleClick = () => {
+    if (isSpeaking) {
+      stop();
+    } else {
+      speak(paragraphs, language === "ar" ? "ar-SA" : "en-US");
+    }
+  };
 
   return (
     <Box
@@ -33,6 +43,7 @@ const SmartReaderCard = () => {
       </Typography>
 
       <IconButton
+        onClick={handleClick}
         disableRipple
         aria-label={t("Open Smart Reader")}
         sx={{

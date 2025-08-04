@@ -72,7 +72,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
       sx={{
         display: "flex",
         flexDirection: "column",
-        rowGap: { xs: newsCard ? "2px" : "10px", md: "10px" },
+        // rowGap: { xs: newsCard ? "2px" : "10px", md: "10px" },
       }}
     >
       <Box
@@ -84,6 +84,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
             : language === "ar"
             ? "flex-end"
             : "flex-start",
+          alignItems: "center",
         }}
       >
         {newsCard ? (
@@ -270,15 +271,20 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
       </Box>
       {detailPage ? null : newsCard ? (
         <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            columnGap: "20px",
-            height: "14px",
-          }}
+        // sx={{
+        //   display: "flex",
+        //   justifyContent: "space-between",
+        //   alignItems: "center",
+        //   columnGap: "20px",
+        //   height: "14px",
+        //   textAlign: {
+        //     // xs: "center",
+        //     xs: language === "ar" ? "left" : "right",
+        //   },
+        //   fontSize: { xs: "7px", sm: "14px", md: "12px" },
+        // }}
         >
-          <Chip
+          {/* <Chip
             sx={{
               width: "50px",
               backgroundColor: "#B1E4FF",
@@ -291,8 +297,8 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               height: "14px",
             }}
             label="2451"
-          />
-          <Typography
+          /> */}
+          {/* <Typography
             sx={{
               textAlign: {
                 xs: "center",
@@ -304,7 +310,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
             component={"h4"}
           >
             {t("shareNews")}
-          </Typography>
+          </Typography> */}
         </Box>
       ) : (
         <>

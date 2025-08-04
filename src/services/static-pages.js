@@ -3,11 +3,11 @@ import { api } from "./rtk";
 export const pagesApi = api.injectEndpoints({
   endpoints: (builder) => ({
     getAllPages: builder.query({
-      query: ({ search }) => ({
+      query: (payload) => ({
         url: `/static-pages`,
         method: "GET",
         params: {
-          ...(search && { search }),
+          ...(payload?.search && { search: payload.search }),
         },
         credentials: "include",
       }),

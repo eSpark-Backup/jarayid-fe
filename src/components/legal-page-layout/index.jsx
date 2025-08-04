@@ -82,7 +82,7 @@ const LegalPageLayout = memo(({ title, paragraphs }) => {
             }}
           >
             <Suspense fallback={<div>Loading Smart Reader...</div>}>
-              <SmartReaderCard />
+              <SmartReaderCard paragraphs={paragraphs} />
             </Suspense>
           </Box>
         </Box>

@@ -56,6 +56,14 @@ const Footer = () => {
       const articles = await Promise.all(
         data?.data?.articles?.map(async (item) => {
           let translatedTitle = item?.title;
+          const englishTitle =
+            item?.originalContent?.scrapedContent?.translatedContent?.englishContent
+              ?.split("-")[0]
+              ?.replace("Title: ", "");
+          const arabicTitle =
+            item?.originalContent?.scrapedContent?.translatedContent?.arabicContent
+              ?.split("-")[0]
+              ?.replace("عنوان:", "");
 
           // if (language === "ar" && item?.title && isEnglish(item.title)) {
           //   translatedTitle = await translateText(item.title, "en", "ar");
@@ -68,6 +76,8 @@ const Footer = () => {
             title: translatedTitle,
             summaryArabic: item?.summaryArabic,
             summaryEnglish: item?.summaryEnglish,
+            englishTitle,
+            arabicTitle,
           };
         })
       );
@@ -252,7 +262,9 @@ const Footer = () => {
                         }}
                         component={"h3"}
                       >
-                        {item?.title}
+                        {language === "ar"
+                          ? item?.arabicTitle
+                          : item?.englishTitle}
                       </Typography>
                       <Typography
                         sx={{

@@ -52,23 +52,23 @@ const ImageSlider = ({ slides }) => {
       maxWidth="538px"
       margin="auto"
     >
-      {slides?.length > 0 && (
-        <Swiper
-          modules={[Navigation, Autoplay]}
-          spaceBetween={20}
-          slidesPerView={1}
-          loop={true}
-          autoplay={{
-            delay: 3000,
-            disableOnInteraction: false,
-          }}
-          onSwiper={(swiper) => {
-            setSwiperInstance(swiper);
-            setSwiperReady(true);
-          }}
-        >
-          {slides?.length > 1 ? (
-            slides?.map((img, index) => (
+      {slides && slides?.length > 0 ? (
+        slides?.length > 1 ? (
+          <Swiper
+            modules={[Navigation, Autoplay]}
+            spaceBetween={20}
+            slidesPerView={1}
+            loop={true}
+            autoplay={{
+              delay: 3000,
+              disableOnInteraction: false,
+            }}
+            onSwiper={(swiper) => {
+              setSwiperInstance(swiper);
+              setSwiperReady(true);
+            }}
+          >
+            {slides?.map((img, index) => (
               <SwiperSlide key={index}>
                 <Box
                   component="img"
@@ -82,22 +82,22 @@ const ImageSlider = ({ slides }) => {
                   }}
                 />
               </SwiperSlide>
-            ))
-          ) : (
-            <Box
-              component="img"
-              src={slides[0]}
-              alt={`slide`}
-              sx={{
-                width: "100%",
-                height: "auto",
-                borderRadius: "8px",
-                objectFit: "cover",
-              }}
-            />
-          )}
-        </Swiper>
-      )}
+            ))}
+          </Swiper>
+        ) : (
+          <Box
+            component="img"
+            src={slides[0]}
+            alt={`slide`}
+            sx={{
+              width: "100%",
+              height: "auto",
+              borderRadius: "8px",
+              objectFit: "cover",
+            }}
+          />
+        )
+      ) : null}
 
       {slides && slides?.length > 1 && (
         <>

@@ -74,6 +74,33 @@ const ArticleDetails = () => {
       if (data) {
         const article = data?.data?.article;
         let translatedTitle = article?.title;
+        const englishTitle =
+          article?.originalContent?.scrapedContent?.translatedContent?.englishContent
+            ?.split("-")[0]
+            ?.replace("Title: ", "");
+        const arabicTitle =
+          article?.originalContent?.scrapedContent?.translatedContent?.arabicContent
+            ?.split("-")[0]
+            ?.replace("عنوان:", "");
+        const originalTitle =
+          article?.originalContent?.rssTranslatedContent?.originalContent
+            ?.split("\n\n")[0]
+            ?.replace("Title: ", "")
+            ?.replace(` - ${article?.source?.split(" - ")[1]}`, "");
+        const originalSummary =
+          article?.originalContent?.rssTranslatedContent?.originalContent
+            ?.split("\n\n")[2]
+            ?.replace("Content:", "");
+        const originalEnglishContent =
+          article?.originalContent?.rssTranslatedContent?.englishContent?.split(
+            "Content: "
+          )[1];
+        const originalArabicContent =
+          article?.originalContent?.rssTranslatedContent?.englishContent?.split(
+            "Content: "
+          )[1];
+        const sourceLanguage =
+          article?.originalContent?.rssTranslatedContent?.sourceLanguage;
 
         // const isTitleArabic = /[\u0600-\u06FF]/.test(article?.title);
 
@@ -95,6 +122,13 @@ const ArticleDetails = () => {
           shareLinks: article?.shareLinks,
           sourceImg: article?.rssFeed?.logo,
           originalArticle: article?.originalContent?.text,
+          englishTitle,
+          arabicTitle,
+          originalTitle,
+          originalSummary,
+          originalEnglishContent,
+          originalArabicContent,
+          sourceLanguage,
         });
       }
     };
@@ -112,7 +146,14 @@ const ArticleDetails = () => {
         const translatedArticles = await Promise.all(
           trendingArticles?.data?.articles?.map(async (item) => {
             let headline = item?.title;
-
+            const englishTitle =
+              item?.originalContent?.scrapedContent?.translatedContent?.englishContent
+                ?.split("-")[0]
+                ?.replace("Title: ", "");
+            const arabicTitle =
+              item?.originalContent?.scrapedContent?.translatedContent?.arabicContent
+                ?.split("-")[0]
+                ?.replace("عنوان:", "");
             // const isArabic = /[\u0600-\u06FF]/.test(headline);
 
             // if (language === "ar" && !isArabic) {
@@ -127,9 +168,11 @@ const ArticleDetails = () => {
               id: item?.id,
               image: item?.image,
               headline,
-              source: item?.source,
+              source: item?.source?.split("- ")[1],
               date: item?.createdAt,
               shareLinks: item?.shareLinks,
+              englishTitle,
+              arabicTitle,
             };
           })
         );
@@ -166,7 +209,7 @@ const ArticleDetails = () => {
             direction="column"
             alignItems="flex-start"
             justifyContent="flex-start"
-            sx={{ display: { xs: "flex", sm: "none" } }}
+            sx={{ display: isTablet ? "flex" : "none" }}
           >
             {isLoading || isFetching ? (
               <Skeleton
@@ -213,7 +256,11 @@ const ArticleDetails = () => {
                 fontSize: { xs: "18px", sm: "35px" },
               }}
             >
-              {articleData?.title}
+              {showOriginal && articleData?.sourceLanguage === language
+                ? articleData?.originalTitle
+                : language === "en"
+                ? articleData?.englishTitle
+                : articleData?.arabicTitle}
             </Typography>
           )}
         </Box>
@@ -248,23 +295,29 @@ const ArticleDetails = () => {
                 sx={{ fontSize: { xs: "12px", sm: "20px" } }}
               >
                 {showOriginal
-                  ? articleData?.originalArticle
+                  ? articleData?.sourceLanguage === language
+                    ? articleData?.originalSummary
+                    : language === "en"
+                    ? articleData?.originalEnglishContent
+                    : articleData?.originalArabicContent
                   : language === "ar"
                   ? articleData?.summaryArabic
                   : articleData?.summaryEnglish}
               </Typography>
             )}
-            <Typography
-              textAlign="center"
-              mt={4}
-              sx={{
-                padding: { xs: "0px 22px", sm: "22px" },
-                fontSize: { xs: "10px", sm: "18px" },
-              }}
-              fontWeight={700}
-            >
-              {t("notice")}
-            </Typography>
+            {!showOriginal && (
+              <Typography
+                textAlign="center"
+                mt={4}
+                sx={{
+                  padding: { xs: "0px 22px", sm: "22px" },
+                  fontSize: { xs: "10px", sm: "18px" },
+                }}
+                fontWeight={700}
+              >
+                {t("notice")}
+              </Typography>
+            )}
           </Box>
           <Button
             variant="gradient"
@@ -273,7 +326,7 @@ const ArticleDetails = () => {
               padding: "0px",
               borderRadius: { xs: "5.14px", sm: "10.08px" },
               fontSize: { xs: "9.14px", sm: "17.92px" },
-              width: { xs: "102px", sm: "fit-content" },
+              width: "max-content",
               height: { xs: "20px", sm: "40px" },
               px: "10px",
             }}
@@ -364,7 +417,9 @@ const ArticleDetails = () => {
                   <NewsCard
                     key={index}
                     image={item?.image}
-                    headline={item?.headline}
+                    headline={
+                      language === "ar" ? item?.arabicTitle : item?.englishTitle
+                    }
                     date={item?.date}
                     source={item?.source}
                     id={item?.id}
@@ -387,7 +442,25 @@ const ArticleDetails = () => {
               },
             }}
           >
-            <SmartReaderCard />
+            <SmartReaderCard
+              paragraphs={`${
+                showOriginal && articleData?.sourceLanguage === language
+                  ? articleData?.originalTitle
+                  : language === "en"
+                  ? articleData?.englishTitle
+                  : articleData?.arabicTitle
+              }      ${
+                showOriginal
+                  ? articleData?.sourceLanguage === language
+                    ? articleData?.originalSummary
+                    : language === "en"
+                    ? articleData?.originalEnglishContent
+                    : articleData?.originalArabicContent
+                  : language === "ar"
+                  ? articleData?.summaryArabic
+                  : articleData?.summaryEnglish
+              }`}
+            />
           </Box>
           <Box
             sx={{
