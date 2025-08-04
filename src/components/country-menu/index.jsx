@@ -1,16 +1,20 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { Menu, Box, Typography, MenuItem } from "@mui/material";
 import { countries, settingsMenuItems } from "../../constant";
 import { backArrow, forwardArrow } from "../../assets";
 import CustomSwitch from "../custom-switch";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
+import { useSearchParams } from "react-router-dom";
 
 const CountryMenu = ({ anchorEl, open, onClose, navbar }) => {
   const [showCountries, setShowCountries] = useState(false);
   const [state, setState] = useState({});
   const { t } = useTranslation();
   const language = useSelector((state) => state.language);
+  const { category: categoriesData } = useSelector((state) => state.category);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const [activeCountry, setActiveCountry] = useState();
 
   const handleToggle = (item) => {
     setState((prev) => ({ ...prev, [item]: !prev[item] }));
@@ -27,6 +31,20 @@ const CountryMenu = ({ anchorEl, open, onClose, navbar }) => {
       onClose();
     }
   };
+
+  const handleItemClick = (name) => {
+    const newParams = new URLSearchParams(searchParams);
+    newParams.set("country", name);
+    setSearchParams(newParams);
+    setActiveCountry(name);
+    onClose();
+  };
+
+  useEffect(() => {
+    if (searchParams.get("country")) {
+      setActiveCountry(searchParams.get("country"));
+    }
+  }, [searchParams]);
 
   return (
     <Menu
@@ -91,12 +109,14 @@ const CountryMenu = ({ anchorEl, open, onClose, navbar }) => {
             </Typography>
           </Box>
           <Box sx={{ display: "flex", flexDirection: "column", width: "100%" }}>
-            {countries?.slice(0, 17)?.map((item, index) => (
+            {categoriesData?.map((item, index) => (
               <MenuItem
                 key={index}
                 sx={{ display: "flex", justifyContent: "center" }}
               >
-                <Typography>{t(item)}</Typography>
+                <Typography onClick={() => handleItemClick(item?.name)}>
+                  {item?.name}
+                </Typography>
               </MenuItem>
             ))}
           </Box>
@@ -119,7 +139,7 @@ const CountryMenu = ({ anchorEl, open, onClose, navbar }) => {
             onClick={handleCountryClick}
           >
             <Typography sx={{ color: "white", fontSize: "17.96px" }}>
-              {t("Lebanon")}
+              {activeCountry}
             </Typography>
             <img
               src={forwardArrow}

@@ -137,6 +137,7 @@ export const theme = createTheme({
             height: "39px",
             "& .MuiChip-label": {
               padding: 0,
+              lineHeight: "normal",
             },
             ":hover": {
               backgroundColor: "#F3EEEE",
@@ -157,6 +158,7 @@ export const theme = createTheme({
             height: "40px",
             "& .MuiChip-label": {
               padding: 0,
+              lineHeight: "normal",
             },
           },
         },
@@ -175,6 +177,7 @@ export const theme = createTheme({
               fontSize: "10.14px",
               fontWeight: "400",
               fontFamily: "Gilroy",
+              lineHeight: "normal",
             },
           },
         },
@@ -194,6 +197,7 @@ export const theme = createTheme({
               fontSize: "10.14px",
               fontWeight: "400",
               fontFamily: "Gilroy",
+              lineHeight: "normal",
             },
           },
         },
@@ -213,6 +217,7 @@ export const theme = createTheme({
               fontSize: "10.14px",
               fontWeight: "400",
               fontFamily: "Gilroy",
+              lineHeight: "normal",
             },
           },
         },
@@ -230,6 +235,7 @@ export const theme = createTheme({
             "& .MuiChip-label": {
               padding: 0,
               color: "white",
+              lineHeight: "normal",
             },
           },
         },
@@ -247,6 +253,7 @@ export const theme = createTheme({
             "& .MuiChip-label": {
               padding: 0,
               color: "#6E6F70",
+              lineHeight: "normal",
             },
           },
         },
@@ -398,12 +405,12 @@ export const theme = createTheme({
       },
       variants: [
         {
-          props: "adminPaper",
+          props: { variant: "adminPaper" },
           style: {
             borderRadius: "16.97px",
             padding: "15px",
             border: "0.85px solid #F8F9FA",
-            boxShadow: "0px 1px 4px 0px #00000040",
+            boxShadow: "0px 1px 4px 0px #00000040 !important",
           },
         },
       ],

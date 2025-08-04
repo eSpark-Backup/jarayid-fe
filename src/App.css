@@ -24,7 +24,7 @@
 @font-face {
   font-family: "Gilroy-Bold";
   src: url("./assets/font/Gilroy-Bold.ttf") format("opentype");
-  font-weight: normal;
+  font-weight: 700;
   font-style: normal;
 }
 
@@ -86,7 +86,8 @@ body {
 
 .highcharts-data-label text,
 .highcharts-credits,
-.highcharts-axis-title {
+.highcharts-axis-title,
+.highcharts-no-tooltip {
   display: none !important;
 }
 

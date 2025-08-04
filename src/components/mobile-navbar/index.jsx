@@ -137,6 +137,7 @@ const MobileNavbar = () => {
             src={logo}
             alt="Logo"
             style={{ width: "124px", height: "42px" }}
+            onClick={() => navigate("/")}
           />
           <img
             src={userBlack}

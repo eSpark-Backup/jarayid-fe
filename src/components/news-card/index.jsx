@@ -27,6 +27,8 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
         },
         px: { xs: "10px", md: "15px" },
         cursor: "pointer",
+        borderBottom: "1px solid #5c5c5c !important",
+        borderRadius: "0px !important",
       }}
       onClick={() => navigate(`/${id}`)}
     >
@@ -62,7 +64,7 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
             overflow: "hidden",
             textOverflow: "ellipsis",
             textAlign: "center",
-            fontWeight: "400",
+            fontWeight: "700",
             maxWidth: "100%",
             display: "-webkit-box",
             WebkitLineClamp: 1,
@@ -134,7 +136,7 @@ const NewsCard = ({ image, source, id, headline, date, shareLinks }) => {
             overflow: "hidden",
             textOverflow: "ellipsis",
             textAlign: "center",
-            fontWeight: "400",
+            fontWeight: "700",
             maxWidth: "100%",
             WebkitLineClamp: 1, // Show only 1 line
             WebkitBoxOrient: "vertical",

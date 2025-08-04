@@ -11,8 +11,8 @@ const SmartReaderCard = () => {
   return (
     <Box
       sx={{
-        px: 2,
-        py: 3,
+        // px: 2,
+        // py: 3,
         display: "flex",
         flexDirection: "column",
         alignItems: "center",

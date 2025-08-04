@@ -155,7 +155,7 @@ const Navbar = () => {
             py: "20px",
             display: "flex",
             justifyContent: "space-between",
-            flexDirection: language === "ar" ? "row-reverse" : "row",
+            flexDirection: "row",
           }}
         >
           <SocialBox />
@@ -165,7 +165,7 @@ const Navbar = () => {
             alt="Logo"
             loading="lazy"
             src={logo}
-            sx={{ width: { md: "170px", lg: "auto" }, cursor: "pointer" }}
+            sx={{ width: { md: "174px", lg: "auto" }, cursor: "pointer" }}
             onClick={() => navigate("/")}
           />
           <Box

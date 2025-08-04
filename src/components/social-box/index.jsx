@@ -29,6 +29,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
   const navigate = useNavigate();
   const links = useSelector((state) => state.socialLinks.links);
   const [myLinks, setMyLinks] = useState({});
+  const { user } = useSelector((state) => state.auth);
 
   const toArabicDigits = (str) => str.replace(/\d/g, (d) => "٠١٢٣٤٥٦٧٨٩"[d]);
 
@@ -78,7 +79,11 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
         sx={{
           display: "flex",
           columnGap: { xs: "3px", md: "4px", lg: "9px" },
-          justifyContent: newsCard ? "flex-end" : "unset",
+          justifyContent: newsCard
+            ? "flex-end"
+            : language === "ar"
+            ? "flex-end"
+            : "flex-start",
         }}
       >
         {newsCard ? (
@@ -125,6 +130,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
                 sx={{
                   width: { xs: "12px", sm: "15px", md: "21px" },
                   height: { xs: "12px", sm: "15px", md: "21px" },
+                  display: user ? "block" : "none",
                 }}
                 loading="lazy"
                 onClick={(e) => {

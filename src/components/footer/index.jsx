@@ -115,7 +115,10 @@ const Footer = () => {
             loading="lazy"
             style={{ cursor: "pointer" }}
             onClick={() => navigate("/")}
-            sx={{ maxWidth: "258px", maxHeight: "87.54px" }}
+            sx={{
+              maxWidth: { xs: "150px", lg: "258px" },
+              maxHeight: "87.54px",
+            }}
           />
 
           <Typography

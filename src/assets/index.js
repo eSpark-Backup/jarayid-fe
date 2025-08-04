@@ -117,6 +117,8 @@ import upload from "./icons/admin-upload.svg";
 import rssSource from "./icons/rssSource.svg";
 import eye from "./icons/eye.svg";
 import blackTrash from "./icons/black-trash.svg";
+import lastMonthIcon from "./icons/lastMonth.svg";
+import thisMonthIcon from "./icons/thisMonth.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
@@ -253,4 +255,6 @@ export {
   rssSource,
   eye,
   blackTrash,
+  lastMonthIcon,
+  thisMonthIcon,
 };

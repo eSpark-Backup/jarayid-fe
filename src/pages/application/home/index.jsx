@@ -37,6 +37,7 @@ import {
   useGetShortsQuery,
 } from "../../../services/feed";
 import { getYouTubeEmbedUrl, translateText } from "../../../utils";
+import InfiniteScroll from "react-infinite-scroll-component";
 
 const Home = () => {
   const { t } = useTranslation();
@@ -267,9 +268,30 @@ const Home = () => {
     fetchData();
   }, [activeItem]);
 
+  const fetchMoreArticles = () => {
+    if (!hasNextPage) return;
+
+    const nextPage = page + 1;
+
+    // Refetch manually with new page
+    refetch({
+      page: nextPage,
+      categoryId: activeId,
+      subType:
+        activeCategory === "Economy"
+          ? "ECONOMICS"
+          : activeCategory === "Sport"
+          ? "SPORTS"
+          : "POLITICS",
+      search: value,
+    });
+
+    setPage(nextPage);
+  };
+
   useEffect(() => {
-    if (articlesData) {
-      const formattedArticles = articlesData?.data?.items?.map((item) => ({
+    if (articlesData && !articleLoading && !isFetching) {
+      const newArticles = articlesData?.data?.items?.map((item) => ({
         id: item?.id,
         image: item?.image,
         headline: item?.title,
@@ -278,15 +300,15 @@ const Home = () => {
         shareLinks: item?.shareLinks,
       }));
 
-      setArticles(formattedArticles || []); // Fallback to empty array if undefined
+      setArticles((prev) =>
+        page === 1 ? newArticles : [...(prev || []), ...newArticles]
+      );
+
       setHasNextPage(articlesData?.data?.pagination?.hasNextPage);
       setHasPrevPage(articlesData?.data?.pagination?.hasPrevPage);
-      setHasFetched(true); // Moved inside to ensure articles are set first
-    } else {
-      setArticles([]); // Explicitly set empty array if no data
-      setHasFetched(true); // Still mark as fetched to avoid infinite loading
+      setHasFetched(true);
     }
-  }, [articlesData]);
+  }, [articlesData, articleLoading, isFetching]);
 
   useEffect(() => {
     if (!data || !activeItem) {
@@ -316,6 +338,12 @@ const Home = () => {
       refetch();
     }
   }, [activeId, activeCategory, value]);
+
+  useEffect(() => {
+    if (articlesData && page === 1) {
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    }
+  }, [articlesData]);
 
   return (
     <>
@@ -425,9 +453,15 @@ const Home = () => {
               <Grid
                 key={index}
                 sx={{
-                  display: { xs: "none", md: "flex" },
-                  width: { md: "14.2857%", lg: "7.1428%" },
+                  display: "flex",
+                  width: {
+                    xs: "110px !important",
+                    sm: "20%",
+                    md: "14.2857%",
+                    lg: "7.1428%",
+                  },
                   p: "3px",
+                  flexShrink: { xs: 0 },
                 }}
               >
                 {isLoading || translationLoading ? (
@@ -465,31 +499,28 @@ const Home = () => {
               </Grid>
             ))}
 
-            {["Lebanon", "Tech", "Sports", "Economy", "Politics"].map(
-              (item, index) => (
-                <Chip
-                  key={index}
-                  label={t(item)}
-                  variant="straight"
-                  sx={{
-                    background:
-                      activeItem === item
-                        ? "linear-gradient(180deg, #007BFF 33%, #004A99 100%)"
-                        : "#F3EEEE",
-                    color: activeItem === item ? "#fff" : "#000",
-                    border:
-                      activeItem === item ? "none" : "1px solid #01000142",
-                    width: { xs: 110, sm: "20%" },
-                    fontSize: 14,
-                    display: { xs: "flex", md: "none" },
-                    flexShrink: 0,
-                    fontWeight: "600",
-                  }}
-                  onClick={() => handleChipClick(item, "country")}
-                  disableRipple
-                />
-              )
-            )}
+            {/* {countries.map((item, index) => (
+              <Chip
+                key={index}
+                label={t(item)}
+                variant="straight"
+                sx={{
+                  background:
+                    activeItem === item
+                      ? "linear-gradient(180deg, #007BFF 33%, #004A99 100%)"
+                      : "#F3EEEE",
+                  color: activeItem === item ? "#fff" : "#000",
+                  border: activeItem === item ? "none" : "1px solid #01000142",
+                  width: { xs: 110, sm: "20%" },
+                  fontSize: 14,
+                  display: { xs: "flex", md: "none" },
+                  flexShrink: 0,
+                  fontWeight: "600",
+                }}
+                onClick={() => handleChipClick(item, "country")}
+                disableRipple
+              />
+            ))} */}
           </Grid>
 
           {user && (
@@ -519,18 +550,18 @@ const Home = () => {
           )}
         </Box>
 
-        <Divider
+        {/* <Divider
           sx={{
             width: { xs: "90%", md: "90%", lg: "70%" },
             backgroundColor: "#A1A0A0",
           }}
-        />
+        /> */}
 
         <Box
           sx={{
             display: "flex",
             gap: { xs: "4px", md: "20px" },
-            flexDirection: language === "ar" ? "row-reverse" : "row",
+            flexDirection: "row",
             width: { xs: "100%", md: "auto" },
             overflowX: "auto",
             flexWrap: "nowrap",
@@ -566,6 +597,7 @@ const Home = () => {
                     fontSize: { xs: "11px", md: "14px", lg: "17.96px" },
                     fontWeight: "400",
                     fontFamily: "Gilroy-Medium",
+                    display: activeCategoryType === "NORMAL" ? "none" : "flex",
                   }}
                   onClick={() => handleChipClick(item, "category")}
                   disableRipple
@@ -604,8 +636,7 @@ const Home = () => {
               }}
             />
             {isLoading || videosLoading
-              ? // Show skeleton loaders when loading
-                Array.from({ length: 3 }).map((_, index) => (
+              ? Array.from({ length: 3 }).map((_, index) => (
                   <React.Fragment key={index}>
                     {/* Mobile skeleton */}
                     <Grid
@@ -833,7 +864,7 @@ const Home = () => {
             </Box>
           )}
         </Box>
-        {isFetching && (
+        {/* {isFetching && (
           <Box
             sx={{
               backgroundColor: "#EDEDED",
@@ -858,185 +889,182 @@ const Home = () => {
               />
             ))}
           </Box>
-        )}
-        {articles?.length > 0 && (
-          <Box
-            sx={{
-              backgroundColor: "#EDEDED",
-              borderTopRightRadius: "9px",
-              borderTopLeftRadius: "9px",
-              width: { xs: "90%", md: "75%", lg: "45%" },
-              display: "flex",
-              flexDirection: "column",
-              rowGap: "25px",
-              "@media (min-width:1281px) and (max-width:1550px)": {
-                width: "55%",
-              },
-            }}
-          >
-            {activeCategoryType === "NORMAL" && (
-              <Grid
-                container
-                columnSpacing={1}
-                rowSpacing={3}
-                sx={{
-                  mt: "20px",
-                  display: { xs: "flex", md: "none" },
-                  p: "15px",
-                }}
-              >
-                {shortsLoading
-                  ? Array.from({ length: 6 }).map((_, index) => (
-                      <Grid
-                        key={index}
-                        size={{ xs: 6, md: 4 }}
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          rowGap: "15px",
-                        }}
-                      >
-                        <Skeleton
-                          variant="rectangular"
-                          width="100%"
-                          height={150}
-                          sx={{ borderRadius: "7.1px" }}
-                        />
-                        <Skeleton variant="text" width="80%" height={30} />
-                      </Grid>
-                    ))
-                  : shortsCOntent?.map((item, index) => (
-                      <Grid
-                        size={{ xs: 6, md: 4 }}
-                        sx={{
-                          display: "flex",
-                          flexDirection: "column",
-                          alignItems: "center",
-                          rowGap: "15px",
-                        }}
-                        key={index}
-                      >
-                        <Box
-                          component="a"
-                          href={item?.link}
-                          target="_blank"
-                          sx={{
-                            textDecoration: "none",
-                            color: "inherit", // Optional: prevent default blue color
-                          }}
-                        >
-                          <Box
-                            component={"img"}
-                            src={item?.image}
-                            sx={{
-                              borderRadius: "7.1px",
-                              width: "100%",
-                              textDecoration: "none !important",
-                            }}
-                            alt="News Image"
-                            loading="lazy"
-                          />
-                          <Typography
-                            sx={{
-                              fontSize: "15.09px",
-                              fontWeight: "600",
-                              textDecoration: "none !important",
-                              textAlign: "center",
-                              color: "black !important",
-                            }}
-                            component={"h2"}
-                          >
-                            {item?.name}
-                          </Typography>
-                        </Box>
-                      </Grid>
-                    ))}
-              </Grid>
-            )}
-            <Box
+        )} */}
+        {/* {articles?.length > 0 && ( */}
+        <Box
+          sx={{
+            // backgroundColor: "#EDEDED",
+            borderTopRightRadius: "9px",
+            borderTopLeftRadius: "9px",
+            width: { xs: "90%", md: "75%", lg: "45%" },
+            display: "flex",
+            flexDirection: "column",
+            rowGap: "25px",
+            "@media (min-width:1281px) and (max-width:1550px)": {
+              width: "55%",
+            },
+          }}
+        >
+          {activeCategoryType === "NORMAL" && (
+            <Grid
+              container
+              columnSpacing={1}
+              rowSpacing={3}
               sx={{
-                display: "flex",
-                flexDirection: "column",
-                rowGap: "15px",
+                mt: "20px",
+                display: { xs: "flex", md: "none" },
                 p: "15px",
               }}
             >
-              {articleLoading || isFetching
-                ? [...Array(5)].map((_, index) => (
-                    <Skeleton
-                      key={`skeleton-${index}`}
-                      variant="rounded"
-                      // width="90%"
-                      height={143}
-                      sx={{ borderRadius: "9px" }}
-                    />
+              {shortsLoading
+                ? Array.from({ length: 6 }).map((_, index) => (
+                    <Grid
+                      key={index}
+                      size={{ xs: 6, md: 4 }}
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        rowGap: "15px",
+                      }}
+                    >
+                      <Skeleton
+                        variant="rectangular"
+                        width="100%"
+                        height={150}
+                        sx={{ borderRadius: "7.1px" }}
+                      />
+                      <Skeleton variant="text" width="80%" height={30} />
+                    </Grid>
                   ))
-                : articles?.map((item, index) =>
-                    item?.ad ? (
+                : shortsCOntent?.map((item, index) => (
+                    <Grid
+                      size={{ xs: 6, md: 4 }}
+                      sx={{
+                        display: "flex",
+                        flexDirection: "column",
+                        alignItems: "center",
+                        rowGap: "15px",
+                      }}
+                      key={index}
+                    >
                       <Box
-                        component={"img"}
-                        src={item?.ad}
-                        alt="Ad"
-                        loading="lazy"
-                        key={index}
-                      />
-                    ) : (
-                      <NewsCard
-                        key={index}
-                        image={item?.image}
-                        headline={item?.headline}
-                        date={item?.date}
-                        source={item?.source}
-                        id={item?.id}
-                        shareLinks={item?.shareLinks}
-                      />
-                    )
-                  )}
-              <Box
-                sx={{
-                  display:
-                    !activeId || articles?.length === 0 ? "none" : "flex",
-                  justifyContent: "space-between",
-                }}
-              >
-                <Box sx={{ width: "200px", height: "40px", m: "0 auto" }}>
-                  <Button
-                    variant="gradient"
-                    onClick={handlePrevPage}
-                    disabled={!hasPrevPage}
-                  >
-                    {t("Previous Page")}
-                  </Button>
-                </Box>
-                <Box sx={{ width: "200px", height: "40px", m: "0 auto" }}>
-                  <Button
-                    variant="gradient"
-                    onClick={handleNextPage}
-                    disabled={!hasNextPage}
-                  >
-                    {t("Next Page")}
-                  </Button>
-                </Box>
-              </Box>
-            </Box>
-          </Box>
-        )}
-        {!isLoading &&
-        !isFetching &&
-        hasFetched &&
-        (!Array.isArray(articles) || articles.length === 0) ? (
+                        component="a"
+                        href={item?.link}
+                        target="_blank"
+                        sx={{
+                          textDecoration: "none",
+                          color: "inherit", // Optional: prevent default blue color
+                        }}
+                      >
+                        <Box
+                          component={"img"}
+                          src={item?.image}
+                          sx={{
+                            borderRadius: "7.1px",
+                            width: "100%",
+                            textDecoration: "none !important",
+                          }}
+                          alt="News Image"
+                          loading="lazy"
+                        />
+                        <Typography
+                          sx={{
+                            fontSize: "15.09px",
+                            fontWeight: "600",
+                            textDecoration: "none !important",
+                            textAlign: "center",
+                            color: "black !important",
+                          }}
+                          component={"h2"}
+                        >
+                          {item?.name}
+                        </Typography>
+                      </Box>
+                    </Grid>
+                  ))}
+            </Grid>
+          )}
           <Box
             sx={{
-              height: "calc(100vh - 600px)",
               display: "flex",
-              justifyContent: "center",
-              alignItems: "center",
+              flexDirection: "column",
+              rowGap: "15px",
+              p: "15px",
+              // maxHeight: "1950px",
+              // overflowY: "auto",
+              // border: "1px solid red",
             }}
           >
-            <Typography sx={{ fontSize: "32px" }}>No Articles Found</Typography>
+            <InfiniteScroll
+              dataLength={articles?.length || 0}
+              next={fetchMoreArticles}
+              hasMore={hasNextPage}
+              loader={
+                (articleLoading || isFetching) &&
+                [...Array(3)].map((_, index) => (
+                  <Skeleton
+                    key={`skeleton-${index}`}
+                    variant="rounded"
+                    height={143}
+                    sx={{ borderRadius: "9px", mb: "15px" }}
+                  />
+                ))
+              }
+              scrollThreshold={0.7}
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                rowGap: "15px",
+              }}
+            >
+              {articles?.map((item, index) =>
+                item?.ad ? (
+                  <Box
+                    component="img"
+                    src={item?.ad}
+                    alt="Ad"
+                    loading="lazy"
+                    key={`ad-${index}`}
+                  />
+                ) : (
+                  <NewsCard
+                    key={`news-${index}`}
+                    image={item?.image}
+                    headline={item?.headline}
+                    date={item?.date}
+                    source={item?.source}
+                    id={item?.id}
+                    shareLinks={item?.shareLinks}
+                  />
+                )
+              )}
+            </InfiniteScroll>
           </Box>
-        ) : null}
+        </Box>
+        {/* )} */}
+        {hasFetched && (
+          <Box>
+            {!articleLoading &&
+            !isFetching &&
+            isSuccess &&
+            hasFetched &&
+            (!Array.isArray(articles) || articles.length === 0) ? (
+              <Box
+                sx={{
+                  height: "calc(100vh - 600px)",
+                  display: "flex",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Typography sx={{ fontSize: "32px" }}>
+                  No Articles Found
+                </Typography>
+              </Box>
+            ) : null}
+          </Box>
+        )}
       </Box>
       <CountryMenu anchorEl={anchorEl2} open={open2} onClose={handleClose2} />
     </>

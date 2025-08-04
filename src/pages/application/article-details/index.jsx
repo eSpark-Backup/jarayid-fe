@@ -148,7 +148,7 @@ const ArticleDetails = () => {
         justifyContent="flex-start"
         sx={{ width: { xs: "90%", sm: "80%", lg: "786px" } }}
       >
-        {/* <Box
+        <Box
           sx={{
             width: { xs: "100%", lg: "738px" },
             height: "134px",
@@ -160,7 +160,7 @@ const ArticleDetails = () => {
             src={image1}
             alt="ad"
           />
-        </Box> */}
+        </Box>
         <Box sx={{ width: { xs: "100%", md: "500px", lg: "738px" }, my: 2 }}>
           <Stack
             direction="column"
@@ -360,12 +360,7 @@ const ArticleDetails = () => {
                 />
               ))
             : tredningData?.map((item, index) =>
-                item?.ad ? //   src={item?.ad} //   component={"img"} // <Box
-                //   alt="Ad"
-                //   loading="lazy"
-                //   key={index}
-                // />
-                null : (
+                item?.ad ? null : ( // /> //   key={index} //   loading="lazy" //   alt="Ad" //   src={item?.ad} //   component={"img"} // <Box
                   <NewsCard
                     key={index}
                     image={item?.image}
@@ -384,8 +379,12 @@ const ArticleDetails = () => {
           <Box
             sx={{
               position: "absolute",
-              top: "330px",
-              left: "40px",
+              top: "130px",
+              right: "110px",
+              "@media (min-width: 800px) and (max-width:1280px)": {
+                top: "300px",
+                right: "30px",
+              },
             }}
           >
             <SmartReaderCard />
@@ -395,6 +394,9 @@ const ArticleDetails = () => {
               position: "absolute",
               top: "300px",
               right: { xs: "5px", lg: "80px" },
+              "@media (min-width: 800px) and (max-width:1280px)": {
+                top: "480px",
+              },
             }}
           >
             <Stack
