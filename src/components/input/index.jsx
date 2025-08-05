@@ -19,6 +19,7 @@ const CustomInput = ({
   modal,
   autoFocus,
   InputProps,
+  dir,
 }) => {
   const language = useSelector((state) => state.language);
   const { t } = useTranslation();
@@ -88,7 +89,7 @@ const CustomInput = ({
                   height: { xs: "38px", lg: 48 },
                   textAlign: language === "ar" ? "right" : "left",
                 },
-                dir: language === "ar" ? "rtl" : "ltr",
+                dir: dir ? dir : language === "ar" ? "rtl" : "ltr",
               }
         }
       />
