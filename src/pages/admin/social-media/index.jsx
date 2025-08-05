@@ -18,9 +18,12 @@ import CategoryDropdown from "../../../components/category-tab";
 import { socialOptions } from "../../../constant";
 import {
   useAddSocialMediaMutation,
+  useDeleteSocialMediaMutation,
   useGetSocialMediaQuery,
 } from "../../../services/social-media";
 import { isObjectValid } from "../../../utils";
+import { deleteSocial } from "../../../assets";
+import DeleteModal from "../../../components/delete-modal";
 
 const textFieldBaseStyle = {
   height: "42px",
@@ -36,6 +39,7 @@ export default function SocialMediaForm() {
   const [category, setCategory] = useState("");
   const [social, setSocial] = useState("");
   const [items, setItems] = useState([]);
+  const [deleteModal, setDeleteModal] = useState(null);
 
   const [showSocialDropdown, setShowSocialDropdown] = useState(false);
 
@@ -84,6 +88,28 @@ export default function SocialMediaForm() {
       if (res?.data) {
         toast.success(res?.data?.message);
         refetch();
+        return;
+      }
+    });
+  };
+
+  const [deleteSocialMedia, { isLoading: deleteLoading }] =
+    useDeleteSocialMediaMutation();
+
+  const handleDelete = (item) => {
+    setDeleteModal(item);
+  };
+
+  const handleDeleteFinal = () => {
+    deleteSocialMedia(deleteModal?.id).then((res) => {
+      if (res?.error) {
+        toast.error(res?.error?.data?.message);
+        return;
+      }
+      if (res?.data) {
+        toast.success(res?.data?.message);
+        refetch();
+        setDeleteModal(null);
         return;
       }
     });
@@ -256,13 +282,11 @@ export default function SocialMediaForm() {
           items?.map((item, index) => (
             <Stack
               sx={{
-                width: {
-                  xs: "100%",
-                  lg: "calc(100% - 68px)",
-                },
+                width: "100%",
                 background: { xs: "#D1E5FA", lg: "transparent" },
                 padding: { xs: "10px", lg: "0px" },
               }}
+              alignItems="center"
               key={index}
               direction={{ xs: "column", lg: "row" }}
               justifyContent="flex-start"
@@ -274,9 +298,11 @@ export default function SocialMediaForm() {
                   ...textFieldBaseStyle,
                   width: "100%",
                   display: "flex",
+                  flex: 1,
                   alignItems: "center",
                   justifyContent: { xs: "center", lg: "flex-start" },
                   background: "#FFF",
+                  minHeight: "42px",
                 }}
               >
                 {item?.link}
@@ -284,7 +310,7 @@ export default function SocialMediaForm() {
               <Box
                 sx={{
                   ...textFieldBaseStyle,
-                  minWidth: { xs: "100%", lg: "145px" },
+                  width: { xs: "100%", lg: "145px" },
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -296,7 +322,7 @@ export default function SocialMediaForm() {
               <Box
                 sx={{
                   ...textFieldBaseStyle,
-                  minWidth: { xs: "100%", lg: "414px" },
+                  width: { xs: "100%", lg: "414px" },
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
@@ -305,6 +331,12 @@ export default function SocialMediaForm() {
               >
                 {item?.categoryName}
               </Box>
+              <img
+                src={deleteSocial}
+                alt="Add"
+                onClick={() => handleDelete(item)}
+                style={{ cursor: "pointer", width: "63px", height: "44px" }}
+              />
             </Stack>
           ))
         ) : (
@@ -318,6 +350,16 @@ export default function SocialMediaForm() {
           </Typography>
         )}
       </Box>
+      <DeleteModal
+        open={deleteModal}
+        handleClose={() => setDeleteModal(null)}
+        handleCancel={() => setDeleteModal(null)}
+        handleConfirm={handleDeleteFinal}
+        heading="Are you sure you want to Delete?"
+        desc={`Are you sure you want to delete this social media`}
+        confirmText="Delete"
+        loading={deleteLoading}
+      />
     </Box>
   );
 }

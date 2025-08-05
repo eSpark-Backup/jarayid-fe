@@ -20,8 +20,16 @@ export const socialMediaApi = api.injectEndpoints({
         };
       },
     }),
+    deleteSocialMedia: builder.mutation({
+      query: (id) => {
+        return {
+          url: `/users/social-media-links/${id}`,
+          method: "DELETE",
+        };
+      },
+    }),
   }),
 });
 
-export const { useGetSocialMediaQuery, useAddSocialMediaMutation } =
+export const { useGetSocialMediaQuery, useAddSocialMediaMutation, useDeleteSocialMediaMutation } =
   socialMediaApi;
