@@ -100,6 +100,7 @@ const Sidebar = ({ sidebarOpen, setSidebarOpen }) => {
         handleAccept={handleLogout}
         handleCancel={() => setOpen(false)}
         button2Text={"Logout"}
+        isAdmin={true}
       >
         <Typography
           sx={{ fontSize: "16px", fontWeight: "400", opacity: "56%" }}

@@ -73,7 +73,7 @@ const GlobalModal = ({
           variant="contained"
           color="primary"
           sx={{
-            width: "137px",
+            width: "max-content",
             height: "40px",
             fontSize: "12px",
           }}

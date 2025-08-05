@@ -60,7 +60,7 @@ const Dashboard = () => {
         )
         .map((item) => item.views);
 
-      const thisMonthTotal = thisMonth.length;
+      const thisMonthTotal = thisMonth?.length;
       const pointsToShow = Math.min(thisMonthTotal, 7);
 
       const thisMonthStep = (thisMonthTotal - 1) / (pointsToShow - 1);

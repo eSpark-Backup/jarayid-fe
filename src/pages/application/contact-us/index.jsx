@@ -8,6 +8,8 @@ import { useRef, useState } from "react";
 import { toast } from "react-toastify"; // Assuming you're using this
 import { VITE_CAPTCHA_SITE_KEY } from "../../../config";
 import { getFont } from "../../../utils";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const sharedInputStyles = {
   "& .MuiOutlinedInput-root": {
@@ -26,11 +28,13 @@ const fields = [
   { name: "businessName", label: "Business Name", placeholder: "" },
   { name: "number", label: "Contact Number", placeholder: "", type: "tel" },
   { name: "email", label: "Contact Email", placeholder: "", type: "email" },
-  { name: "country", label: "Country ", placeholder: "" },
+  { name: "country", label: "Country", placeholder: "" },
   { name: "message", label: "Message", placeholder: "" },
 ];
 
 const ContactUsSite = () => {
+  const language = useSelector((state) => state.language);
+  const { t } = useTranslation();
   const [contactData, { isLoading }] = usePostContactUsMutation();
   const recaptchaRef = useRef(null);
   const [isCaptchaVerified, setIsCaptchaVerified] = useState(false);
@@ -78,8 +82,8 @@ const ContactUsSite = () => {
   const renderInput = ({ name, label, placeholder, type }) => (
     <Box key={name} sx={{ width: { xs: "100%", md: "46%", lg: "47%" } }}>
       <CustomInput
-        label={label}
-        placeholder={placeholder}
+        label={t(label)}
+        placeholder={t(placeholder)}
         type={type || "text"}
         sx={sharedInputStyles}
         name={name}
@@ -105,7 +109,7 @@ const ContactUsSite = () => {
       }}
     >
       <Typography sx={{ fontSize: getFont("32px"), fontWeight: "600" }}>
-        Contact Us
+        {t("Contact Us")}
       </Typography>
       <Box
         component="form"
@@ -141,7 +145,12 @@ const ContactUsSite = () => {
           />
         </Box>
 
-        <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+        <Box
+          sx={{
+            display: "flex",
+            justifyContent: language === "ar" ? "flex-start" : "flex-end",
+          }}
+        >
           <Box sx={{ width: { xs: "100%", md: "162px" }, height: "58.64px" }}>
             <Button
               variant="contained"
@@ -149,7 +158,7 @@ const ContactUsSite = () => {
               type="submit"
               loading={isLoading}
             >
-              Submit
+              {t("Submit")}
             </Button>
           </Box>
         </Box>

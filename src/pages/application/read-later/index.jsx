@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { useGetReadLaterArticlesQuery } from "../../../services/feed";
 import { useSelector } from "react-redux";
 import { getFont, translateText } from "../../../utils";
+import { useTranslation } from "react-i18next";
 
 const ReadLater = () => {
   const { data, isLoading, isFetching } = useGetReadLaterArticlesQuery(
@@ -15,6 +16,7 @@ const ReadLater = () => {
     { refetchOnMountOrArgChange: true }
   );
 
+  const { t } = useTranslation();
   const [translating, setTranslating] = useState(true);
   const [readLaterData, setReadLaterData] = useState([]);
   const language = useSelector((state) => state.language);
@@ -99,7 +101,7 @@ const ReadLater = () => {
             ))
           ) : readLaterData?.length === 0 && !isLoading ? (
             <Typography sx={{ textAlign: "center", fontSize: getFont("32px") }}>
-              No Data Found
+              {t("No Data Found")}
             </Typography>
           ) : (
             readLaterData?.map((item, index) =>

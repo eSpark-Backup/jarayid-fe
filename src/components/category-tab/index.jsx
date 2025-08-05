@@ -5,6 +5,7 @@ import { Box, ClickAwayListener, Button } from "@mui/material";
 import DownArrow from "../../assets/icons/arrow-down.svg";
 import CheckOn from "../../assets/icons/check-on.svg";
 import CheckOff from "../../assets/icons/check-off.svg";
+import { t } from "i18next";
 
 const CategoryDropdown = ({
   selectedCategories,
@@ -13,17 +14,24 @@ const CategoryDropdown = ({
   setSelectedText,
   width = "414px",
   options,
+  isAdmin,
 }) => {
   const { category } = useSelector((state) => state.category);
   const catOptions =
     category?.map((cat) => {
-      return { label: cat?.name, value: cat?.id };
+      return {
+        label: cat?.name,
+        value: cat?.id,
+        arabicName: cat?.translatedContent?.arabic?.name,
+        engName: cat?.translatedContent?.english?.name,
+      };
     }) || [];
   const [categoryOptions, setCategoryOptions] = useState(catOptions);
   useEffect(() => {
     setCategoryOptions(catOptions);
   }, [category]);
   const [showCategoryDropdown, setShowCategoryDropdown] = useState(false);
+  const language = useSelector((state) => state.language);
 
   const toggleCategory = (name) => {
     setSelectedCategories((prev) => {
@@ -75,7 +83,7 @@ const CategoryDropdown = ({
             whiteSpace: "nowrap",
           }}
         >
-          {selectedText || "Category"}
+          {selectedText || isAdmin ? "Category" : t("Category")}
         </Box>
         <img src={DownArrow} alt="Down Arrow" />
       </Box>
@@ -126,7 +134,11 @@ const CategoryDropdown = ({
                   }}
                   onClick={() => toggleCategory(option?.label)}
                 />
-                {option?.label}
+                {isAdmin
+                  ? option?.label
+                  : language === "ar"
+                  ? option?.arabicName
+                  : option?.engName}
               </Box>
             ))}
           </Box>

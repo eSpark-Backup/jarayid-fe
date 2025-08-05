@@ -1,6 +1,8 @@
 import { Box, Button, Modal, Typography } from "@mui/material";
 import { deleteInfo, modalClose } from "../../assets";
 import { getFont } from "../../utils";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
 
 const ConfirmModal = ({
   open,
@@ -11,7 +13,10 @@ const ConfirmModal = ({
   handleAccept,
   heading,
   button2Text,
+  isAdmin,
 }) => {
+  const { t } = useTranslation();
+  const language = useSelector((state) => state.language);
   return (
     <Modal
       open={open}
@@ -51,7 +56,7 @@ const ConfirmModal = ({
         <Box
           sx={{
             display: "flex",
-            justifyContent: "flex-end",
+            justifyContent: language === "ar" ? "flex-start" : "flex-end",
             alignItems: "center",
           }}
         >
@@ -73,11 +78,24 @@ const ConfirmModal = ({
               display: "none",
             },
             width: { xs: "100%" },
+            display: "flex",
+            flexDirection: "column",
+            alignItems: language === "ar" ? "flex-end" : "flex-start",
           }}
         >
-          <img src={deleteInfo} alt="" />
-          <Typography sx={{ fontSize: getFont("24px"), fontWeight: "600" }}>
-            {heading}
+          <img
+            src={deleteInfo}
+            alt=""
+            style={{ width: "75px", height: "75px" }}
+          />
+          <Typography
+            sx={{
+              fontSize: getFont("24px"),
+              fontWeight: "600",
+              textAlign: language !== "ar" || isAdmin ? "left" : "right",
+            }}
+          >
+            {isAdmin ? heading : t(heading)}
           </Typography>
           {children}
         </Box>
@@ -108,12 +126,12 @@ const ConfirmModal = ({
               disableRipple
               onClick={handleCancel}
             >
-              Cancel
+              {isAdmin ? "Cancel" : t("Cancel")}
             </Button>
           </Box>
           <Box sx={{ width: { xs: "100%", md: "47%" }, height: "44px" }}>
             <Button variant="delete" disableRipple onClick={handleAccept}>
-              {button2Text}
+              {isAdmin ? button2Text : t(button2Text)}
             </Button>
           </Box>
         </Box>

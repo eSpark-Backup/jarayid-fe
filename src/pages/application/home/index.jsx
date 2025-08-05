@@ -68,6 +68,7 @@ const Home = () => {
   const [hasFetched, setHasFetched] = useState(false);
   const [hasMoreShorts, setHasMoreSHorts] = useState(false);
   const value = useSelector((state) => state.chatbot.value);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   const skeletonArray = new Array(14).fill(null);
 
@@ -285,25 +286,28 @@ const Home = () => {
     fetchData();
   }, [activeItem, data, language, arabicCountries, countries]);
 
-  const fetchMoreArticles = () => {
-    if (!hasNextPage) return;
+  const fetchMoreArticles = async () => {
+    if (!hasNextPage || isFetchingMore) return; // Prevent concurrent fetches
 
     const nextPage = page + 1;
+    setIsFetchingMore(true); // Lock further fetches
 
-    // Refetch manually with new page
-    refetch({
-      page: nextPage,
-      categoryId: activeId,
-      subType:
-        activeCategory === "Economy"
-          ? "ECONOMICS"
-          : activeCategory === "Sport"
-          ? "SPORTS"
-          : "POLITICS",
-      search: value,
-    });
-
-    setPage(nextPage);
+    try {
+      setPage(nextPage);
+      await refetch({
+        page: nextPage,
+        categoryId: activeId,
+        subType:
+          activeCategory === "Economy"
+            ? "ECONOMICS"
+            : activeCategory === "Sport"
+            ? "SPORTS"
+            : "POLITICS",
+        search: value,
+      });
+    } finally {
+      setIsFetchingMore(false);
+    }
   };
 
   useEffect(() => {
@@ -330,9 +334,18 @@ const Home = () => {
         };
       });
 
-      setArticles((prev) =>
-        page === 1 ? newArticles : [...(prev || []), ...newArticles]
-      );
+      setArticles((prev) => {
+        if (page === 1) {
+          return newArticles; // Reset on first page
+        }
+
+        // Filter out duplicates (compare by `id`)
+        const uniqueNewArticles = newArticles.filter(
+          (newItem) => !prev?.some((prevItem) => prevItem.id === newItem.id)
+        );
+
+        return [...(prev || []), ...uniqueNewArticles];
+      });
 
       setHasNextPage(articlesData?.data?.pagination?.hasNextPage);
       setHasPrevPage(articlesData?.data?.pagination?.hasPrevPage);
@@ -370,9 +383,11 @@ const Home = () => {
         name: item?.title,
         image: item?.thumbnailUrl,
         link: item?.youtubeUrl,
-        arabicTitle: item?.translatedContent && item?.translatedContent?.length > 0 && item?.translatedContent?.find(
-          (item) => item?.language === "arabic"
-        )?.title,
+        arabicTitle:
+          item?.translatedContent &&
+          item?.translatedContent?.length > 0 &&
+          item?.translatedContent?.find((item) => item?.language === "arabic")
+            ?.title,
       }));
       setHasMoreSHorts(shortsData?.data?.pagination?.hasNextPage);
       setShortsContent(data);

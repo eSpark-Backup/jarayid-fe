@@ -9,6 +9,7 @@ import { useGetCategoriesQuery } from "../../services/feed";
 import { useRssFeedQuery } from "../../services/rss";
 import { useSelector } from "react-redux";
 import { getFont } from "../../utils";
+import { useTranslation } from "react-i18next";
 
 const EditSourceModal = () => {
   const [selectedCategories, setSelectedCategories] = useState({});
@@ -18,6 +19,8 @@ const EditSourceModal = () => {
   const { category: categoriesData } = useSelector((state) => state.category);
   const [fetched, setFetched] = useState(false);
   const [hasMoreData, setHasMoreData] = useState(false);
+  const { t } = useTranslation();
+  const language = useSelector((state) => state.language);
 
   const {
     data: rssData,
@@ -62,7 +65,6 @@ const EditSourceModal = () => {
     const filtered = categoriesData.filter(
       (item) => selectedCategories[item.name] === true
     );
-    console.log("HELLO");
 
     const newIds = filtered?.map((item) => item?.id);
     // console.log(newIds, "NEWS IDS");
@@ -83,11 +85,14 @@ const EditSourceModal = () => {
           justifyContent: "space-between",
           alignItems: "center",
           columnGap: "10px",
-          flexDirection: { xs: "column", md: "row" },
+          flexDirection: {
+            xs: "column",
+            md: language === "ar" ? "row-reverse" : "row",
+          },
         }}
       >
         <Typography sx={{ fontSize: getFont("32px"), fontWeight: "600" }}>
-          Edit New Source
+          {t("Edit New Source")}
         </Typography>
         <Box
           sx={{
@@ -130,6 +135,7 @@ const EditSourceModal = () => {
                   display: "flex",
                   justifyContent: "space-between",
                   alignItems: "center",
+                  flexDirection: language === "ar" ? "row-reverse" : "row",
                 }}
                 key={index}
               >
@@ -138,6 +144,7 @@ const EditSourceModal = () => {
                     display: "flex",
                     columnGap: "10px",
                     alignItems: "center",
+                    flexDirection: language === "ar" ? "row-reverse" : "row",
                   }}
                 >
                   <img
