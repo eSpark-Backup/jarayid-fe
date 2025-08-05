@@ -42,7 +42,7 @@ const EditSourceModal = () => {
         id: item?.id,
         link: item?.url,
         img: item?.logo,
-        checked: true,
+        checked: item?.active,
       }));
       setFetched(true);
       setItems(data);
@@ -149,7 +149,7 @@ const EditSourceModal = () => {
                       height: 35,
                       //   marginRight: 8,
                     }}
-                    onClick={() => handleItemClicked(item?.id)}
+                    // onClick={() => handleItemClicked(item?.id)}
                   />
                   <Typography
                     sx={{

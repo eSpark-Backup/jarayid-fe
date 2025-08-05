@@ -492,7 +492,7 @@ const Home = () => {
                 sx={{
                   display: "flex",
                   width: {
-                    xs: "110px !important",
+                    xs: "110px",
                     sm: "20%",
                     md: "14.2857%",
                     lg: "7.1428%",
