@@ -46,7 +46,7 @@ const DeleteModal = ({
         <img src={CloseIcon}></img>
       </IconButton>
 
-      <DialogTitle>
+      <DialogTitle component={"main"}>
         <Typography variant="h6" fontWeight={600}>
           {heading}
         </Typography>

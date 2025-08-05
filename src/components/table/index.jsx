@@ -47,6 +47,7 @@ const DynamicTable = ({
   headerBorder,
   showView = false,
   handleView,
+  isLeft,
 }) => {
   const renderSortIcon = (columnKey) => {
     if (sortBy !== columnKey) return null;
@@ -72,17 +73,6 @@ const DynamicTable = ({
           alignItems="center"
           spacing={1}
         >
-          {showView && (
-            <img
-              src={eye}
-              alt="view"
-              style={{ cursor: "pointer" }}
-              onClick={(e) => {
-                e.stopPropagation();
-                handleView(item);
-              }}
-            />
-          )}
           {!hideEdit && (
             <img
               src={adminEdit}
@@ -95,7 +85,7 @@ const DynamicTable = ({
             />
           )}
           {!hideSwitch &&
-            ((isToggleLoading && item?.id === loadingId) ? (
+            (isToggleLoading && item?.id === loadingId ? (
               <CircularProgress size={16} />
             ) : (
               <CustomSwitch
@@ -154,13 +144,29 @@ const DynamicTable = ({
               }}
             />
           )}
+          {showView && (
+            <img
+              src={eye}
+              alt="view"
+              style={{ cursor: "pointer" }}
+              onClick={(e) => {
+                e.stopPropagation();
+                handleView(item);
+              }}
+            />
+          )}
         </Stack>
       );
     }
 
     if (column.chip) {
       return (
-        <Chip onClick={() => {}} label={cell?.label} variant={cell?.variant} />
+        <Chip
+          onClick={() => {}}
+          label={cell?.label}
+          variant={cell?.variant}
+          sx={{ cursor: "text" }}
+        />
       );
     }
     return cell;
@@ -217,12 +223,16 @@ const DynamicTable = ({
                   <TableCell
                     key={index}
                     onClick={() => onSort?.(column.key[column.key.length - 1])}
-                    sx={{ cursor: "pointer" }}
+                    sx={{ cursor: selectable ? "pointer" : "text" }}
                   >
                     <Stack
                       direction="row"
-                      justifyContent="center"
-                      alignItems="center"
+                      justifyContent={
+                        isLeft && index === 0 ? "flex-start" : "center"
+                      }
+                      alignItems={
+                        isLeft && index === 0 ? "flex-start" : "center"
+                      }
                       gap={0.5}
                     >
                       <span>{column.name}</span>
@@ -255,12 +265,13 @@ const DynamicTable = ({
                         />
                       </TableCell>
                     )}
-                    {extendedColumns?.map((column) => (
+                    {extendedColumns?.map((column, ind) => (
                       <TableCell
                         sx={{
-                          textAlign: "center",
+                          textAlign: isLeft && ind === 0 ? "left" : "center",
                           pl: "0px",
                           cursor: onRowClick ? "pointer" : "auto",
+                          // py: "8px !important",
                         }}
                         key={column.key.join(".")}
                         onClick={onRowClick ? () => onRowClick(item) : () => {}}

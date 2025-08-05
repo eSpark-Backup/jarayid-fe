@@ -15,8 +15,8 @@ export const columns = () => {
               window.open(item?.website, "_blank", "noopener,noreferrer")
             }
             sx={{
-              color: "#908B93",
-              fontSize: "14px",
+              color: "#8C8E90",
+              fontSize: "16px",
               fontWeight: 400,
               textDecoration: "underline",
               cursor: "pointer",

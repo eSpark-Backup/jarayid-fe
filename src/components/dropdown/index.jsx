@@ -19,7 +19,7 @@ const CustomSelect = styled(Select)(({ theme }) => ({
     alignItems: "center",
     fontWeight: 700,
     fontSize: "14px",
-    color: "#3C3A41",
+    color: "#403A44",
   },
   "& .MuiOutlinedInput-notchedOutline": {
     border: "none",

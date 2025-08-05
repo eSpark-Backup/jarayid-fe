@@ -63,8 +63,14 @@ const FAQList = ({
           sx={{
             borderRadius: "16px !important",
             mb: 2,
-            border: "1px solid #D9DBE9 !important",
-            boxShadow: "0px 5px 15px rgba(25, 33, 61, 0.06) !important",
+            border:
+              expanded === index
+                ? "1px solid #D9DBE9 !important"
+                : "1px solid #F1F2F9 !important",
+            boxShadow:
+              expanded === index
+                ? "0px 5px 15px rgba(25, 33, 61, 0.06) !important"
+                : "0px 1px 4px 0px #19213D0F",
             "&:before": { display: "none" },
           }}
         >
@@ -77,7 +83,7 @@ const FAQList = ({
                 width: "100%",
                 alignItems: "center",
               },
-              minHeight: "unset",
+              // minHeight: "unset",
             }}
           >
             <Box
@@ -96,6 +102,7 @@ const FAQList = ({
                   pr: { xs: 0, sm: 2 },
                   flex: 1,
                   wordBreak: "break-word",
+                  fontSize: "20px",
                 }}
               >
                 {faq.question}
@@ -126,7 +133,7 @@ const FAQList = ({
               justifyContent: "space-between",
               alignItems: { xs: "flex-start", sm: "flex-start" },
               paddingTop: 0,
-              mt: "-20px",
+              // mt: "-20px",
               gap: 2,
             }}
           >

@@ -201,7 +201,10 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
         ) : (
           <>
             {shareLinks?.facebook || myLinks?.facebook ? (
-              <a href={shareLinks?.facebook || myLinks?.facebook}>
+              <a
+                href={shareLinks?.facebook || myLinks?.facebook}
+                target="_blank"
+              >
                 <Box
                   component={"img"}
                   src={facebook}
@@ -212,7 +215,10 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               </a>
             ) : null}
             {!detailPage && (shareLinks?.instagram || myLinks?.instagram) && (
-              <a href={shareLinks?.instagram || myLinks?.instagram}>
+              <a
+                href={shareLinks?.instagram || myLinks?.instagram}
+                target="_blank"
+              >
                 <Box
                   component={"img"}
                   src={instagram}
@@ -223,7 +229,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               </a>
             )}
             {shareLinks?.tiktok || myLinks?.tiktok ? (
-              <a href={shareLinks?.tiktok || myLinks?.tiktok}>
+              <a href={shareLinks?.tiktok || myLinks?.tiktok} target="_blank">
                 <Box
                   component={"img"}
                   src={tiktok}
@@ -234,7 +240,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               </a>
             ) : null}
             {shareLinks?.twitter || myLinks?.twitter ? (
-              <a href={shareLinks?.twitter || myLinks?.twitter}>
+              <a href={shareLinks?.twitter || myLinks?.twitter} target="_blank">
                 <Box
                   component={"img"}
                   src={twitter}
@@ -245,7 +251,10 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               </a>
             ) : null}
             {shareLinks?.whatsapp || myLinks?.whatsapp ? (
-              <a href={shareLinks?.whatsapp || myLinks?.whatsapp}>
+              <a
+                href={shareLinks?.whatsapp || myLinks?.whatsapp}
+                target="_blank"
+              >
                 <Box
                   component={"img"}
                   src={whatsapp}
@@ -256,7 +265,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
               </a>
             ) : null}
             {shareLinks?.youtube || myLinks?.youtube ? (
-              <a href={shareLinks?.youtube || myLinks?.youtube}>
+              <a href={shareLinks?.youtube || myLinks?.youtube} target="_blank">
                 <Box
                   component={"img"}
                   src={youtube}

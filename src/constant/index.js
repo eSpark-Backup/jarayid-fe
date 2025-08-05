@@ -880,7 +880,7 @@ export const usersData = [
     joinDate: "25/09/25",
     lastLogin: "25/09/25",
     status: {
-      label: "Active",
+      label: "Guest",
       variant: "blue",
     },
   },
@@ -892,7 +892,7 @@ export const usersData = [
     joinDate: "25/09/25",
     lastLogin: "25/09/25",
     status: {
-      label: "Active",
+      label: "Guest",
       variant: "blue",
     },
   },
@@ -916,7 +916,7 @@ export const usersData = [
     joinDate: "25/09/25",
     lastLogin: "25/09/25",
     status: {
-      label: "Active",
+      label: "Guest",
       variant: "blue",
     },
   },

@@ -454,7 +454,7 @@ const Field = ({
             alignItems: multiline ? "start" : "center",
           },
           "& .MuiInputBase-input": {
-            padding: multiline ? "8px 14px" : "0 14px",
+            padding: multiline ? "8px 14px 8px 0px" : "0 14px 0px 0px",
           },
         }}
       />

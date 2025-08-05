@@ -128,7 +128,11 @@ const RssSourceManagement = () => {
             sx={{ width: { xs: "100%", sm: "max-content" } }}
           >
             <Box sx={{ width: "max-content", height: "39px" }}>
-              <Button onClick={() => setOpenAdd(true)} variant="gradient">
+              <Button
+                onClick={() => setOpenAdd(true)}
+                variant="gradient"
+                sx={{ border: "none !important" }}
+              >
                 + Add RSS Source
               </Button>
             </Box>
@@ -153,7 +157,7 @@ const RssSourceManagement = () => {
           marginTop: "20px",
           background: "#FFF",
           borderRadius: "14px",
-          padding: { xs: "32px", sm: "32px 77px 32px 32px" },
+          padding: { xs: "32px" },
         }}
       >
         <DynamicTable

@@ -1,3 +1,4 @@
+import { method } from "lodash";
 import { api } from "./rtk";
 
 export const categoriesApi = api.injectEndpoints({
@@ -24,6 +25,13 @@ export const categoriesApi = api.injectEndpoints({
         credentials: "include",
       }),
     }),
+    deleteCategory: builder.mutation({
+      query: ({ id }) => ({
+        url: `/categories/${id}`,
+        method: "DELETE",
+        credentials: "include",
+      }),
+    }),
   }),
 });
 
@@ -31,4 +39,5 @@ export const {
   useGetAllCateoriesQuery,
   useAddCateoryMutation,
   useUpdateCateoryMutation,
+  useDeleteCategoryMutation,
 } = categoriesApi;
