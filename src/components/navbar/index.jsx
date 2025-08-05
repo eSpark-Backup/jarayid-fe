@@ -410,9 +410,14 @@ const Navbar = () => {
         button2Text={"Logout"}
       >
         <Typography
-          sx={{ fontSize: getFont("16px"), fontWeight: "400", opacity: "56%" }}
+          sx={{
+            fontSize: getFont("16px"),
+            fontWeight: "400",
+            opacity: "56%",
+            textAlign: language === "ar" ? "right" : "left",
+          }}
         >
-          Are you sure you want to Logout?
+          {t("Are you sure you want to Logout?")}
         </Typography>
       </ConfirmModal>
       <DynamicModal

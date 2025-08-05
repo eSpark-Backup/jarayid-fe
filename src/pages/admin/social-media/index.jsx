@@ -251,6 +251,7 @@ export default function SocialMediaForm() {
             setSelectedCategories={setSelectedCategories}
             selectedText={category}
             setSelectedText={setCategory}
+            isAdmin={true}
           />
         </Box>
         {addingLoading ? (
