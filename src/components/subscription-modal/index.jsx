@@ -1,8 +1,40 @@
+import { useEffect } from "react";
+import { useSelector } from "react-redux";
 import { Box, Typography } from "@mui/material";
 import PriceCard from "../price-card";
 import { getFont } from "../../utils";
+import { VITE_CLIENT_PADDLE_TOKEN } from "../../config";
 
-const SubscriptionModal = () => {
+const SubscriptionModal = ({ onClose }) => {
+  const { subscriptions } = useSelector((state) => state.subscriptions);
+
+  const handleCheckout = (priceId) => {
+    if (window.Paddle) {
+      Paddle.Checkout.open({
+        items: [
+          {
+            priceId,
+            quantity: 1,
+          },
+        ],
+      });
+    }
+  };
+
+  useEffect(() => {
+    if (window.Paddle) {
+      Paddle.Environment.set("sandbox");
+      Paddle.Initialize({
+        token: VITE_CLIENT_PADDLE_TOKEN,
+        eventCallback: function (event) {
+          if (event.name === "checkout.completed") {
+            onClose && onClose();
+          }
+        },
+      });
+    }
+  }, []);
+
   return (
     <Box>
       <Typography sx={{ fontSize: getFont("32px"), fontWeight: "600" }}>
@@ -18,24 +50,20 @@ const SubscriptionModal = () => {
           rowGap: "15px",
         }}
       >
-        <Box sx={{ width: { xs: "100%", md: "47%" } }}>
-          <PriceCard
-            name={"Basic Subscription"}
-            description={
-              "Get Ad Free Experience While you are Reading your Favourite articles."
-            }
-            price={"$9.99"}
-          />
-        </Box>
-        <Box sx={{ width: { xs: "100%", md: "47%" } }}>
-          <PriceCard
-            name={"Basic Subscription"}
-            description={
-              "Get Ad Free Experience While you are Reading your Favourite articles."
-            }
-            price={"$9.99"}
-          />
-        </Box>
+        {subscriptions?.map((plan) => {
+          return (
+            <Box sx={{ width: { xs: "100%", md: "47%" } }}>
+              <PriceCard
+                name={plan?.name}
+                description={plan?.description}
+                interval={plan?.prices?.MONTHLY?.interval}
+                price={`$${plan?.prices?.MONTHLY?.amount}`}
+                handleCheckout={handleCheckout}
+                priceId={plan?.prices?.MONTHLY?.id}
+              />
+            </Box>
+          );
+        })}
       </Box>
     </Box>
   );

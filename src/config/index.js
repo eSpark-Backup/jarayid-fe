@@ -6,3 +6,4 @@ export const VITE_BASE_URL =
 export const VITE_AUTH0_DOMAIN = "dev-st4ex8mtmrznbeji.us.auth0.com";
 export const VITE_CLIENT_ID = "DrTJihVGc8SMawWQkCeji5k5DL44Lfas";
 export const VITE_CAPTCHA_SITE_KEY = "6LeiS5orAAAAADXS7liaUSkS1R7qTWUVBRaTWomj";
+export const VITE_CLIENT_PADDLE_TOKEN = "test_4a8bed346029ed6231bcf8a17d4";

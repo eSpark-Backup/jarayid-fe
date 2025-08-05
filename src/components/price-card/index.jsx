@@ -1,7 +1,14 @@
-import { Box, Typography } from "@mui/material";
+import { Box, Button, Typography } from "@mui/material";
 import { go, users } from "../../assets";
 
-const PriceCard = ({ name, description, price }) => {
+const PriceCard = ({
+  name,
+  description,
+  price,
+  interval,
+  handleCheckout,
+  priceId,
+}) => {
   return (
     <Box
       sx={{
@@ -12,6 +19,7 @@ const PriceCard = ({ name, description, price }) => {
         display: "flex",
         flexDirection: "column",
         rowGap: "15px",
+        height: "380px"
       }}
     >
       <Typography
@@ -36,18 +44,19 @@ const PriceCard = ({ name, description, price }) => {
           {price}
         </Typography>
         <Typography sx={{ color: "white", opacity: "80%", fontSize: "17px" }}>
-          / MN
+          / {interval === "MONTHLY" ? "MN" : "YR"}
         </Typography>
       </Box>
-      <Box sx={{ display: "flex", columnGap: "10px" }}>
+      {/* <Box sx={{ display: "flex", columnGap: "10px" }}>
         <img src={users} alt="User Group" />
         <Typography
           sx={{ fontSize: "16px", color: "white", fontWeight: "600" }}
         >
           + 10 Users
         </Typography>
-      </Box>
-      <Box
+      </Box> */}
+      <Button
+        onClick={() => handleCheckout(priceId)}
         sx={{
           width: "100%",
           backgroundColor: "#007BFF",
@@ -57,6 +66,9 @@ const PriceCard = ({ name, description, price }) => {
           justifyContent: "center",
           alignItems: "center",
           columnGap: "5px",
+          "&:hover": {
+            backgroundColor: "#007BFF",
+          },
         }}
       >
         <Typography
@@ -65,7 +77,7 @@ const PriceCard = ({ name, description, price }) => {
           Upgrade Now
         </Typography>
         <img src={go} alt="Icon" />
-      </Box>
+      </Button>
     </Box>
   );
 };

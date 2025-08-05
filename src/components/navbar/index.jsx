@@ -379,7 +379,7 @@ const Navbar = () => {
           },
         }}
       >
-        <SubscriptionModal />
+        <SubscriptionModal onClose={() => setSubscriptionModal(false)} />
       </DynamicModal>
       <DynamicModal
         open={contactModal}
