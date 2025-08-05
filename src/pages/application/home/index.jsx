@@ -27,7 +27,7 @@ import {
   Skeleton,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { forwardArrow, settingsWhite } from "../../../assets";
@@ -289,29 +289,35 @@ const Home = () => {
     fetchData();
   }, [activeItem, data, language, arabicCountries, countries]);
 
-  const fetchMoreArticles = async () => {
-    if (!hasNextPage || isFetchingMore) return; // Prevent concurrent fetches
+  // const fetchMoreArticles = async () => {
+  //   if (!hasNextPage || isFetchingMore) return;
 
-    const nextPage = page + 1;
-    setIsFetchingMore(true); // Lock further fetches
+  //   const nextPage = page + 1;
+  //   setIsFetchingMore(true);
 
-    try {
-      setPage(nextPage);
-      await refetch({
-        page: nextPage,
-        categoryId: activeId,
-        subType:
-          activeCategory === "Economy"
-            ? "ECONOMICS"
-            : activeCategory === "Sport"
-            ? "SPORTS"
-            : "POLITICS",
-        search: value,
-      });
-    } finally {
-      setIsFetchingMore(false);
+  //   try {
+  //     setPage(nextPage);
+  //     await refetch({
+  //       page: nextPage,
+  //       categoryId: activeId,
+  //       subType:
+  //         activeCategory === "Economy"
+  //           ? "ECONOMICS"
+  //           : activeCategory === "Sport"
+  //           ? "SPORTS"
+  //           : "POLITICS",
+  //       search: value,
+  //     });
+  //   } finally {
+  //     setIsFetchingMore(false);
+  //   }
+  // };
+
+  const fetchMoreArticles = useCallback(() => {
+    if (!isFetching && hasNextPage) {
+      setPage((prev) => prev + 1);
     }
-  };
+  }, [hasNextPage, isFetching]);
 
   useEffect(() => {
     if (articlesData) {
