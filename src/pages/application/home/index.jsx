@@ -270,6 +270,9 @@ const Home = () => {
 
       const activeYoutube = activeData[0]?.youtubeContents?.map((item) => ({
         heading: item.title,
+        arabicTitle: item?.translatedContent?.find(
+          (item) => item?.language === "arabic"
+        )?.title,
         videoUrl: item.youtubeUrl,
         type: item?.contentType,
       }));
@@ -311,7 +314,8 @@ const Home = () => {
         const arabicTitle =
           item?.originalContent?.scrapedContent?.translatedContent?.arabicContent
             ?.split("-")[0]
-            ?.replace("عنوان:", "");
+            ?.replace("عنوان:", "")
+            ?.replace("Title:", "");
         return {
           id: item?.id,
           image: item?.image,
@@ -364,6 +368,9 @@ const Home = () => {
         name: item?.title,
         image: item?.thumbnailUrl,
         link: item?.youtubeUrl,
+        arabicTitle: item?.translatedContent?.find(
+          (item) => item?.language === "arabic"
+        )?.title,
       }));
       setHasMoreSHorts(shortsData?.data?.pagination?.hasNextPage);
       setShortsContent(data);
@@ -768,7 +775,9 @@ const Home = () => {
                             }}
                             component={"h1"}
                           >
-                            {item?.heading}
+                            {language === "ar"
+                              ? item?.arabicTitle
+                              : item?.heading}
                           </Typography>
                           <Box
                             component="iframe"
@@ -808,7 +817,9 @@ const Home = () => {
                             }}
                             component={"h1"}
                           >
-                            {item?.heading}
+                            {language === "ar"
+                              ? item?.arabicTitle
+                              : item?.heading}
                           </Typography>
                           <Box
                             component="iframe"
@@ -897,7 +908,7 @@ const Home = () => {
                           }}
                           component={"h2"}
                         >
-                          {item?.name}
+                          {language === "ar" ? item?.arabicTitle : item?.name}
                         </Typography>
                       </a>
                     </Grid>
@@ -1029,7 +1040,7 @@ const Home = () => {
                           }}
                           component={"h2"}
                         >
-                          {item?.name}
+                          {language === "ar" ? item?.arabicTitle : item?.name}
                         </Typography>
                       </Box>
                     </Grid>
@@ -1143,7 +1154,7 @@ const Home = () => {
                 }}
               >
                 <Typography sx={{ fontSize: getFont("32px") }}>
-                  No Articles Found
+                  {t("No Articles Found")}
                 </Typography>
               </Box>
             ) : null}

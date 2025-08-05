@@ -39,7 +39,7 @@ const PriceCard = ({
         }}
       >
         <Typography
-          sx={{ color: "white", fontSize: "50px", fontWeight: "800" }}
+          sx={{ color: "white", fontSize: "50px", fontWeight: "600" }}
         >
           {price}
         </Typography>

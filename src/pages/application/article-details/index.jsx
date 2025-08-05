@@ -81,7 +81,8 @@ const ArticleDetails = () => {
         const arabicTitle =
           article?.originalContent?.scrapedContent?.translatedContent?.arabicContent
             ?.split("-")[0]
-            ?.replace("عنوان:", "");
+            ?.replace("عنوان:", "")
+            ?.replace("Title:", "");
         const originalTitle =
           article?.originalContent?.rssTranslatedContent?.originalContent
             ?.split("\n\n")[0]
