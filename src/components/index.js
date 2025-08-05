@@ -34,6 +34,8 @@ import OutlineInput from "./outline-input";
 import OutlineSelect from "./outline-select";
 import OutlinedFileInput from "./outline-image-input";
 import EditSourceModal from "./edit-source-modal";
+import NewAd from "./new-ad";
+import AdData from "./ad-data";
 
 export {
   Button,
@@ -72,4 +74,6 @@ export {
   OutlineSelect,
   OutlinedFileInput,
   EditSourceModal,
+  NewAd,
+  AdData,
 };

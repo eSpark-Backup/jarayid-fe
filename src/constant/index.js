@@ -1648,7 +1648,7 @@ export const infoCardData = [
   },
 ];
 
-export const dropdowns = ["Main Page", "Article Page", "Category"];
+export const dropdowns = ["Main Page", "Article Page"];
 
 export const dropdownOptions = {
   "Main Page": ["Left", "Right", "Feed"],

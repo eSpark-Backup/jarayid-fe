@@ -120,6 +120,8 @@ import blackTrash from "./icons/black-trash.svg";
 import lastMonthIcon from "./icons/lastMonth.svg";
 import thisMonthIcon from "./icons/thisMonth.svg";
 import deleteSocial from "./icons/delete-social.svg";
+import adUnchecked from "./icons/adUnchecked.svg";
+import adChecked from "./icons/adChecked.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
@@ -259,4 +261,6 @@ export {
   lastMonthIcon,
   thisMonthIcon,
   deleteSocial,
+  adChecked,
+  adUnchecked,
 };
