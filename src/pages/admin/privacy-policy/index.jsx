@@ -199,6 +199,7 @@ const TermsPrivacyScreen = () => {
               fontSize: "20px",
               fontWeight: "400",
               color: "#101828 !important",
+              textTransform: "none",
             }}
           />
           <Tab
@@ -207,6 +208,7 @@ const TermsPrivacyScreen = () => {
               fontSize: "20px",
               fontWeight: "400",
               color: "#101828 !important",
+              textTransform: "none",
             }}
           />
         </Tabs>

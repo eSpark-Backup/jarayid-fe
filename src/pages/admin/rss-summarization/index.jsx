@@ -20,7 +20,7 @@ import { dropdownArrow, upArrow } from "../../../assets";
 import { modelsContent, timeOptions, wordInputStyles } from "../../../constant";
 
 const sectionStyle = {
-  border: "0.5px solid #9C9393",
+  border: "0.5px solid #9c939385",
   borderRadius: "14px",
   p: "15px",
   display: "flex",
@@ -140,6 +140,8 @@ const RssSummarization = () => {
               boxShadow: "0px 2px 2px 0px #0000000D",
               width: "380.58px",
               "& .MuiOutlinedInput-root": {
+                borderRadius: "8px !important",
+                cursor: "pointer !important",
                 "& fieldset": {
                   borderColor: "#D2D5DA",
                 },
@@ -348,7 +350,7 @@ const RssSummarization = () => {
                 textAlign: "center",
               }}
             >
-              Chat GPT Options
+              Time Limit
             </Typography>
             <Typography
               sx={{
@@ -358,7 +360,7 @@ const RssSummarization = () => {
                 textAlign: "center",
               }}
             >
-              Select Model:
+              Display Articles published within the last
             </Typography>
             <Box
               sx={{

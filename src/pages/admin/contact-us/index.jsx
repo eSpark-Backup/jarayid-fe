@@ -60,7 +60,7 @@ const ContactUs = () => {
           marginTop: "20px",
           background: "#FFF",
           borderRadius: "14px",
-          padding: { xs: "32px", sm: "32px 77px 32px 32px" },
+          padding: { xs: "32px" },
         }}
       >
         <DynamicTable

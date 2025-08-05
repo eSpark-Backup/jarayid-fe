@@ -18,6 +18,7 @@ const CustomInput = React.forwardRef(({ placeholder, value, onClick }, ref) => (
       alignItems: "center",
       fontSize: "14px",
       color: "#3C3A41",
+      cursor: "pointer",
     }}
   >
     {value === "" ? placeholder : value}

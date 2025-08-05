@@ -34,10 +34,11 @@ const NavLink = ({ img, name, type, link, handleClick }) => {
       />
       <Typography
         sx={{
-          fontWeight: 700,
+          fontWeight: 400,
           fontSize: type === "logout" ? "20px" : "16px",
           color:
             path === link ? "#FFF" : type === "logout" ? "#DF1C41" : "#6E6F70",
+          fontFamily: "Gilroy-SemiBold",
         }}
       >
         {name}

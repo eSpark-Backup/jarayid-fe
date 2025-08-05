@@ -103,7 +103,6 @@ const Home = () => {
       if (!data) return;
 
       const items = data?.data?.items || [];
-      console.log(data);
       const originalNames = items.map((item) => item?.name);
       const arabiclNames = items.map(
         (item) => item?.translatedContent?.arabic?.name
@@ -148,8 +147,6 @@ const Home = () => {
   }, [queryCountry, language, arabicCountries]);
 
   const handleChipClick = (item, type) => {
-    console.log(item, type);
-
     setSearchParams((prev) => {
       const newParams = new URLSearchParams(prev);
 
@@ -255,10 +252,20 @@ const Home = () => {
     const fetchData = () => {
       if (!data?.data || !activeItem) return;
 
-      const targetCountry = activeItem;
+      let targetCountry = activeItem;
+
+      if (language === "ar") {
+        const countryIndex = arabicCountries.findIndex(
+          (name) => name === activeItem
+        );
+
+        if (countryIndex === -1) return;
+
+        targetCountry = countries[countryIndex];
+      }
 
       const activeData = data.data.items.filter(
-        (item) => item.name.toLowerCase() === targetCountry?.toLowerCase()
+        (item) => item.name.toLowerCase() === targetCountry.toLowerCase()
       );
 
       const activeYoutube = activeData[0]?.youtubeContents?.map((item) => ({
@@ -271,7 +278,7 @@ const Home = () => {
     };
 
     fetchData();
-  }, [activeItem]);
+  }, [activeItem, data, language, arabicCountries, countries]);
 
   const fetchMoreArticles = () => {
     if (!hasNextPage) return;
@@ -328,15 +335,28 @@ const Home = () => {
   }, [articlesData, articleLoading, isFetching]);
 
   useEffect(() => {
-    if (!data || !activeItem) {
-      return;
-    }
+    if (!data || !activeItem) return;
+
     const items = data?.data?.items;
+
+    let targetName = activeItem;
+
+    if (language === "ar") {
+      const countryIndex = arabicCountries.findIndex(
+        (name) => name === activeItem
+      );
+
+      if (countryIndex === -1) return;
+
+      targetName = countries[countryIndex];
+    }
+
     const item = items?.filter(
-      (cat) => cat?.name?.toLowerCase() === activeItem?.toLowerCase()
+      (cat) => cat?.name?.toLowerCase() === targetName?.toLowerCase()
     );
+
     setActiveCategoryType(item[0]?.type);
-  }, [activeItem, data]);
+  }, [activeItem, data, language]);
 
   useEffect(() => {
     if (shortsData) {
@@ -361,8 +381,6 @@ const Home = () => {
       window.scrollTo({ top: 0, behavior: "smooth" });
     }
   }, [articlesData]);
-
-  console.log("Loading states:", { articleLoading, isFetching });
 
   return (
     <>
@@ -1091,7 +1109,11 @@ const Home = () => {
                     <NewsCard
                       key={`news-${index}`}
                       image={item?.image}
-                      headline={item?.headline}
+                      headline={
+                        language === "ar"
+                          ? item?.arabicTitle
+                          : item?.englishTitle
+                      }
                       date={item?.date}
                       source={item?.source}
                       id={item?.id}

@@ -51,6 +51,7 @@ const Navbar = () => {
   const [editSource, setEditSource] = useState(false);
   const value = useSelector((state) => state.chatbot.value);
   const location = useLocation();
+  const { fontType } = useSelector((state) => state?.font);
 
   const { data: socialLinks, isLoading: socailLinksLoading } =
     useSoicalLinksQuery({ page: 1, limit: 10 });
@@ -203,7 +204,7 @@ const Navbar = () => {
                     alignItems: "center",
                     width: "136px",
                     cursor: "pointer",
-                    height: "40px",
+                    height: fontType === "regular" ? "35px" : "40px",
                   }}
                   onClick={handleClick}
                 >

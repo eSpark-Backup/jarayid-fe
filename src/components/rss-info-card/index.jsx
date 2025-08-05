@@ -142,7 +142,7 @@ const RssInfoCard = ({
           ) : (
             <img
               onClick={() => handleRefresh(id)}
-              style={{ cursor: "pointer" }}
+              style={{ cursor: "pointer", marginBottom: "7px" }}
               src={refresh}
               alt="refresh"
             />

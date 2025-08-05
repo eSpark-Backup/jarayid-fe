@@ -44,7 +44,7 @@ export const theme = createTheme({
             color: "#FFFFFF",
           },
           ":disabled": {
-            color: "rgb(213 213 213 / 73%)",
+            // color: "rgb(213 213 213 / 73%)",
           },
         },
       },
@@ -331,8 +331,8 @@ export const theme = createTheme({
             borderTop: "1px solid #EAE7EC",
             borderBottom: "1px solid #EAE7EC",
             whiteSpace: "nowrap",
-            color: "#908B93",
-            fontSize: "14px",
+            color: "#8C8E90",
+            fontSize: "16px",
             fontWeight: 400,
             padding: "18px 10px",
           },
@@ -410,7 +410,7 @@ export const theme = createTheme({
           "& .MuiSvgIcon-root": {
             width: 16,
             height: 16,
-            borderRadius: 4,
+            borderRadius: "4px",
           },
           "&.Mui-checked .MuiSvgIcon-root": {
             width: 16,

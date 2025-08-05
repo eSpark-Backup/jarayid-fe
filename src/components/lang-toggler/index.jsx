@@ -8,12 +8,13 @@ const LanguageToggler = () => {
   const { t } = useTranslation();
   const { switchLanguage } = useLanguageSwitcher();
   const language = useSelector((state) => state.language);
+  const { fontType } = useSelector((state) => state?.font);
   return (
     <Box
       onClick={() => switchLanguage(language === "en" ? "ar" : "en")}
       sx={{
         height: "38px",
-        width: "125px",
+        width: fontType === "regular" ? "110px" : "125px",
         backgroundColor: "#ECECEC",
         border: "1px solid #E8E0E0",
         borderRadius: "21px",
@@ -34,7 +35,12 @@ const LanguageToggler = () => {
           borderRadius: "50%",
           position: "absolute",
           top: "7px",
-          left: language === "ar" ? "5px" : "85px",
+          left:
+            language === "ar"
+              ? "5px"
+              : fontType === "regular"
+              ? "75px"
+              : "85px",
           transition: "left 0.3s ease",
         }}
       ></Box>

@@ -210,7 +210,7 @@ const RssSource = () => {
           marginTop: "20px",
           background: "#FFF",
           borderRadius: "14px",
-          padding: { xs: "32px", sm: "32px 41px 32px 37px" },
+          padding: { xs: "32px" },
         }}
       >
         <Stack

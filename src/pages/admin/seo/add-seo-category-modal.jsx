@@ -60,6 +60,7 @@ const AddSeoCategoryModal = ({ categories, open, onClose, onSuccess }) => {
       disableSubmit={!isObjectValid(formData)}
       loading={isLoading}
       height={"auto"}
+      width="549px"
     >
       <OutlineSelect
         options={categories?.map((cat) => {

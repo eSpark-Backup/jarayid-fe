@@ -36,10 +36,11 @@ const GlobalModal = ({
       <DialogTitle
         color="#3F3F40"
         fontSize="30px"
-        fontWeight="bold"
         sx={{
           position: "relative",
           pr: "48px",
+          fontFamily: "Gilroy-Bold",
+          fontWeight: "400",
         }}
       >
         {title}
