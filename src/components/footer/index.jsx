@@ -64,7 +64,8 @@ const Footer = () => {
           const arabicTitle =
             item?.originalContent?.scrapedContent?.translatedContent?.arabicContent
               ?.split("-")[0]
-              ?.replace("عنوان:", "");
+              ?.replace("عنوان:", "")
+              ?.replace("Title: ", "");
 
           // if (language === "ar" && item?.title && isEnglish(item.title)) {
           //   translatedTitle = await translateText(item.title, "en", "ar");
