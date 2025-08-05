@@ -32,7 +32,10 @@ const ManualPosting = () => {
     error,
     refetch,
     isFetching,
-  } = useGetAllArticlesForAdminQuery({ page, pageSize });
+  } = useGetAllArticlesForAdminQuery(
+    { page, pageSize },
+    { refetchOnMountOrArgChange: true }
+  );
 
   useEffect(() => {
     if (isSuccess) {

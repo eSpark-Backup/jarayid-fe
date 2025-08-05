@@ -25,6 +25,7 @@ const FAQList = ({
   onEdit,
   onDelete,
   isLoading,
+  user,
 }) => {
   const { t } = useTranslation();
   const theme = useTheme();
@@ -41,7 +42,7 @@ const FAQList = ({
   if (!faqs || faqs.length === 0) {
     return (
       <Typography align="center" color="textSecondary" mt={3} my={5}>
-        {t("No FAQs available.")}
+        {user ? t("No FAQs available.") : "No FAQs available."}
       </Typography>
     );
   }

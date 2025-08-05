@@ -23,10 +23,13 @@ const SeoManagement = () => {
     isLoading,
     refetch,
     isFetching,
-  } = useGetAllCateoriesQuery({
-    page,
-    pageSize,
-  });
+  } = useGetAllCateoriesQuery(
+    {
+      page,
+      pageSize,
+    },
+    { refetchOnMountOrArgChange: true }
+  );
 
   useEffect(() => {
     if (isSuccess) {

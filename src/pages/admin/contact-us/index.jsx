@@ -31,7 +31,10 @@ const ContactUs = () => {
     isSuccess,
     isError,
     error,
-  } = useGetContactsQuery({ page, pageSize });
+  } = useGetContactsQuery(
+    { page, pageSize },
+    { refetchOnMountOrArgChange: true }
+  );
   useEffect(() => {
     if (isSuccess) {
       setData(

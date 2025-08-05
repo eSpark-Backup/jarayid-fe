@@ -96,7 +96,10 @@ const Home = () => {
 
   const { data: shortsData, isLoading: shortsLoading } = useGetShortsQuery(
     { page: shortsPage, categoryId: activeId },
-    { skip: !activeId || activeCategoryType !== "NORMAL" }
+    {
+      skip: !activeId || activeCategoryType !== "NORMAL",
+      refetchOnMountOrArgChange: true,
+    }
   );
 
   useEffect(() => {
@@ -322,11 +325,15 @@ const Home = () => {
             ?.split("-")[0]
             ?.replace("عنوان:", "")
             ?.replace("Title:", "");
+        const source =
+          item?.source?.split("- ")?.length > 1
+            ? item?.source?.split("- ")[1]
+            : item?.source?.split("- ")[0];
         return {
           id: item?.id,
           image: item?.image,
           headline: item?.title,
-          source: item?.source?.split("- ")[1],
+          source,
           date: item?.createdAt,
           shareLinks: item?.shareLinks,
           englishTitle,
