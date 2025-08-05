@@ -855,9 +855,9 @@ export const modelsContent = [
 ];
 
 export const timeOptions = [
-  { id: 1, value: "Days" },
-  { id: 2, value: "Week" },
-  { id: 3, value: "Month" },
+  { id: 1, label: "Day", value: "day" },
+  { id: 2, label: "Week", value: "week" },
+  { id: 3, label: "Month", value: "month" },
 ];
 export const usersData = [
   {
