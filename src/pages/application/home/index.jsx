@@ -270,9 +270,11 @@ const Home = () => {
 
       const activeYoutube = activeData[0]?.youtubeContents?.map((item) => ({
         heading: item.title,
-        arabicTitle: item?.translatedContent?.find(
-          (item) => item?.language === "arabic"
-        )?.title,
+        arabicTitle:
+          item?.translatedContent &&
+          item?.translatedContent?.length > 0 &&
+          item?.translatedContent?.find((item) => item?.language === "arabic")
+            ?.title,
         videoUrl: item.youtubeUrl,
         type: item?.contentType,
       }));
@@ -368,7 +370,7 @@ const Home = () => {
         name: item?.title,
         image: item?.thumbnailUrl,
         link: item?.youtubeUrl,
-        arabicTitle: item?.translatedContent?.find(
+        arabicTitle: item?.translatedContent && item?.translatedContent?.length > 0 && item?.translatedContent?.find(
           (item) => item?.language === "arabic"
         )?.title,
       }));

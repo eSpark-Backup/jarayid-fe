@@ -142,7 +142,7 @@
   "share_news": "شارك الأخبار",
   "most_read": "الأكثر قراءة",
   "FAQ": {
-    "title": "Frequently Asked Questions",
+    "title": "الأسئلة الشائعة",
     "items": [
       {
         "question": "Lorem Ipsum is simply dummy text of the printing?",
@@ -183,5 +183,6 @@
   "name placeholder": "أدخل اسمك",
   "Name is required": "الاسم مطلوب",
   "Name": "اسم",
-  "No Articles Found": "لم يتم العثور على أي مقالات"
+  "No Articles Found": "لم يتم العثور على أي مقالات",
+  "No FAQs available.": "لا توجد أسئلة شائعة متاحة"
 }
