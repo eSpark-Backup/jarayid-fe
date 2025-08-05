@@ -44,17 +44,17 @@ const StackedAreaChart = ({ data }) => {
         data: data?.lastMonth || [],
         marker: {
           enabled: true,
-          fillColor: "#07E098",
+          fillColor: "#0095FF",
         },
-        color: "#00E09653",
+        color: "#009DFF51",
       },
       {
         name: "This Month",
         data: data?.thisMonth || [],
-        color: "#009DFF51",
+        color: "#00E09653",
         marker: {
           enabled: true,
-          fillColor: "#0095FF",
+          fillColor: "#07E098",
         },
       },
     ],
