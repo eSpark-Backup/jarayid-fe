@@ -12,6 +12,7 @@ import { toast } from "react-toastify";
 import { isObjectValid } from "../../../utils";
 
 const YoutubeManagement = () => {
+  const [loadingId, setLoadingId] = useState(null);
   const [resetSignal, setResetSignal] = useState(0);
   const [youtubeVideos, setYoutubeVideos] = useState([]);
   const {
@@ -61,14 +62,17 @@ const YoutubeManagement = () => {
       toast.error("Please fill all fields");
       return;
     }
+    setLoadingId(id);
     editYoutubeVideo({ id, credentials: body }).then((res) => {
       if (res?.error) {
         toast.error(res?.error?.data?.message);
+        setLoadingId(null);
         return;
       }
       if (res?.data) {
         toast.success(res?.data?.message);
         refetch();
+        setLoadingId(null);
         return;
       }
     });
@@ -77,14 +81,17 @@ const YoutubeManagement = () => {
   const [deleteVideo, { isLoading: isDeleteLoading }] =
     useDeleteYoutubeVideoMutation();
   const handleDelete = (id) => {
+    setLoadingId(id);
     deleteVideo(id).then((res) => {
       if (res?.error) {
         toast.error(res?.error?.data?.message);
+        setLoadingId(null);
         return;
       }
       if (res?.data) {
         toast.success(res?.data?.message);
         refetch();
+        setLoadingId(null);
         return;
       }
     });
@@ -119,6 +126,7 @@ const YoutubeManagement = () => {
               isEditLoading={isEditLoading}
               handleEditYoutubeVideo={handleEditYoutubeVideo}
               resetSignal={resetSignal}
+              loadingId={loadingId}
               title="Shorts"
             />
             <VideoUpload
@@ -132,6 +140,7 @@ const YoutubeManagement = () => {
               isEditLoading={isEditLoading}
               handleEditYoutubeVideo={handleEditYoutubeVideo}
               resetSignal={resetSignal}
+              loadingId={loadingId}
               title="Full Videos Link"
             />
           </>

@@ -5,7 +5,7 @@ import { DynamicTable, SubHeader, Button } from "../../../components";
 import { columns } from "../../../columns/categories";
 import {
   useDeleteCategoryMutation,
-  useGetAllCateoriesQuery,
+  useGetAllCateoriesForTableQuery,
 } from "../../../services/categories";
 import AddCategoryModal from "./add-category-modal";
 import EditCategoryModal from "./edit-category-modal";
@@ -29,7 +29,7 @@ const Categories = () => {
     isLoading,
     refetch,
     isFetching,
-  } = useGetAllCateoriesQuery(
+  } = useGetAllCateoriesForTableQuery(
     {
       page,
       pageSize,

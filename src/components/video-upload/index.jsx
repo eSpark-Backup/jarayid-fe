@@ -29,6 +29,7 @@ const VideoUpload = ({
   handleDelete,
   handleEditYoutubeVideo,
   isEditLoading,
+  loadingId,
 }) => {
   const [showAdd, setShowAdd] = useState(true);
   const [tabValue, setTabValue] = useState(0);
@@ -167,7 +168,7 @@ const VideoUpload = ({
                       height: "20px",
                     }}
                   >
-                    {isDeleteLoading ? (
+                    {loadingId === video?.id && isDeleteLoading ? (
                       <CircularProgress size={10} />
                     ) : (
                       <img
@@ -265,9 +266,9 @@ const VideoUpload = ({
                         deviceType: tabValue === 1 ? "MOBILE" : "WEB",
                       })
                     }
-                    loading={isEditLoading}
+                    loading={loadingId === video?.id && isEditLoading}
                     disabled={
-                      isEditLoading ||
+                      (loadingId === video?.id && isEditLoading) ||
                       !dataForm?.find((item) => item?.id === video?.id)?.form ||
                       !isObjectValid(
                         dataForm?.find((item) => item?.id === video?.id)?.form
