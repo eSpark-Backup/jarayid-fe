@@ -467,5 +467,20 @@ export const theme = createTheme({
         },
       },
     },
+    MuiTabs: {
+      styleOverrides: {
+        scroller: {
+          overflowX: "inherit",
+          overflowY: "inherit",
+        },
+        root: {
+          overflow: "inherit",
+        },
+        indicator: {
+          bottom: "-2px",
+          height: "5px",
+        },
+      },
+    },
   },
 });

@@ -9,7 +9,7 @@ const VisiualAd = () => {
   return (
     <>
       <SubHeader title="Visual Ad Placement" />
-      <Typography>
+      <Typography sx={{ fontSize: "18px", color: "#4E4852" }}>
         Configure ad placements, manage Google Ads and AdMob integration, and
         monitor ad performance.
       </Typography>

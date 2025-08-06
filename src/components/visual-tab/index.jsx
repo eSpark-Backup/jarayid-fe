@@ -36,10 +36,12 @@ const VisualTab = () => {
       sx={{
         p: 2,
         borderRadius: "14px",
-        minHeight: { xs: "auto", md: "491px" },
+        minHeight: "490px",
         minWidth: 0,
         marginTop: "23px",
         position: "relative",
+        border: "0.83px solid #F8F9FA !important",
+        boxShadow: "0px 3.3px 16.52px 0px #EEEEEE80 !important",
       }}
     >
       <Tabs
@@ -54,11 +56,19 @@ const VisualTab = () => {
       >
         <Tab
           label="Web"
-          sx={{ fontSize: "20px", fontWeight: 600, color: "#101828" }}
+          sx={{
+            fontSize: "20px",
+            fontWeight: 600,
+            color: "#101828 !important",
+          }}
         />
         <Tab
           label="App"
-          sx={{ fontSize: "20px", fontWeight: 600, color: "#101828" }}
+          sx={{
+            fontSize: "20px",
+            fontWeight: 600,
+            color: "#101828 !important",
+          }}
         />
       </Tabs>
       {currentComp === 1 ? (

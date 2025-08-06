@@ -87,7 +87,9 @@ const AdData = ({ handleNewClick, handleEdit, currentTab }) => {
                 p: "15px",
                 display: "flex",
                 justifyContent: "space-between",
-                alignItems: "center",
+                alignItems: { xs: "flex-start", md: "center" },
+                flexDirection: { xs: "column", md: "row" },
+                rowGap: "5px",
               }}
               key={index}
             >
@@ -95,7 +97,8 @@ const AdData = ({ handleNewClick, handleEdit, currentTab }) => {
                 sx={{
                   display: "flex",
                   columnGap: "15px",
-                  alignItems: "center",
+                  alignItems: { xs: "flex-start", md: "center" },
+                  flexDirection: { xs: "column", md: "row" },
                 }}
               >
                 <Box

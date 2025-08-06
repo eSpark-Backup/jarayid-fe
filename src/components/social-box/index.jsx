@@ -107,7 +107,7 @@ const SocialBox = ({ newsCard, detailPage, shareLinks, id }) => {
                 height: { xs: "12px", sm: "15px", md: "21px" },
               }}
               onClick={(e) => {
-                navigate(`/${id}`);
+                navigate(`/${id}#comment`);
                 e.stopPropagation();
               }}
               loading="lazy"

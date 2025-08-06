@@ -1,8 +1,11 @@
 import * as Yup from "yup";
 
+const emailRegex = /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
+
 export const loginSchema = Yup.object({
   email: Yup.string()
-    .email("Invalid email address")
+    .matches(emailRegex, "Invalid email address")
+    // .email("Invalid email address")
     .required("Email is required"),
   password: Yup.string()
     .required("Password is required")
@@ -15,7 +18,8 @@ export const loginSchema = Yup.object({
 
 export const signupValidationSchema = Yup.object({
   email: Yup.string()
-    .email("Invalid email address")
+    .matches(emailRegex, "Invalid email address")
+    // .email("Invalid email address")
     .required("Email is required"),
   password: Yup.string()
     .required("Password is required")
@@ -45,7 +49,8 @@ export const changePasswordSchema = Yup.object({
 
 export const verifyEmailSchema = Yup.object({
   email: Yup.string()
-    .email("Invalid email address")
+    .matches(emailRegex, "Invalid email address")
+    // .email("Invalid email address")
     .required("Email is required"),
 });
 
@@ -53,7 +58,8 @@ export const contactUsSchema = Yup.object({
   name: Yup.string().required("Name is required"),
   businessName: Yup.string().required("Business name is required"),
   email: Yup.string()
-    .email("Invalid email address")
+    .matches(emailRegex, "Invalid email address")
+    // .email("Invalid email address")
     .required("Email is required"),
   number: Yup.string().required("Contact number is required"),
   country: Yup.string().required("Country name is required"),

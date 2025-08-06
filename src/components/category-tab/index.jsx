@@ -110,6 +110,8 @@ const CategoryDropdown = ({
                 md: "repeat(3, 1fr)",
                 lg: "repeat(4, 1fr)",
               },
+              maxHeight: { xs: "200px", md: "auto" },
+              overflowY: { xs: "auto" },
             }}
           >
             {categoryOptions.map((option, index) => (

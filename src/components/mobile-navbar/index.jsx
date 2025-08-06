@@ -11,7 +11,7 @@ import {
 import { countries, otherSettings, settingsMenuItems } from "../../constant";
 import CustomSwitch from "../custom-switch";
 import useLanguageSwitcher from "../../hooks/change-language";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import CountryMenu from "../country-menu";
@@ -24,6 +24,8 @@ import ShareModal from "../share-modal";
 import ConfirmModal from "../confirm-modal";
 import EditSourceModal from "../edit-source-modal";
 import { getFont } from "../../utils";
+import { logout } from "../../store/slices/auth";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const MobileNavbar = () => {
   const { t } = useTranslation();
@@ -38,6 +40,8 @@ const MobileNavbar = () => {
   const [socialModal, setSocialModal] = useState(false);
   const { user } = useSelector((state) => state.auth);
   const [editSource, setEditSource] = useState(false);
+  const dispatch = useDispatch();
+  const { isAuthenticated, logout: logoutAsGoogle } = useAuth0();
 
   const navigate = useNavigate();
 
@@ -259,7 +263,13 @@ const MobileNavbar = () => {
         open={logoutModal}
         handleClose={() => setLogoutModal(false)}
         heading={"Are you sure you want to Logout?"}
-        handleAccept={() => setLogoutModal(false)}
+        handleAccept={() => {
+          dispatch(logout());
+          isAuthenticated &&
+            logoutAsGoogle({ returnTo: window.location.origin });
+          setLogoutModal(false);
+          navigate("/signup");
+        }}
         handleCancel={() => setLogoutModal(false)}
         button2Text={"Logout"}
       >

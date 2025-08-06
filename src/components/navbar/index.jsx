@@ -405,6 +405,7 @@ const Navbar = () => {
           isAuthenticated &&
             logoutAsGoogle({ returnTo: window.location.origin });
           setLogoutModal(false);
+          navigate("/signup");
         }}
         handleCancel={() => setLogoutModal(false)}
         button2Text={"Logout"}

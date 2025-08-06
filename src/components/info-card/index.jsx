@@ -32,7 +32,12 @@ const InfoCard = ({
         mt="5px"
       >
         <Typography
-          sx={{ fontSize: "26.62px", color: "#202224", fontWeight: 600 }}
+          sx={{
+            fontSize: "21.9px",
+            color: "#202224",
+            fontWeight: 400,
+            fontFamily: "Gilroy-SemiBold",
+          }}
         >
           {value}
         </Typography>
@@ -50,7 +55,7 @@ const InfoCard = ({
           <img src={trending === "up" ? trendingUp : trendingDown} alt="icon" />
           <Typography
             sx={{
-              fontSize: "15.21px",
+              fontSize: "13px",
               color: trending === "up" ? "#00B69B" : "#F93C65",
               fontWeight: 400,
             }}
@@ -61,7 +66,7 @@ const InfoCard = ({
           {!hideTime && timeStamp && (
             <Typography
               sx={{
-                fontSize: "15.21px",
+                fontSize: "13px",
                 color: "#606060",
                 fontWeight: 400,
               }}

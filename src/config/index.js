@@ -1,4 +1,4 @@
-const VITE_DEPLOYMENT_TYPE = "PROD";
+const VITE_DEPLOYMENT_TYPE = "DEV";
 export const VITE_BASE_URL =
   VITE_DEPLOYMENT_TYPE === "PROD"
     ? "https://jarayid-api.stg.esparkconsultants.com/api"

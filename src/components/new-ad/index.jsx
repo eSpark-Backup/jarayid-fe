@@ -212,7 +212,7 @@ const NewAd = ({ handleCancel, currentTab, data }) => {
               key={index}
               sx={{
                 position: "relative",
-                width: { xs: "100%", sm: index === 2 ? 414 : 212 },
+                width: { xs: "100%", sm: index === 2 ? 414 : "48%", lg: 212 },
               }}
             >
               <Button
@@ -317,13 +317,13 @@ const NewAd = ({ handleCancel, currentTab, data }) => {
           backgroundColor: "#EAE7EC",
           borderRadius: "5px",
           textAlign: "center",
-          height: "142px",
+          height: { xs: "100px", md: "142px" },
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
           flexDirection: "column",
-          p: "20px 0px 10px 0px",
+          p: "10px 0px 10px 0px",
           rowGap: "10px",
           cursor: "pointer",
         }}
@@ -345,14 +345,17 @@ const NewAd = ({ handleCancel, currentTab, data }) => {
       <Box
         sx={{
           display: "flex",
-          justifyContent: "flex-end",
+          justifyContent: { xs: "center", md: "flex-end" },
           position: "absolute",
           bottom: "20px",
-          right: "20px",
+          right: { xs: "0px", md: "20px" },
           columnGap: "20px",
+          flexDirection: { xs: "column", md: "row" },
+          width: "100%",
+          alignItems: "center",
         }}
       >
-        <Box sx={{ width: "175px", height: "44.14px" }}>
+        <Box sx={{ width: { xs: "90%", md: "175px" }, height: "44.14px" }}>
           <Button
             sx={{
               backgroundColor: "transparent",
@@ -376,7 +379,7 @@ const NewAd = ({ handleCancel, currentTab, data }) => {
             Cancel
           </Button>
         </Box>
-        <Box sx={{ width: "175px", height: "44.14px" }}>
+        <Box sx={{ width: { xs: "90%", md: "175px" }, height: "44.14px" }}>
           <Button
             variant="gradient"
             onClick={LaunchHandler}

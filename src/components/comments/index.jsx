@@ -39,15 +39,25 @@ const CommentBox = ({ data, total, hasMore, handleMore }) => {
 
   React.useEffect(() => {
     if (data?.length > 0) {
-      setComments((prevComments) => [...prevComments, ...data]);
+      setComments((prevComments) => {
+        const existingIds = new Set(prevComments.map((comment) => comment.id));
+        const newComments = data.filter(
+          (comment) => !existingIds.has(comment.id)
+        );
+        return [...prevComments, ...newComments];
+      });
     } else {
       setComments([]);
     }
-  }, [i18n.language, t, data]);
+  }, [data]);
 
   useEffect(() => {
     setCount(total);
   }, [total]);
+
+  // useEffect(() => {
+  //   console.log(comments);
+  // }, [comments]);
 
   const handleAddComment = async () => {
     if (!newComment.trim()) return;

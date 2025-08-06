@@ -54,7 +54,7 @@ const ArticleDetails = () => {
   const { data: commentsData, isLoading: commentsLoading } =
     useGetCommentsQuery(
       { page: commentsPage, limit: 3, articleId: pathname },
-      { skip: !pathname }
+      { skip: !pathname, refetchOnMountOrArgChange: true }
     );
 
   useEffect(() => {
@@ -65,7 +65,9 @@ const ArticleDetails = () => {
       text: item?.content,
       date: dayjs(item?.createdAt).fromNow(),
     }));
+    console.log(data);
     setComments(data);
+    console.log("COMMENTS");
     setTotalComments(commentsData?.data?.meta?.totalItems);
   }, [commentsData]);
 
@@ -140,6 +142,15 @@ const ArticleDetails = () => {
   useEffect(() => {
     setArticleData({});
   }, [pathname]);
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.getElementById(location.hash.replace("#", ""));
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
 
   useEffect(() => {
     const translateHeadlines = async () => {
@@ -347,6 +358,7 @@ const ArticleDetails = () => {
             textAlign="center"
             fontSize={getFont("12px")}
             fontWeight={600}
+            id="comment"
           >
             {t("share_news")}
           </Typography>

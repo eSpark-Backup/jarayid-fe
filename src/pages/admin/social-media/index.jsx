@@ -73,7 +73,7 @@ export default function SocialMediaForm() {
     const body = {
       categoryName: category,
       link,
-      socialMedia: social === "X" ? "TWITTER" : social,
+      socialMedia: social === "X" ? "TWITTER" : social?.toUpperCase(),
       isActive: true,
     };
     if (!isObjectValid(body)) {
@@ -174,7 +174,6 @@ export default function SocialMediaForm() {
           >
             <span
               style={{
-                width: "100%",
                 textOverflow: "ellipsis",
                 overflow: "hidden",
                 whiteSpace: "nowrap",
@@ -233,6 +232,7 @@ export default function SocialMediaForm() {
                         width: 18,
                         height: 18,
                         marginRight: 8,
+                        textTransform: "uppercase",
                       }}
                       onClick={() => toggleSocial(option?.label)}
                     />
@@ -316,9 +316,11 @@ export default function SocialMediaForm() {
                   alignItems: "center",
                   justifyContent: "center",
                   background: "#FFF",
+                  textTransform: "capitalize",
                 }}
               >
-                {item?.socialMedia}
+                {item?.socialMedia?.slice(0, 1)?.toUpperCase() +
+                  item?.socialMedia?.slice(1)?.toLowerCase()}
               </Box>
               <Box
                 sx={{
