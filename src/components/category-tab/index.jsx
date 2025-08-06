@@ -83,7 +83,7 @@ const CategoryDropdown = ({
             whiteSpace: "nowrap",
           }}
         >
-          {selectedText || isAdmin ? "Category" : t("Category")}
+          {selectedText ? selectedText : isAdmin ? "Category" : t("Category")}
         </Box>
         <img src={DownArrow} alt="Down Arrow" />
       </Box>

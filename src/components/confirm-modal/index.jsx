@@ -56,7 +56,9 @@ const ConfirmModal = ({
         <Box
           sx={{
             display: "flex",
-            justifyContent: language === "ar" ? "flex-start" : "flex-end",
+            // justifyContent: language === "ar" ? "flex-start" : "flex-end",
+            justifyContent:
+              isAdmin || language !== "ar" ? "flex-end" : "flex-start",
             alignItems: "center",
           }}
         >
@@ -80,7 +82,9 @@ const ConfirmModal = ({
             width: { xs: "100%" },
             display: "flex",
             flexDirection: "column",
-            alignItems: language === "ar" ? "flex-end" : "flex-start",
+            // alignItems: language === "ar" ? "flex-end" : "flex-start",
+            alignItems:
+              isAdmin || language !== "ar" ? "flex-start" : "flex-end",
           }}
         >
           <img
@@ -121,7 +125,12 @@ const ConfirmModal = ({
                 border: "1px solid #373838",
                 fontSize: getFont("16px"),
                 my: "0px",
-                textTransform: "none", // optional: to prevent uppercase text
+                textTransform: "none",
+                "&:hover": {
+                  backgroundColor: "#ffffff",
+                  color: "#454545",
+                  boxShadow: "none",
+                },
               }}
               disableRipple
               onClick={handleCancel}

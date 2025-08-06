@@ -73,7 +73,7 @@ export default function SocialMediaForm() {
     const body = {
       categoryName: category,
       link,
-      socialMedia: social,
+      socialMedia: social === "X" ? "TWITTER" : social,
       isActive: true,
     };
     if (!isObjectValid(body)) {
@@ -226,7 +226,7 @@ export default function SocialMediaForm() {
                     }}
                   >
                     <img
-                      src={social === option?.value ? CheckOn : CheckOff}
+                      src={social === option?.label ? CheckOn : CheckOff}
                       alt="checkbox"
                       style={{
                         cursor: "pointer",
@@ -234,7 +234,7 @@ export default function SocialMediaForm() {
                         height: 18,
                         marginRight: 8,
                       }}
-                      onClick={() => toggleSocial(option?.value)}
+                      onClick={() => toggleSocial(option?.label)}
                     />
                     {option?.label}
                   </Box>
