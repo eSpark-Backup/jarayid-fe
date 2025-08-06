@@ -3,6 +3,12 @@ import { api } from "./rtk";
 
 export const categoriesApi = api.injectEndpoints({
   endpoints: (builder) => ({
+    getAllCateoriesForTable: builder.query({
+      query: ({ page, pageSize }) => ({
+        url: `/categories?page=${page}&limit=${pageSize}`,
+        method: "GET",
+      }),
+    }),
     getAllCateories: builder.query({
       query: ({ page, pageSize = 30 }) => ({
         url: `/categories?page=${page}&limit=${pageSize}`,
@@ -36,6 +42,7 @@ export const categoriesApi = api.injectEndpoints({
 });
 
 export const {
+  useGetAllCateoriesForTableQuery,
   useGetAllCateoriesQuery,
   useAddCateoryMutation,
   useUpdateCateoryMutation,

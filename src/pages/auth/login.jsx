@@ -34,10 +34,6 @@ const Login = () => {
           }
           return;
         }
-        if (res?.error) {
-          toast.error(res?.error?.data?.message);
-          return;
-        }
       });
     },
   });
