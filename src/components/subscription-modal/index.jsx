@@ -7,7 +7,6 @@ import { VITE_CLIENT_PADDLE_TOKEN } from "../../config";
 
 const SubscriptionModal = ({ onClose }) => {
   const { subscriptions } = useSelector((state) => state.subscriptions);
-  console.log(subscriptions);
 
   const handleCheckout = (priceId) => {
     if (window.Paddle) {
@@ -51,16 +50,16 @@ const SubscriptionModal = ({ onClose }) => {
           rowGap: "15px",
         }}
       >
-        {subscriptions?.map((plan, index) => {
+        {subscriptions?.map((plan) => {
           return (
             <Box sx={{ width: { xs: "100%", md: "47%" } }}>
               <PriceCard
                 name={plan?.name}
                 description={plan?.description}
-                interval={plan?.prices?.["MONTHLY" || "YEARLY"]?.interval}
-                price={`$${plan?.prices?.["MONTHLY" || "YEARLY"]?.amount}`}
+                interval={plan?.prices?.MONTHLY?.interval}
+                price={`$${plan?.prices?.MONTHLY?.amount}`}
                 handleCheckout={handleCheckout}
-                priceId={plan?.prices?.["MONTHLY" || "YEARLY"]?.id}
+                priceId={plan?.prices?.MONTHLY?.id}
               />
             </Box>
           );
