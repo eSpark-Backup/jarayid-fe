@@ -14,6 +14,7 @@ import ButtonDown from "../../assets/icons/button-open.svg";
 import EditIcon from "../../assets/icons/edit.svg";
 import DeleteIcon from "../../assets/icons/delete.svg";
 import { getFont } from "../../utils";
+import { useTranslation } from "react-i18next";
 
 const FAQList = ({
   faqs,
@@ -24,7 +25,9 @@ const FAQList = ({
   onEdit,
   onDelete,
   isLoading,
+  user,
 }) => {
+  const { t } = useTranslation();
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("sm"));
 
@@ -39,7 +42,7 @@ const FAQList = ({
   if (!faqs || faqs.length === 0) {
     return (
       <Typography align="center" color="textSecondary" mt={3} my={5}>
-        No FAQs available.
+        {user ? t("No FAQs available.") : "No FAQs available."}
       </Typography>
     );
   }

@@ -7,6 +7,7 @@ import CustomInput from "../input";
 import { useUpdateUserMutation } from "../../services/auth";
 import { toast } from "react-toastify";
 import { getFont } from "../../utils";
+import { useTranslation } from "react-i18next";
 
 const sharedInputStyles = {
   mt: 0,
@@ -49,6 +50,8 @@ const EditProfileModal = ({ handleClose }) => {
   const [editName, setEditName] = useState(false);
   const [editMobile, setEditMobile] = useState(false);
   const [editLocation, setEditLocation] = useState(false);
+  const language = useSelector((state) => state.language);
+  const { t } = useTranslation();
 
   const formik = useFormik({
     initialValues: {
@@ -212,7 +215,10 @@ const EditProfileModal = ({ handleClose }) => {
             alignItems: { xs: "flex-start", sm: "center" },
             pb: "20px",
             borderBottom: "1.63px solid #F3F4F6",
-            flexDirection: { xs: "column", sm: "row" },
+            flexDirection: {
+              xs: "column",
+              sm: language === "ar" ? "row-reverse" : "row",
+            },
             rowGap: editName ? "0px" : "10px",
           }}
         >
@@ -222,12 +228,12 @@ const EditProfileModal = ({ handleClose }) => {
               color: "#1F2937",
             }}
           >
-            Name
+            {t("Name")}
           </Typography>
           {editName ? (
             <Box sx={{ width: { xs: "100%", sm: "220px" } }}>
               <CustomInput
-                placeholder={"your name"}
+                placeholder={t("your name")}
                 type={"text"}
                 sx={sharedInputStyles}
                 name={"name"}
@@ -251,7 +257,7 @@ const EditProfileModal = ({ handleClose }) => {
               }}
               onClick={handleNameClick}
             >
-              {formik.values.name || "your name"}
+              {formik.values.name || t("your name")}
             </Typography>
           )}
         </Box>
@@ -262,7 +268,10 @@ const EditProfileModal = ({ handleClose }) => {
             alignItems: { xs: "flex-start", sm: "center" },
             pb: "20px",
             borderBottom: "1.63px solid #F3F4F6",
-            flexDirection: { xs: "column", sm: "row" },
+            flexDirection: {
+              xs: "column",
+              sm: language === "ar" ? "row-reverse" : "row",
+            },
             rowGap: "10px",
           }}
         >
@@ -272,7 +281,7 @@ const EditProfileModal = ({ handleClose }) => {
               color: "#1F2937",
             }}
           >
-            Email account
+            {t("Email account")}
           </Typography>
           <Typography
             sx={{
@@ -290,7 +299,10 @@ const EditProfileModal = ({ handleClose }) => {
             alignItems: { xs: "flex-start", sm: "center" },
             pb: "20px",
             borderBottom: "1.63px solid #F3F4F6",
-            flexDirection: { xs: "column", sm: "row" },
+            flexDirection: {
+              xs: "column",
+              sm: language === "ar" ? "row-reverse" : "row",
+            },
             rowGap: editMobile ? "0px" : "10px",
           }}
         >
@@ -300,13 +312,13 @@ const EditProfileModal = ({ handleClose }) => {
               color: "#1F2937",
             }}
           >
-            Mobile number
+            {t("Mobile number")}
           </Typography>
           {editMobile ? (
             <Box sx={{ width: { xs: "100%", sm: "220px" } }}>
               <CustomInput
                 autoFocus
-                placeholder={"Add number"}
+                placeholder={t("Add number")}
                 type={"text"}
                 sx={sharedInputStyles}
                 name={"mobile"}
@@ -329,7 +341,7 @@ const EditProfileModal = ({ handleClose }) => {
               }}
               onClick={() => setEditMobile(true)}
             >
-              {formik.values.mobile || "Add number"}
+              {formik.values.mobile || t("Add number")}
             </Typography>
           )}
         </Box>
@@ -340,7 +352,10 @@ const EditProfileModal = ({ handleClose }) => {
             justifyContent: "space-between",
             alignItems: { xs: "flex-start", sm: "center" },
             pb: "20px",
-            flexDirection: { xs: "column", sm: "row" },
+            flexDirection: {
+              xs: "column",
+              sm: language === "ar" ? "row-reverse" : "row",
+            },
             rowGap: editLocation ? "0px" : "10px",
           }}
         >
@@ -350,13 +365,13 @@ const EditProfileModal = ({ handleClose }) => {
               color: "#1F2937",
             }}
           >
-            Location
+            {t("Location")}
           </Typography>
           {editLocation ? (
             <Box sx={{ width: { xs: "100%", sm: "220px" } }}>
               <CustomInput
                 autoFocus
-                placeholder={"Location"}
+                placeholder={t("Add location")}
                 type={"text"}
                 sx={sharedInputStyles}
                 name={"location"}
@@ -381,12 +396,17 @@ const EditProfileModal = ({ handleClose }) => {
               }}
               onClick={() => setEditLocation(true)}
             >
-              {formik.values.location || "Add location"}
+              {formik.values.location || t("Add location")}
             </Typography>
           )}
         </Box>
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: language === "ar" ? "flex-start" : "flex-end",
+        }}
+      >
         <Box sx={{ width: { xs: "100%", md: "234.19px" }, height: "58.64px" }}>
           <Button
             loading={isLoading}
@@ -395,7 +415,7 @@ const EditProfileModal = ({ handleClose }) => {
             disableRipple
             type="submit"
           >
-            Save Change
+            {t("Save Change")}
           </Button>
         </Box>
       </Box>

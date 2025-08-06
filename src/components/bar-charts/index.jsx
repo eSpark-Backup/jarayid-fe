@@ -1,22 +1,7 @@
 import Highcharts from "highcharts";
 import HighchartsReact from "highcharts-react-official";
 
-const WeeklyColumnChart = () => {
-  const data = [
-    { name: "Monday", y: 70, drilldown: "mondayDetails", color: "#0095FF" },
-    { name: "Tuesday", y: 100, drilldown: "tuesdayDetails", color: "#0095FF" },
-    {
-      name: "Wednesday",
-      y: 150,
-      drilldown: "wednesdayDetails",
-      color: "#0095FF",
-    },
-    { name: "Thursday", y: 70, drilldown: "thursdayDetails", color: "#0095FF" },
-    { name: "Friday", y: 40, drilldown: "fridayDetails", color: "#0095FF" },
-    { name: "Saturday", y: 70, drilldown: "saturdayDetails", color: "#0095FF" },
-    { name: "Sunday", y: 30, drilldown: "sundayDetails", color: "#0095FF" },
-  ];
-
+const WeeklyColumnChart = ({ data }) => {
   const maxY = Math.max(...data.map((point) => point.y));
 
   const options = {

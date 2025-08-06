@@ -82,6 +82,14 @@ export const rssApi = api.injectEndpoints({
         };
       },
     }),
+    syncRssFeed: builder.mutation({
+      query: () => {
+        return {
+          url: `/rss-feeds/process/all`,
+          method: "POST",
+        };
+      },
+    }),
   }),
 });
 
@@ -94,4 +102,5 @@ export const {
   useDeleteRssFeedMutation,
   useRefreshRssFeedMutation,
   useRssFeedQuery,
+  useSyncRssFeedMutation,
 } = rssApi;

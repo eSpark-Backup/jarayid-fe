@@ -34,7 +34,10 @@ const ExternalLink = () => {
     error,
     refetch,
     isFetching,
-  } = useGetAllExternalLinksQuery({ page, pageSize });
+  } = useGetAllExternalLinksQuery(
+    { page, pageSize },
+    { refetchOnMountOrArgChange: true }
+  );
 
   useEffect(() => {
     if (isSuccess) {

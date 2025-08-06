@@ -2,6 +2,8 @@ import { Box, Button, Typography } from "@mui/material";
 import CustomInput from "../input";
 import { useFormik } from "formik";
 import { getFont } from "../../utils";
+import { useSelector } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 const sharedInputStyles = {
   "& .MuiOutlinedInput-root": {
@@ -23,13 +25,15 @@ const fields = [
     label: "Website",
     placeholder: "",
   },
-  { name: "email", label: "Email", placeholder: "", type: "email" },
+  { name: "email", label: "email", placeholder: "", type: "email" },
   { name: "category", label: "Category", placeholder: "" },
   { name: "number", label: "Contact Number", placeholder: "", type: "tel" },
-  { name: "country", label: "Country ", placeholder: "" },
+  { name: "country", label: "Country", placeholder: "" },
 ];
 
 const AdvertiseModal = ({ handleSubmit }) => {
+  const language = useSelector((state) => state.language);
+  const { t } = useTranslation();
   const formik = useFormik({
     initialValues: {
       name: "",
@@ -48,8 +52,8 @@ const AdvertiseModal = ({ handleSubmit }) => {
   const renderInput = ({ name, label, placeholder, type }) => (
     <Box key={name} sx={{ width: { xs: "100%", md: "46%", lg: "47%" } }}>
       <CustomInput
-        label={label}
-        placeholder={placeholder}
+        label={t(label)}
+        placeholder={t(placeholder)}
         type={type || "text"}
         sx={sharedInputStyles}
         name={name}
@@ -62,10 +66,17 @@ const AdvertiseModal = ({ handleSubmit }) => {
       />
     </Box>
   );
+
   return (
     <Box component={"form"} onSubmit={formik.handleSubmit}>
-      <Typography sx={{ fontSize: getFont("32px"), fontWeight: "600" }}>
-        Advertise here
+      <Typography
+        sx={{
+          fontSize: getFont("32px"),
+          fontWeight: "600",
+          textAlign: language === "ar" ? "right" : "left",
+        }}
+      >
+        {t("Advertise here")}
       </Typography>
       <Box
         sx={{
@@ -78,10 +89,15 @@ const AdvertiseModal = ({ handleSubmit }) => {
       >
         {fields.map(renderInput)}
       </Box>
-      <Box sx={{ display: "flex", justifyContent: "flex-end" }}>
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: language === "ar" ? "flex-start" : "flex-end",
+        }}
+      >
         <Box sx={{ width: { xs: "100%", md: "162px" }, height: "58.64px" }}>
           <Button variant="contained" disableRipple type="submit">
-            Submit
+            {t("Submit")}
           </Button>
         </Box>
       </Box>

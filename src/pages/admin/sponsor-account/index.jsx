@@ -21,7 +21,10 @@ const SponsorAccount = () => {
     isSuccess,
     isError,
     error,
-  } = useGetAllSponsorAccountQuery({ page, pageSize });
+  } = useGetAllSponsorAccountQuery(
+    { page, pageSize },
+    { refetchOnMountOrArgChange: true }
+  );
 
   useEffect(() => {
     if (isSuccess) {

@@ -4,15 +4,24 @@ import { setFontType } from "../../store/slices/font-type";
 import CheckOn from "../../assets/icons/check-on.svg";
 import CheckOff from "../../assets/icons/check-off.svg";
 import { getFont } from "../../utils";
+import { useTranslation } from "react-i18next";
 
 const FontSizeModal = () => {
   const dispatch = useDispatch();
   const { fontType } = useSelector((state) => state?.font);
+  const language = useSelector((state) => state.language);
+  const { t } = useTranslation();
 
   return (
     <Box>
-      <Typography sx={{ fontSize: getFont("32px"), fontWeight: "600" }}>
-        Font Size
+      <Typography
+        sx={{
+          fontSize: getFont("32px"),
+          fontWeight: "600",
+          textAlign: language === "ar" ? "right" : "left",
+        }}
+      >
+        {t("Font Size")}
       </Typography>
       <Box
         sx={{
@@ -49,7 +58,7 @@ const FontSizeModal = () => {
                   fontWeight: fontSize === "large" ? "900" : "400",
                 }}
               >
-                {fontSize}
+                {t(fontSize)}
               </Typography>
             </Stack>
           );

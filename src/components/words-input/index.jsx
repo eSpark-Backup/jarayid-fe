@@ -33,6 +33,7 @@ const WordsInput = ({ label, value, handleChange, name, index }) => {
             modal={true}
             name={name}
             autoFocus={true}
+            dir={"ltr"}
           />
         </Box>
       </Box>

@@ -10,6 +10,7 @@ import {
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import { getFont } from "../../utils";
+import { useTranslation } from "react-i18next";
 
 const ShareModal = ({ heading }) => {
   const items = [
@@ -23,6 +24,8 @@ const ShareModal = ({ heading }) => {
 
   const links = useSelector((state) => state.socialLinks.links);
   const [myLinks, setMyLinks] = useState({});
+  const language = useSelector((state) => state.language);
+  const { t } = useTranslation();
 
   useEffect(() => {
     const platformMap = {
@@ -50,8 +53,14 @@ const ShareModal = ({ heading }) => {
 
   return (
     <Box>
-      <Typography sx={{ fontSize: getFont("32px"), fontWeight: "600" }}>
-        {heading}
+      <Typography
+        sx={{
+          fontSize: getFont("32px"),
+          fontWeight: "600",
+          textAlign: language === "ar" ? "right" : "left",
+        }}
+      >
+        {t(heading)}
       </Typography>
       <Box
         sx={{
@@ -59,6 +68,7 @@ const ShareModal = ({ heading }) => {
           justifyContent: "space-between",
           alignItems: "center",
           mt: "30px",
+          flexDirection: language === "ar" ? "row-reverse" : "row",
         }}
       >
         {items?.map((item, index) => {

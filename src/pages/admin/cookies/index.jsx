@@ -32,7 +32,10 @@ const Cookies = () => {
     error,
     refetch,
     isFetching,
-  } = useGetCookiesQuery({ page, pageSize });
+  } = useGetCookiesQuery(
+    { page, pageSize },
+    { refetchOnMountOrArgChange: true }
+  );
 
   useEffect(() => {
     if (isSuccess) {

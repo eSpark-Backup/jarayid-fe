@@ -27,7 +27,7 @@ import {
   Skeleton,
   Typography,
 } from "@mui/material";
-import React, { useEffect, useState } from "react";
+import React, { useCallback, useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { forwardArrow, settingsWhite } from "../../../assets";
@@ -68,6 +68,7 @@ const Home = () => {
   const [hasFetched, setHasFetched] = useState(false);
   const [hasMoreShorts, setHasMoreSHorts] = useState(false);
   const value = useSelector((state) => state.chatbot.value);
+  const [isFetchingMore, setIsFetchingMore] = useState(false);
 
   const skeletonArray = new Array(14).fill(null);
 
@@ -95,7 +96,10 @@ const Home = () => {
 
   const { data: shortsData, isLoading: shortsLoading } = useGetShortsQuery(
     { page: shortsPage, categoryId: activeId },
-    { skip: !activeId || activeCategoryType !== "NORMAL" }
+    {
+      skip: !activeId || activeCategoryType !== "NORMAL",
+      refetchOnMountOrArgChange: true,
+    }
   );
 
   useEffect(() => {
@@ -270,6 +274,11 @@ const Home = () => {
 
       const activeYoutube = activeData[0]?.youtubeContents?.map((item) => ({
         heading: item.title,
+        arabicTitle:
+          item?.translatedContent &&
+          item?.translatedContent?.length > 0 &&
+          item?.translatedContent?.find((item) => item?.language === "arabic")
+            ?.title,
         videoUrl: item.youtubeUrl,
         type: item?.contentType,
       }));
@@ -280,26 +289,35 @@ const Home = () => {
     fetchData();
   }, [activeItem, data, language, arabicCountries, countries]);
 
-  const fetchMoreArticles = () => {
-    if (!hasNextPage) return;
+  // const fetchMoreArticles = async () => {
+  //   if (!hasNextPage || isFetchingMore) return;
 
-    const nextPage = page + 1;
+  //   const nextPage = page + 1;
+  //   setIsFetchingMore(true);
 
-    // Refetch manually with new page
-    refetch({
-      page: nextPage,
-      categoryId: activeId,
-      subType:
-        activeCategory === "Economy"
-          ? "ECONOMICS"
-          : activeCategory === "Sport"
-          ? "SPORTS"
-          : "POLITICS",
-      search: value,
-    });
+  //   try {
+  //     setPage(nextPage);
+  //     await refetch({
+  //       page: nextPage,
+  //       categoryId: activeId,
+  //       subType:
+  //         activeCategory === "Economy"
+  //           ? "ECONOMICS"
+  //           : activeCategory === "Sport"
+  //           ? "SPORTS"
+  //           : "POLITICS",
+  //       search: value,
+  //     });
+  //   } finally {
+  //     setIsFetchingMore(false);
+  //   }
+  // };
 
-    setPage(nextPage);
-  };
+  const fetchMoreArticles = useCallback(() => {
+    if (!isFetching && hasNextPage) {
+      setPage((prev) => prev + 1);
+    }
+  }, [hasNextPage, isFetching]);
 
   useEffect(() => {
     if (articlesData) {
@@ -311,12 +329,17 @@ const Home = () => {
         const arabicTitle =
           item?.originalContent?.scrapedContent?.translatedContent?.arabicContent
             ?.split("-")[0]
-            ?.replace("عنوان:", "");
+            ?.replace("عنوان:", "")
+            ?.replace("Title:", "");
+        const source =
+          item?.source?.split("- ")?.length > 1
+            ? item?.source?.split("- ")[1]
+            : item?.source?.split("- ")[0];
         return {
           id: item?.id,
           image: item?.image,
           headline: item?.title,
-          source: item?.source?.split("- ")[1],
+          source,
           date: item?.createdAt,
           shareLinks: item?.shareLinks,
           englishTitle,
@@ -324,9 +347,18 @@ const Home = () => {
         };
       });
 
-      setArticles((prev) =>
-        page === 1 ? newArticles : [...(prev || []), ...newArticles]
-      );
+      setArticles((prev) => {
+        if (page === 1) {
+          return newArticles; // Reset on first page
+        }
+
+        // Filter out duplicates (compare by `id`)
+        const uniqueNewArticles = newArticles.filter(
+          (newItem) => !prev?.some((prevItem) => prevItem.id === newItem.id)
+        );
+
+        return [...(prev || []), ...uniqueNewArticles];
+      });
 
       setHasNextPage(articlesData?.data?.pagination?.hasNextPage);
       setHasPrevPage(articlesData?.data?.pagination?.hasPrevPage);
@@ -364,6 +396,11 @@ const Home = () => {
         name: item?.title,
         image: item?.thumbnailUrl,
         link: item?.youtubeUrl,
+        arabicTitle:
+          item?.translatedContent &&
+          item?.translatedContent?.length > 0 &&
+          item?.translatedContent?.find((item) => item?.language === "arabic")
+            ?.title,
       }));
       setHasMoreSHorts(shortsData?.data?.pagination?.hasNextPage);
       setShortsContent(data);
@@ -492,7 +529,7 @@ const Home = () => {
                 sx={{
                   display: "flex",
                   width: {
-                    xs: "110px !important",
+                    xs: "110px",
                     sm: "20%",
                     md: "14.2857%",
                     lg: "7.1428%",
@@ -768,7 +805,9 @@ const Home = () => {
                             }}
                             component={"h1"}
                           >
-                            {item?.heading}
+                            {language === "ar"
+                              ? item?.arabicTitle
+                              : item?.heading}
                           </Typography>
                           <Box
                             component="iframe"
@@ -808,7 +847,9 @@ const Home = () => {
                             }}
                             component={"h1"}
                           >
-                            {item?.heading}
+                            {language === "ar"
+                              ? item?.arabicTitle
+                              : item?.heading}
                           </Typography>
                           <Box
                             component="iframe"
@@ -897,7 +938,7 @@ const Home = () => {
                           }}
                           component={"h2"}
                         >
-                          {item?.name}
+                          {language === "ar" ? item?.arabicTitle : item?.name}
                         </Typography>
                       </a>
                     </Grid>
@@ -1029,7 +1070,7 @@ const Home = () => {
                           }}
                           component={"h2"}
                         >
-                          {item?.name}
+                          {language === "ar" ? item?.arabicTitle : item?.name}
                         </Typography>
                       </Box>
                     </Grid>
@@ -1143,7 +1184,7 @@ const Home = () => {
                 }}
               >
                 <Typography sx={{ fontSize: getFont("32px") }}>
-                  No Articles Found
+                  {t("No Articles Found")}
                 </Typography>
               </Box>
             ) : null}

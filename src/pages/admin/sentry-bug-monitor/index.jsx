@@ -22,7 +22,10 @@ const SentryBugMonitor = () => {
     isSuccess,
     isError,
     error,
-  } = useGetAllBugsQuery();
+  } = useGetAllBugsQuery(
+    { page, pageSize },
+    { refetchOnMountOrArgChange: true }
+  );
 
   useEffect(() => {
     if (isSuccess) {
@@ -39,7 +42,7 @@ const SentryBugMonitor = () => {
                   ? "red"
                   : "green",
             },
-            time: dayjs(item?.createdAt).format("HH:mm:ss")
+            time: dayjs(item?.createdAt).format("HH:mm:ss"),
           };
         })
       );

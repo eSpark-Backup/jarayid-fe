@@ -81,7 +81,8 @@ const ArticleDetails = () => {
         const arabicTitle =
           article?.originalContent?.scrapedContent?.translatedContent?.arabicContent
             ?.split("-")[0]
-            ?.replace("عنوان:", "");
+            ?.replace("عنوان:", "")
+            ?.replace("Title:", "");
         const originalTitle =
           article?.originalContent?.rssTranslatedContent?.originalContent
             ?.split("\n\n")[0]
@@ -155,6 +156,10 @@ const ArticleDetails = () => {
                 ?.split("-")[0]
                 ?.replace("عنوان:", "")
                 ?.replace("Title:", "");
+            const source =
+              item?.source?.split("- ")?.length > 1
+                ? item?.source?.split("- ")[1]
+                : item?.source?.split("- ")[0];
             // const isArabic = /[\u0600-\u06FF]/.test(headline);
 
             // if (language === "ar" && !isArabic) {
@@ -169,7 +174,7 @@ const ArticleDetails = () => {
               id: item?.id,
               image: item?.image,
               headline,
-              source: item?.source?.split("- ")[1],
+              source,
               date: item?.createdAt,
               shareLinks: item?.shareLinks,
               englishTitle,

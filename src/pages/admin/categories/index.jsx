@@ -29,10 +29,13 @@ const Categories = () => {
     isLoading,
     refetch,
     isFetching,
-  } = useGetAllCateoriesQuery({
-    page,
-    pageSize,
-  });
+  } = useGetAllCateoriesQuery(
+    {
+      page,
+      pageSize,
+    },
+    { refetchOnMountOrArgChange: true }
+  );
 
   const [deleteData, { isLoading: deleteLoading }] =
     useDeleteCategoryMutation();

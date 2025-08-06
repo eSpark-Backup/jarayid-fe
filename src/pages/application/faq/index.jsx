@@ -5,6 +5,7 @@ import SmartReaderCard from "../../../components/smart-reader";
 import FAQList from "../../../components/faq-list";
 import { useGetAllPagesQuery } from "../../../services/static-pages";
 import { getFont } from "../../../utils";
+import { useSelector } from "react-redux";
 
 const FAQSection = () => {
   const { t, i18n } = useTranslation();
@@ -17,12 +18,30 @@ const FAQSection = () => {
     setExpanded(isExpanded ? panelIndex : false);
   };
   const [data, setData] = useState([]);
+  const [translatedData, setTranslatedData] = useState([]);
+  const language = useSelector((state) => state.language);
 
   const { data: staticPageData, isLoading: staticPageLoading } =
     useGetAllPagesQuery({ search: "faq" });
 
   useEffect(() => {
     setData(staticPageData?.data?.items[0]?.content?.faq);
+    const translatedFaq =
+      staticPageData?.data?.items[0]?.translatedContent[0]?.content?.split(
+        "\n\n"
+      );
+    const ArabicFaqArrTemp = translatedFaq?.map((item, ind) =>
+      item
+        ?.split("\n")
+        ?.map((i) =>
+          i.replace(`Q${ind + 1}: `, "").replace(`A${ind + 1}: `, "")
+        )
+    );
+    const ArabicFaqArr = ArabicFaqArrTemp?.map(([question, answer]) => ({
+      question,
+      answer,
+    }));
+    setTranslatedData(ArabicFaqArr);
   }, [staticPageData]);
 
   return (
@@ -65,7 +84,8 @@ const FAQSection = () => {
           />
         ) : (
           <FAQList
-            faqs={data}
+            user
+            faqs={language === "ar" ? translatedData : data}
             expanded={expanded}
             handleChange={handleChange}
             isArabic={isArabic}
@@ -90,9 +110,13 @@ const FAQSection = () => {
             }}
           >
             <SmartReaderCard
-              paragraphs={data?.map(
-                (item) => `${item?.question} ${item?.answer}`
-              )}
+              paragraphs={
+                language === "ar"
+                  ? translatedData?.map(
+                      (item) => `${item?.question} ${item?.answer}`
+                    )
+                  : data?.map((item) => `${item?.question} ${item?.answer}`)
+              }
             />
           </Box>
         )}
