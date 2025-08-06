@@ -122,6 +122,8 @@ import thisMonthIcon from "./icons/thisMonth.svg";
 import deleteSocial from "./icons/delete-social.svg";
 import adUnchecked from "./icons/adUnchecked.svg";
 import adChecked from "./icons/adChecked.svg";
+import adminEdit2 from "./icons/admin-edit-2.svg";
+import delete2 from "./icons/delete2.svg";
 
 import slider from "./images/slider.png";
 import image1 from "./images/image-1.png";
@@ -263,4 +265,6 @@ export {
   deleteSocial,
   adChecked,
   adUnchecked,
+  adminEdit2,
+  delete2,
 };

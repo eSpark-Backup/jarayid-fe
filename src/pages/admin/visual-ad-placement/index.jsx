@@ -13,15 +13,28 @@ const VisiualAd = () => {
         Configure ad placements, manage Google Ads and AdMob integration, and
         monitor ad performance.
       </Typography>
-      <Grid sx={{ justifyContent: "space-between" }} container spacing={2} mt="25px">
+      <Grid
+        sx={{ justifyContent: "space-between" }}
+        container
+        spacing={2}
+        mt="25px"
+      >
         {infoCardData.map((card, index) => (
           <Grid
-            item
+            // item
             key={index}
-            xs={12}
-            sm={6}
-            md={3}
-            sx={{ width: 233, height: 126 }}
+            // xs={12}
+            // sm={6}
+            // md={3}
+            sx={{
+              maxWidth: {
+                md: "233px", // applies at `md` breakpoint and above
+              },
+              "@media (min-width: 1441px)": {
+                maxWidth: "100% !important",
+              },
+            }}
+            size={{ xs: 12, sm: 6, md: 3 }}
           >
             <InfoCard
               adPlacement={true}

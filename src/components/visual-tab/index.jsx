@@ -8,6 +8,7 @@ import {
   Paper,
   Checkbox,
   ClickAwayListener,
+  LinearProgress,
 } from "@mui/material";
 import LinkIcon from "../../assets/icons/link-icon.svg";
 import DownArrow from "../../assets/icons/arrow-down.svg";
@@ -20,18 +21,14 @@ import AdData from "../ad-data";
 
 const VisualTab = () => {
   const [tabIndex, setTabIndex] = React.useState(0);
-  const [currentComp, setCurrentComp] = useState(1);
-
-  const [ads, setAds] = useState([]);
-
-  const { data, isLoading } = useGetAllAdsQuery({ page: 1 });
+  const [currentComp, setCurrentComp] = useState(0);
+  const [editData, setEditData] = useState({});
 
   const handleTabChange = (event, newValue) => setTabIndex(newValue);
-
-  useEffect(() => {
-    if (!data) return;
-    setAds(data?.data?.items);
-  }, [data]);
+  const handleEditItem = (item) => {
+    setEditData(item);
+    setCurrentComp(1);
+  };
 
   return (
     <Paper
@@ -39,7 +36,7 @@ const VisualTab = () => {
       sx={{
         p: 2,
         borderRadius: "14px",
-        height: { xs: "auto", md: "491px" },
+        minHeight: { xs: "auto", md: "491px" },
         minWidth: 0,
         marginTop: "23px",
         position: "relative",
@@ -65,9 +62,20 @@ const VisualTab = () => {
         />
       </Tabs>
       {currentComp === 1 ? (
-        <NewAd handleCancel={() => setCurrentComp(0)} currentTab={tabIndex} />
+        <NewAd
+          handleCancel={() => {
+            setCurrentComp(0);
+            setEditData({});
+          }}
+          currentTab={tabIndex}
+          data={editData}
+        />
       ) : (
-        <AdData handleNewClick={() => setCurrentComp(1)} />
+        <AdData
+          handleNewClick={() => setCurrentComp(1)}
+          handleEdit={handleEditItem}
+          currentTab={tabIndex}
+        />
       )}
     </Paper>
   );

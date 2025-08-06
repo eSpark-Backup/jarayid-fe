@@ -13,6 +13,11 @@ import CheckOff from "../../assets/icons/check-off.svg";
 import React, { useEffect, useState } from "react";
 import { adChecked, adUnchecked } from "../../assets";
 import CategoryDropdown from "../category-tab";
+import { toast } from "react-toastify";
+import {
+  useEditAdMutation,
+  useNewAdMutation,
+} from "../../services/ad-placement";
 
 const buttonStyle = {
   backgroundColor: "#EAF4FF",
@@ -36,12 +41,17 @@ const buttonStyle = {
   },
 };
 
-const NewAd = ({ handleCancel, currentTab }) => {
+const NewAd = ({ handleCancel, currentTab, data }) => {
   const [anchorEls, setAnchorEls] = React.useState({});
   const [showCategoryDropdown, setShowCategoryDropdown] = React.useState(false);
   const [selectedCategories, setSelectedCategories] = React.useState({});
   const [category, setCategory] = useState("");
   const [selectedOptions, setSelectedOptions] = React.useState({});
+  const [pastedText, setPastedText] = useState("");
+  const [adData, { isLoading }] = useNewAdMutation();
+  const [editData, { isLoading: editLoading }] = useEditAdMutation({
+    id: data?.id,
+  });
 
   const handleClick = (event, label) => {
     if (label === "Category") {
@@ -77,11 +87,111 @@ const NewAd = ({ handleCancel, currentTab }) => {
     });
   };
 
-  const LaunchHandler = () => {
-    console.log(selectedOptions["Main Page"], "MAIN PAGE");
-    console.log(selectedOptions["Article Page"], "Article Page");
-    console.log(selectedCategories, "CATEGORIES");
+  const LaunchHandler = async () => {
+    const hasValidMainPage =
+      Array.isArray(selectedOptions?.["Main Page"]) &&
+      selectedOptions["Main Page"].length > 0;
+    const hasValidArticlePage =
+      Array.isArray(selectedOptions?.["Article Page"]) &&
+      selectedOptions["Article Page"].length > 0;
+    const hasSelectedCategory =
+      selectedCategories && Object.values(selectedCategories).some(Boolean);
+    const hasValidLink = pastedText?.trim();
+
+    if (
+      hasValidMainPage &&
+      hasValidArticlePage &&
+      hasSelectedCategory &&
+      hasValidLink
+    ) {
+      const selectedCategoryKeys = Object.entries(selectedCategories)
+        .filter(([_, value]) => value === true)
+        .map(([key]) => key);
+
+      const obj = {
+        platform: currentTab === 0 ? "WEB" : "APP",
+        mainPage: selectedOptions["Main Page"].join(", "),
+        articlePage: selectedOptions["Article Page"].join(", "),
+        category: selectedCategoryKeys,
+        adLink: pastedText,
+        isActive: true,
+      };
+
+      try {
+        const isEdit = Object.keys(data)?.length > 0;
+        const res = isEdit
+          ? await editData({ body: obj, id: data?.id })
+          : await adData({ body: obj });
+
+        if (res?.data) {
+          toast.success(
+            isEdit
+              ? "Visual ad placement edited successfully"
+              : "Visual ad placement created successfully"
+          );
+          handleCancel();
+          return;
+        }
+
+        if (res?.error) {
+          toast.error(res.error?.data?.message);
+          console.log(res?.error);
+          // handleCancel();
+          return;
+        }
+      } catch (error) {
+        console.log(error);
+        toast.error("Something went wrong");
+        handleCancel();
+        return;
+      }
+    } else {
+      if (!hasValidMainPage) {
+        toast.error("Main Page option is missing.");
+        return;
+      }
+      if (!hasValidArticlePage) {
+        toast.error("Article Page option is missing.");
+        return;
+      }
+      if (!hasSelectedCategory) {
+        toast.error("No categories selected.");
+        return;
+      }
+      if (!hasValidLink) {
+        toast.error("Pasted text is empty or missing.");
+        return;
+      }
+    }
   };
+
+  const handlePaste = async () => {
+    try {
+      const text = await navigator.clipboard.readText();
+      setPastedText(text || "Clipboard is empty");
+    } catch (err) {
+      console.error("Failed to read clipboard: ", err);
+      setPastedText("Unable to read clipboard");
+    }
+  };
+
+  useEffect(() => {
+    if (!data) return;
+
+    setSelectedOptions({
+      "Main Page": data.mainPage?.split(", ").filter(Boolean) || [],
+      "Article Page": data.articlePage?.split(", ").filter(Boolean) || [],
+    });
+
+    const categoryObj = {};
+    data.category?.forEach((cat) => {
+      categoryObj[cat] = true;
+    });
+    setSelectedCategories(categoryObj);
+    setCategory(data.category?.join(", ") || "");
+
+    setPastedText(data.adLink || "");
+  }, [data]);
 
   return (
     <Box>
@@ -197,6 +307,7 @@ const NewAd = ({ handleCancel, currentTab }) => {
             setSelectedCategories={setSelectedCategories}
             selectedText={category}
             setSelectedText={setCategory}
+            isAdmin={true}
           />
         </ClickAwayListener>
       </Box>
@@ -206,16 +317,29 @@ const NewAd = ({ handleCancel, currentTab }) => {
           backgroundColor: "#EAE7EC",
           borderRadius: "5px",
           textAlign: "center",
-          height: "131px",
+          height: "142px",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
           width: "100%",
+          flexDirection: "column",
+          p: "20px 0px 10px 0px",
+          rowGap: "10px",
+          cursor: "pointer",
         }}
+        onClick={handlePaste}
       >
         <img src={LinkIcon} alt="Link Icon" />
-        <Typography color="#bbb" variant="body2">
-          +
+        <Typography
+          sx={{
+            fontSize: "14px",
+            color: "#A6A6A6",
+            fontFamily: "Gilroy-SemiBold",
+            userSelect: "none",
+            wordBreak: "break-all",
+          }}
+        >
+          {pastedText || "Click Here for the Copied Link"}
         </Typography>
       </Box>
       <Box
@@ -253,8 +377,12 @@ const NewAd = ({ handleCancel, currentTab }) => {
           </Button>
         </Box>
         <Box sx={{ width: "175px", height: "44.14px" }}>
-          <Button variant="gradient" onClick={LaunchHandler}>
-            Launch New Ad
+          <Button
+            variant="gradient"
+            onClick={LaunchHandler}
+            loading={isLoading || editLoading}
+          >
+            {Object.keys(data)?.length > 0 ? "Edit Ad" : "Launch New Ad"}
           </Button>
         </Box>
       </Box>

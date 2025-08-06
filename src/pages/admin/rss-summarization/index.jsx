@@ -179,25 +179,25 @@ const RssSummarization = () => {
     <>
       <SubHeader
         title={"RSS Summarization"}
-        rightNode={
-          <Button
-            disabled={updateLoading}
-            loading={updateLoading}
-            variant="contained"
-            color="primary"
-            sx={{
-              width: { xs: "100%", sm: "auto" },
-              minWidth: "125px",
-              height: "35px",
-              backgroundColor: "#007BFF",
-              fontSize: "12px",
-              textTransform: "none",
-            }}
-            onClick={handleUpdate}
-          >
-            Save
-          </Button>
-        }
+        // rightNode={
+        //   <Button
+        //     disabled={updateLoading}
+        //     loading={updateLoading}
+        //     variant="contained"
+        //     color="primary"
+        //     sx={{
+        //       width: { xs: "100%", sm: "auto" },
+        //       minWidth: "125px",
+        //       height: "35px",
+        //       backgroundColor: "#007BFF",
+        //       fontSize: "12px",
+        //       textTransform: "none",
+        //     }}
+        //     onClick={handleUpdate}
+        //   >
+        //     Save
+        //   </Button>
+        // }
       />
       <Paper variant="adminPaper" sx={{ mt: "20px" }}>
         {isLoading ? (
@@ -607,6 +607,27 @@ const RssSummarization = () => {
                 </Box>
               </Grid>
             </Grid>
+            <Box
+              sx={{ display: "flex", justifyContent: "flex-end", mt: "20px" }}
+            >
+              <Button
+                disabled={updateLoading}
+                loading={updateLoading}
+                variant="contained"
+                color="primary"
+                sx={{
+                  width: { xs: "100%", sm: "auto" },
+                  minWidth: "125px",
+                  height: "35px",
+                  backgroundColor: "#007BFF",
+                  fontSize: "12px",
+                  textTransform: "none",
+                }}
+                onClick={handleUpdate}
+              >
+                Save
+              </Button>
+            </Box>
           </>
         )}
       </Paper>
