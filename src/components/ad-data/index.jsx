@@ -10,10 +10,10 @@ import { toast } from "react-toastify";
 
 const AdData = ({ handleNewClick, handleEdit, currentTab }) => {
   const [ads, setAds] = useState([]);
-  const [page, setPage] = useState(1);
-  const { data, isLoading, isFetching, isSuccess } = useGetAllAdsQuery({
-    page,
-  });
+  const { data, isLoading, isFetching, isSuccess, isError, error } =
+    useGetAllAdsQuery({
+      page: 1,
+    });
 
   const [deleteData, { isLoading: deleteLoading }] = useDeleteAdMutation();
 
@@ -35,12 +35,22 @@ const AdData = ({ handleNewClick, handleEdit, currentTab }) => {
     }
   }, [data, currentTab]);
 
+  useEffect(() => {
+    if (isError && error) {
+      toast.error(error?.data?.message);
+      return;
+    }
+  }, [isError, error]);
+
   const handleFinalDelete = async () => {
     try {
       const res = await deleteData({ id: deleteModal });
       if (res?.data) {
         toast.success("Ad deleted successfully");
         setDeleteModal(false);
+      }
+      if (res?.error) {
+        toast.error(res?.error?.data?.message);
       }
     } catch (error) {
       toast.error("Something went wrong");
