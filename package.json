@@ -20,7 +20,7 @@
     "dayjs": "^1.11.13",
     "formik": "^2.4.6",
     "highcharts": "^12.3.0",
-    "highcharts-react-official": "^3.2.2",
+    "highcharts-react-official": "^3.2.3",
     "i18next": "^23.15.1",
     "i18next-browser-languagedetector": "^8.2.0",
     "lodash": "^4.17.21",
